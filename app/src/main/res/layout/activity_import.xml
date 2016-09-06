@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+ >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolba_import"
+        android:layout_width="match_parent"
+        android:elevation="5dp"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:background="#63B8FF">
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.design.widget.TextInputLayout
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:id="@+id/input_import_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolba_import"
+        android:layout_gravity="center">
+
+        <EditText
+            android:id="@+id/et_import_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="学号"
+            android:imeActionId="@+id/login"
+            android:imeOptions="actionUnspecified"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/input_import_num"
+        android:id="@+id/input_import_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_gravity="center">
+
+        <EditText
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:id="@+id/et_import_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="密码(默认身份证后六位，同工大导航)"
+            android:password="true"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_ok_import"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/input_import_password"
+        android:layout_margin="20dp"
+        android:background="@drawable/btn_import"
+        android:text="获取"
+        android:textColor="@drawable/login_nomrmal" />
+
+</RelativeLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolba_ele"
+        android:layout_width="match_parent"
+        android:elevation="5dp"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:background="#63B8FF">
+    </android.support.v7.widget.Toolbar>
+
+    <EditText
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/num1"
+        android:hint="宿舍楼栋"
+        />
+    <EditText
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/num2"
+        android:hint="宿舍号"/>
+    <Button
+        android:id="@+id/btn_get"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="查询"
+        android:layout_margin="10dp"
+        android:background="@drawable/btn_login"
+        android:textStyle="bold" />
+
+</LinearLayout>

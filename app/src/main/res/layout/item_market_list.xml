@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:elevation="5dp"
+    android:padding="10dp">
+
+
+    <ImageView
+    android:id="@+id/iv_img_marketitem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:adjustViewBounds="true"
+    android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tv_fuhao_marketitem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_img_marketitem"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text=" ¥ "
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_price_marketitem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_img_marketitem"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/tv_fuhao_marketitem"
+        android:text="12222"
+        android:textColor="@color/red"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/iv_line_marketitem"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tv_fuhao_marketitem"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/gray" />
+
+    <TextView
+        android:id="@+id/tv_content_marketitem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_line_marketitem"
+        android:text="捷安特orc3300公路车 疾如风 轻若羽 有意可刀fdfdsfdsfsfsfsdfdsd"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_crateon_marketitem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_content_marketitem"
+        android:layout_marginTop="4dp"
+        android:text="33天前" />
+</RelativeLayout>

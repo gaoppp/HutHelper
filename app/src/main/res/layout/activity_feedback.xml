@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolba_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="5dp"
+        android:fitsSystemWindows="true"
+        android:background="#63B8FF">
+    </android.support.v7.widget.Toolbar>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/et_feedbk_tel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="联系方式"
+            android:imeActionId="@+id/login"
+            android:imeActionLabel="反馈"
+            android:imeOptions="actionSend"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/et_feedbk_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="反馈内容"
+            android:imeActionId="@+id/login"
+            android:minLines="5"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <Button
+        android:layout_margin="10dp"
+        android:id="@+id/btn_feedbk_ok"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="反馈"
+        android:background="@drawable/btn_login"
+        android:textStyle="bold" />
+
+</LinearLayout>

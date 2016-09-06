@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFF"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolba_scorer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#63B8FF"
+        android:elevation="5dp"
+        android:fitsSystemWindows="true">
+
+        <ImageView
+            android:id="@+id/iv_update_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="-5dp"
+            android:alpha="0.55"
+            android:padding="13dp"
+            android:src="@mipmap/ic_cached_black_24dp" />
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolba_scorer">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tv_grade_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="总览"
+                android:textSize="14dp" />
+
+            <ImageView
+                android:id="@+id/iv_grade_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/tv_grade_1"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:id="@+id/ll_grade_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_grade_line"
+                android:paddingTop="5dp"
+                android:weightSum="3">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="学分绩点"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="平均分数"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="挂科数/总数"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_grade_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_grade_title"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/tv_grade_jd"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingTop="8dp"
+                    android:text="3.11"
+                    android:textColor="@color/titleTextColor"
+                    android:textSize="@dimen/dp_40" />
+
+                <TextView
+                    android:id="@+id/tv_grade_avgfs"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingTop="8dp"
+                    android:text="80"
+                    android:textColor="@color/titleTextColor"
+                    android:textSize="@dimen/dp_40" />
+
+                <TextView
+                    android:id="@+id/tv_grade_nopassnum"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingTop="8dp"
+                    android:text="0"
+                    android:textColor="@color/titleTextColor"
+                    android:textSize="@dimen/dp_40" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_grade_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_grade_content"
+                android:paddingTop="6dp"
+                android:text="图表"
+                android:textSize="14dp" />
+
+            <ImageView
+                android:id="@+id/iv_grade_line2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/tv_grade_2"
+                android:background="@color/gray" />
+
+            <com.echo.holographlibrary.BarGraph
+                android:id="@+id/graph_grade_bar"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_below="@+id/iv_grade_line2"
+                android:paddingTop="6dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="学分绩点柱形图"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/tv_grade_3"
+                android:layout_below="@+id/graph_grade_bar"/>
+
+            <com.echo.holographlibrary.PieGraph
+                android:id="@+id/graph_grade_pie"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_below="@+id/tv_grade_3"
+                android:layout_marginTop="10dp" />
+            <TextView
+                android:id="@+id/tv_grade_pie"
+                android:layout_below="@+id/graph_grade_pie"
+                android:text="获得学分/总学分"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_grade_showall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_grade_pie"
+                android:background="@drawable/btn_login"
+                android:layout_marginTop="6dp"
+                android:text="显示所有成绩" />
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

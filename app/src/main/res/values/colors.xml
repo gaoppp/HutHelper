@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="item_divider">#fafafa</color>
+    <color name="item_common_pressed">#e0e0e0</color>
+    <color name="item_common_selected">#5e5e5e</color>
+    <color name="background_common">#fafafa</color>
+    <color name="background_menu_divider">#d0d0d0</color>
+    <color name="background_menu">#e0e0e0</color>
+    <color name="font_default">#222222</color>
+    <color name="font_light">#777777</color>
+    <color name="white">#ffffff</color>
+    <color name="white_light">#888888</color> <!-- 淡白色 -->
+    <color name="darkorange">#20c36e</color>
+    <color name="black">#000000</color>
+    <color name="gray">#FFDBDBDB</color>
+    <color name="red">#FF0000</color>
+    <color name="darkgray">#50808080</color>
+    <color name="blue">#20c36e</color>
+    <color name="green">#008000</color> <!-- 绿色 -->
+    <color name="green1">#8dce3f</color> <!-- 绿色 -->
+    <color name="orange">#eb923e</color>
+    <color name="lightblue">#36c77b</color>
+    <color name="transparent_gray">#8000</color>
+    <color name="transparent">#00000000</color>
+    <!-- A light Holo shade of blue -->
+    <color name="holo_blue_light">#36c77b</color>
+    <!-- A light Holo shade of green -->
+    <color name="holo_green_light">#36c77b</color>
+    <!-- A really bright Holo shade of blue -->
+    <color name="holo_blue_bright">#36c77b</color>
+    <color name="today">#ffff3e45</color>
+    <color name="lightgrey">#D3D3D3</color> <!-- 亮灰色 -->
+    <color name="dimgray">#696969</color> <!-- 暗灰色 -->
+    <color name="dimgrey">#696969</color> <!-- 暗灰色 -->
+
+    <color name="calendar_event">#999999</color>
+    <color name="dialogColor">#f0ffffff</color>
+    <color name="dialog_gray">#e6e6e6</color>
+    <color name="black1">#333333</color>
+    <color name="black2">#666666</color>
+    <color name="indexcshape0">#fe8a7f</color>
+    <color name="indexcshape1">#b9a571</color>
+    <color name="indexcshape2">#71b9a5</color>
+    <color name="indexcshape3">#719bb8</color>
+    <color name="indexcshape4">#a15679</color>
+    <color name="top_title_green">#8DCE3F</color>
+    <color name="rippelColor">#FFFFFF</color>
+    <color name="focus_circle_bg">#F24949</color>
+    <color name="date_1">#F24949</color>
+    <color name="date_2">#40000000</color>
+    <color name="Grey">#BEBEBE</color>
+    <color name="LightGray">#D3D3D3</color>
+    <color name="gray1">#eaeaea</color> <!-- 灰色 -->
+
+    <color name="header_bg">#FCFCFB</color>
+    <color name="calendar_title_bg">#E8E8E7</color>
+    <color name="calendar_text">#75B174</color>
+    <color name="calendar_class_title_bg">#F2F2F2</color>
+
+
+    <!-- 文字颜色 -->
+    <color name="titleTextColor">#75B174</color> <!-- 深绿色 -->
+
+    <color name="textColor">#7cbd7b</color> <!-- 深绿色 -->
+    <color name="textColor_g">#64a461</color> <!-- 深绿色 -->
+    <color name="textColor1">#777878</color> <!-- 深灰色 -->
+    <color name="textColor_black">#646262</color> <!-- 黑色 -->
+    <color name="textColor_black1">#9b9999</color>
+    <color name="textColor_black2">#646464</color> <!-- 浅黑色 -->
+    <color name="textColor_black3">#939493</color>
+    <color name="textColor_o">#eeb886</color> <!-- 橙色 -->
+    <color name="textColor_gray">#999999</color> <!-- 灰色 -->
+    <color name="textColorwhite">#f9f9f9</color>
+
+    <!-- 周视图课程颜色 -->
+    <color name="week_view_gray">#8db18a</color>
+    <color name="week_view_red">#f67979</color>
+    <color name="week_view_bule">#9adbf3</color>
+    <color name="week_view_green">#89c997</color>
+    <color name="week_view_orange">#fdb680</color>
+    <color name="week_view_sky">#58dcf0</color>
+    <color name="week_view_pubple">#f0acf2</color>
+    <color name="week_view_pubple1">#b9b9f1</color>
+
+    <color name="week_view_black">#9db8b3</color>
+
+    <color name="week_view_text">#313334</color>
+    <color name="week_view_text_date">#abadae</color>
+    <color name="week_view_date_highted">#ac9fc5</color>
+    <color name="translucent_black">#a0000000</color>
+
+    <color name="dialog_bg">#f5f5f5</color>
+
+    <drawable name="btn_press">#CCCCCC</drawable>
+    <drawable name="login_nomrmal">#63B8FF</drawable>
+    <drawable name="scoreitem_normal">#F9F9F9</drawable>
+
+</resources>

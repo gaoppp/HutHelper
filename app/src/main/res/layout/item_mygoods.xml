@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="5dp"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_mygoodsitem_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="标题sdfsdfqfdsfsd"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_mygoodsitem_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_mygoodsitem_title"
+        android:padding="5dp"
+        android:text="内容dfqe"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:paddingLeft="5dp"
+        android:id="@+id/tv_mygoodsitem_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_mygoodsitem_content"
+        android:text="2016_09_04 19:12:40" />
+
+    <TextView
+
+        android:paddingBottom="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_mygoodsitem_content"
+        android:layout_toLeftOf="@+id/tv_mygoodsitem_1"
+        android:text="155"
+        android:id="@+id/tv_mygoodsitem_viewnum"/>
+
+    <TextView
+        android:paddingBottom="5dp"
+        android:id="@+id/tv_mygoodsitem_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_mygoodsitem_content"
+        android:paddingRight="5dp"
+        android:text="次浏览" />
+
+</RelativeLayout>

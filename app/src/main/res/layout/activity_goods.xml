@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#63B8FF"
+        android:fitsSystemWindows="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+
+            android:id="@+id/iv_img_goods"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/ic_head" />
+
+        <TextView
+            android:id="@+id/tv_name_goods"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/iv_img_goods"
+            android:layout_toRightOf="@+id/iv_img_goods"
+            android:padding="5dp"
+            android:text="和沙拉酱"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_createon_goods"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/iv_img_goods"
+            android:layout_below="@+id/tv_name_goods"
+            android:layout_toRightOf="@+id/iv_img_goods"
+            android:paddingLeft="5dp"
+            android:text="22天前"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_oldprice_goods"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/tv_name_goods"
+            android:text="545545"
+            android:textColor="@color/black2"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_newprice_goods"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_createon_goods"
+            android:layout_alignParentRight="true"
+            android:text="555"
+            android:textColor="@color/red"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_title_goods"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_createon_goods"
+            android:paddingTop="10dp"
+            android:text="捷安特orc3300公路车 疾如风 轻若羽 有意可刀"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+        <ImageView
+            android:id="@+id/iv_line_goods1"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/tv_title_goods"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/gray" />
+
+        <TextView
+            android:id="@+id/quality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_line_goods1"
+            android:layout_marginTop="5dp"
+            android:text="成色:"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_quality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_line_goods1"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/quality"
+            android:text="八成新"
+            android:textColor="@color/black2"
+            android:textSize="16sp" />
+
+        <!--<TextView
+            android:id="@+id/place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_quality"
+            android:paddingTop="5dp"
+            android:text="所在地:"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_place_goods"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_quality"
+            android:layout_toRightOf="@+id/place"
+            android:paddingTop="5dp"
+            android:text="工大校"
+            android:textColor="@color/black1"
+            android:textSize="18sp" />-->
+
+        <TextView
+            android:id="@+id/connectway"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_quality"
+            android:paddingTop="5dp"
+            android:text="联系方式:"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_connectway_goods"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/quality"
+            android:layout_toRightOf="@+id/connectway"
+            android:paddingTop="5dp"
+            android:text="123"
+            android:textColor="@color/black2"
+            android:textSize="16sp" />
+
+
+
+        <ImageView
+            android:id="@+id/iv_line_goods"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/tv_connectway_goods"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/gray" />
+
+        <TextView
+            android:id="@+id/tv_content_goods"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_line_goods"
+            android:paddingTop="8dp"
+            android:text="捷安特orc3300公路车 20斤轻量随意上楼 速度快超过一切山地车 有意联系试车"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_imglist_goods"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tv_content_goods"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentEnd="true">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rv_imglist_goods"
+            android:text="@string/market_warn"
+            android:textColor="@color/black2"
+            android:textSize="14sp"
+            android:id="@+id/textView" />
+
+    </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

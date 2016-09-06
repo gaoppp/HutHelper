@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_coursetable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#63B8FF"
+        android:elevation="5dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_chooseweek_coursetable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="第几周"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:drawablePadding="8dp"
+            android:drawableRight="@drawable/triangle_down"
+            />
+        <ImageView
+            android:id="@+id/iv_coursetable_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_cached_black_24dp"
+            android:padding="13dp"
+            android:layout_marginRight="-5dp"
+            android:alpha="0.55"
+            android:layout_gravity="right"
+            />
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:id="@+id/fl_coursetable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_coursetable" />
+
+</RelativeLayout>
