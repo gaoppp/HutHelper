@@ -27,6 +27,7 @@
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
+        android:id="@+id/scroll_grade_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolba_scorer">
@@ -96,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingTop="8dp"
-                    android:text="3.11"
+                    android:text="0.00"
                     android:textColor="@color/titleTextColor"
                     android:textSize="@dimen/dp_40" />
 
@@ -106,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingTop="8dp"
-                    android:text="80"
+                    android:text="0"
                     android:textColor="@color/titleTextColor"
                     android:textSize="@dimen/dp_40" />
 
@@ -175,6 +176,16 @@
                 android:text="显示所有成绩" />
         </RelativeLayout>
     </ScrollView>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_score_empty"
+        android:layout_below="@+id/toolba_scorer"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="暂时还没有成绩数据"/>
 
 
 </RelativeLayout>

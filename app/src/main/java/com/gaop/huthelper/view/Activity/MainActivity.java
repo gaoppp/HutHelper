@@ -20,8 +20,10 @@ import android.widget.TextView;
 
 import com.gaop.huthelper.DB.DBHelper;
 import com.gaop.huthelper.Model.HttpResult;
+import com.gaop.huthelper.Model.Say;
 import com.gaop.huthelper.Model.UpdateMsg;
 import com.gaop.huthelper.R;
+import com.gaop.huthelper.jiekou.SayListAPI;
 import com.gaop.huthelper.jiekou.SubscriberOnNextListener;
 import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.net.ProgressSubscriber;
@@ -165,7 +167,7 @@ public class MainActivity extends BaseActivity {
                 startActivity(GradeActivity.class);
                 break;
             case R.id.imgbtn_class_maincontent:
-                ToastUtil.showToastShort("暂未推出");
+                startActivity(SayActivity.class);
                 break;
             case R.id.imgbtn_date_maincontent:
                 startActivity(CalendarActivity.class);

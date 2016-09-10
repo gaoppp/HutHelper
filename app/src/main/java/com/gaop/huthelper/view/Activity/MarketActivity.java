@@ -66,8 +66,9 @@ public class MarketActivity extends BaseActivity {
     @Override
     public void doBusiness(Context mContext) {
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
         toolbar.setTitle("二手市场");
+        setSupportActionBar(toolbar);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

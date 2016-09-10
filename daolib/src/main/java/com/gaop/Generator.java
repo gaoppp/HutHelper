@@ -20,6 +20,7 @@ public class Generator {
     private static void addUser(Schema schema){
         Entity user=schema.addEntity("User");
         user.addIdProperty();
+        user.addStringProperty("user_id");
         user.addStringProperty("rember_code");
         user.addStringProperty("studentKH");
         user.addStringProperty("TrueName");

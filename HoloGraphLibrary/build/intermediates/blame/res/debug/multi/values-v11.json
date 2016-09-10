@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\AndroidStudioWorkspace\\HutHelper\\HoloGraphLibrary\\build\\intermediates\\res\\merged\\debug\\values-v11\\values-v11.xml",
+        "outputFile": "/home/gaop/Android/HutHelper/HoloGraphLibrary/build/intermediates/res/merged/debug/values-v11/values-v11.xml",
         "map": [
             {
                 "to": {
@@ -12,7 +12,7 @@
                     "endOffset": 187
                 },
                 "from": {
-                    "file": "D:\\AndroidStudioWorkspace\\HutHelper\\HoloGraphLibrary\\res\\values-v11\\styles.xml",
+                    "file": "/home/gaop/Android/HutHelper/HoloGraphLibrary/res/values-v11/styles.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,

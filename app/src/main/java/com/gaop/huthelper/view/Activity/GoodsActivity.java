@@ -118,8 +118,8 @@ public class GoodsActivity extends BaseActivity {
         }
         tvConnectwayGoods.setText(contentway);
         Adapter adapter = new Adapter(GoodsActivity.this, goods.getPics());
-        rvImglistGoods.setLayoutManager(new FullyLinearLayoutManager(GoodsActivity.this, LinearLayoutManager.HORIZONTAL, false));
-        rvImglistGoods.addItemDecoration(new DividerItemDecoration(GoodsActivity.this, DividerItemDecoration.HORIZONTAL_LIST));
+        rvImglistGoods.setLayoutManager(new LinearLayoutManager(GoodsActivity.this, LinearLayoutManager.HORIZONTAL, false));
+        //rvImglistGoods.addItemDecoration(new DividerItemDecoration(GoodsActivity.this, DividerItemDecoration.HORIZONTAL_LIST));
         adapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

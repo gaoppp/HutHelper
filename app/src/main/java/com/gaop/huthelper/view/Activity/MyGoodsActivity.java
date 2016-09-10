@@ -73,6 +73,7 @@ public class MyGoodsActivity extends BaseActivity {
         rvMarketlist.setLayoutManager(new LinearLayoutManager(MyGoodsActivity.this, LinearLayoutManager.VERTICAL, false));
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(this, new MyGoodsAdapter(MyGoodsActivity.this, Goodslist));
         getGoodsList();
+        //rvMarketlist.setEmptyView();
         rvMarketlist.setAdapter(mLRecyclerViewAdapter);
         rvMarketlist.setLScrollListener(new LRecyclerView.LScrollListener() {
             @Override

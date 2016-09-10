@@ -14,6 +14,7 @@
         tools:replace="android:theme,android:label,android:icon">
         <activity android:name=".view.Activity.SplashActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTask"
             android:theme="@style/AppSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -74,7 +75,12 @@
         <activity android:name=".view.Activity.MyGoodsActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
-
+        <activity android:name=".view.Activity.SayActivity"
+         android:theme="@style/AppTheme.NoActionBar"
+        android:screenOrientation="portrait"/>
+        <activity android:name=".view.Activity.MySayListActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
 
         <meta-data android:value="5731dca2e0f55a05ff00098d" android:name="UMENG_APPKEY"></meta-data>
         <meta-data android:value="Wandoujia" android:name="UMENG_CHANNEL"/><!-- ATTENTION: This was auto-generated to add Google Play services to your project for

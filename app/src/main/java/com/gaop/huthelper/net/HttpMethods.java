@@ -2,7 +2,6 @@ package com.gaop.huthelper.net;
 
 
 import android.content.Context;
-import android.util.Log;
 
 import com.gaop.huthelper.DB.DBHelper;
 import com.gaop.huthelper.Model.DepInfo;
@@ -12,7 +11,11 @@ import com.gaop.huthelper.Model.GoodsListItem;
 
 import com.gaop.huthelper.Model.HttpResult;
 import com.gaop.huthelper.Model.MyGoodsItem;
+import com.gaop.huthelper.Model.Say;
+import com.gaop.huthelper.Model.SayData;
 import com.gaop.huthelper.Model.UpdateMsg;
+import com.gaop.huthelper.jiekou.AddGoodsAPI;
+import com.gaop.huthelper.jiekou.AddSayLikeAPI;
 import com.gaop.huthelper.jiekou.AllClassAPI;
 import com.gaop.huthelper.jiekou.CourseTableAPI;
 import com.gaop.huthelper.jiekou.DeleteGoodAPI;
@@ -23,6 +26,8 @@ import com.gaop.huthelper.jiekou.GoodListAPI;
 import com.gaop.huthelper.jiekou.GoodsAPI;
 import com.gaop.huthelper.jiekou.GradeAPI;
 import com.gaop.huthelper.jiekou.MyGoodListAPI;
+import com.gaop.huthelper.jiekou.UserSayListAPI;
+import com.gaop.huthelper.jiekou.SayListAPI;
 import com.gaop.huthelper.jiekou.UpdateAPI;
 import com.gaop.huthelper.jiekou.UserDataAPI;
 import com.gaop.huthelper.utils.PrefUtil;
@@ -32,21 +37,14 @@ import com.gaop.huthelperdao.Lesson;
 import com.gaop.huthelperdao.Trem;
 import com.gaop.huthelperdao.User;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -129,6 +127,40 @@ public class HttpMethods {
 
     }
 
+    /**
+     * 分页获取说说列表
+     * @param subscriber
+     * @param pagenum
+     */
+    public void getSayList(Subscriber<HttpResult<SayData>> subscriber, int pagenum){
+
+        SayListAPI sayListAPI=retrofit.create(SayListAPI.class);
+        sayListAPI.getSayList(pagenum)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void getMySayList(Subscriber<HttpResult<SayData>> subscriber, String user_id){
+
+        UserSayListAPI sayListAPI=retrofit.create(UserSayListAPI.class);
+        sayListAPI.getSayList(user_id)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void likeSay(Subscriber<HttpResult> subscriber, String num, String code,String id){
+
+        AddSayLikeAPI sayListAPI=retrofit.create(AddSayLikeAPI.class);
+        sayListAPI.likeSay(num,code,id)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
     /**
      * 获取我的商品
      * @param subscriber
@@ -221,6 +253,8 @@ public class HttpMethods {
                                     allsf = allsf + Float.valueOf(grade.getXF());
                                     allNum++;
                                 }
+                                if(grade.getJD()==null)
+                                    grade.setJD("0");
 
                                 allJd+=Float.valueOf(grade.getXF())*Float.valueOf(grade.getJD());
 
@@ -368,31 +402,25 @@ public class HttpMethods {
     }
 
 
-    public void UploadFile(String des,Map<String, RequestBody> bodyMap){
-       // FileUploadAPI fileUploadService=retrofit.create(FileUploadAPI.class);
-        //fileUploadService.uploadImage(des,bodyMap).
-    }
-    public static void uploadMany(ArrayList<String> paths){
-        Map<String,RequestBody> photos = new HashMap<>();
-        if (paths.size()>0) {
-            for (int i=0;i<paths.size();i++) {
-                photos.put("photos"+i+"\"; filename=\"icon.png",  RequestBody.create(MediaType.parse("multipart/form-data"), new File(paths.get(i))));
-            }
-        }
-//        Call<String> stringCall = apiManager.uploadImage(desp, photos);
-//        stringCall.enqueue(new Callback<String>() {
-//            @Override
-//            public void onResponse(Call<String> call, Response<String> response) {
-//                Log.d(TAG, "onResponse() called with: " + "call = [" + call + "], response = [" + response + "]");
-//            }
-//
-//            @Override
-//            public void onFailure(Call<String> call, Throwable t) {
-//                Log.d(TAG, "onFailure() called with: " + "call = [" + call + "], t = [" + t + "]");
-//            }
-//        });
+    public void UploadFile(Subscriber<HttpResult<String>> subscriber, String des, MultipartBody.Part bodyMap){
+        FileUploadAPI fileUploadService=retrofit.create(FileUploadAPI.class);
+        fileUploadService.uploadImage(bodyMap)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
     }
 
+    public void AddGoods(Subscriber<HttpResult<String>> subscriber,User user,String tit,String content,String price,String price_src,
+                         int Class,int attr,String hidden,String phone,String qq,String wechat){
+        AddGoodsAPI addGoodsAPI=retrofit.create(AddGoodsAPI.class);
+        addGoodsAPI.AddGoods(user.getStudentKH(),user.getRember_code(),tit,content,price,price_src,user.getUser_id(),
+                Class,attr,hidden,phone,qq,wechat)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 
 
 }

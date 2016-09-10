@@ -2,6 +2,7 @@ package com.gaop.huthelper.view.Activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.gaop.huthelper.R;
 import com.gaop.huthelper.net.HttpMethods;
@@ -19,7 +21,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by gaop1 on 2016/9/3.
@@ -30,6 +31,10 @@ public class ShowImgActivity extends BaseActivity implements GestureDetector.OnG
     ImageView ivShowImg;
     @BindView(R.id.fraglayout_showImg)
     FrameLayout fraglayoutShowImg;
+    @BindView(R.id.tv_imgviewnum)
+    TextView tvImgviewnum;
+    @BindView(R.id.toolar)
+    Toolbar toolbar;
 
     private GestureDetector detector;
 
@@ -54,16 +59,23 @@ public class ShowImgActivity extends BaseActivity implements GestureDetector.OnG
     @Override
     public void doBusiness(Context mContext) {
         ButterKnife.bind(this);
-        setAllowFullScreen(true);
+        //setAllowFullScreen(true);
+
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        tvImgviewnum.setText((curr+1)+"/"+urls.size());
         detector = new GestureDetector(this);
         Picasso.with(ShowImgActivity.this).load(HttpMethods.BASE_URL + urls.get(curr))
                 .into(ivShowImg);
-//        ivShowImg.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                return false;
-//            }
-//        });
+
     }
 
     @Override
@@ -75,7 +87,9 @@ public class ShowImgActivity extends BaseActivity implements GestureDetector.OnG
         if (curr - 1 >= 0) {
             --curr;
             startAnimation();
-            Picasso.with(ShowImgActivity.this).load(HttpMethods.BASE_URL + urls.get(curr))
+            tvImgviewnum.setText((curr+1)+"/"+urls.size());
+            Picasso.with(ShowImgActivity.this).load(HttpMethods.BASE_URL + urls.get(curr)).placeholder(R.drawable.img_loading)
+                    .error(R.drawable.img_error)
                     .into(ivShowImg);
         } else {
             ToastUtil.showToastShort("已经是第一张");
@@ -83,32 +97,19 @@ public class ShowImgActivity extends BaseActivity implements GestureDetector.OnG
     }
 
     private void left() {
-        if (curr < urls.size()-1) {
+        if (curr < urls.size() - 1) {
             ++curr;
             startAnimation();
+            tvImgviewnum.setText((curr+1)+"/"+urls.size());
             Picasso.with(ShowImgActivity.this).load(HttpMethods.BASE_URL + urls.get(curr))
                     .into(ivShowImg);
+
         } else {
             ToastUtil.showToastShort("已经是最后一张");
         }
     }
 
-//    @OnClick({R.id.iv_showImg, R.id.fraglayout_showImg})
-//    public void onClick(View view) {
-//        switch (view.getId()) {
-//            case R.id.iv_showImg:
-//                break;
-//            case R.id.fraglayout_showImg:
-//                finish();
-//                break;
-//        }
-//    }
 
-
-//    @OnClick(R.id.iv_showImg)
-//    public void onClick() {
-//       // finish();
-//    }
 
     /**
      * 滑动页面动画

@@ -7,6 +7,7 @@ package com.gaop.huthelperdao;
 public class User {
 
     private Long id;
+    private String user_id;
     private String rember_code;
     private String studentKH;
     private String TrueName;
@@ -26,8 +27,9 @@ public class User {
         this.id = id;
     }
 
-    public User(Long id, String rember_code, String studentKH, String TrueName, String username, String dep_name, String class_name, String address, String active, String last_login, String login_cnt, String sex) {
+    public User(Long id, String user_id, String rember_code, String studentKH, String TrueName, String username, String dep_name, String class_name, String address, String active, String last_login, String login_cnt, String sex) {
         this.id = id;
+        this.user_id = user_id;
         this.rember_code = rember_code;
         this.studentKH = studentKH;
         this.TrueName = TrueName;
@@ -47,6 +49,14 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     public String getRember_code() {

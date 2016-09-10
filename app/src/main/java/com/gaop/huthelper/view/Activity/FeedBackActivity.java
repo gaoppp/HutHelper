@@ -29,34 +29,6 @@ public class FeedBackActivity extends BaseActivity {
     private TextView mTvTel, mTvContent;
     private Button mFeedBk;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feedback);
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolba_feedback);
-        mToolbar.setTitle("反馈意见");
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        mTvContent = (TextView) findViewById(R.id.et_feedbk_content);
-        mTvTel = (TextView) findViewById(R.id.et_feedbk_tel);
-        mFeedBk = (Button) findViewById(R.id.btn_feedbk_ok);
-        mFeedBk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (fastClick()) {
-                    CommUtil.hideSoftInput(FeedBackActivity.this);
-                    feedBack();
-                }
-            }
-        });
-
-    }
 
     private void feedBack() {
         String content = mTvContent.getText().toString();
@@ -87,12 +59,33 @@ public class FeedBackActivity extends BaseActivity {
 
     @Override
     public int bindLayout() {
-        return 0;
+        return R.layout.activity_feedback;
     }
 
     @Override
     public void doBusiness(Context mContext) {
-
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolba_feedback);
+        mToolbar.setTitle("反馈意见");
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        mTvContent = (TextView) findViewById(R.id.et_feedbk_content);
+        mTvTel = (TextView) findViewById(R.id.et_feedbk_tel);
+        mFeedBk = (Button) findViewById(R.id.btn_feedbk_ok);
+        mFeedBk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (fastClick()) {
+                    CommUtil.hideSoftInput(FeedBackActivity.this);
+                    feedBack();
+                }
+            }
+        });
     }
 
 }

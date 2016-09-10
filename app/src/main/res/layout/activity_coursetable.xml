@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:fitsSystemWindows="true">
+    >
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_coursetable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#63B8FF"
+        android:fitsSystemWindows="true"
         android:elevation="5dp"
         >
 
@@ -23,7 +24,8 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:drawablePadding="8dp"
-            android:drawableRight="@drawable/triangle_down"
+            android:drawableRight="@drawable/down"
+             
             />
         <ImageView
             android:id="@+id/iv_coursetable_update"

@@ -87,7 +87,7 @@ public class CommUtil {
         for (Lesson l:courseList) {
             if(CommUtil.ifHaveCourse(l,DateUtil.getNowWeek())){
                 if(l.getDjj().equals(num))
-                    return "第"+num+(num+1)+"节"+l.getName()+" "+l.getRoom();
+                    return "第"+num+","+(num+1)+"节"+l.getName()+" "+l.getRoom();
                 else
                     LessonMap.put(l.getDjj(),l);
             }
@@ -97,7 +97,7 @@ public class CommUtil {
             if(num>9)
                 return "今天没课了";
             if(LessonMap.get(num)!=null){
-                return "第"+num+(num+1)+"节"+LessonMap.get(num).getName()+"　"+LessonMap.get(num).getRoom();
+                return "第"+num+","+(num+1)+"节"+LessonMap.get(num).getName()+"　"+LessonMap.get(num).getRoom();
             }
         }while (num<9);
 

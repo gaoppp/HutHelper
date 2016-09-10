@@ -434,6 +434,7 @@ public class CourseTable extends Fragment {
                                         index=i;
                                     }
                                     change=true;
+                                     it.remove();
                                 }
                             }
                             if(!change){
@@ -461,8 +462,6 @@ public class CourseTable extends Fragment {
                         lesson.setBackgroundResource(bgRes);//设置背景
                         lesson.setTextColor(Color.WHITE);
                     } else {
-                        Log.e("ww",mTable.get().CurrWeek+"");
-                        Log.e("tag",upperCourse.getName()+CommUtil.ifHaveCourse(upperCourse,  mTable.get().CurrWeek));
                         lesson.setBackgroundResource(R.drawable.kbno);
                         lesson.setTextColor(Color.GRAY);
                     }
