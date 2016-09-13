@@ -16,6 +16,7 @@ public class Lesson implements java.io.Serializable {
     private Integer djj;
     private Integer qsz;
     private Integer jsz;
+    private String index;
 
     public Lesson() {
     }
@@ -24,7 +25,7 @@ public class Lesson implements java.io.Serializable {
         this.id = id;
     }
 
-    public Lesson(Long id, String xh, String dsz, String name, String teacher, String room, Integer xqj, Integer djj, Integer qsz, Integer jsz) {
+    public Lesson(Long id, String xh, String dsz, String name, String teacher, String room, Integer xqj, Integer djj, Integer qsz, Integer jsz, String index) {
         this.id = id;
         this.xh = xh;
         this.dsz = dsz;
@@ -35,6 +36,7 @@ public class Lesson implements java.io.Serializable {
         this.djj = djj;
         this.qsz = qsz;
         this.jsz = jsz;
+        this.index = index;
     }
 
     public Long getId() {
@@ -115,6 +117,14 @@ public class Lesson implements java.io.Serializable {
 
     public void setJsz(Integer jsz) {
         this.jsz = jsz;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 
 }

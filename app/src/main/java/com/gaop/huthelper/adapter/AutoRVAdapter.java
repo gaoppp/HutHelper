@@ -40,7 +40,6 @@ public abstract class AutoRVAdapter extends RecyclerView.Adapter<AutoRVAdapter.R
 
     @Override
     public void onBindViewHolder(final RVHolder holder, final int position) {
-
         onBindViewHolder(holder.getViewHolder(), position);
         if (onItemClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {

@@ -1,10 +1,14 @@
 package com.gaop;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import de.greenrobot.daogenerator.DaoGenerator;
 import de.greenrobot.daogenerator.Entity;
 import de.greenrobot.daogenerator.Property;
 import de.greenrobot.daogenerator.Schema;
 import de.greenrobot.daogenerator.ToMany;
+import sun.rmi.runtime.Log;
 
 public class Generator {
 
@@ -13,8 +17,17 @@ public class Generator {
         addUser(schema);
         addLesson(schema);
         addGrade(schema);
-        new DaoGenerator().generateAll(schema, "D:/AndroidStudioWorkspace/HutHelper/app/src/main/java-gen");
+        addNotice(schema);
+        new DaoGenerator().generateAll(schema, "/home/gaop/Android/HutHelper/app/src/main/java-gen");    }
 
+
+    private static void addNotice(Schema schema){
+
+        Entity notice= schema.addEntity("Notice");
+        notice.addIdProperty();
+        notice.addStringProperty("time");
+        notice.addStringProperty("content");
+        notice.addStringProperty("title");
     }
 
     private static void addUser(Schema schema){
@@ -46,6 +59,7 @@ public class Generator {
         lesson.addIntProperty("djj");
         lesson.addIntProperty("qsz");
         lesson.addIntProperty("jsz");
+        lesson.addStringProperty("index");
     }
     private static void addGrade(Schema schema){
 

@@ -56,7 +56,6 @@ public class Trem {
     public void setContent(String content) {
         this.content = content;
     }
-
     @Override
     public boolean equals(Object o) {
         if(o instanceof Trem){

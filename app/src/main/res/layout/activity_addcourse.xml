@@ -11,30 +11,24 @@
         android:background="#63B8FF"
         android:elevation="5dp"
         android:fitsSystemWindows="true">
-        <!--<ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_edit"
-            android:padding="13dp"
-            android:layout_marginRight="0dp"
-            />-->
+
         <ImageView
-            android:id="@+id/iv_course_delete"
+            android:id="@+id/iv_addcourse_ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_delete"
+            android:src="@mipmap/ic_check_black_24dp"
             android:padding="13dp"
             android:layout_marginRight="-5dp"
-
+            android:alpha="0.55"
             android:layout_gravity="right"
             />
-
     </android.support.v7.widget.Toolbar>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/rl_course_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/iv_course_name"
@@ -45,26 +39,29 @@
             android:src="@mipmap/ic_coursename" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/iv_course_name"
+            android:layout_weight="2"
             android:padding="10dp"
             android:text="课程名"
             android:textColor="@color/black1"
             android:textSize="20sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/tv_course_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="6"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:paddingRight="10dp"
-            android:text="未知"
-            android:textSize="20sp" />
-    </RelativeLayout>
 
-    <RelativeLayout
+            android:paddingRight="10dp"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:id="@+id/rl_course_teacher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -78,7 +75,8 @@
             android:src="@mipmap/ic_courseteacher" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/iv_course_teacher"
             android:padding="10dp"
@@ -86,18 +84,19 @@
             android:textColor="@color/black1"
             android:textSize="20sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/tv_course_teacher"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="6"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:paddingRight="10dp"
-            android:text="未知"
             android:textSize="20sp" />
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="horizontal"
         android:id="@+id/rl_course_classroom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -111,7 +110,8 @@
             android:src="@mipmap/ic_courseloc" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/iv_course_classroom"
             android:padding="10dp"
@@ -119,18 +119,19 @@
             android:textColor="@color/black1"
             android:textSize="20sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/tv_course_classroom"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="6"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:paddingRight="10dp"
-            android:text="未知"
             android:textSize="20sp" />
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="horizontal"
         android:id="@+id/rl_course_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -144,7 +145,8 @@
             android:src="@mipmap/ic_coursetime" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/iv_course_time"
             android:padding="10dp"
@@ -152,18 +154,35 @@
             android:textColor="@color/black1"
             android:textSize="20sp" />
 
-        <TextView
+        <Spinner
+            android:id="@+id/spinner_addcourse_week"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="2dp"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:entries="@array/weeklist"
+            android:layout_height="wrap_content"></Spinner>
+        <Spinner
+            android:id="@+id/spinner_addcourse_num"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="2dp"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:entries="@array/coursenumlist"
+            android:layout_height="wrap_content"></Spinner>
+        <!--<EditText
             android:id="@+id/tv_course_time"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="6"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:paddingRight="10dp"
-            android:text="未知"
-            android:textSize="20sp" />
-    </RelativeLayout>
+            android:textSize="20sp" />-->
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="horizontal"
         android:id="@+id/rl_course_week"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -177,7 +196,8 @@
             android:src="@mipmap/ic_course_week" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/iv_course_week"
             android:padding="10dp"
@@ -186,14 +206,24 @@
             android:textSize="20sp" />
 
         <TextView
+            android:layout_width="0dp"
+            android:layout_weight="6"
             android:id="@+id/tv_course_week"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:paddingRight="10dp"
-            android:text="未知"
+            android:text="点击下方选择"
             android:textSize="20sp" />
-    </RelativeLayout>
+    </LinearLayout>
+    <GridView
+        android:horizontalSpacing="5dp"
+        android:verticalSpacing="5dp"
+        android:padding="20dp"
+        android:numColumns="5"
+        android:id="@+id/rv_weekchoose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </GridView>
 
 </LinearLayout>

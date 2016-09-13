@@ -165,6 +165,7 @@ public class MyGoodsActivity extends BaseActivity {
                 , user.getStudentKH(), user.getRember_code());
     }
 
+
     private void deleteGoods(final int position) {
         User user = DBHelper.getUserDao().get(0);
         SubscriberOnNextListener<HttpResult> subscriberOnNextListener = new SubscriberOnNextListener<HttpResult>() {

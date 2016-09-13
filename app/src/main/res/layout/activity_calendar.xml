@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
@@ -15,9 +15,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/calendar" />
+            android:paddingBottom="8dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_calendar_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"></android.support.v7.widget.RecyclerView>
+
+
+            <ImageView
+                android:id="@+id/iv_calendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rv_calendar_date"
+                android:src="@drawable/calendar"
+                android:scaleType="fitStart"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
     </ScrollView>
 </LinearLayout>

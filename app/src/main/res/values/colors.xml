@@ -38,6 +38,8 @@
     <color name="dimgray">#696969</color> <!-- 暗灰色 -->
     <color name="dimgrey">#696969</color> <!-- 暗灰色 -->
 
+    <color name="yellow">#FFFF00</color>
+
     <color name="calendar_event">#999999</color>
     <color name="dialogColor">#f0ffffff</color>
     <color name="dialog_gray">#e6e6e6</color>

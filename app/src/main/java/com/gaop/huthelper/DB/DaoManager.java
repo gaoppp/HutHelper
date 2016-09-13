@@ -13,6 +13,8 @@ import com.gaop.huthelperdao.Grade;
 import com.gaop.huthelperdao.GradeDao;
 import com.gaop.huthelperdao.Lesson;
 import com.gaop.huthelperdao.LessonDao;
+import com.gaop.huthelperdao.Notice;
+import com.gaop.huthelperdao.NoticeDao;
 import com.gaop.huthelperdao.Trem;
 import com.gaop.huthelperdao.TremDao;
 import com.gaop.huthelperdao.User;
@@ -35,23 +37,25 @@ public class DaoManager {
     private CourseGradeDao courseGradeDao;
     private LessonDao lessonDao;
     private GradeDao gradeDao;
+    private NoticeDao noticeDao;
 
-    public DaoManager(){
+    public DaoManager() {
 
     }
 
-    public static DaoManager getInstance(Context context){
-        if (instance == null){
+    public static DaoManager getInstance(Context context) {
+        if (instance == null) {
             instance = new DaoManager();
             if (appContext == null) {
                 appContext = context.getApplicationContext();
             }
             instance.mDaoSession = MApplication.getDaoSession(context);
             instance.userDao = instance.mDaoSession.getUserDao();
-            instance.lessonDao=instance.mDaoSession.getLessonDao();
-            instance.gradeDao=instance.mDaoSession.getGradeDao();
-            instance.courseGradeDao=instance.mDaoSession.getCourseGradeDao();
-            instance.tremDao=instance.mDaoSession.getTremDao();
+            instance.lessonDao = instance.mDaoSession.getLessonDao();
+            instance.gradeDao = instance.mDaoSession.getGradeDao();
+            instance.courseGradeDao = instance.mDaoSession.getCourseGradeDao();
+            instance.tremDao = instance.mDaoSession.getTremDao();
+            instance.noticeDao=instance.mDaoSession.getNoticeDao();
         }
         return instance;
     }
@@ -86,12 +90,13 @@ public class DaoManager {
     /**
      * User查找功能
      * //查找条件
+     *
      * @param arg0
      * @param conditions
      * @return:albumList
      */
     public List<User> queryUser(WhereCondition arg0,
-                                    WhereCondition... conditions) {
+                                WhereCondition... conditions) {
         QueryBuilder<User> qb = userDao.queryBuilder();
         qb.where(arg0, conditions);
         List<User> personList = qb.list();
@@ -137,13 +142,17 @@ public class DaoManager {
         lessonDao.insert(person);
     }
 
-    public void insertListLesson(List<Lesson> list){
-        if (null == list || list.isEmpty()){
+    public void insertListLesson(List<Lesson> list) {
+        if (null == list || list.isEmpty()) {
             return;
         }
         for (Lesson object : list) {
             lessonDao.insert(object);
         }
+    }
+
+    public void deleteLessonByid(List<Long> d) {
+        lessonDao.deleteByKeyInTx(d);
     }
 
     public void insertOrReplaceLesson(Lesson person) {
@@ -157,12 +166,13 @@ public class DaoManager {
     /**
      * Lesson查找功能
      * //查找条件
+     *
      * @param arg0
      * @param conditions
      * @return:albumList
      */
     public List<Lesson> queryLesson(WhereCondition arg0,
-                                WhereCondition... conditions) {
+                                    WhereCondition... conditions) {
         QueryBuilder<Lesson> qb = lessonDao.queryBuilder();
         qb.where(arg0, conditions);
         List<Lesson> personList = qb.list();
@@ -187,7 +197,7 @@ public class DaoManager {
      * @param:album
      */
     public void deleteLesson(Lesson person) {
-       lessonDao.delete(person);
+        lessonDao.delete(person);
     }
 
     /**
@@ -217,8 +227,8 @@ public class DaoManager {
         tremDao.update(person);
     }
 
-    public void insertListTrem(List<Trem> list){
-        if (null == list || list.isEmpty()){
+    public void insertListTrem(List<Trem> list) {
+        if (null == list || list.isEmpty()) {
             return;
         }
         for (Trem object : list) {
@@ -229,6 +239,7 @@ public class DaoManager {
     /**
      * Trem查找功能
      * //查找条件
+     *
      * @param arg0
      * @param conditions
      * @return:albumList
@@ -263,7 +274,6 @@ public class DaoManager {
     }
 
 
-
     /**
      * ================CourseGrade===================*
      */
@@ -282,8 +292,8 @@ public class DaoManager {
         courseGradeDao.insert(person);
     }
 
-    public void insertListCourseGrade(List<CourseGrade> list){
-        if (null == list || list.isEmpty()){
+    public void insertListCourseGrade(List<CourseGrade> list) {
+        if (null == list || list.isEmpty()) {
             return;
         }
         for (CourseGrade object : list) {
@@ -302,13 +312,14 @@ public class DaoManager {
     /**
      * CourseGrade查找功能
      * //查找条件
+     *
      * @param arg0
      * @param conditions
      * @return:albumList
      */
     public List<CourseGrade> queryCourseGrade(WhereCondition arg0,
-                                    WhereCondition... conditions) {
-        QueryBuilder<CourseGrade> qb =courseGradeDao.queryBuilder();
+                                              WhereCondition... conditions) {
+        QueryBuilder<CourseGrade> qb = courseGradeDao.queryBuilder();
         qb.where(arg0, conditions);
         List<CourseGrade> personList = qb.list();
 
@@ -365,6 +376,7 @@ public class DaoManager {
     /**
      * Grade查找功能
      * //查找条件
+     *
      * @param arg0
      * @param conditions
      * @return:albumList
@@ -398,5 +410,25 @@ public class DaoManager {
         gradeDao.delete(person);
     }
 
+    /****************************通知×××××××××××××××××××/
+     *
+     */
 
+    public List<Notice> orderAscnotice() {
+        return noticeDao.queryBuilder().orderAsc(NoticeDao.Properties.Id).list();
+    }
+
+    /**
+     * Grade插入功能
+     *
+     * @return
+     * @param:album
+     */
+    public void insertNotice(Notice person) {
+        noticeDao.insert(person);
+    }
+
+    public void deleteAllNotice() {
+        noticeDao.deleteAll();
+    }
 }

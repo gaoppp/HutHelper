@@ -1,11 +1,16 @@
 package com.gaop.huthelper.utils;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
+import android.util.Base64;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -15,7 +20,9 @@ import com.gaop.huthelperdao.Lesson;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -104,6 +111,22 @@ public class CommUtil {
         return "";
     }
 
+    /**
+     * 判断网络
+     *
+     * @param context
+     * @return
+     */
+    public static boolean isOnline(Context context) {
+        ConnectivityManager manager = (ConnectivityManager) context
+                .getSystemService(Activity.CONNECTIVITY_SERVICE);
+        NetworkInfo info = manager.getActiveNetworkInfo();
+        if (info != null && info.isConnected()) {
+            return true;
+        }
+        return false;
+    }
+
 
     /**
      * 判断课程有无
@@ -113,15 +136,23 @@ public class CommUtil {
      */
 
     public static boolean ifHaveCourse(Lesson lesson, int currWeek) {
-        if(currWeek>=lesson.getQsz()&&currWeek<=lesson.getJsz()){
-            if("单".equals(lesson.getDsz())&&currWeek%2==0){
-                return false;
+        String[] s=lesson.getIndex().split(" ");
+
+        String curr=String.valueOf(currWeek);
+        for (String w:s) {
+            if(w.equals(curr)){
+                return true;
             }
-            if("双".equals(lesson.getDsz())&&currWeek%2!=0){
-                return false;
-            }
-            return true;
         }
+//        if(currWeek>=lesson.getQsz()&&currWeek<=lesson.getJsz()){
+//            if("单".equals(lesson.getDsz())&&currWeek%2==0){
+//                return false;
+//            }
+//            if("双".equals(lesson.getDsz())&&currWeek%2!=0){
+//                return false;
+//            }
+//            return true;
+//        }
         return false;
     }
 
@@ -178,7 +209,7 @@ public class CommUtil {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
         int options = 100;
-        while ( baos.toByteArray().length / 1024>500) { //循环判断如果压缩后图片是否大于1M,大于继续压缩
+        while ( baos.toByteArray().length / 1024>600) { //循环判断如果压缩后图片是否大于1M,大于继续压缩
             baos.reset();//重置baos即清空baos
             image.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
             options -= 10;//每次都减少10
@@ -187,4 +218,75 @@ public class CommUtil {
         Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片
         return bitmap;
     }
+
+    /**
+     * sha1加密
+     * @param decript
+     * @return
+     */
+    public static String SHA1(String decript) {
+        try {
+            MessageDigest digest = java.security.MessageDigest
+                    .getInstance("SHA-1");
+            digest.update(decript.getBytes());
+            byte messageDigest[] = digest.digest();
+            // Create Hex String
+            StringBuffer hexString = new StringBuffer();
+            // 字节数组转换为 十六进制 数
+            for (int i = 0; i < messageDigest.length; i++) {
+                String shaHex = Integer.toHexString(messageDigest[i] & 0xFF);
+                if (shaHex.length() < 2) {
+                    hexString.append(0);
+                }
+                hexString.append(shaHex);
+            }
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    /**
+     * BASE64 加密
+     * @param str
+     * @return
+     */
+    public static  String encryptBASE64(String str) {
+        if (str == null || str.length() == 0) {
+            return null;
+        }
+        try {
+            byte[] encode = str.getBytes("UTF-8");
+            // base64 加密
+            return new String(Base64.encode(encode, 0, encode.length, Base64.DEFAULT), "UTF-8");
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /**
+     * 6.0以上权限
+     * @param activity
+     * @return
+     */
+    public static boolean isGrantExternalRW(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && activity.checkSelfPermission(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            activity.requestPermissions(new String[]{
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+            }, 1);
+
+            return false;
+        }
+
+        return true;
+    }
+
 }

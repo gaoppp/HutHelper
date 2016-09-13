@@ -23,7 +23,6 @@ import com.gaop.huthelper.Model.HttpResult;
 import com.gaop.huthelper.Model.Say;
 import com.gaop.huthelper.Model.UpdateMsg;
 import com.gaop.huthelper.R;
-import com.gaop.huthelper.jiekou.SayListAPI;
 import com.gaop.huthelper.jiekou.SubscriberOnNextListener;
 import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.net.ProgressSubscriber;
@@ -139,7 +138,6 @@ public class MainActivity extends BaseActivity {
     }
 
 
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -155,13 +153,15 @@ public class MainActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imgbtn_notice_maincontent:
-
+                startActivity(NoticeActivity.class);
                 break;
             case R.id.imgbtn_course_maincontent:
                 startActivity(CourseTableActivity.class);
                 break;
             case R.id.imgbtn_book_maincontent:
-
+                Bundle bundle = new Bundle();
+                bundle.putInt("type", WebViewActivity.TYPE_LIB);
+                startActivity(WebViewActivity.class, bundle);
                 break;
             case R.id.imgbtn_score_maincontent:
                 startActivity(GradeActivity.class);
@@ -173,7 +173,9 @@ public class MainActivity extends BaseActivity {
                 startActivity(CalendarActivity.class);
                 break;
             case R.id.imgbtn_time_maincontent:
-                ToastUtil.showToastShort("暂未推出");
+                Bundle bundle1 = new Bundle();
+                bundle1.putInt("type", WebViewActivity.TYPE_EXAM);
+                startActivity(WebViewActivity.class, bundle1);
                 break;
             case R.id.imgbtn_electric_maincontent:
                 startActivity(ElecticActivity.class);

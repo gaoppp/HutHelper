@@ -36,7 +36,7 @@
             android:layout_alignTop="@+id/iv_img_goods"
             android:layout_toRightOf="@+id/iv_img_goods"
             android:padding="5dp"
-            android:text="和沙拉酱"
+            android:text="加载中"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_createon_goods"
             android:paddingTop="10dp"
-            android:text="捷安特orc3300公路车 疾如风 轻若羽 有意可刀"
+            android:text="加载中"
             android:textColor="@color/black"
             android:textSize="16sp" />
         <ImageView
@@ -111,26 +111,7 @@
             android:textColor="@color/black2"
             android:textSize="16sp" />
 
-        <!--<TextView
-            android:id="@+id/place"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_quality"
-            android:paddingTop="5dp"
-            android:text="所在地:"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/tv_place_goods"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_quality"
-            android:layout_toRightOf="@+id/place"
-            android:paddingTop="5dp"
-            android:text="工大校"
-            android:textColor="@color/black1"
-            android:textSize="18sp" />-->
 
         <TextView
             android:id="@+id/connectway"
@@ -172,7 +153,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/iv_line_goods"
             android:paddingTop="8dp"
-            android:text="捷安特orc3300公路车 20斤轻量随意上楼 速度快超过一切山地车 有意联系试车"
+            android:text="加载中"
             android:textColor="@color/black"
             android:textSize="16sp" />
 

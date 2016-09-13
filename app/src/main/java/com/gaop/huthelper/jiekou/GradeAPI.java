@@ -19,6 +19,7 @@ import rx.Observable;
  * Created by gaop1 on 2016/7/30.
  */
 public interface GradeAPI {
-    @GET("api/v1/get/scores/{xh}/{code_app}")
-    Observable<HttpResult<List<CourseGrade>>> getGrade(@Path("xh") String xh, @Path("code_app") String code_app);
+    @GET("api/v1/get/scores/{xh}/{code_app}/{sha1}")
+    Observable<HttpResult<List<CourseGrade>>> getGrade(@Path("xh") String xh, @Path("code_app") String code_app
+            , @Path("sha1") String sha1);
 }

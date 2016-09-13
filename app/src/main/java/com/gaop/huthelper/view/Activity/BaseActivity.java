@@ -14,6 +14,7 @@ import android.view.WindowManager;
 
 import com.gaop.huthelper.MApplication;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.message.PushAgent;
 
 /**
  * Created by gaop1 on 2016/7/23.
@@ -64,6 +65,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        PushAgent.getInstance(this).onAppStart();
     }
 
     /**

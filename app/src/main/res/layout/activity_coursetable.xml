@@ -24,7 +24,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:drawablePadding="8dp"
-            android:drawableRight="@drawable/down"
+            android:drawableRight="@drawable/triangle_down"
              
             />
         <ImageView

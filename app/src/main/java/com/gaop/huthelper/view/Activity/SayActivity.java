@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -13,12 +12,10 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.gaop.huthelper.Model.GoodsListItem;
 import com.gaop.huthelper.Model.HttpResult;
 import com.gaop.huthelper.Model.Say;
 import com.gaop.huthelper.Model.SayData;
 import com.gaop.huthelper.R;
-import com.gaop.huthelper.adapter.MarketRVAdapter;
 import com.gaop.huthelper.adapter.SayRVAdapter;
 import com.gaop.huthelper.jiekou.SubscriberOnNextListener;
 import com.gaop.huthelper.net.HttpMethods;
@@ -91,10 +88,11 @@ public class SayActivity extends BaseActivity {
                 startActivity(AddGoodsActivity.class);
             }
         });
+
         getSayList(1);
 
 
-        rvSaylist.setLayoutManager(new LinearLayoutManager(SayActivity.this,LinearLayoutManager.VERTICAL,false));
+        rvSaylist.setLayoutManager(new LinearLayoutManager(SayActivity.this, LinearLayoutManager.VERTICAL, false));
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(this, new SayRVAdapter(SayActivity.this, Saylist));
         rvSaylist.setAdapter(mLRecyclerViewAdapter);
         rvSaylist.setLScrollListener(new LRecyclerView.LScrollListener() {
@@ -118,11 +116,11 @@ public class SayActivity extends BaseActivity {
 
             @Override
             public void onBottom() {
-                Log.e("ds",CURPage+" "+COUNT);
+                Log.e("ds", CURPage + " " + COUNT);
                 if (CURPage + 1 <= COUNT) {
                     ++CURPage;
                     getSayList(CURPage);
-                }else
+                } else
                     RecyclerViewStateUtils.setFooterViewState(rvSaylist, LoadingFooter.State.TheEnd);
             }
 
@@ -134,9 +132,9 @@ public class SayActivity extends BaseActivity {
         mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int i) {
-               // Bundle mBundle = new Bundle();
-               // mBundle.putString("id", Saylist.get(i).getId());
-               //
+                // Bundle mBundle = new Bundle();
+                // mBundle.putString("id", Saylist.get(i).getId());
+                //
                 // startActivity(GoodsActivity.class, mBundle);
             }
 
@@ -154,7 +152,7 @@ public class SayActivity extends BaseActivity {
             public void onNext(HttpResult<SayData> o) {
                 if (o.getMsg().equals("ok")) {
                     COUNT = o.getData().getInfo().getPage_max();
-                    CURPage =Integer.valueOf(o.getData().getInfo().getPage_cur());
+                    CURPage = Integer.valueOf(o.getData().getInfo().getPage_cur());
                     Saylist.addAll(o.getData().getPosts());
                 } else {
                     ToastUtil.showToastShort("获取服务器数据为空");
@@ -181,15 +179,25 @@ public class SayActivity extends BaseActivity {
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
+    }
 
-    @OnClick(R.id.iv_say_mysay)
-    public void onClick() {
-        if(fastClick()){
-            Bundle bundle=new Bundle();
-            bundle.putString("user_id","my");
-            startActivity(MySayListActivity.class,bundle);
+    @OnClick({R.id.iv_say_mysay, R.id.fab})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_say_mysay:
+                if(fastClick()){
+                    Bundle bundle=new Bundle();
+                    bundle.putString("user_id","my");
+                    startActivity(MySayListActivity.class,bundle);
+                }
+                break;
+            case R.id.fab:
+                startActivity(AddSayActivity.class);
+                break;
         }
-
-
     }
 }

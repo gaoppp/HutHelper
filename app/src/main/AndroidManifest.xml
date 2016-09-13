@@ -12,9 +12,10 @@
         android:theme="@style/AppTheme">
 
         tools:replace="android:theme,android:label,android:icon">
-        <activity android:name=".view.Activity.SplashActivity"
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".view.Activity.SplashActivity"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@style/AppSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,72 +23,118 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.Activity.MarketActivity"
+        <activity
+            android:name=".view.Activity.MarketActivity"
             android:label="@string/title_activity_market"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".view.Activity.ElecticActivity"
+        <activity
+            android:name=".view.Activity.ElecticActivity"
             android:theme="@style/AppTheme.NoActionBar">
             android:screenOrientation="portrait"
         </activity>
-        <activity android:name=".view.Activity.CourseTableActivity"
+        <activity
+            android:name=".view.Activity.CourseTableActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".view.Activity.ImportActivity"
+        <activity
+            android:name=".view.Activity.ImportActivity"
             android:theme="@style/AppTheme.NoActionBar">
             android:screenOrientation="portrait"
         </activity>
-        <activity android:name=".view.Activity.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.Activity.CourseItemActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"></activity
-            >
-        <activity android:name=".view.Activity.GradeActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+        <activity
+            android:name=".view.Activity.MainActivity"
             android:screenOrientation="portrait"
-            />
-        <activity android:name=".view.Activity.GradeListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Activity.CourseItemActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".view.Activity.GradeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Activity.GradeListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Activity.FeedBackActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Activity.UserActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Activity.AboutActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Activity.CalendarActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Activity.GoodsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Activity.ShowImgActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Activity.AddGoodsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Activity.MyGoodsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Activity.SayActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Activity.MySayListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Activity.AddSayActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Activity.WebViewActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.Activity.FeedBackActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.Activity.AddCourseActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.Activity.UserActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.Activity.AboutActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.Activity.CalendarActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.Activity.GoodsActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.Activity.ShowImgActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.Activity.AddGoodsActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.Activity.MyGoodsActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.Activity.SayActivity"
-         android:theme="@style/AppTheme.NoActionBar"
-        android:screenOrientation="portrait"/>
-        <activity android:name=".view.Activity.MySayListActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.Activity.NoticeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Activity.NoticeItemActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <meta-data android:value="5731dca2e0f55a05ff00098d" android:name="UMENG_APPKEY"></meta-data>
-        <meta-data android:value="Wandoujia" android:name="UMENG_CHANNEL"/><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="7b7aaa25e7678d08c405d849a5b425aa"></meta-data>
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5731dca2e0f55a05ff00098d"></meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Wandoujia" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>

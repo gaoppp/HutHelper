@@ -10,6 +10,15 @@ public class Electric {
      * prize : 92.62
      */
 
+//    {
+//        "jid":"",
+//        "device":"android x.x",
+//        "student_number":"16508500101"
+//        "expired_time":""
+//    }
+
+
+
     private String oddl;
     private String suml;
     private String prize;

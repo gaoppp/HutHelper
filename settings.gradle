@@ -1,1 +1,1 @@
-include ':app', ':daolib', ':HoloGraphLibrary'
+include ':app', ':daolib', ':HoloGraphLibrary', ':PushSDK'

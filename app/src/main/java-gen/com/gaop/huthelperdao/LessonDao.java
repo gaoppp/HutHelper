@@ -33,6 +33,7 @@ public class LessonDao extends AbstractDao<Lesson, Long> {
         public final static Property Djj = new Property(7, Integer.class, "djj", false, "DJJ");
         public final static Property Qsz = new Property(8, Integer.class, "qsz", false, "QSZ");
         public final static Property Jsz = new Property(9, Integer.class, "jsz", false, "JSZ");
+        public final static Property Index = new Property(10, String.class, "index", false, "INDEX");
     };
 
 
@@ -57,7 +58,8 @@ public class LessonDao extends AbstractDao<Lesson, Long> {
                 "\"XQJ\" INTEGER," + // 6: xqj
                 "\"DJJ\" INTEGER," + // 7: djj
                 "\"QSZ\" INTEGER," + // 8: qsz
-                "\"JSZ\" INTEGER);"); // 9: jsz
+                "\"JSZ\" INTEGER," + // 9: jsz
+                "\"INDEX\" TEXT);"); // 10: index
     }
 
     /** Drops the underlying database table. */
@@ -120,6 +122,11 @@ public class LessonDao extends AbstractDao<Lesson, Long> {
         if (jsz != null) {
             stmt.bindLong(10, jsz);
         }
+ 
+        String index = entity.getIndex();
+        if (index != null) {
+            stmt.bindString(11, index);
+        }
     }
 
     /** @inheritdoc */
@@ -141,7 +148,8 @@ public class LessonDao extends AbstractDao<Lesson, Long> {
             cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6), // xqj
             cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7), // djj
             cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8), // qsz
-            cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9) // jsz
+            cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9), // jsz
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10) // index
         );
         return entity;
     }
@@ -159,6 +167,7 @@ public class LessonDao extends AbstractDao<Lesson, Long> {
         entity.setDjj(cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7));
         entity.setQsz(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
         entity.setJsz(cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9));
+        entity.setIndex(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
      }
     
     /** @inheritdoc */

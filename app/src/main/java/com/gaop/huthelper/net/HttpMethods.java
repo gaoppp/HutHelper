@@ -26,10 +26,10 @@ import com.gaop.huthelper.jiekou.GoodListAPI;
 import com.gaop.huthelper.jiekou.GoodsAPI;
 import com.gaop.huthelper.jiekou.GradeAPI;
 import com.gaop.huthelper.jiekou.MyGoodListAPI;
-import com.gaop.huthelper.jiekou.UserSayListAPI;
-import com.gaop.huthelper.jiekou.SayListAPI;
+import com.gaop.huthelper.jiekou.SayAPI;
 import com.gaop.huthelper.jiekou.UpdateAPI;
 import com.gaop.huthelper.jiekou.UserDataAPI;
+import com.gaop.huthelper.utils.CommUtil;
 import com.gaop.huthelper.utils.PrefUtil;
 import com.gaop.huthelperdao.CourseGrade;
 import com.gaop.huthelperdao.Grade;
@@ -134,7 +134,7 @@ public class HttpMethods {
      */
     public void getSayList(Subscriber<HttpResult<SayData>> subscriber, int pagenum){
 
-        SayListAPI sayListAPI=retrofit.create(SayListAPI.class);
+        SayAPI sayListAPI=retrofit.create(SayAPI.class);
         sayListAPI.getSayList(pagenum)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -142,16 +142,28 @@ public class HttpMethods {
                 .subscribe(subscriber);
     }
 
+    /**
+     * 获取指定id的说说列表
+     * @param subscriber
+     * @param user_id
+     */
     public void getMySayList(Subscriber<HttpResult<SayData>> subscriber, String user_id){
 
-        UserSayListAPI sayListAPI=retrofit.create(UserSayListAPI.class);
-        sayListAPI.getSayList(user_id)
+        SayAPI sayListAPI=retrofit.create(SayAPI.class);
+        sayListAPI.getSayListById(user_id)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
 
+    /**
+     * 点赞说说
+     * @param subscriber
+     * @param num
+     * @param code
+     * @param id
+     */
     public void likeSay(Subscriber<HttpResult> subscriber, String num, String code,String id){
 
         AddSayLikeAPI sayListAPI=retrofit.create(AddSayLikeAPI.class);
@@ -161,6 +173,50 @@ public class HttpMethods {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
+    /**
+     * 删除说说
+     * @param subscriber
+     * @param num
+     * @param code
+     * @param id
+     */
+    public void deleteSay(Subscriber<HttpResult> subscriber,String num,String code,String id){
+        SayAPI api=retrofit.create(SayAPI.class);
+        api.deleteSay(num,code,id)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 发布说说
+     * @param subscriber
+     * @param user
+     * @param content
+     * @param attr
+     */
+    public void addSay(Subscriber<HttpResult<String>> subscriber, User user, String content, String attr){
+        SayAPI sayAPI=retrofit.create(SayAPI.class);
+        sayAPI.addSay(user.getStudentKH(),user.getRember_code(),content,attr)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+
+    }
+
+    public void UploadSayImag(Subscriber<HttpResult<String>> subscriber, String des, MultipartBody.Part bodyMap){
+        SayAPI fileUploadService=retrofit.create(SayAPI.class);
+        fileUploadService.uploadImage(bodyMap)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
     /**
      * 获取我的商品
      * @param subscriber
@@ -215,12 +271,12 @@ public class HttpMethods {
      * 获取成绩数据
      *
      * @param subscriber
-     * @param num        学号
-     * @param pass
      */
-    public void getGradeData(final Context context, Subscriber<String> subscriber, final String num, final String pass) {
+    public void getGradeData(final Context context, Subscriber<String> subscriber, final User user) {
         GradeAPI gradeAPI = retrofit.create(GradeAPI.class);
-        gradeAPI.getGrade(num, pass)
+
+        String sha1= CommUtil.SHA1(user.getStudentKH()+user.getRember_code()+"f$Z@%");
+        gradeAPI.getGrade(user.getStudentKH(), user.getRember_code(),sha1)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -319,6 +375,20 @@ public class HttpMethods {
                     @Override
                     public String call(HttpResult<List<Lesson>> listHttpResult) {
                         if ("ok".equals(listHttpResult.getMsg())) {
+                            StringBuilder sb;
+                            for (Lesson l:listHttpResult.getData()) {
+                                sb=new StringBuilder();
+                                for(int i=l.getQsz();i<=l.getJsz();i++){
+                                    if("单".equals(l.getDsz())&&i%2==0){
+                                        continue;
+                                    }else if("双".equals(l.getDsz())&&i%1!=0){
+                                        continue;
+                                    }else {
+                                        sb.append(" "+i);
+                                    }
+                                }
+                                l.setIndex(sb.toString());
+                            }
                             DBHelper.deleteAllLesson();
                             DBHelper.insertListLessonDao(listHttpResult.getData());
                             PrefUtil.setBoolean(context, "isLoadCourseTable", true);
@@ -402,6 +472,12 @@ public class HttpMethods {
     }
 
 
+    /**
+     * 上传商品图片
+     * @param subscriber
+     * @param des
+     * @param bodyMap
+     */
     public void UploadFile(Subscriber<HttpResult<String>> subscriber, String des, MultipartBody.Part bodyMap){
         FileUploadAPI fileUploadService=retrofit.create(FileUploadAPI.class);
         fileUploadService.uploadImage(bodyMap)
@@ -411,10 +487,25 @@ public class HttpMethods {
                 .subscribe(subscriber);
     }
 
+    /**
+     * 发布商品
+     * @param subscriber
+     * @param user
+     * @param tit
+     * @param content
+     * @param price
+     * @param price_src
+     * @param Class
+     * @param attr
+     * @param hidden
+     * @param phone
+     * @param qq
+     * @param wechat
+     */
     public void AddGoods(Subscriber<HttpResult<String>> subscriber,User user,String tit,String content,String price,String price_src,
                          int Class,int attr,String hidden,String phone,String qq,String wechat){
         AddGoodsAPI addGoodsAPI=retrofit.create(AddGoodsAPI.class);
-        addGoodsAPI.AddGoods(user.getStudentKH(),user.getRember_code(),tit,content,price,price_src,user.getUser_id(),
+        addGoodsAPI.AddGoods(user.getStudentKH(),user.getRember_code(),tit,content,price,price_src,
                 Class,attr,hidden,phone,qq,wechat)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

@@ -212,8 +212,7 @@ public class GradeActivity extends BaseActivity {
             }
         };
         HttpMethods.getInstance().getGradeData(GradeActivity.this,
-                new ProgressSubscriber<String>(getGradeData, GradeActivity.this), user.getStudentKH(),
-                user.getRember_code()
+                new ProgressSubscriber<String>(getGradeData, GradeActivity.this),user
         );
     }
 

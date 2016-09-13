@@ -42,6 +42,7 @@ import com.gaop.huthelper.utils.DateUtil;
 import com.gaop.huthelper.utils.DensityUtils;
 import com.gaop.huthelper.utils.ScreenUtils;
 import com.gaop.huthelper.utils.ToastUtil;
+import com.gaop.huthelper.view.Activity.AddCourseActivity;
 import com.gaop.huthelper.view.Activity.CourseItemActivity;
 import com.gaop.huthelperdao.Lesson;
 import com.gaop.huthelperdao.User;
@@ -157,17 +158,6 @@ public class CourseTable extends Fragment {
 
     private View view;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
     CourseInfoInitMessageHandler courseInfoInitMessageHandler = new CourseInfoInitMessageHandler(this);
 
     @Nullable
@@ -252,6 +242,7 @@ public class CourseTable extends Fragment {
 
                                     Toast.makeText(mContext, "节" + num + "xin" + weekofday, Toast.LENGTH_SHORT).show();
                                     //跳转到添加课程界面
+                                    startActivity(new Intent(mContext, AddCourseActivity.class));
                                     return;
                                 }
                             }
