@@ -1,28 +1,27 @@
 package com.gaop.huthelper.view.Activity;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gaop.huthelper.DB.DBHelper;
 import com.gaop.huthelper.R;
 import com.gaop.huthelperdao.User;
 
-import java.util.ArrayList;
-
-import okhttp3.Call;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by gaop1 on 2016/5/22.
  */
 public class UserActivity extends BaseActivity implements View.OnClickListener {
+    @BindView(R.id.btn_user_changepw)
+    Button btnUserChangepw;
     private User mUser;
     private TextView mName, mSex, mNum, mSchool, mClass;
     private Toolbar mToolbar;
@@ -96,7 +95,7 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
             case R.id.rl_user_num:
                 break;
             case R.id.rl_user_school:
-               // getSchoolList();
+                // getSchoolList();
                 break;
             case R.id.rl_user_class:
 
@@ -108,68 +107,19 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
     }
 
 
-    public void getSchoolList() {
-//        OkHttpUtils.get().url(getResources().getText(R.string.stuClass).toString()).build().execute(new StringCallback() {
-//            @Override
-//            public void onError(Call call, Exception e) {
-//                mDiolog.dismiss();
-//                Toast.makeText(MyApplication.AppContext, "获取列表失败！", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onResponse(String response) {
-//                try {
-//                    List<ClassInf> schoolList = new ArrayList<>();
-//                    com.alibaba.fastjson.JSONArray jsonArray = JSON.parseArray(response);
-//                    for (int i = 0; i < jsonArray.size(); i++) {
-//                        com.alibaba.fastjson.JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                        String s = jsonObject.getString("depName");
-//                        schoolList.add(new ClassInf(jsonObject.getString("depNo"),jsonObject.getString("depName")));
-//                    }
-//                    mDiolog.dismiss();
-//                    showChooseDialog(0, schoolList);
-//                } catch (com.alibaba.fastjson.JSONException e) {
-//                    mDiolog.dismiss();
-//                    Toast.makeText(MyApplication.AppContext, "解析数据失败！", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 
-    public void getClassList() {
-//        OkHttpUtils.get().url(getResources().getText(R.string.stuClass).toString()).build().execute(new StringCallback() {
-//            @Override
-//            public void onError(Call call, Exception e) {
-//                mDiolog.dismiss();
-//                Toast.makeText(MyApplication.AppContext, "获取列表失败！", Toast.LENGTH_SHORT).show();
-//
-//            }
-//
-//            @Override
-//            public void onResponse(String response) {
-//                try {
-//
-//                    com.alibaba.fastjson.JSONArray jsonArray = JSON.parseArray(response);
-//                    for (int i = 0; i < jsonArray.size(); i++) {
-//                        com.alibaba.fastjson.JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                        if ((jsonObject.getString("depName")).equals(mUser.getDepartment())) {
-//                            List<ClassInf> classList = new ArrayList<>();
-//                            jsonArray=jsonObject.getJSONArray("classes");
-//                            for(int j=0;j<jsonArray.size();j++){
-//                                jsonObject=jsonArray.getJSONObject(j);
-//                                classList.add(new ClassInf(jsonObject.getString("classNo"),jsonObject.getString("className")));
-//                            }
-//                            mDiolog.dismiss();
-//                            showChooseDialog(1, classList);
-//                            break;
-//                        }
-//                    }
-//                } catch (com.alibaba.fastjson.JSONException e) {
-//                    mDiolog.dismiss();
-//                    Toast.makeText(MyApplication.AppContext, "解析数据失败！", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+    @OnClick(R.id.btn_user_changepw)
+    public void onClick() {
+        Bundle bundle = new Bundle();
+        bundle.putInt("type", WebViewActivity.TYPE_CHANGE_PW);
+        startActivity(WebViewActivity.class, bundle);
     }
 
 //    private void showChooseDialog(final int type, final List<ClassInf> list) {

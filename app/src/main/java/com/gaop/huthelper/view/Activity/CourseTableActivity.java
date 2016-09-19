@@ -1,6 +1,7 @@
 package com.gaop.huthelper.view.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -147,6 +148,10 @@ public class CourseTableActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        table.initDate();
+    }
 
     /**
      * 设置周数列表PopupWindows

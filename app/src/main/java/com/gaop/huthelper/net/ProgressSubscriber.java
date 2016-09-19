@@ -40,13 +40,12 @@ public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCanc
         }else if(e instanceof java.net.SocketTimeoutException){
             //连接超时
             ToastUtil.showToastShort("连接超时！");
-        }else{
-
-            ToastUtil.showToastShort("连接服务器出错"+e.toString());
-            //未知错误
-           ;
-           Log.e("error",e.toString()+e.getMessage());
+        }else if(e instanceof retrofit2.adapter.rxjava.HttpException){
+           ToastUtil.showToastShort("服务器错误");
         }
+ //      else{
+//           ToastUtil.showToastShort("数据异常");
+//       }
     }
 
     @Override

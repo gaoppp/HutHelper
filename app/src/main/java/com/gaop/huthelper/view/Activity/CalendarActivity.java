@@ -63,25 +63,32 @@ public class CalendarActivity extends BaseActivity {
                 finish();
             }
         });
-        //PhotoViewAttacher attacher = new PhotoViewAttacher(ivCalendar);
-       // attacher.update();
+        PhotoViewAttacher attacher = new PhotoViewAttacher(ivCalendar);
+        attacher.update();
         holiDays = new ArrayList<>();
         HoliDay holiDay = new HoliDay("中秋节", new Date(2016 - 1900, 8, 15));
-        holiDays.add(holiDay);
+        //int days = DateUtil.getIntervalDays(new Date(), holiDay.getTime());
+        addHoliday(holiDay);
         holiDay = new HoliDay("国庆节", new Date(2016 - 1900, 9, 1));
-        holiDays.add(holiDay);
+        addHoliday(holiDay);
         holiDay = new HoliDay("四级考试", new Date(2016 - 1900, 11, 17));
-        holiDays.add(holiDay);
+        addHoliday(holiDay);
         holiDay = new HoliDay("考研", new Date(2016 - 1900, 11, 24));
-        holiDays.add(holiDay);
+        addHoliday(holiDay);
         holiDay = new HoliDay("寒假", new Date(2017 - 1900, 0, 9));
-        holiDays.add(holiDay);
+        addHoliday(holiDay);
 
         rvCalendarDate.setLayoutManager(new LinearLayoutManager(CalendarActivity.this, LinearLayoutManager.HORIZONTAL, false));
 
-
         DateListAdapter adapter = new DateListAdapter(CalendarActivity.this, holiDays);
         rvCalendarDate.setAdapter(adapter);
+    }
+
+    private void addHoliday(HoliDay holiDay) {
+        int days = DateUtil.getIntervalDays(new Date(), holiDay.getTime());
+        if (days >= 0) {
+            holiDays.add(holiDay);
+        }
     }
 
 
@@ -109,14 +116,10 @@ public class CalendarActivity extends BaseActivity {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             int days = DateUtil.getIntervalDays(new Date(), holiDays.get(position).getTime());
-            if (days < 0) {
-                holiDays.remove(position);
-                list.remove(position);
-            } else {
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
-                holder.getTextView(R.id.show_time).setText(formatter.format(holiDays.get(position).getTime()));
-                holder.getTextView(R.id.date_title).setText(holiDays.get(position).getName() + "\n" + days + "天");
-            }
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
+            holder.getTextView(R.id.show_time).setText(formatter.format(holiDays.get(position).getTime()));
+            holder.getTextView(R.id.date_title).setText(holiDays.get(position).getName() + "\n" + days + "天");
         }
 
     }

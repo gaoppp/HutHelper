@@ -98,7 +98,7 @@ public class DateUtil {
             return date;
         }
         CustomDate date = new CustomDate(c.get(Calendar.YEAR),
-                c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH) - 7);
+                c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH));
         Log.e("daet", date.toString());
         return date;
     }
@@ -115,7 +115,7 @@ public class DateUtil {
             return date;
         }
         CustomDate date = new CustomDate(c.get(Calendar.YEAR),
-                c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH) - 7);
+                c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH));
         Log.e("daet", date.toString());
         return date;
     }

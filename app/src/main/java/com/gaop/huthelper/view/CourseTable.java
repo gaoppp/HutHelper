@@ -240,9 +240,9 @@ public class CourseTable extends Fragment {
                                 if (curClickView.getId() == v.getId()) {
                                     curClickView = null;
 
-                                    Toast.makeText(mContext, "节" + num + "xin" + weekofday, Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(mContext, "节" + num + "xin" + weekofday, Toast.LENGTH_SHORT).show();
                                     //跳转到添加课程界面
-                                    startActivity(new Intent(mContext, AddCourseActivity.class));
+                                    startActivityForResult(new Intent(mContext, AddCourseActivity.class),101);
                                     return;
                                 }
                             }
@@ -371,7 +371,7 @@ public class CourseTable extends Fragment {
     }
 
 
-    static class CourseInfoInitMessageHandler extends Handler {
+    class CourseInfoInitMessageHandler extends Handler {
         WeakReference<CourseTable> mTable;
 
         public CourseInfoInitMessageHandler(CourseTable table) {
@@ -492,7 +492,8 @@ public class CourseTable extends Fragment {
                                         mBundle.putSerializable("lesson", courseInfo);
                                         intent.putExtras(mBundle);
                                         intent.setClass(mTable.get().mContext, CourseItemActivity.class);
-                                        mTable.get().mContext.startActivity(intent);
+                                        startActivityForResult(intent,102);
+                                      //  mTable.get().mContext.startActivityf(intent);
                                         coursePopupDialog.dismiss();
                                     }
                                 });
@@ -504,7 +505,7 @@ public class CourseTable extends Fragment {
                                 mBundle.putSerializable("lesson", tempList.get(0));
                                 intent.putExtras(mBundle);
                                 intent.setClass(mTable.get().mContext, CourseItemActivity.class);
-                                mTable.get().mContext.startActivity(intent);
+                                startActivityForResult(intent,102);
                             }
                         }
                     });
@@ -522,31 +523,6 @@ public class CourseTable extends Fragment {
 
 
     public void changeWeek(int week,CustomDate date) {
-//        Log.e("week123",week+"");
-//        int currentMonthDays = DateUtil.getMonthDays(mShowDate.year, mShowDate.month);
-//        if (mShowDate.day + WEEK*(week-CurrWeek) > currentMonthDays) {
-//            if (mShowDate.month == 12) {
-//                mShowDate.month = 1;
-//                mShowDate.year += 1;
-//            } else {
-//                mShowDate.month += 1;
-//            }
-//            mShowDate.day = WEEK*(week-CurrWeek) - currentMonthDays + mShowDate.day;
-//        }else if (mShowDate.day + WEEK*(week-CurrWeek)< 1) {
-//            if (mShowDate.month == 1) {
-//                mShowDate.month = 12;
-//                mShowDate.year -= 1;
-//            } else {
-//                mShowDate.month -= 1;
-//            }
-//            mShowDate.day = currentMonthDays + WEEK*(week-CurrWeek) + mShowDate.day;
-//        }else{
-//            mShowDate.day += WEEK*(week-CurrWeek);
-//        }
-//        CurrWeek=week;
-//        Log.e("week",CurrWeek+"");
-//        //更新课程数据
-
         textviewLessonMap = new HashMap<Integer, List<Lesson>>();
         courseTextViewList = new ArrayList<TextView>();
         CurrWeek=week;

@@ -20,6 +20,7 @@ import com.gaop.huthelperdao.TremDao;
 import com.gaop.huthelperdao.User;
 import com.gaop.huthelperdao.UserDao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.dao.query.QueryBuilder;
@@ -415,7 +416,11 @@ public class DaoManager {
      */
 
     public List<Notice> orderAscnotice() {
-        return noticeDao.queryBuilder().orderAsc(NoticeDao.Properties.Id).list();
+        List<Notice> list= noticeDao.queryBuilder().orderAsc(NoticeDao.Properties.Id).list();
+        if(list==null||list.size()==0)
+            return new ArrayList<>();
+        else
+            return list;
     }
 
     /**

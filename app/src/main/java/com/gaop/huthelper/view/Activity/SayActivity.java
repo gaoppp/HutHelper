@@ -1,6 +1,7 @@
 package com.gaop.huthelper.view.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -85,7 +86,7 @@ public class SayActivity extends BaseActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(AddGoodsActivity.class);
+                startActivityForResult(AddGoodsActivity.class,201);
             }
         });
 
@@ -129,24 +130,11 @@ public class SayActivity extends BaseActivity {
             }
 
         });
-        mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int i) {
-                // Bundle mBundle = new Bundle();
-                // mBundle.putString("id", Saylist.get(i).getId());
-                //
-                // startActivity(GoodsActivity.class, mBundle);
-            }
 
-            @Override
-            public void onItemLongClick(View view, int i) {
-
-            }
-        });
 
     }
 
-    public void getSayList(int pagenum) {
+    public void getSayList(final int pagenum) {
         SubscriberOnNextListener<HttpResult<SayData>> subscriberOnNextListener = new SubscriberOnNextListener<HttpResult<SayData>>() {
             @Override
             public void onNext(HttpResult<SayData> o) {
@@ -154,6 +142,12 @@ public class SayActivity extends BaseActivity {
                     COUNT = o.getData().getInfo().getPage_max();
                     CURPage = Integer.valueOf(o.getData().getInfo().getPage_cur());
                     Saylist.addAll(o.getData().getPosts());
+                    if(pagenum==1){
+                        mLRecyclerViewAdapter = new LRecyclerViewAdapter(SayActivity.this, new SayRVAdapter(SayActivity.this, Saylist));
+                        rvSaylist.setAdapter(mLRecyclerViewAdapter);
+                        return;
+                    }
+                    mLRecyclerViewAdapter.notifyDataSetChanged();
                 } else {
                     ToastUtil.showToastShort("获取服务器数据为空");
                 }
@@ -196,8 +190,26 @@ public class SayActivity extends BaseActivity {
                 }
                 break;
             case R.id.fab:
-                startActivity(AddSayActivity.class);
+                startActivityForResult(AddSayActivity.class,202);
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (resultCode){
+            case 333:
+                CURPage = 0;
+                Saylist = new ArrayList<>();
+                isRefresh = true;
+                getSayList(1);
+               // rvSaylist.scrollToPosition(0);
+               // rvSaylist.forceToRefresh();
+                Log.e("ds","ds");
+                break;
+            default:
+                break;
+
         }
     }
 }

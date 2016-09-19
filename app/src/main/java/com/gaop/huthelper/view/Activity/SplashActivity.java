@@ -22,7 +22,7 @@ public class SplashActivity extends Activity {
             startActivity(new Intent(SplashActivity.this,ImportActivity.class));
             finish();
         }else{
-            mainhandler.sendEmptyMessageDelayed(0, 1000);
+            mainhandler.sendEmptyMessageDelayed(0, 800);
         }
     }
 

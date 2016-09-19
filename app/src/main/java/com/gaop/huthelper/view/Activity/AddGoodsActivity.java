@@ -32,10 +32,13 @@ import com.gaop.huthelper.adapter.ChoosePicAdapter;
 import com.gaop.huthelper.adapter.ViewHolder;
 import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.utils.CommUtil;
+import com.gaop.huthelper.utils.DensityUtils;
+import com.gaop.huthelper.utils.ScreenUtils;
 import com.gaop.huthelper.utils.ToastUtil;
 import com.gaop.huthelperdao.User;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,6 +94,7 @@ public class AddGoodsActivity extends BaseActivity {
     private Bitmap bmp;                      //导入临时图片
     private ArrayList<Bitmap> imageItem;
     private ChoosePicAdapter addGoodsAdapter;
+    private ArrayList<Integer> imageOption;
 
     @Override
     public void initParms(Bundle parms) {
@@ -119,7 +123,9 @@ public class AddGoodsActivity extends BaseActivity {
 
         bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_add_black_48dp);
         imageItem = new ArrayList<Bitmap>();
+        imageOption = new ArrayList<>();
         imageItem.add(bmp);
+        imageOption.add(100);
         rvAddgoodsImglist.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         addGoodsAdapter = new ChoosePicAdapter(this, imageItem);
         addGoodsAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -152,26 +158,29 @@ public class AddGoodsActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
+
             List<Uri> mSelected = PicturePickerUtils.obtainResult(data);
-
-
             dialog = new ProgressDialog(AddGoodsActivity.this);
             dialog.show();
             dialog.setMessage("正在处理图片");
             dialog.setCancelable(false);
-            Observable.from(mSelected).map(new Func1<Uri, Bitmap>() {
+            Observable.from(mSelected).map(new Func1<Uri, Integer>() {
                 @Override
-                public Bitmap call(Uri filePath) { // 参数类型 String
-                    Bitmap bitmap = null;
+                public Integer call(Uri filePath) { // 参数类型 String
+
+                    int option = 50;
                     try {
-                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                        option = CommUtil.compressImage(bitmap);
+                        imageItem.add(bitmap);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    return CommUtil.compressImage(bitmap); // 返回类型 Bitmap
+                    Log.e("fd",option+"");
+                    return option; // 返回类型 Bitmap
                 }
             }).subscribeOn(Schedulers.io()) // 指定 subscribe() 发生在 IO 线程
-                    .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Bitmap>() {
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Integer>() {
                 @Override
                 public void onCompleted() {
                     dialog.dismiss();
@@ -186,8 +195,8 @@ public class AddGoodsActivity extends BaseActivity {
                 }
 
                 @Override
-                public void onNext(Bitmap bitmap) {
-                    imageItem.add(CommUtil.compressImage(bitmap));
+                public void onNext(Integer filePath) {
+                    imageOption.add(filePath);
                 }
             });
         }
@@ -209,6 +218,7 @@ public class AddGoodsActivity extends BaseActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 imageItem.remove(position);
+                imageOption.remove(position);
                 addGoodsAdapter.notifyDataSetChanged();
             }
         });
@@ -246,12 +256,16 @@ public class AddGoodsActivity extends BaseActivity {
             addGoods();
             return;
         }
+        dialog.setCancelable(false);
         dialog.setMessage("正在上传第" + i + "张图片");
         ByteArrayOutputStream os = new ByteArrayOutputStream();
-        imageItem.get(i).compress(Bitmap.CompressFormat.PNG, 100, os);
+        imageItem.get(i).compress(Bitmap.CompressFormat.PNG, imageOption.get(i), os);
         byte[] bytes = os.toByteArray();
+        Log.e(TAG, bytes.length+ "   " +imageOption.get(i));
         final RequestBody requestFile = RequestBody.create(MediaType.parse("image/png"), bytes);
         final MultipartBody.Part photo = MultipartBody.Part.createFormData("file", "01.png", requestFile);
+
+
         HttpMethods.getInstance().UploadFile(
                 new Subscriber<HttpResult<String>>() {
                     @Override
@@ -273,6 +287,7 @@ public class AddGoodsActivity extends BaseActivity {
                             stringBuilder.append(o.getData());
                             uploadImg(i + 1);
                         } else {
+                            dialog.dismiss();
                             ToastUtil.showToastShort("第" + i + "张图片上传失败:" + o.getMsg());
                         }
                     }
@@ -303,11 +318,15 @@ public class AddGoodsActivity extends BaseActivity {
                                                    if (stringHttpResult.getMsg().equals("ok")) {
                                                        dialog.dismiss();
                                                        ToastUtil.showToastShort("发布成功");
+                                                       setResult(333);
+                                                       finish();
                                                    } else if (stringHttpResult.getMsg().equals("令牌错误")) {
                                                        startActivity(ImportActivity.class);
                                                        ToastUtil.showToastShort("账号异地登录，请重新登录");
-                                                   } else
+                                                   } else {
+                                                       dialog.dismiss();
                                                        ToastUtil.showToastShort(stringHttpResult.getMsg());
+                                                   }
 
                                                }
                                            }, user, etAddgoodsTitle.getText().toString(), etAddgoodsContent.getText().toString(),

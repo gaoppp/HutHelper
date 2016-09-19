@@ -141,10 +141,11 @@
             <com.echo.holographlibrary.BarGraph
                 android:id="@+id/graph_grade_bar"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="220dp"
                 android:layout_below="@+id/iv_grade_line2"
                 android:paddingTop="6dp" />
             <TextView
+                android:padding="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="学分绩点柱形图"

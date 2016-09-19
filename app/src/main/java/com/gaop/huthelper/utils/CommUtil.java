@@ -3,14 +3,20 @@ package com.gaop.huthelper.utils;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -20,6 +26,10 @@ import com.gaop.huthelperdao.Lesson;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -58,6 +68,7 @@ public class CommUtil {
         //return new StringBuilder().append(mYear).append(".").append(mMonth).append(".").append(mDay).append("  星期").append(mWay);
         return "第" + DateUtil.getNowWeek() + "周  星期" + mWay;
     }
+
     /**
      * 返回下一节课
      *
@@ -65,7 +76,7 @@ public class CommUtil {
      * @return
      */
     public static String getNextClass(Context context) {
-        if(!PrefUtil.getBoolean(context,"isLoadCourseTable",false)){
+        if (!PrefUtil.getBoolean(context, "isLoadCourseTable", false)) {
             return "";
         }
         final Calendar c = Calendar.getInstance();
@@ -75,38 +86,38 @@ public class CommUtil {
         }
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int num;
-        if(hour>=0&&hour<8)
-            num=1;
-        else if(hour>=8&&hour<10)
-            num=3;
-        else if(hour>=10&&hour<14)
-            num=5;
-        else if(hour>=14&&hour<16)
-            num=7;
-        else if(hour>=16&&hour<19)
-            num=9;
+        if (hour >= 0 && hour < 8)
+            num = 1;
+        else if (hour >= 8 && hour < 10)
+            num = 3;
+        else if (hour >= 10 && hour < 14)
+            num = 5;
+        else if (hour >= 14 && hour < 16)
+            num = 7;
+        else if (hour >= 16 && hour < 19)
+            num = 9;
         else
             return "今天没课了";
 
         List<Lesson> courseList = DBHelper.getLessonByWeek(String.valueOf(mWeek));
 
-        HashMap<Integer,Lesson> LessonMap=new HashMap<>();
-        for (Lesson l:courseList) {
-            if(CommUtil.ifHaveCourse(l,DateUtil.getNowWeek())){
-                if(l.getDjj().equals(num))
-                    return "第"+num+","+(num+1)+"节"+l.getName()+" "+l.getRoom();
+        HashMap<Integer, Lesson> LessonMap = new HashMap<>();
+        for (Lesson l : courseList) {
+            if (CommUtil.ifHaveCourse(l, DateUtil.getNowWeek())) {
+                if (l.getDjj().equals(num))
+                    return "第" + num + "," + (num + 1) + "节" + l.getName() + " " + l.getRoom();
                 else
-                    LessonMap.put(l.getDjj(),l);
+                    LessonMap.put(l.getDjj(), l);
             }
         }
         do {
-            num+=2;
-            if(num>9)
+            num += 2;
+            if (num > 9)
                 return "今天没课了";
-            if(LessonMap.get(num)!=null){
-                return "第"+num+","+(num+1)+"节"+LessonMap.get(num).getName()+"　"+LessonMap.get(num).getRoom();
+            if (LessonMap.get(num) != null) {
+                return "第" + num + "," + (num + 1) + "节" + LessonMap.get(num).getName() + "　" + LessonMap.get(num).getRoom();
             }
-        }while (num<9);
+        } while (num < 9);
 
         return "";
     }
@@ -130,29 +141,21 @@ public class CommUtil {
 
     /**
      * 判断课程有无
-     * @param lesson 课程
-     * @param currWeek  查询的周
+     *
+     * @param lesson   课程
+     * @param currWeek 查询的周
      * @return
      */
 
     public static boolean ifHaveCourse(Lesson lesson, int currWeek) {
-        String[] s=lesson.getIndex().split(" ");
+        String[] s = lesson.getIndex().split(" ");
 
-        String curr=String.valueOf(currWeek);
-        for (String w:s) {
-            if(w.equals(curr)){
+        String curr = String.valueOf(currWeek);
+        for (String w : s) {
+            if (w.equals(curr)) {
                 return true;
             }
         }
-//        if(currWeek>=lesson.getQsz()&&currWeek<=lesson.getJsz()){
-//            if("单".equals(lesson.getDsz())&&currWeek%2==0){
-//                return false;
-//            }
-//            if("双".equals(lesson.getDsz())&&currWeek%2!=0){
-//                return false;
-//            }
-//            return true;
-//        }
         return false;
     }
 
@@ -187,6 +190,7 @@ public class CommUtil {
 
     /**
      * 隐藏软键盘
+     *
      * @param activity
      */
     @TargetApi(Build.VERSION_CODES.CUPCAKE)
@@ -199,28 +203,211 @@ public class CommUtil {
         }
     }
 
+
+    public static int compressImage(Bitmap bitmap) {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            int options = 90;
+            while (baos.toByteArray().length / 1024 > 600) {
+                baos.reset();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);
+                options -= 10;
+            }
+            baos.close();
+            return options;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return 50;
+        }
+    }
+
     /**
      * 压缩图片
-     * @param image
+     *
+     * @param
      * @return
      */
-    public static Bitmap compressImage(Bitmap image) {
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
-        int options = 100;
-        while ( baos.toByteArray().length / 1024>600) { //循环判断如果压缩后图片是否大于1M,大于继续压缩
-            baos.reset();//重置baos即清空baos
-            image.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
-            options -= 10;//每次都减少10
+    public static String yasuo(Context mActivity, Uri uri,ContentResolver contentresolver) {
+        Log.e("d",uri.toString());
+        File file = new File(getFilePathFromContentUri(uri,contentresolver));
+        BitmapFactory.Options options = getBitmapOptions(file.getPath());
+        int screenMax = Math.max(ScreenUtils.getScreenWidth(mActivity),
+                ScreenUtils.getScreenHeight(mActivity));
+        int imgMax = Math.max(options.outWidth, options.outHeight);
+        int inSimpleSize = 1;
+        if (screenMax <= imgMax) {
+            inSimpleSize = Math.max(screenMax, imgMax) / Math.min(screenMax, imgMax);
         }
-        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//把压缩后的数据baos存放到ByteArrayInputStream中
-        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片
-        return bitmap;
+        return compressBitmap(mActivity,
+                file.getAbsolutePath(),
+                Bitmap.CompressFormat.JPEG,
+                options.outWidth / inSimpleSize,
+                options.outHeight / inSimpleSize,
+                false);
+    }
+
+    public static String getFilePathFromContentUri(Uri selectedVideoUri,
+                                                   ContentResolver contentResolver) {
+        String filePath;
+        String[] filePathColumn = {MediaStore.MediaColumns.DATA};
+
+        Cursor cursor = contentResolver.query(selectedVideoUri, filePathColumn, null, null, null);
+//      也可用下面的方法拿到cursor
+//      Cursor cursor = this.context.managedQuery(selectedVideoUri, filePathColumn, null, null, null);
+
+        cursor.moveToFirst();
+
+        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+        filePath = cursor.getString(columnIndex);
+        cursor.close();
+        Log.e("ea",filePath);
+        return filePath;
+    }
+
+
+    /**
+     * 得到指定路径图片的options，不加载内存
+     *
+     * @param srcPath 源图片路径
+     * @return Options {@link BitmapFactory.Options}
+     */
+    public static BitmapFactory.Options getBitmapOptions(String srcPath) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(srcPath, options);
+        return options;
+    }
+
+
+    /**
+     * 压缩指定路径图片，并将其保存在缓存目录中;<br>
+     * 通过isDelSrc判定是否删除源文件，并获取到缓存后的图片路径;<br>
+     * 图片过大可能OOM
+     *
+     * @param context
+     * @param srcPath
+     * @param rqsW
+     * @param rqsH
+     * @param isDelSrc
+     * @return
+     */
+    public static String compressBitmap(Context context, String srcPath,
+                                        Bitmap.CompressFormat format,
+                                        int rqsW, int rqsH, boolean isDelSrc) {
+        Bitmap bitmap = compressBitmap(srcPath, rqsW, rqsH);
+        int num=compressImage(bitmap);
+        File srcFile = new File(srcPath);
+        String desPath = getImageCacheDir(context) + srcFile.getName();
+        clearCropFile(desPath);
+        try {
+            File file = new File(desPath);
+            FileOutputStream fos = new FileOutputStream(file);
+            bitmap.compress(format, num, fos);
+            fos.close();
+            if (isDelSrc) srcFile.deleteOnExit();
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        return desPath;
+    }
+
+    /**
+     * 删除文件
+     *
+     * @param uri 文件Uri
+     * @return 成功与否
+     */
+    public static boolean clearCropFile(Uri uri) {
+        if (uri == null) {
+            return false;
+        }
+        return clearCropFile(uri.getPath());
+    }
+
+    /**
+     * 删除文件
+     *
+     * @param path 文件路径
+     * @return 成功与否
+     */
+    public static boolean clearCropFile(String path) {
+        if (TextUtils.isEmpty(path)) {
+            return false;
+        }
+        //有时文件明明存在  但 file.exists为false
+
+        File file = new File(path);
+
+        //System.out.println("工具判断:"+FileUtils.exists(file)+" 原始判断:"+file.exists()+" \npath:"+file.getPath());
+
+        if (file.exists()) {
+            boolean result = file.delete();
+            if (result) {
+                System.out.println("Cached crop file cleared.");
+            } else {
+                System.out.println("Failed to clear cached crop file.");
+            }
+            return result;
+        } else {
+            System.out.println("Trying to clear cached crop file but it does not exist.");
+        }
+
+        return false;
+    }
+
+    /**
+     * 获取图片缓存路径
+     *
+     * @param context
+     * @return
+     */
+    private static String getImageCacheDir(Context context) {
+        String dir = context.getCacheDir()+ File.separator;
+        File file = new File(dir);
+        if (!file.exists()) file.mkdirs();
+        return dir;
+    }
+
+    /**
+     * 压缩指定路径的图片，并得到图片对象
+     *
+     * @param path bitmap source path
+     * @return Bitmap {@link Bitmap}
+     */
+    public static Bitmap compressBitmap(String path, int rqsW, int rqsH) {
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(path, options);
+        options.inSampleSize = calculateInSampleSize(options, rqsW, rqsH);
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFile(path, options);
+    }
+
+    /**
+     * calculate the bitmap sampleSize
+     *
+     * @param options
+     * @return
+     */
+    public static int calculateInSampleSize(BitmapFactory.Options options, int rqsW, int rqsH) {
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+        if (rqsW == 0 || rqsH == 0) return 1;
+        if (height > rqsH || width > rqsW) {
+            final int heightRatio = Math.round((float) height / (float) rqsH);
+            final int widthRatio = Math.round((float) width / (float) rqsW);
+            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+        }
+        return inSampleSize;
     }
 
     /**
      * sha1加密
+     *
      * @param decript
      * @return
      */
@@ -250,10 +437,11 @@ public class CommUtil {
 
     /**
      * BASE64 加密
+     *
      * @param str
      * @return
      */
-    public static  String encryptBASE64(String str) {
+    public static String encryptBASE64(String str) {
         if (str == null || str.length() == 0) {
             return null;
         }
@@ -271,6 +459,7 @@ public class CommUtil {
 
     /**
      * 6.0以上权限
+     *
      * @param activity
      * @return
      */

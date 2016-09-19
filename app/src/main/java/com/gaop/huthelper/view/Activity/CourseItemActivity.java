@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.gaop.huthelper.DB.DBHelper;
 import com.gaop.huthelper.R;
+import com.gaop.huthelper.utils.ToastUtil;
 import com.gaop.huthelperdao.Lesson;
 
 import java.util.ArrayList;
@@ -81,7 +82,7 @@ public class CourseItemActivity extends BaseActivity {
             }
         }
         week.append("周");
-        if (TextUtils.isEmpty(lesson.getDsz()))
+        if (!TextUtils.isEmpty(lesson.getDsz()))
             week.append("(").append(lesson.getDsz()).append(")");
         tvCourseWeek.setText(week);
     }
@@ -103,6 +104,8 @@ public class CourseItemActivity extends BaseActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 DBHelper.deleteLessonById(IdList);
+                ToastUtil.showToastShort("删除成功！");
+                finish();
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {

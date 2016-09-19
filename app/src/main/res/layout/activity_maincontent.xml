@@ -115,7 +115,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bt_class" />
+                android:background="@drawable/bt_say" />
 
             <View
                 android:layout_width="1dp"
@@ -145,7 +145,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bt_time" />
+                android:background="@drawable/bt_homework" />
 
             <View
                 android:layout_width="1dp"
@@ -169,7 +169,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bt_public" />
+                android:background="@drawable/bt_market" />
         </LinearLayout>
     </LinearLayout>
 

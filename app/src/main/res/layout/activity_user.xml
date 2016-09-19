@@ -218,5 +218,15 @@
             android:textSize="20sp" />
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/btn_user_changepw"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="修改密码"
+        android:layout_margin="20dp"
+        android:background="@drawable/btn_login"
+        android:textStyle="bold" />
+
 
 </LinearLayout>

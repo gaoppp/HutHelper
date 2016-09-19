@@ -9,6 +9,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.gaop.huthelper.DB.DBHelper;
 import com.gaop.huthelper.Model.GoodsListItem;
@@ -28,6 +29,8 @@ import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.github.jdsjlzx.util.RecyclerViewStateUtils;
 import com.github.jdsjlzx.view.LoadingFooter;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +46,8 @@ public class MyGoodsActivity extends BaseActivity {
     Toolbar toolbar;
     @BindView(R.id.rv_marketlist)
     LRecyclerView rvMarketlist;
+    @BindView(R.id.tv_goods_empty)
+    TextView tvEmpty;
 
     private LRecyclerViewAdapter mLRecyclerViewAdapter;
     private List<MyGoodsItem> Goodslist;
@@ -73,7 +78,7 @@ public class MyGoodsActivity extends BaseActivity {
         rvMarketlist.setLayoutManager(new LinearLayoutManager(MyGoodsActivity.this, LinearLayoutManager.VERTICAL, false));
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(this, new MyGoodsAdapter(MyGoodsActivity.this, Goodslist));
         getGoodsList();
-        //rvMarketlist.setEmptyView();
+        rvMarketlist.setEmptyView(tvEmpty);
         rvMarketlist.setAdapter(mLRecyclerViewAdapter);
         rvMarketlist.setLScrollListener(new LRecyclerView.LScrollListener() {
             @Override

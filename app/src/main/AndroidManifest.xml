@@ -14,7 +14,6 @@
         tools:replace="android:theme,android:label,android:icon">
         <activity
             android:name=".view.Activity.SplashActivity"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppSplash">
             <intent-filter>
@@ -43,6 +42,7 @@
             android:screenOrientation="portrait"
         </activity>
         <activity
+            android:launchMode="singleTask"
             android:name=".view.Activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -120,6 +120,7 @@
             android:name=".view.Activity.NoticeItemActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <service android:name=".PushIntentService" />
 
         <meta-data
             android:name="UMENG_MESSAGE_SECRET"
@@ -129,7 +130,7 @@
             android:value="5731dca2e0f55a05ff00098d"></meta-data>
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="Wandoujia" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+            android:value="w" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
             android:name="com.google.android.gms.version"

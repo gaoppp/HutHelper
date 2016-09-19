@@ -27,7 +27,11 @@ import android.content.Context;
 import android.graphics.*;
 import android.graphics.Bitmap.Config;
 import android.graphics.drawable.NinePatchDrawable;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import org.jetbrains.annotations.NotNull;
@@ -39,6 +43,7 @@ public class BarGraph extends View {
 
     private ArrayList<Bar> points = new ArrayList<Bar>();
     private Paint p = new Paint();
+    private TextPaint tp=new TextPaint();
     private Path path = new Path();
     private Rect r;
     private boolean showBarText = true;
@@ -105,7 +110,7 @@ public class BarGraph extends View {
             float maxValue = 0;
             float padding = 7;
             int selectPadding = 4;
-            float bottomPadding = 40;
+            float bottomPadding = 90;
 
             float usableHeight;
             if (showBarText) {
@@ -175,9 +180,21 @@ public class BarGraph extends View {
                     canvas.drawRect(r, this.p);
                 }
 
-
+                int w=(int) ((padding * 2) * count + padding + barWidth * count);
+                int w2=(int) ((padding * 2) * count + padding + barWidth * (count + 1));
                 this.p.setTextSize(20);
-                canvas.drawText(p.getName(), (int) (((r.left + r.right) / 2) - (this.p.measureText(p.getName()) / 2)), getHeight() - 5, this.p);
+                tp.setColor(Color.BLACK);
+                tp.setAntiAlias(true);
+                this.tp.setTextSize(20);
+                tp.setColor(p.getColor());
+                StaticLayout layout = new StaticLayout(p.getName(), tp, w2-w,
+                        Layout.Alignment.ALIGN_NORMAL, 1.0F, 0.0F, true);
+                canvas.save();
+                canvas.translate((int) (((r.left + r.right) / 2) - (this.tp.measureText(p.getName().substring(0,8)) / 2)),getHeight()-55);
+                layout.draw(canvas);
+                canvas.restore();
+
+                //canvas.drawText(p.getName(), (int) (((r.left + r.right) / 2) - (this.p.measureText(p.getName()) / 2)), getHeight() - 5, this.p);
                 if (showBarText) {
                     this.p.setTextSize(40);
                     this.p.setColor(Color.WHITE);

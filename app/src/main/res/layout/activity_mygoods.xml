@@ -17,6 +17,8 @@
         android:layout_height="wrap_content">
     </com.github.jdsjlzx.recyclerview.LRecyclerView>
     <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_goods_empty"
         android:textSize="20sp"
         android:layout_below="@+id/toolbar"
         android:padding="10dp"

@@ -2,6 +2,7 @@ package com.gaop.huthelper.net;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import com.gaop.huthelper.DB.DBHelper;
 import com.gaop.huthelper.Model.DepInfo;
@@ -129,12 +130,13 @@ public class HttpMethods {
 
     /**
      * 分页获取说说列表
+     *
      * @param subscriber
      * @param pagenum
      */
-    public void getSayList(Subscriber<HttpResult<SayData>> subscriber, int pagenum){
+    public void getSayList(Subscriber<HttpResult<SayData>> subscriber, int pagenum) {
 
-        SayAPI sayListAPI=retrofit.create(SayAPI.class);
+        SayAPI sayListAPI = retrofit.create(SayAPI.class);
         sayListAPI.getSayList(pagenum)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -144,12 +146,13 @@ public class HttpMethods {
 
     /**
      * 获取指定id的说说列表
+     *
      * @param subscriber
      * @param user_id
      */
-    public void getMySayList(Subscriber<HttpResult<SayData>> subscriber, String user_id){
+    public void getMySayList(Subscriber<HttpResult<SayData>> subscriber, String user_id) {
 
-        SayAPI sayListAPI=retrofit.create(SayAPI.class);
+        SayAPI sayListAPI = retrofit.create(SayAPI.class);
         sayListAPI.getSayListById(user_id)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -159,15 +162,16 @@ public class HttpMethods {
 
     /**
      * 点赞说说
+     *
      * @param subscriber
      * @param num
      * @param code
      * @param id
      */
-    public void likeSay(Subscriber<HttpResult> subscriber, String num, String code,String id){
+    public void likeSay(Subscriber<HttpResult> subscriber, String num, String code, String id) {
 
-        AddSayLikeAPI sayListAPI=retrofit.create(AddSayLikeAPI.class);
-        sayListAPI.likeSay(num,code,id)
+        AddSayLikeAPI sayListAPI = retrofit.create(AddSayLikeAPI.class);
+        sayListAPI.likeSay(num, code, id)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -176,14 +180,15 @@ public class HttpMethods {
 
     /**
      * 删除说说
+     *
      * @param subscriber
      * @param num
      * @param code
      * @param id
      */
-    public void deleteSay(Subscriber<HttpResult> subscriber,String num,String code,String id){
-        SayAPI api=retrofit.create(SayAPI.class);
-        api.deleteSay(num,code,id)
+    public void deleteSay(Subscriber<HttpResult> subscriber, String num, String code, String id) {
+        SayAPI api = retrofit.create(SayAPI.class);
+        api.deleteSay(num, code, id)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -193,14 +198,15 @@ public class HttpMethods {
 
     /**
      * 发布说说
+     *
      * @param subscriber
      * @param user
      * @param content
      * @param attr
      */
-    public void addSay(Subscriber<HttpResult<String>> subscriber, User user, String content, String attr){
-        SayAPI sayAPI=retrofit.create(SayAPI.class);
-        sayAPI.addSay(user.getStudentKH(),user.getRember_code(),content,attr)
+    public void addSay(Subscriber<HttpResult<String>> subscriber, User user, String content, String attr) {
+        SayAPI sayAPI = retrofit.create(SayAPI.class);
+        sayAPI.addSay(user.getStudentKH(), user.getRember_code(), content, attr)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -208,8 +214,8 @@ public class HttpMethods {
 
     }
 
-    public void UploadSayImag(Subscriber<HttpResult<String>> subscriber, String des, MultipartBody.Part bodyMap){
-        SayAPI fileUploadService=retrofit.create(SayAPI.class);
+    public void UploadSayImag(Subscriber<HttpResult<String>> subscriber, String des, MultipartBody.Part bodyMap) {
+        SayAPI fileUploadService = retrofit.create(SayAPI.class);
         fileUploadService.uploadImage(bodyMap)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -219,13 +225,14 @@ public class HttpMethods {
 
     /**
      * 获取我的商品
+     *
      * @param subscriber
      * @param num
      * @param rember_code
      */
-    public void getMyGoodsList(Subscriber<HttpResult<List<MyGoodsItem>>> subscriber,String num,String rember_code){
+    public void getMyGoodsList(Subscriber<HttpResult<List<MyGoodsItem>>> subscriber, String num, String rember_code) {
         MyGoodListAPI goodListAPI = retrofit.create(MyGoodListAPI.class);
-        goodListAPI.getMyGoodsList(num,rember_code)
+        goodListAPI.getMyGoodsList(num, rember_code)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -234,15 +241,16 @@ public class HttpMethods {
 
     /**
      * 删除商品
+     *
      * @param subscriber
      * @param num
      * @param rember_code
      * @param id
      */
 
-    public void deleteGoods(Subscriber<HttpResult> subscriber,String num,String rember_code,String id){
-        DeleteGoodAPI goodListAPI = retrofit.create( DeleteGoodAPI.class);
-        goodListAPI.deleteGoods(num,rember_code,id)
+    public void deleteGoods(Subscriber<HttpResult> subscriber, String num, String rember_code, String id) {
+        DeleteGoodAPI goodListAPI = retrofit.create(DeleteGoodAPI.class);
+        goodListAPI.deleteGoods(num, rember_code, id)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -251,16 +259,17 @@ public class HttpMethods {
 
     /**
      * 获取商品详情
+     *
      * @param subscriber
      * @param num
      * @param rember_code
      * @param id
      */
-    public void getGoodsContent(Subscriber<HttpResult<Goods>> subscriber,String num,String rember_code,String id){
+    public void getGoodsContent(Subscriber<HttpResult<Goods>> subscriber, String num, String rember_code, String id) {
 
-        GoodsAPI goodsAPI=retrofit.create(GoodsAPI.class);
-        goodsAPI.getGoodsContent(num,rember_code,id).
-        subscribeOn(Schedulers.io())
+        GoodsAPI goodsAPI = retrofit.create(GoodsAPI.class);
+        goodsAPI.getGoodsContent(num, rember_code, id).
+                subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
@@ -272,11 +281,11 @@ public class HttpMethods {
      *
      * @param subscriber
      */
-    public void getGradeData(final Context context, Subscriber<String> subscriber, final User user) {
+    public void getGradeData(final Context context, final Subscriber<String> subscriber, final User user) {
         GradeAPI gradeAPI = retrofit.create(GradeAPI.class);
 
-        String sha1= CommUtil.SHA1(user.getStudentKH()+user.getRember_code()+"f$Z@%");
-        gradeAPI.getGrade(user.getStudentKH(), user.getRember_code(),sha1)
+        String sha1 = CommUtil.SHA1(user.getStudentKH() + user.getRember_code() + "f$Z@%");
+        gradeAPI.getGrade(user.getStudentKH(), user.getRember_code(), sha1)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -296,56 +305,66 @@ public class HttpMethods {
                             float allJd = 0;//总学分绩点  学分绩点=学分*绩点
                             int allNum = 0;//总数目
                             Set<Trem> trim = new HashSet<Trem>();
-                            //处理成绩数据并存入数据库
-                            for (CourseGrade grade : studentGrade.getData()) {
-                                Trem trem = new Trem();
-                                trem.setContent(grade.getXN() + "学年第" + grade.getXQ() + "学期");
-                                trem.setXN(grade.getXN());
-                                trem.setXQ(grade.getXQ());
-                                trim.add(trem);
-                                if(grade.getCXBJ()==null)
-                                    grade.setCXBJ("0");
-                                if ("0".equals(grade.getCXBJ())) {
-                                    allsf = allsf + Float.valueOf(grade.getXF());
-                                    allNum++;
-                                }
-                                if(grade.getJD()==null)
-                                    grade.setJD("0");
+                            if (studentGrade.getData() != null && studentGrade.getData().size() != 0) {
 
-                                allJd+=Float.valueOf(grade.getXF())*Float.valueOf(grade.getJD());
-
-                                Float g;
-                                if (grade.getBKCJ() != null) {
-                                    g = Math.max(Float.valueOf(grade.getZSCJ()), Float.valueOf(grade.getBKCJ()));
-                                } else {
-                                    g = Float.valueOf(grade.getZSCJ());
-                                }
-                                if (g >= 60) {
-                                    getsf = getsf + Float.valueOf(grade.getXF());
-                                    //allJd += Float.valueOf(grade.getJD());
-                                    allScore += g;
-                                    if ("1".equals(grade.getCXBJ())) {
-                                        cxsf = cxsf + Float.valueOf(grade.getXF());
-                                        nopassxf -= Float.valueOf(grade.getXF());
-                                        --noPassNum;
-                                    }
-                                } else {
+                                //处理成绩数据并存入数据库
+                                for (CourseGrade grade : studentGrade.getData()) {
+                                    Trem trem = new Trem();
+                                    trem.setContent(grade.getXN() + "学年第" + grade.getXQ() + "学期");
+                                    trem.setXN(grade.getXN());
+                                    trem.setXQ(grade.getXQ());
+                                    trim.add(trem);
+                                    if (grade.getCXBJ() == null)
+                                        grade.setCXBJ("0");
                                     if ("0".equals(grade.getCXBJ())) {
-                                        ++noPassNum;
-                                        nopassxf += Float.valueOf(grade.getXF());
+                                        allsf = allsf + Float.valueOf(grade.getXF());
+                                        allNum++;
+                                    }
+                                    Float g;
+                                    if (grade.getBKCJ() != null) {
+                                        g = Math.max(Float.valueOf(grade.getZSCJ()), Float.valueOf(grade.getBKCJ()));
+                                    } else {
+                                        g = Float.valueOf(grade.getZSCJ());
+                                    }
+
+
+                                    if (grade.getJD() == null || grade.getJD().equals("0")){
+
+                                        if(g>=60){
+                                            grade.setJD((g-50)/10+"");
+                                        }else{
+                                            grade.setJD("0");
+                                        }
+                                    }
+
+                                    allJd += Float.valueOf(grade.getXF()) * Float.valueOf(grade.getJD());
+
+
+                                    if (g >= 60) {
+                                        getsf = getsf + Float.valueOf(grade.getXF());
+                                        allScore += g;
+                                        if ("1".equals(grade.getCXBJ())) {
+                                            cxsf = cxsf + Float.valueOf(grade.getXF());
+                                            nopassxf -= Float.valueOf(grade.getXF());
+                                            --noPassNum;
+                                        }
+                                    } else {
+                                        if ("0".equals(grade.getCXBJ())) {
+                                            ++noPassNum;
+                                            nopassxf += Float.valueOf(grade.getXF());
+                                        }
                                     }
                                 }
+
+                                Allgrade.setAllsf(allsf);
+                                Allgrade.setNoPassNum(noPassNum);
+                                Allgrade.setGetsf(getsf);
+                                Allgrade.setCxsf(cxsf);
+                                Allgrade.setNopassxf(nopassxf);
+                                Allgrade.setAllNum(allNum);
+                                Allgrade.setAvgScore(allScore / (studentGrade.getData().size() - noPassNum));
+                                Allgrade.setAvgJd(allJd / allsf);
                             }
-
-                            Allgrade.setAllsf(allsf);
-                            Allgrade.setNoPassNum(noPassNum);
-                            Allgrade.setGetsf(getsf);
-                            Allgrade.setCxsf(cxsf);
-                            Allgrade.setNopassxf(nopassxf);
-                            Allgrade.setAllNum(allNum);
-                            Allgrade.setAvgScore(allScore / (studentGrade.getData().size() - noPassNum));
-                            Allgrade.setAvgJd(allJd / allsf);
-
                             DBHelper.deleteAllCourseGrade();
                             DBHelper.deleteAllTrem();
                             DBHelper.deleteAllGrade();
@@ -375,19 +394,21 @@ public class HttpMethods {
                     @Override
                     public String call(HttpResult<List<Lesson>> listHttpResult) {
                         if ("ok".equals(listHttpResult.getMsg())) {
-                            StringBuilder sb;
-                            for (Lesson l:listHttpResult.getData()) {
-                                sb=new StringBuilder();
-                                for(int i=l.getQsz();i<=l.getJsz();i++){
-                                    if("单".equals(l.getDsz())&&i%2==0){
-                                        continue;
-                                    }else if("双".equals(l.getDsz())&&i%1!=0){
-                                        continue;
-                                    }else {
-                                        sb.append(" "+i);
+                            if (listHttpResult.getData() != null && listHttpResult.getData().size() != 0) {
+                                StringBuilder sb;
+                                for (Lesson l : listHttpResult.getData()) {
+                                    sb = new StringBuilder();
+                                    for (int i = l.getQsz(); i <= l.getJsz(); i++) {
+                                        if ("单".equals(l.getDsz()) && i % 2 == 0) {
+                                            continue;
+                                        } else if ("双".equals(l.getDsz()) && i % 2 != 0) {
+                                            continue;
+                                        } else {
+                                            sb.append(" " + i);
+                                        }
                                     }
+                                    l.setIndex(sb.toString());
                                 }
-                                l.setIndex(sb.toString());
                             }
                             DBHelper.deleteAllLesson();
                             DBHelper.insertListLessonDao(listHttpResult.getData());
@@ -474,12 +495,13 @@ public class HttpMethods {
 
     /**
      * 上传商品图片
+     *
      * @param subscriber
      * @param des
      * @param bodyMap
      */
-    public void UploadFile(Subscriber<HttpResult<String>> subscriber, String des, MultipartBody.Part bodyMap){
-        FileUploadAPI fileUploadService=retrofit.create(FileUploadAPI.class);
+    public void UploadFile(Subscriber<HttpResult<String>> subscriber, String des, MultipartBody.Part bodyMap) {
+        FileUploadAPI fileUploadService = retrofit.create(FileUploadAPI.class);
         fileUploadService.uploadImage(bodyMap)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -489,6 +511,7 @@ public class HttpMethods {
 
     /**
      * 发布商品
+     *
      * @param subscriber
      * @param user
      * @param tit
@@ -502,11 +525,11 @@ public class HttpMethods {
      * @param qq
      * @param wechat
      */
-    public void AddGoods(Subscriber<HttpResult<String>> subscriber,User user,String tit,String content,String price,String price_src,
-                         int Class,int attr,String hidden,String phone,String qq,String wechat){
-        AddGoodsAPI addGoodsAPI=retrofit.create(AddGoodsAPI.class);
-        addGoodsAPI.AddGoods(user.getStudentKH(),user.getRember_code(),tit,content,price,price_src,
-                Class,attr,hidden,phone,qq,wechat)
+    public void AddGoods(Subscriber<HttpResult<String>> subscriber, User user, String tit, String content, String price, String price_src,
+                         int Class, int attr, String hidden, String phone, String qq, String wechat) {
+        AddGoodsAPI addGoodsAPI = retrofit.create(AddGoodsAPI.class);
+        addGoodsAPI.AddGoods(user.getStudentKH(), user.getRember_code(), tit, content, price, price_src,
+                Class, attr, hidden, phone, qq, wechat)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

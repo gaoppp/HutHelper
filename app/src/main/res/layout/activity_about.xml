@@ -42,7 +42,7 @@
                 android:layout_alignLeft="@+id/au_name"
                 android:layout_below="@+id/au_name"
                 android:layout_marginTop="6dp"
-                android:text="V0.5.1"
+                android:text="V0.7"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
         </RelativeLayout>
@@ -71,7 +71,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
-                android:text="这款应用是湖南工业大学计通学院创新训练中心旗下的网络组，为工大学生开发的产品，志于帮助同学们更加便捷的体验校园生活。"
+                android:text="这款应用是湖南工大计算机学院网络组与应用开发组，为工大学生开发的产品，志于帮助同学们更加便捷的体验校园生活。"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -171,7 +171,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="5dp"
-                        android:text="后台开发"
+                        android:text="后端开发"
                         android:textColor="#121212"
                         android:textSize="11sp" />
 

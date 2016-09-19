@@ -20,6 +20,8 @@ import com.gaop.huthelper.adapter.ViewHolder;
 import com.gaop.huthelperdao.CourseGrade;
 import com.gaop.huthelperdao.Trem;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,6 +66,21 @@ public class GradeListActivity extends BaseActivity {
         lessonList = DBHelper.getCourseGradeDao();
         tremList = DBHelper.getTremDao();
         if (lessonList != null && tremList != null) {
+            Collections.sort(tremList, new Comparator<Trem>() {
+                public int compare(Trem list1, Trem list2) {
+                    if (list1.getXN().compareTo(list2.getXN()) > 0) {
+                        return 1;
+                    } else if (list1.getXN().equals(list2.getXN())) {
+                        if (Integer.valueOf(list1.getXQ()) > Integer.valueOf(list2.getXQ())) {
+                            return 1;
+                        } else {
+                            return -1;
+                        }
+                    } else {
+                        return -1;
+                    }
+                }
+            });
             adapter=new RVAdapter(GradeListActivity.this, lessonList);
             rvGradelist.setLayoutManager(new LinearLayoutManager(GradeListActivity.this,LinearLayoutManager.VERTICAL,false));
             rvGradelist.setAdapter(adapter);

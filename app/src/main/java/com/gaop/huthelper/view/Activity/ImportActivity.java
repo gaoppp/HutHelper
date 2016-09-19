@@ -12,11 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 
+import com.gaop.huthelper.DB.DBHelper;
 import com.gaop.huthelper.R;
 import com.gaop.huthelper.jiekou.SubscriberOnNextListener;
 import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.net.ProgressSubscriber;
 import com.gaop.huthelper.utils.ToastUtil;
+import com.gaop.huthelperdao.User;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -119,7 +120,7 @@ public class GradeActivity extends BaseActivity {
     private void InitData() {
         //获取grade
         Grade grade = DBHelper.getGradeDao().get(0);
-        if (grade == null) {
+        if (grade.getAllNum()==null||grade.getAllNum()==0) {
             scrollGradeBody.setVisibility(View.GONE);
             tvScoreEmpty.setVisibility(View.VISIBLE);
         } else {
@@ -184,12 +185,11 @@ public class GradeActivity extends BaseActivity {
                 Random random = new Random();
                 int i = Math.abs(random.nextInt()) % 8;
                 d.setColor(Color.parseColor(colors[i]));
-                d.setName(t.getContent());
+                d.setName(t.getXN()+"\n第"+t.getXQ()+"学期");
                 d.setValue((float) (Math.round(allJd.get(t.getContent()) / xf.get(t.getContent()) * 100)) / 100);
                 points.add(d);
             }
             BarGraph g = (BarGraph) findViewById(R.id.graph_grade_bar);
-
             g.setBars(points);
             g.setUnit(" ");
         }

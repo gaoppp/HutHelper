@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -29,6 +30,11 @@ import com.gaop.huthelper.net.ProgressSubscriber;
 import com.gaop.huthelper.utils.CommUtil;
 import com.gaop.huthelper.utils.ToastUtil;
 import com.gaop.huthelperdao.User;
+import com.umeng.common.inter.ITagManager;
+import com.umeng.message.ALIAS_TYPE;
+import com.umeng.message.PushAgent;
+import com.umeng.message.UTrack;
+import com.umeng.message.tag.TagManager;
 
 import java.util.Map;
 
@@ -91,8 +97,15 @@ public class MainActivity extends BaseActivity {
     DrawerLayout drawerLayout;
 
     @Override
-    public void initParms(Bundle parms) {
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        User user = DBHelper.getUserDao().get(0);
 
+        tvNavName.setText(user.getTrueName());
+    }
+
+    @Override
+    public void initParms(Bundle parms) {
     }
 
     @Override
@@ -125,6 +138,24 @@ public class MainActivity extends BaseActivity {
                 else
                     next[2] = "助手";
                 subscriber.onNext(next);
+
+                if (user != null) {
+                    PushAgent mPushAgent = PushAgent.getInstance(MainActivity.this);
+                    mPushAgent.getTagManager().add(new TagManager.TCallBack() {
+                        @Override
+                        public void onMessage(final boolean isSuccess, final ITagManager.Result result) {
+                            //  Log.e(TAG, "onMessage11: "+isSuccess );
+                        }
+                    }, user.getDep_name(), user.getClass_name());
+
+                    mPushAgent.addAlias(user.getStudentKH(), "学号", new UTrack.ICallBack() {
+                        @Override
+                        public void onMessage(boolean isSuccess, String message) {
+                            // Log.e(TAG, "onMessage: "+isSuccess+message );
+                        }
+                    });
+                }
+
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<String[]>() {
@@ -135,6 +166,7 @@ public class MainActivity extends BaseActivity {
                         tvNavName.setText(data[2]);
                     }
                 });
+        checkUpdate(false);
     }
 
 
@@ -187,7 +219,7 @@ public class MainActivity extends BaseActivity {
                 startActivity(UserActivity.class);
                 break;
             case R.id.tv_nav_update:
-                checkUpdate();
+                checkUpdate(true);
                 break;
             case R.id.tv_nav_manage:
                 startActivity(AboutActivity.class);
@@ -204,7 +236,7 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void checkUpdate() {
+    private void checkUpdate(final boolean showe) {
         SubscriberOnNextListener getUpdateData = new SubscriberOnNextListener<HttpResult<UpdateMsg>>() {
             @Override
             public void onNext(final HttpResult<UpdateMsg> o) {
@@ -233,14 +265,16 @@ public class MainActivity extends BaseActivity {
                                     });
                             builder.show();
                         } else {
-                            ToastUtil.showToastShort("已经是最新版本了");
+                            if (showe)
+                                ToastUtil.showToastShort("已经是最新版本了");
                         }
 
                     } catch (PackageManager.NameNotFoundException e) {
                         e.printStackTrace();
                     }
                 } else {
-                    ToastUtil.showToastShort(o.getMsg());
+                    if (showe)
+                        ToastUtil.showToastShort(o.getMsg());
                 }
             }
         };

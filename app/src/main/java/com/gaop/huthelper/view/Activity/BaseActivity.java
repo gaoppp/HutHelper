@@ -35,6 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private String APP_NAME;
     protected final String TAG = this.getClass().getSimpleName();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,6 +157,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (bundle != null) {
             intent.putExtras(bundle);
         }
+        startActivityForResult(intent, requestCode);
+    }
+
+    public void startActivityForResult(Class<?> cls, int requestCode) {
+        Intent intent = new Intent();
+        intent.setClass(this, cls);
         startActivityForResult(intent, requestCode);
     }
 

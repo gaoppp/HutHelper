@@ -68,7 +68,8 @@ public class AddSayActivity extends BaseActivity {
     private Bitmap bmp;
     private List<Bitmap> imageItem;
     private ChoosePicAdapter adapter;
-    private StringBuilder imageString=new StringBuilder();
+    private StringBuilder imageString = new StringBuilder();
+    private ArrayList<Integer> imageOption;
     /**
      * Dialog对话框提示用户删除操作
      * position为删除图片位置
@@ -105,7 +106,9 @@ public class AddSayActivity extends BaseActivity {
 
         bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_add_black_48dp);
         imageItem = new ArrayList<Bitmap>();
+        imageOption = new ArrayList<>();
         imageItem.add(bmp);
+        imageOption.add(100);
         rvAddsayImglist.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         adapter = new ChoosePicAdapter(this, imageItem);
         adapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -159,26 +162,30 @@ public class AddSayActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
-            List<Uri> mSelected = PicturePickerUtils.obtainResult(data);
 
+            List<Uri> mSelected = PicturePickerUtils.obtainResult(data);
             dialog = new ProgressDialog(AddSayActivity.this);
             dialog.show();
             dialog.setMessage("正在处理图片");
             dialog.setCancelable(false);
-            Observable.from(mSelected).map(new Func1<Uri, Bitmap>() {
+            Observable.from(mSelected).map(new Func1<Uri, Integer>() {
                 @Override
-                public Bitmap call(Uri filePath) { // 参数类型 String
-                    Bitmap bitmap = null;
+                public Integer call(Uri filePath) { // 参数类型 String
+
+                    int option = 50;
                     try {
-                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                        option = CommUtil.compressImage(bitmap);
+                        imageItem.add(bitmap);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    return CommUtil.compressImage(bitmap); // 返回类型 Bitmap
-                }}).subscribeOn(Schedulers.io()) // 指定 subscribe() 发生在 IO 线程
-                    .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Bitmap>() {
+                    Log.e("fd",option+"");
+                    return option; // 返回类型 Bitmap
+                }
+            }).subscribeOn(Schedulers.io()) // 指定 subscribe() 发生在 IO 线程
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Integer>() {
                 @Override
                 public void onCompleted() {
                     dialog.dismiss();
@@ -191,9 +198,10 @@ public class AddSayActivity extends BaseActivity {
                     ToastUtil.showToastShort("导入图片出错");
 
                 }
+
                 @Override
-                public void onNext(Bitmap bitmap) {
-                    imageItem.add(CommUtil.compressImage(bitmap));
+                public void onNext(Integer filePath) {
+                    imageOption.add(filePath);
                 }
             });
         }
@@ -208,6 +216,7 @@ public class AddSayActivity extends BaseActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 imageItem.remove(position);
+                imageOption.remove(position);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -219,10 +228,11 @@ public class AddSayActivity extends BaseActivity {
         });
         builder.create().show();
     }
+
     @OnClick(R.id.iv_addsay_ok)
     public void onClick() {
         if (fastClick()) {
-            if (etAddsayContent.getText().toString().equals("") ) {
+            if (etAddsayContent.getText().toString().equals("")) {
                 ToastUtil.showToastShort("请填写内容");
             } else {
                 dialog = new ProgressDialog(AddSayActivity.this);
@@ -240,7 +250,7 @@ public class AddSayActivity extends BaseActivity {
         dialog.setCancelable(false);
         dialog.setMessage("正在上传第" + i + "张图片");
         ByteArrayOutputStream os = new ByteArrayOutputStream();
-        imageItem.get(i).compress(Bitmap.CompressFormat.PNG, 100, os);
+        imageItem.get(i).compress(Bitmap.CompressFormat.PNG, imageOption.get(i), os);
         byte[] bytes = os.toByteArray();
         final RequestBody requestFile = RequestBody.create(MediaType.parse("image/png"), bytes);
         final MultipartBody.Part photo = MultipartBody.Part.createFormData("file", "01.png", requestFile);
@@ -266,6 +276,7 @@ public class AddSayActivity extends BaseActivity {
                             uploadImg(i + 1);
                         } else {
                             ToastUtil.showToastShort("第" + i + "张图片上传失败:" + o.getMsg());
+                            dialog.dismiss();
                         }
                     }
                 }, "file", photo);
@@ -277,30 +288,35 @@ public class AddSayActivity extends BaseActivity {
         dialog.setMessage("正在发布说说");
         User user = DBHelper.getUserDao().get(0);
         HttpMethods.getInstance().addSay(new Subscriber<HttpResult<String>>() {
-                                               @Override
-                                               public void onCompleted() {
+            @Override
+            public void onCompleted() {
 
-                                               }
+            }
 
-                                               @Override
-                                               public void onError(Throwable e) {
-                                                   dialog.dismiss();
-                                                   ToastUtil.showToastShort("上传出错" + e.toString());
-                                               }
+            @Override
+            public void onError(Throwable e) {
+                dialog.dismiss();
+                ToastUtil.showToastShort("上传出错" + e.toString());
+            }
 
-                                               @Override
-                                               public void onNext(HttpResult<String> stringHttpResult) {
-                                                   if (stringHttpResult.getMsg().equals("ok")) {
-                                                       dialog.dismiss();
-                                                       ToastUtil.showToastShort("发布成功");
-                                                   }else if(stringHttpResult.getMsg().equals("令牌错误")){
-                                                       startActivity(ImportActivity.class);
-                                                       ToastUtil.showToastShort("账号异地登录，请重新登录");
-                                                   }else
-                                                       ToastUtil.showToastShort(stringHttpResult.getMsg());
+            @Override
+            public void onNext(HttpResult<String> stringHttpResult) {
+                if (stringHttpResult.getMsg().equals("ok")) {
+                    dialog.dismiss();
+                    ToastUtil.showToastShort("发布成功");
+                    setResult(333);
+                    finish();
+                } else if (stringHttpResult.getMsg().equals("令牌错误")) {
+                    dialog.dismiss();
+                    startActivity(ImportActivity.class);
+                    ToastUtil.showToastShort("账号异地登录，请重新登录");
+                } else {
+                    dialog.dismiss();
+                    ToastUtil.showToastShort(stringHttpResult.getMsg());
+                }
 
-                                               }
-                                           }, user,etAddsayContent.getText().toString(),imageString.toString());
+            }
+        }, user, etAddsayContent.getText().toString(), imageString.toString());
     }
 
 

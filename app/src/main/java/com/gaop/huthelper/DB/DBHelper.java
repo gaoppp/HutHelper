@@ -47,7 +47,9 @@ public class DBHelper {
     }
 
     public static void insertLesson(Lesson lesson) {
-        MApplication.daoManager.insertLesson(lesson);
+
+        if(lesson==null)
+            return;MApplication.daoManager.insertLesson(lesson);
     }
 
     public static List<Lesson> getLessonByWeek(String num) {
@@ -55,6 +57,8 @@ public class DBHelper {
     }
 
     public static void insertListLessonDao(List<Lesson> list) {
+        if(list==null)
+            return;
         MApplication.daoManager.insertListLesson(list);
     }
 
@@ -106,6 +110,8 @@ public class DBHelper {
     }
 
     public static void insertCourseGradeList(List<CourseGrade> list) {
+        if(list==null)
+            return;
         MApplication.daoManager.insertListCourseGrade(list);
     }
 

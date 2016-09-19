@@ -80,6 +80,8 @@ public class Lesson implements java.io.Serializable {
     }
 
     public String getRoom() {
+        if(room==null||room=="")
+            return "无教室";
         return room;
     }
 
@@ -104,7 +106,7 @@ public class Lesson implements java.io.Serializable {
     }
 
     public Integer getQsz() {
-        return qsz;
+        return qsz==null?0:qsz;
     }
 
     public void setQsz(Integer qsz) {
@@ -112,7 +114,7 @@ public class Lesson implements java.io.Serializable {
     }
 
     public Integer getJsz() {
-        return jsz;
+        return jsz==null?0:jsz;
     }
 
     public void setJsz(Integer jsz) {

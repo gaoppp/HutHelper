@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import com.gaop.huthelper.DB.DBHelper;
 import com.gaop.huthelper.Model.HttpResult;
@@ -36,6 +37,8 @@ public class MySayListActivity extends BaseActivity {
     Toolbar toolbar;
     @BindView(R.id.rv_mysaylist)
     LRecyclerView rvMysaylist;
+    @BindView(R.id.tv_say_empty)
+    TextView tv_empty;
 
     List<Say> Saylist = new ArrayList<>();
 
@@ -103,6 +106,7 @@ public class MySayListActivity extends BaseActivity {
             }
 
         });
+        rvMysaylist.setEmptyView(tv_empty);
 
     }
     public void getSayList() {

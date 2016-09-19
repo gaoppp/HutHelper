@@ -1,6 +1,7 @@
 package com.gaop.huthelper.view.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import android.widget.RelativeLayout;
 import com.gaop.huthelper.Model.GoodsListItem;
 import com.gaop.huthelper.R;
 import com.gaop.huthelper.adapter.MarketRVAdapter;
+import com.gaop.huthelper.adapter.SayRVAdapter;
 import com.gaop.huthelper.jiekou.SubscriberOnNextListener;
 import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.net.ProgressSubscriber;
@@ -79,7 +81,7 @@ public class MarketActivity extends BaseActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(AddGoodsActivity.class);
+                startActivityForResult(AddGoodsActivity.class,311);
             }
         });
         getGoodsList(1);
@@ -135,7 +137,7 @@ public class MarketActivity extends BaseActivity {
     }
 
 
-    public void getGoodsList(int pagenum) {
+    public void getGoodsList(final int pagenum) {
         SubscriberOnNextListener<GoodsListItem[]> subscriberOnNextListener = new SubscriberOnNextListener<GoodsListItem[]>() {
             @Override
             public void onNext(GoodsListItem[] jsonArray) {
@@ -145,6 +147,24 @@ public class MarketActivity extends BaseActivity {
                     int count = jsonArray.length;
                     for (int i = 1; i < count; i++) {
                         Goodslist.add(jsonArray[i]);
+                    }
+                    if(pagenum==1){
+                        mLRecyclerViewAdapter = new LRecyclerViewAdapter(MarketActivity.this, new MarketRVAdapter(MarketActivity.this, Goodslist));
+                        rvMarketlist.setAdapter(mLRecyclerViewAdapter);
+                        mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int i) {
+                                Bundle mBundle = new Bundle();
+                                mBundle.putString("id", Goodslist.get(i).getId());
+                                startActivity(GoodsActivity.class, mBundle);
+                            }
+
+                            @Override
+                            public void onItemLongClick(View view, int i) {
+
+                            }
+                        });
+                        return;
                     }
                 } else {
                     ToastUtil.showToastShort("获取服务器数据为空");
@@ -166,7 +186,6 @@ public class MarketActivity extends BaseActivity {
     }
 
     private void showViews() {
-        // toolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
         fab.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
     }
 
@@ -202,10 +221,8 @@ public class MarketActivity extends BaseActivity {
 
         @Override
         public void onBottom() {
-            Log.e("tag", CURPage + "  " + COUNT);
             if (CURPage + 1 <= COUNT) {
                 ++CURPage;
-                Log.e("ee", "here");
                 getGoodsList(CURPage);
             }
             // do something, such as load next page.
@@ -248,5 +265,19 @@ public class MarketActivity extends BaseActivity {
         public abstract void onShow();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (resultCode){
+            case 333:
+                CURPage = 0;
+                Goodslist = new ArrayList<>();
+                isRefresh = true;
+                getGoodsList(1);
 
+                break;
+            default:
+                break;
+
+        }
+    }
 }

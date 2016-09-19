@@ -46,7 +46,7 @@ public class CourseInfoAdapter extends BaseAdapter{
             textView.setTextColor(Color.BLACK);
             textView.setGravity(Gravity.CENTER_VERTICAL);
             textView.setPadding(10,0,0,0);
-           if(CommUtil.ifHaveCourse(lesson,2)){
+           if(CommUtil.ifHaveCourse(lesson,currentWeek)){
                textView.setBackgroundResource(R.drawable.kb3);
            }else {
                textView.setBackgroundResource(R.drawable.kbno);
