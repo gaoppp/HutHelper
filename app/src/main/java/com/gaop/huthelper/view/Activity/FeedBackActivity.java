@@ -1,26 +1,20 @@
 package com.gaop.huthelper.view.Activity;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gaop.huthelper.DB.DBHelper;
-import com.gaop.huthelper.Model.Electric;
 import com.gaop.huthelper.R;
 import com.gaop.huthelper.jiekou.SubscriberOnNextListener;
 import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.net.ProgressSubscriber;
 import com.gaop.huthelper.utils.CommUtil;
-import com.gaop.huthelper.utils.PrefUtil;
 import com.gaop.huthelper.utils.ToastUtil;
 import com.gaop.huthelperdao.User;
 
@@ -38,22 +32,21 @@ public class FeedBackActivity extends BaseActivity {
         String content = mTvContent.getText().toString();
         String tel = mTvTel.getText().toString();
         if (TextUtils.isEmpty(content)) {
-           ToastUtil.showToastShort("反馈意见不能为空");
+            ToastUtil.showToastShort("反馈意见不能为空");
             return;
         } else {
             User user = DBHelper.getUserDao().get(0);
             content = user.getStudentKH() + " " + content;
-            SubscriberOnNextListener getElectricData = new SubscriberOnNextListener<String>() {
+            SubscriberOnNextListener getData = new SubscriberOnNextListener<String>() {
                 @Override
                 public void onNext(String o) {
+                    FeedBackActivity.this.finish();
                     ToastUtil.showToastShort("反馈成功！");
-                    mTvContent.setText("");
-                    mTvTel.setText("");
                 }
             };
             HttpMethods.getInstance().feedBack(
-                    new ProgressSubscriber<String>(getElectricData, FeedBackActivity.this),
-                    tel,content);
+                    new ProgressSubscriber<String>(getData, FeedBackActivity.this),
+                    tel, content);
         }
 
 
@@ -93,10 +86,11 @@ public class FeedBackActivity extends BaseActivity {
                 }
             }
         });
+        Log.e("dd", "here");
     }
 
     protected boolean fastClick() {
-        if (System.currentTimeMillis() - lastClick <= 1500) {
+        if (System.currentTimeMillis() - lastClick <= 2000) {
             return false;
         }
         lastClick = System.currentTimeMillis();

@@ -85,6 +85,9 @@ public class CourseItemActivity extends BaseActivity {
         if (!TextUtils.isEmpty(lesson.getDsz()))
             week.append("(").append(lesson.getDsz()).append(")");
         tvCourseWeek.setText(week);
+        if(TextUtils.isEmpty(week)){
+            tvCourseWeek.setText(lesson.getIndex());
+        }
     }
 
 

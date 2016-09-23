@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -15,10 +14,8 @@ import com.gaop.huthelper.adapter.AutoRVAdapter;
 import com.gaop.huthelper.adapter.ViewHolder;
 import com.gaop.huthelper.utils.DateUtil;
 
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -119,7 +116,10 @@ public class CalendarActivity extends BaseActivity {
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
             holder.getTextView(R.id.show_time).setText(formatter.format(holiDays.get(position).getTime()));
-            holder.getTextView(R.id.date_title).setText(holiDays.get(position).getName() + "\n" + days + "天");
+            if (formatter.format(holiDays.get(position).getTime()).equals(formatter.format(new Date()))) {
+                holder.getTextView(R.id.date_title).setText(holiDays.get(position).getName() + "\n" + "今天");
+            } else
+                holder.getTextView(R.id.date_title).setText(holiDays.get(position).getName() + "\n" + (days + 1) + "天");
         }
 
     }

@@ -1,9 +1,6 @@
 package com.gaop.huthelper.net;
 
 import android.content.Context;
-import android.system.ErrnoException;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.gaop.huthelper.jiekou.SubscriberOnNextListener;
 import com.gaop.huthelper.utils.ToastUtil;
@@ -34,18 +31,17 @@ public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCanc
     public void onError(Throwable e) {
         dismissProgressDialog();
 
-       if(e instanceof java.net.ConnectException){
-           //网络连接错误
+        if (e instanceof java.net.ConnectException) {
+            //网络连接错误
             ToastUtil.showToastShort("网络连接失败！");
-        }else if(e instanceof java.net.SocketTimeoutException){
+        } else if (e instanceof java.net.SocketTimeoutException) {
             //连接超时
             ToastUtil.showToastShort("连接超时！");
-        }else if(e instanceof retrofit2.adapter.rxjava.HttpException){
-           ToastUtil.showToastShort("服务器错误");
+        } else if (e instanceof retrofit2.adapter.rxjava.HttpException) {
+            ToastUtil.showToastShort("服务器错误");
+        } else {
+            ToastUtil.showToastShort("数据解析错误");
         }
- //      else{
-//           ToastUtil.showToastShort("数据异常");
-//       }
     }
 
     @Override

@@ -11,7 +11,6 @@ import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.gaop.huthelper.DB.DBHelper;
 import com.gaop.huthelper.R;
@@ -19,12 +18,8 @@ import com.gaop.huthelper.utils.CommUtil;
 import com.gaop.huthelper.utils.ToastUtil;
 import com.gaop.huthelperdao.User;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by gaop on 16-9-12.
@@ -36,8 +31,7 @@ public class WebViewActivity extends BaseActivity {
     WebView webview;
     @BindView(R.id.pb_webview)
     ProgressBar pbWebview;
-    @BindView(R.id.tv_homework_grade)
-    TextView tvHomeworkgrade;
+
 
     private String Url;
     private String Title;
@@ -46,7 +40,7 @@ public class WebViewActivity extends BaseActivity {
 
     static final int TYPE_LIB = 1;
     static final int TYPE_EXAM = 2;
-    static final int TYPE_CHANGE_PW=3;
+    static final int TYPE_CHANGE_PW = 3;
     private int type;
     private User user;
 
@@ -68,25 +62,26 @@ public class WebViewActivity extends BaseActivity {
         if (type == TYPE_EXAM) {
             user = DBHelper.getUserDao().get(0);
             String num = user.getStudentKH();
-            String sha1 = CommUtil.SHA1(num) + "Xp@d";
-            //Long time = Long.parseLong(String.valueOf(System.currentTimeMillis()).toString().substring(0, 10)) + 24 * 3600;
-            String url = "{\"jid\":\"" + sha1 + "\",\"device\":\"android x.x\",\"student_number\":\"" +
-                    num + "\"}";
-            try {
-                Url = "http://218.75.197.121:8888/homework/?m=homework&client_token=" + URLDecoder.decode(url, "utf-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-                ToastUtil.showToastShort("进入失败");
-            }
+            String rember = user.getRember_code();
+//            String sha1 = CommUtil.SHA1(num) + "Xp@d";
+//            //Long time = Long.parseLong(String.valueOf(System.currentTimeMillis()).toString().substring(0, 10)) + 24 * 3600;
+//            String url = "{\"jid\":\"" + sha1 + "\",\"device\":\"android x.x\",\"student_number\":\"" +
+//                    num + "\"}";
+
+            // Url = "http://218.75.197.121:8888/homework/?m=homework&client_token=" + URLDecoder.decode(url, "utf-8");
+            Url = "http://218.75.197.121:8888/api/v1/get/myhomework/" + num + "/" + rember;
+
             toolbar.setTitle("在线作业");
         } else if (type == TYPE_LIB) {
             toolbar.setTitle("图书馆");
             Url = "http://172.16.64.7:8080/opac/index";
-            tvHomeworkgrade.setVisibility(View.GONE);
-        }else if(type==TYPE_CHANGE_PW){
+//            toolbar.setTitle("考试查询");
+//            Url="http://172.16.10.210:81/exam";
+
+        } else if (type == TYPE_CHANGE_PW) {
             toolbar.setTitle("修改密码");
             Url = "http://218.75.197.121:8888/auth/resetPass";
-            tvHomeworkgrade.setVisibility(View.GONE);
+
         }
 
         setSupportActionBar(toolbar);
@@ -135,25 +130,7 @@ public class WebViewActivity extends BaseActivity {
 
     }
 
-    @OnClick(R.id.tv_homework_grade)
-    public void onClick() {
-        if(fastClick()){
-            user = DBHelper.getUserDao().get(0);
-            String num = user.getStudentKH();
-            String sha1 = CommUtil.SHA1(num) + "Xp@d";
-           // Long time = Long.parseLong(String.valueOf(System.currentTimeMillis()).toString().substring(0, 10)) + 24 * 3600;
-            String url = "{\"jid\":\"" + sha1 + "\",\"device\":\"android x.x\",\"student_number\":\"" +
-                    num + "\"}";
-            String scoreurl = null;
-            try {
-               scoreurl = "http://218.75.197.121:8888/homework/?m=homework_score&client_token=" + URLDecoder.decode(url, "utf-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-                ToastUtil.showToastShort("进入失败");
-            }
-            webview.loadUrl(scoreurl);
-        }
-    }
+
 
     protected void hideErrorPage() {
         RelativeLayout webParentView = (RelativeLayout) mErrorView.getParent();
@@ -220,8 +197,6 @@ public class WebViewActivity extends BaseActivity {
         webview.removeAllViews();
         webview.destroy();
     }
-
-
 
 
 }

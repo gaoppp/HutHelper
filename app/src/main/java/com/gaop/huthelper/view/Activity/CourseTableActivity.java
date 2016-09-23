@@ -88,6 +88,8 @@ public class CourseTableActivity extends BaseActivity {
     @Override
     public void doBusiness(Context mContext) {
         ButterKnife.bind(this);
+        CurrWeek = DateUtil.getNowWeek();
+        Log.e("dd",CurrWeek+"");
         toolbarCoursetable.setTitle("");
         setSupportActionBar(toolbarCoursetable);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -105,7 +107,7 @@ public class CourseTableActivity extends BaseActivity {
     }
 
     private void setView() {
-        CurrWeek = DateUtil.getNowWeek();
+
         table = new CourseTable();
         table.setmContext(this);
         tvChoose.setText("第" + CurrWeek + "周");

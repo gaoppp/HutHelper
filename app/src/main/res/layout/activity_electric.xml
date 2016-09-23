@@ -7,7 +7,7 @@
         android:id="@+id/toolba_ele"
         android:layout_width="match_parent"
         android:elevation="5dp"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
         android:fitsSystemWindows="true"
         android:background="#63B8FF">
     </android.support.v7.widget.Toolbar>

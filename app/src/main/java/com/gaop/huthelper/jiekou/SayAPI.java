@@ -65,4 +65,16 @@ public interface SayAPI {
     @Multipart
     @POST("api/v1/moments/upload")
     Observable<HttpResult<String>> uploadImage(@Part MultipartBody.Part file);
+
+
+    /**
+     * 发布评论
+     * @param num
+     * @param code
+     * @param id
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/v1/moments/comment/{num}/{code}/{id}")
+    Observable<HttpResult> addComment(@Path("num") String num,@Path("code") String code,@Path("id") String id,@Field("comment") String comment);
 }

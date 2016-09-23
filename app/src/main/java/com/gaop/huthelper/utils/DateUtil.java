@@ -332,15 +332,16 @@ public class DateUtil {
      */
     public static int getNowWeek() {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        int be = 0;
+        long be = 0;
         try {
             Date begin = df.parse("2016-08-29");
             Date end = new Date();
-            be = (int) (end.getTime() - begin.getTime()) / (1000 * 60 * 60 * 24);
+            be = (end.getTime() - begin.getTime()) / (1000 * 60 * 60 * 24);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return be / 7 + 1;
+
+        return (int) (be / 7 + 1);
     }
 
     /**

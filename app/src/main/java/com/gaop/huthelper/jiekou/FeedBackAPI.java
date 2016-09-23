@@ -4,7 +4,6 @@ import okhttp3.ResponseBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -13,6 +12,6 @@ import rx.Observable;
 public interface FeedBackAPI {
     @FormUrlEncoded
     @POST("home/msg/0")
-    Observable<String> feed(@Field("email") String email,
+    Observable<ResponseBody> feed(@Field("email") String email,
                                       @Field("content") String content);
 }

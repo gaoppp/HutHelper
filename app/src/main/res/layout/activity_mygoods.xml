@@ -7,7 +7,7 @@
         android:id="@+id/toolbar"
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
         android:background="#63B8FF" />
 
     <com.github.jdsjlzx.recyclerview.LRecyclerView

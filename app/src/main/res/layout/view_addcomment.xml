@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/comment_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal"
+    android:paddingBottom="3dp"
+    android:paddingTop="3dp"
+    >
+
+    <EditText
+        android:id="@+id/et_addcomment_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="5dip"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dip"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:maxLength="2000"
+        android:paddingLeft="3dp"
+        android:textSize="16sp" />
+
+    <Button
+        android:background="@drawable/btn_login"
+        android:id="@+id/btn_addcomment_submit"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_margin="7dp"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:text="发送" />
+</LinearLayout>

@@ -9,7 +9,6 @@ import com.gaop.huthelper.MApplication;
  * Created by gaop1 on 2016/7/25.
  */
 public class ToastUtil {
-
     private static Context context= MApplication.AppContext;
 
     public static void showToastLong(String msg){

@@ -2,17 +2,14 @@ package com.gaop.huthelper.net;
 
 
 import android.content.Context;
-import android.util.Log;
 
 import com.gaop.huthelper.DB.DBHelper;
 import com.gaop.huthelper.Model.DepInfo;
 import com.gaop.huthelper.Model.Electric;
 import com.gaop.huthelper.Model.Goods;
 import com.gaop.huthelper.Model.GoodsListItem;
-
 import com.gaop.huthelper.Model.HttpResult;
 import com.gaop.huthelper.Model.MyGoodsItem;
-import com.gaop.huthelper.Model.Say;
 import com.gaop.huthelper.Model.SayData;
 import com.gaop.huthelper.Model.UpdateMsg;
 import com.gaop.huthelper.jiekou.AddGoodsAPI;
@@ -32,12 +29,14 @@ import com.gaop.huthelper.jiekou.UpdateAPI;
 import com.gaop.huthelper.jiekou.UserDataAPI;
 import com.gaop.huthelper.utils.CommUtil;
 import com.gaop.huthelper.utils.PrefUtil;
+import com.gaop.huthelper.utils.ToastUtil;
 import com.gaop.huthelperdao.CourseGrade;
 import com.gaop.huthelperdao.Grade;
 import com.gaop.huthelperdao.Lesson;
 import com.gaop.huthelperdao.Trem;
 import com.gaop.huthelperdao.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -46,6 +45,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -176,6 +176,16 @@ public class HttpMethods {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
+    }
+
+    public void addComment(Subscriber<HttpResult> subscriber,User user,String id,String comment){
+        SayAPI api=retrofit.create(SayAPI.class);
+        api.addComment(user.getStudentKH(),user.getRember_code(),id,comment)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+
     }
 
     /**
@@ -427,9 +437,23 @@ public class HttpMethods {
     /**
      * 反馈意见
      */
-    public void feedBack(Subscriber<String> subscriber, String tel, String content) {
+    public void feedBack(final Subscriber<String> subscriber, String tel, String content) {
         FeedBackAPI feedBackAPI = retrofit.create(FeedBackAPI.class);
         feedBackAPI.feed(tel, content)
+                .map(new Func1<ResponseBody, String>() {
+
+                    @Override
+                    public String call(ResponseBody responseBody) {
+                        String s="";
+                        try {
+                            s=new String(responseBody.bytes(),"UTF-8");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            ToastUtil.showToastShort("数据异常");
+                        }
+                        return s;
+                    }
+                })
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
