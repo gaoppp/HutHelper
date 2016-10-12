@@ -4,7 +4,7 @@ package com.gaop.huthelperdao;
 /**
  * Entity mapped to table "USER".
  */
-public class User {
+public class User implements java.io.Serializable {
 
     private Long id;
     private String user_id;

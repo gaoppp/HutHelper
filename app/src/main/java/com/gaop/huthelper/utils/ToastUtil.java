@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.gaop.huthelper.MApplication;
 
 /**
+ * 弹窗工具
  * Created by gaop1 on 2016/7/25.
  */
 public class ToastUtil {

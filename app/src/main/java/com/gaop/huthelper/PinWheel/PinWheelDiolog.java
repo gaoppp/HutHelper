@@ -10,6 +10,7 @@ import com.gaop.huthelper.R;
 
 
 /**
+ * 自定义Diolog
  * Created by gaop1 on 2016/4/22.
  */
 public class PinWheelDiolog {

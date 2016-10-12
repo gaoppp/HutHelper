@@ -1,9 +1,8 @@
 package com.gaop.huthelper.DB;
 
-import android.content.Context;
-
 import com.gaop.huthelper.MApplication;
 import com.gaop.huthelperdao.CourseGrade;
+import com.gaop.huthelperdao.Explesson;
 import com.gaop.huthelperdao.Grade;
 import com.gaop.huthelperdao.Lesson;
 import com.gaop.huthelperdao.LessonDao;
@@ -11,9 +10,7 @@ import com.gaop.huthelperdao.Notice;
 import com.gaop.huthelperdao.Trem;
 import com.gaop.huthelperdao.User;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -37,6 +34,10 @@ public class DBHelper {
         MApplication.daoManager.deleteAllUser();
     }
 
+    public static void UpdateUser(User user) {
+        MApplication.daoManager.updateUser(user);
+    }
+
     /***********************
      * Lesson
      ****************/
@@ -48,8 +49,9 @@ public class DBHelper {
 
     public static void insertLesson(Lesson lesson) {
 
-        if(lesson==null)
-            return;MApplication.daoManager.insertLesson(lesson);
+        if (lesson == null)
+            return;
+        MApplication.daoManager.insertLesson(lesson);
     }
 
     public static List<Lesson> getLessonByWeek(String num) {
@@ -57,7 +59,7 @@ public class DBHelper {
     }
 
     public static void insertListLessonDao(List<Lesson> list) {
-        if(list==null)
+        if (list == null)
             return;
         MApplication.daoManager.insertListLesson(list);
     }
@@ -110,7 +112,7 @@ public class DBHelper {
     }
 
     public static void insertCourseGradeList(List<CourseGrade> list) {
-        if(list==null)
+        if (list == null)
             return;
         MApplication.daoManager.insertListCourseGrade(list);
     }
@@ -132,6 +134,21 @@ public class DBHelper {
 
     public static void deleteAllNotice() {
         MApplication.daoManager.deleteAllNotice();
+    }
+
+    /***************
+     * ExpLesson
+     */
+    public static List<Explesson> getExpLessons() {
+        return MApplication.daoManager.orderAscExpLesson();
+    }
+
+    public static void insertListExpLesson(List<Explesson> list) {
+        MApplication.daoManager.insertListExpLesson(list);
+    }
+
+    public static void deleteAllExpLesson() {
+        MApplication.daoManager.deleteAllExpLesson();
     }
 
 }

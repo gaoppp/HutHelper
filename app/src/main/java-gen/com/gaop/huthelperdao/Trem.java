@@ -71,4 +71,5 @@ public class Trem {
         return (XN!=null?XN.hashCode():1)*31+XQ.hashCode();
     }
 
+
 }

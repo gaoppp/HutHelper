@@ -42,8 +42,8 @@
             android:screenOrientation="portrait"
         </activity>
         <activity
-            android:launchMode="singleTask"
             android:name=".view.Activity.MainActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -94,7 +94,7 @@
             android:name=".view.Activity.SayActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".view.Activity.MySayListActivity"
             android:screenOrientation="portrait"
@@ -121,6 +121,16 @@
             android:name=".view.Activity.NoticeItemActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Activity.ChangeNickNameActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Activity.ExpLessonActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
         <service android:name=".PushIntentService" />
 
         <meta-data

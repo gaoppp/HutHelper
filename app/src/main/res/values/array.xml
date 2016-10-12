@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="goodsclass">
+    <item>电脑/硬件</item>
+    <item>手机/相机/游戏机</item>
+    <item>家电/家具/办公</item>
+    <item>自行车/摩托车</item>
+    <item>服饰/鞋帽/饰品</item>
+    <item>书籍/考研资料</item>
+</string-array>
+    <string-array name="goodsqu">
+        <item>99成新</item>
+        <item>95成新</item>
+        <item>9成新</item>
+        <item>8成新</item>
+        <item>7成新及以下</item>
+    </string-array>
+    <string-array name="weeklist">
+        <item>星期一</item>
+        <item>星期二</item>
+        <item>星期三</item>
+        <item>星期四</item>
+        <item>星期五</item>
+        <item>星期六</item>
+        <item>星期日</item>
+    </string-array>
+    <string-array name="coursenumlist">
+        <item>一,二节</item>
+        <item>三,四节</item>
+        <item>五,六节</item>
+        <item>七,八节</item>
+        <item>九,十节</item>
+    </string-array>
+
+</resources>

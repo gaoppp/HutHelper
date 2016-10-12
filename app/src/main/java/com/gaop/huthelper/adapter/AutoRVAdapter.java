@@ -5,23 +5,27 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
-
-import com.gaop.huthelperdao.CourseGrade;
 
 import java.util.List;
 
 /**
+ *通用适配器
  * Created by gaop1 on 2016/7/9.
  */
 public abstract class AutoRVAdapter extends RecyclerView.Adapter<AutoRVAdapter.RVHolder> {
     public List<?> list;
     public Context context;
+    boolean isrecycle=true;
 
     public AutoRVAdapter(Context context, List<?> list) {
         this.list = list;
         this.context = context;
+    }
+    public AutoRVAdapter(Context context, List<?> list,boolean isrecycleable) {
+        this.list = list;
+        this.context = context;
+        this.isrecycle=isrecycleable;
     }
 
     @Override
@@ -41,6 +45,7 @@ public abstract class AutoRVAdapter extends RecyclerView.Adapter<AutoRVAdapter.R
     @Override
     public void onBindViewHolder(final RVHolder holder, final int position) {
         onBindViewHolder(holder.getViewHolder(), position);
+        holder.setIsRecyclable(isrecycle);
         if (onItemClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -98,6 +103,7 @@ public abstract class AutoRVAdapter extends RecyclerView.Adapter<AutoRVAdapter.R
         public ViewHolder getViewHolder() {
             return viewHolder;
         }
+
 
     }
 

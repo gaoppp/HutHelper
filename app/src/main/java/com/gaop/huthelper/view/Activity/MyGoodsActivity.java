@@ -5,18 +5,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.gaop.huthelper.DB.DBHelper;
-import com.gaop.huthelper.Model.GoodsListItem;
 import com.gaop.huthelper.Model.HttpResult;
 import com.gaop.huthelper.Model.MyGoodsItem;
 import com.gaop.huthelper.R;
-import com.gaop.huthelper.adapter.MarketRVAdapter;
 import com.gaop.huthelper.adapter.MyGoodsAdapter;
 import com.gaop.huthelper.jiekou.SubscriberOnNextListener;
 import com.gaop.huthelper.net.HttpMethods;
@@ -26,28 +21,26 @@ import com.gaop.huthelperdao.User;
 import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
-import com.github.jdsjlzx.util.RecyclerViewStateUtils;
-import com.github.jdsjlzx.view.LoadingFooter;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by gaop1 on 2016/9/4.
  */
 public class MyGoodsActivity extends BaseActivity {
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+
     @BindView(R.id.rv_marketlist)
     LRecyclerView rvMarketlist;
     @BindView(R.id.tv_goods_empty)
     TextView tvEmpty;
+    @BindView(R.id.tv_toolbar_title)
+    TextView tvToolbarTitle;
 
     private LRecyclerViewAdapter mLRecyclerViewAdapter;
     private List<MyGoodsItem> Goodslist;
@@ -64,16 +57,7 @@ public class MyGoodsActivity extends BaseActivity {
     @Override
     public void doBusiness(Context mContext) {
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle("我的商品");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        tvToolbarTitle.setText("我的商品");
         Goodslist = new ArrayList<>();
         rvMarketlist.setLayoutManager(new LinearLayoutManager(MyGoodsActivity.this, LinearLayoutManager.VERTICAL, false));
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(this, new MyGoodsAdapter(MyGoodsActivity.this, Goodslist));
@@ -189,5 +173,11 @@ public class MyGoodsActivity extends BaseActivity {
         HttpMethods.getInstance().deleteGoods(
                 new ProgressSubscriber<HttpResult>(subscriberOnNextListener, MyGoodsActivity.this)
                 , user.getStudentKH(), user.getRember_code(), Goodslist.get(position).getId());
+    }
+
+
+    @OnClick(R.id.imgbtn_toolbar_back)
+    public void onClick() {
+        finish();
     }
 }

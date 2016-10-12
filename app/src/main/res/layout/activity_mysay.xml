@@ -15,12 +15,8 @@
         android:layout_height="wrap_content"
         android:text="你没有发布任何说说"/>
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:background="#63B8FF"
-        android:fitsSystemWindows="true"></android.support.v7.widget.Toolbar>
+    <include layout="@layout/customtoolbar"
+        android:id="@+id/toolbar"/>
 
     <com.github.jdsjlzx.recyclerview.LRecyclerView
         android:id="@+id/rv_mysaylist"

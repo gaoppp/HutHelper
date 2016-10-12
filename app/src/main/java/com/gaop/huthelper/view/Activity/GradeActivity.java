@@ -3,11 +3,8 @@ package com.gaop.huthelper.view.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -44,10 +41,6 @@ import butterknife.OnClick;
  */
 public class GradeActivity extends BaseActivity {
 
-    @BindView(R.id.toolba_scorer)
-    Toolbar toolbaScorer;
-    @BindView(R.id.iv_update_score)
-    ImageView ivUpdateScore;
     @BindView(R.id.btn_grade_showall)
     Button btnGradeShowall;
     @BindView(R.id.tv_grade_jd)
@@ -62,6 +55,8 @@ public class GradeActivity extends BaseActivity {
     ScrollView scrollGradeBody;
     @BindView(R.id.tv_score_empty)
     TextView tvScoreEmpty;
+    @BindView(R.id.tv_toolbar_title)
+    TextView tvToolbarTitle;
 
 
     @Override
@@ -78,15 +73,7 @@ public class GradeActivity extends BaseActivity {
     public void doBusiness(Context mContext) {
 
         ButterKnife.bind(this);
-        toolbaScorer.setTitle("成绩");
-        setSupportActionBar(toolbaScorer);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbaScorer.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        tvToolbarTitle.setText("成绩");
         if (!PrefUtil.getBoolean(GradeActivity.this, "isLoadGrade", false)) {
             LoadGrade();
 
@@ -101,26 +88,11 @@ public class GradeActivity extends BaseActivity {
         super.onDestroy();
     }
 
-    @OnClick({R.id.iv_update_score, R.id.btn_grade_showall})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.iv_update_score:
-                if (fastClick()) {
-                    LoadGrade();
-                }
-                break;
-            case R.id.btn_grade_showall:
-                if (fastClick()) {
-                    startActivity(GradeListActivity.class);
-                }
-                break;
-        }
-    }
 
     private void InitData() {
         //获取grade
         Grade grade = DBHelper.getGradeDao().get(0);
-        if (grade.getAllNum()==null||grade.getAllNum()==0) {
+        if (grade.getAllNum() == null || grade.getAllNum() == 0) {
             scrollGradeBody.setVisibility(View.GONE);
             tvScoreEmpty.setVisibility(View.VISIBLE);
         } else {
@@ -185,7 +157,7 @@ public class GradeActivity extends BaseActivity {
                 Random random = new Random();
                 int i = Math.abs(random.nextInt()) % 8;
                 d.setColor(Color.parseColor(colors[i]));
-                d.setName(t.getXN()+"\n第"+t.getXQ()+"学期");
+                d.setName(t.getXN() + "\n第" + t.getXQ() + "学期");
                 d.setValue((float) (Math.round(allJd.get(t.getContent()) / xf.get(t.getContent()) * 100)) / 100);
                 points.add(d);
             }
@@ -212,15 +184,23 @@ public class GradeActivity extends BaseActivity {
             }
         };
         HttpMethods.getInstance().getGradeData(GradeActivity.this,
-                new ProgressSubscriber<String>(getGradeData, GradeActivity.this),user
+                new ProgressSubscriber<String>(getGradeData, GradeActivity.this), user
         );
     }
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    @OnClick({R.id.imgbtn_toolbar_back, R.id.iv_coursetable_update, R.id.btn_grade_showall})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.imgbtn_toolbar_back:
+                finish();
+                break;
+            case R.id.iv_coursetable_update:
+                LoadGrade();
+                break;
+            case R.id.btn_grade_showall:
+                startActivity(GradeListActivity.class);
+                break;
+        }
     }
 }

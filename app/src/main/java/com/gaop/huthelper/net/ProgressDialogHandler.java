@@ -1,16 +1,15 @@
 package com.gaop.huthelper.net;
 
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 import com.gaop.huthelper.PinWheel.PinWheelDiolog;
 
 /**
+ * 处理网络访问Dialog Handler
  * Created by gaop1 on 2016/7/24.
  */
 public class ProgressDialogHandler extends Handler {

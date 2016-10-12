@@ -11,12 +11,13 @@
         android:layout_height="100dp"
         android:orientation="vertical" >
         <ImageView
+            android:padding="4dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:id="@+id/iv_addgoodsitem_img"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:scaleType="fitXY"
-            android:src="@mipmap/ic_add_black_24dp" />
+            android:src="@mipmap/ic_addpic" />
     </RelativeLayout>
 </LinearLayout>

@@ -3,27 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:fitsSystemWindows="true"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:background="#63B8FF" />
+    <include layout="@layout/customtoolbar"
+        android:id="@+id/toolbar"/>
 
     <com.github.jdsjlzx.recyclerview.LRecyclerView
-        android:layout_below="@+id/toolbar"
         android:id="@+id/rv_marketlist"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </com.github.jdsjlzx.recyclerview.LRecyclerView>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"></com.github.jdsjlzx.recyclerview.LRecyclerView>
+
     <TextView
-        android:visibility="gone"
         android:id="@+id/tv_goods_empty"
-        android:textSize="20sp"
-        android:layout_below="@+id/toolbar"
-        android:padding="10dp"
-        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="你没有发布任何商品"/>
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:text="你没有发布任何商品"
+        android:textSize="20sp"
+        android:visibility="gone" />
 </RelativeLayout>

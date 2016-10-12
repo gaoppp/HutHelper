@@ -5,6 +5,7 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 
 /**
+ * 动画工具
  * Created by gaop on 16-9-10.
  */
 public class AnimationTools {

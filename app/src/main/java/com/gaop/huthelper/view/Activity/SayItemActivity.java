@@ -5,5 +5,4 @@ package com.gaop.huthelper.view.Activity;
  */
 public class SayItemActivity {
 
-
 }

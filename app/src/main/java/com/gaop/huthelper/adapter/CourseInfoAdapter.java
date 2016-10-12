@@ -17,6 +17,7 @@ import com.gaop.huthelperdao.Lesson;
 import java.util.List;
 
 /**
+ * 课程信息适配器
  * Created by gaop1 on 2016/7/12.
  */
 public class CourseInfoAdapter extends BaseAdapter{

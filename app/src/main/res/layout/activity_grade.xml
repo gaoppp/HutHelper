@@ -7,24 +7,42 @@
     android:background="#FFFF"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
+
+    <RelativeLayout
         android:id="@+id/toolba_scorer"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:background="#63B8FF"
-        android:elevation="5dp"
-        android:fitsSystemWindows="true">
+        android:layout_height="64dp"
+        android:background="#1ddbcd">
 
-        <ImageView
-            android:id="@+id/iv_update_score"
+        <ImageButton
+            android:id="@+id/imgbtn_toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="31dp"
+            android:background="@mipmap/ic_back" />
+
+        <TextView
+            android:id="@+id/tv_toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginRight="-5dp"
-            android:alpha="0.55"
-            android:padding="13dp"
-            android:src="@mipmap/ic_cached_black_24dp" />
-    </android.support.v7.widget.Toolbar>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="31dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/iv_coursetable_update"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="31dp"
+            android:src="@mipmap/ic_update" />
+    </RelativeLayout>
+
 
     <ScrollView
         android:id="@+id/scroll_grade_body"
@@ -144,14 +162,15 @@
                 android:layout_height="220dp"
                 android:layout_below="@+id/iv_grade_line2"
                 android:paddingTop="6dp" />
+
             <TextView
-                android:padding="4dp"
+                android:id="@+id/tv_grade_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="学分绩点柱形图"
+                android:layout_below="@+id/graph_grade_bar"
                 android:layout_centerHorizontal="true"
-                android:id="@+id/tv_grade_3"
-                android:layout_below="@+id/graph_grade_bar"/>
+                android:padding="4dp"
+                android:text="学分绩点柱形图" />
 
             <com.echo.holographlibrary.PieGraph
                 android:id="@+id/graph_grade_pie"
@@ -159,34 +178,39 @@
                 android:layout_height="200dp"
                 android:layout_below="@+id/tv_grade_3"
                 android:layout_marginTop="10dp" />
+
             <TextView
                 android:id="@+id/tv_grade_pie"
-                android:layout_below="@+id/graph_grade_pie"
-                android:text="获得学分/总学分"
-                android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/graph_grade_pie"
+                android:layout_centerHorizontal="true"
+                android:text="获得学分/总学分" />
 
             <Button
+                android:layout_marginBottom="10dp"
                 android:id="@+id/btn_grade_showall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
                 android:layout_below="@+id/tv_grade_pie"
-                android:background="@drawable/btn_login"
-                android:layout_marginTop="6dp"
-                android:text="显示所有成绩" />
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_importdata"
+                android:text="查看所有成绩"
+                android:textColor="@color/white" />
         </RelativeLayout>
     </ScrollView>
+
     <TextView
-        android:visibility="gone"
         android:id="@+id/tv_score_empty"
-        android:layout_below="@+id/toolba_scorer"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="暂时还没有成绩数据"/>
+        android:layout_below="@+id/toolba_scorer"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:text="暂时还没有成绩数据"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
 
 </RelativeLayout>

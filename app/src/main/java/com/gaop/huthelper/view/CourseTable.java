@@ -1,51 +1,37 @@
 package com.gaop.huthelper.view;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gaop.huthelper.CourseInfoGallery;
 import com.gaop.huthelper.CustomDate;
-
 import com.gaop.huthelper.DB.DBHelper;
-import com.gaop.huthelper.DB.DaoManager;
 import com.gaop.huthelper.R;
 import com.gaop.huthelper.adapter.CourseInfoAdapter;
-import com.gaop.huthelper.jiekou.SubscriberOnNextListener;
-import com.gaop.huthelper.net.HttpMethods;
-import com.gaop.huthelper.net.ProgressSubscriber;
 import com.gaop.huthelper.utils.CommUtil;
 import com.gaop.huthelper.utils.DateUtil;
 import com.gaop.huthelper.utils.DensityUtils;
 import com.gaop.huthelper.utils.ScreenUtils;
-import com.gaop.huthelper.utils.ToastUtil;
 import com.gaop.huthelper.view.Activity.AddCourseActivity;
 import com.gaop.huthelper.view.Activity.CourseItemActivity;
 import com.gaop.huthelperdao.Lesson;
-import com.gaop.huthelperdao.User;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -120,6 +106,8 @@ public class CourseTable extends Fragment {
     private int firstGridWidth;
     //一小时区域
     RelativeLayout.LayoutParams mHourParams;
+
+    RelativeLayout.LayoutParams mNumTextParams;
     //时间文字
     RelativeLayout.LayoutParams mHourTextParams;
     //时间截止线
@@ -140,7 +128,7 @@ public class CourseTable extends Fragment {
 
     private boolean isInit;
 
-    //  public static final int[] HOURS = {8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
+    public final String[] HOURS = {"8:00", "8:55", "10:00", "10:55", "14:00", "14:55", "16:00", "16:55", "19:00", "19:55"};
 
     private int month = 0, year = 0;
     protected Map<Integer, List<Lesson>> textviewLessonMap = new HashMap<Integer, List<Lesson>>();
@@ -197,6 +185,9 @@ public class CourseTable extends Fragment {
         mMonth.setText(mShowDate.getMonth() < 10 ? "0" + mShowDate.getMonth() : mShowDate.getMonth() + "月");
     }
 
+    /**
+     * 初始化添加课程点击事件
+     */
     private void initTwentyFourHourViews() {
         initViewParams();
         for (int i = 1; i < 11; i++) {
@@ -270,7 +261,11 @@ public class CourseTable extends Fragment {
         textView.setTextAppearance(mContext, R.style.weekViewTimeText);
         textView.setText("" + hour);
         layout.addView(textView);
-
+        textView=new TextView(mContext);
+        textView.setLayoutParams(mNumTextParams);
+        textView.setTextAppearance(mContext,R.style.weekViewNumText);
+        textView.setText(HOURS[hour-1]);
+        layout.addView(textView);
         //第10节横线不显示
         if (hour != 10) {
             TextView lineView = new TextView(mContext);
@@ -302,6 +297,9 @@ public class CourseTable extends Fragment {
         courseLayout.addView(view);
     }
 
+    /**
+     * 初始化viewparams
+     */
     private void initViewParams() {
         if (mHourParams == null) {
             mHourParams = new RelativeLayout.LayoutParams(firstGridWidth, gridHeight);
@@ -310,6 +308,12 @@ public class CourseTable extends Fragment {
             mHourTextParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             mHourTextParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
             mHourTextParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+        }
+        if(mNumTextParams==null){
+            mNumTextParams=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+            mNumTextParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            mNumTextParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+            mNumTextParams.topMargin=6;
         }
 
         if (mHourLineParams == null) {

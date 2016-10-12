@@ -15,11 +15,13 @@ import com.gaop.huthelper.Model.UpdateMsg;
 import com.gaop.huthelper.jiekou.AddGoodsAPI;
 import com.gaop.huthelper.jiekou.AddSayLikeAPI;
 import com.gaop.huthelper.jiekou.AllClassAPI;
+import com.gaop.huthelper.jiekou.ChangeUserNameAPI;
 import com.gaop.huthelper.jiekou.CourseTableAPI;
 import com.gaop.huthelper.jiekou.DeleteGoodAPI;
 import com.gaop.huthelper.jiekou.ElectricAPI;
 import com.gaop.huthelper.jiekou.FeedBackAPI;
 import com.gaop.huthelper.jiekou.FileUploadAPI;
+import com.gaop.huthelper.jiekou.GetExpLessonAPI;
 import com.gaop.huthelper.jiekou.GoodListAPI;
 import com.gaop.huthelper.jiekou.GoodsAPI;
 import com.gaop.huthelper.jiekou.GradeAPI;
@@ -31,6 +33,7 @@ import com.gaop.huthelper.utils.CommUtil;
 import com.gaop.huthelper.utils.PrefUtil;
 import com.gaop.huthelper.utils.ToastUtil;
 import com.gaop.huthelperdao.CourseGrade;
+import com.gaop.huthelperdao.Explesson;
 import com.gaop.huthelperdao.Grade;
 import com.gaop.huthelperdao.Lesson;
 import com.gaop.huthelperdao.Trem;
@@ -55,6 +58,7 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
+ * 网络封装
  * Created by 高沛 on 2016/7/24.
  */
 public class HttpMethods {
@@ -178,9 +182,9 @@ public class HttpMethods {
                 .subscribe(subscriber);
     }
 
-    public void addComment(Subscriber<HttpResult> subscriber,User user,String id,String comment){
-        SayAPI api=retrofit.create(SayAPI.class);
-        api.addComment(user.getStudentKH(),user.getRember_code(),id,comment)
+    public void addComment(Subscriber<HttpResult> subscriber, User user, String id, String comment) {
+        SayAPI api = retrofit.create(SayAPI.class);
+        api.addComment(user.getStudentKH(), user.getRember_code(), id, comment)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -338,11 +342,11 @@ public class HttpMethods {
                                     }
 
 
-                                    if (grade.getJD() == null || grade.getJD().equals("0")){
+                                    if (grade.getJD() == null || grade.getJD().equals("0")) {
 
-                                        if(g>=60){
-                                            grade.setJD((g-50)/10+"");
-                                        }else{
+                                        if (g >= 60) {
+                                            grade.setJD((g - 50) / 10 + "");
+                                        } else {
                                             grade.setJD("0");
                                         }
                                     }
@@ -444,9 +448,9 @@ public class HttpMethods {
 
                     @Override
                     public String call(ResponseBody responseBody) {
-                        String s="";
+                        String s = "";
                         try {
-                            s=new String(responseBody.bytes(),"UTF-8");
+                            s = new String(responseBody.bytes(), "UTF-8");
                         } catch (IOException e) {
                             e.printStackTrace();
                             ToastUtil.showToastShort("数据异常");
@@ -560,5 +564,55 @@ public class HttpMethods {
                 .subscribe(subscriber);
     }
 
+    /**
+     * 修改昵称
+     *
+     * @param subscriber
+     * @param user
+     * @param username
+     */
+    public void ChangeUserName(Subscriber<HttpResult> subscriber, User user, final String username) {
+        ChangeUserNameAPI api = retrofit.create(ChangeUserNameAPI.class);
+        api.changeUsername(user.getStudentKH(), user.getRember_code(), username)
+                .map(new Func1<HttpResult, HttpResult>() {
+                    @Override
+                    public HttpResult call(HttpResult httpResult) {
+
+                        if (httpResult.getMsg().equals("ok")) {
+                            User u = DBHelper.getUserDao().get(0);
+                            u.setUsername(username);
+                            DBHelper.UpdateUser(u);
+                        }
+                        return httpResult;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+
+    }
+
+    public void GetExpLessons(final Context context, Subscriber<String> subscriber, String xh, String code) {
+        GetExpLessonAPI api = retrofit.create(GetExpLessonAPI.class);
+        api.getExpLesson(xh, code)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .map(new Func1<HttpResult<List<Explesson>>, String>() {
+                    @Override
+                    public String call(HttpResult<List<Explesson>> listHttpResult) {
+                        if(listHttpResult.getMsg().equals("ok")){
+                            DBHelper.deleteAllExpLesson();
+                            DBHelper.insertListExpLesson(listHttpResult.getData());
+                            PrefUtil.setBoolean(context, "isLoadExpLesson", true);
+                        }
+                        return listHttpResult.getMsg();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+
+
+    }
 
 }

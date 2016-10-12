@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/customtoolbar" />
+
+
+    <EditText
+        android:id="@+id/et_chgnn_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/et_feeback"
+        android:padding="15dp" />
+
+
+
+    <Button
+        android:id="@+id/btn_chgnn_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/et_chgnn_content"
+        android:layout_margin="18dp"
+        android:background="@drawable/ed_importdata"
+        android:text="确认"
+        android:textColor="@color/black" />
+
+</RelativeLayout>

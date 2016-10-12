@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/gaop/Android/HutHelper/HoloGraphLibrary/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v11/values-v11.xml",
+        "outputFile": "/home/gaop/Android/HutHelper1/HoloGraphLibrary/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v11/values-v11.xml",
         "map": [
             {
                 "to": {
@@ -12,7 +12,7 @@
                     "endOffset": 187
                 },
                 "from": {
-                    "file": "/home/gaop/Android/HutHelper/HoloGraphLibrary/res/values-v11/styles.xml",
+                    "file": "/home/gaop/Android/HutHelper1/HoloGraphLibrary/res/values-v11/styles.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,

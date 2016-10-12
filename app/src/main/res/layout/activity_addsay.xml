@@ -1,0 +1,97 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efefef"
+    tools:context="com.gaop.huthelper.view.Activity.MarketActivity">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#1ddbcd">
+
+        <ImageButton
+            android:id="@+id/imgbtn_toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="31dp"
+            android:background="@mipmap/ic_back" />
+
+        <TextView
+            android:id="@+id/tv_toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="31dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/iv_addsay_ok"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="31dp"
+            android:src="@mipmap/ic_ok" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar">
+
+        <RelativeLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:id="@+id/et_addsay_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:padding="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/et_feeback"
+                android:hint="说点啥呢"
+                android:minLines="5"
+                />
+
+          <ImageView
+              android:id="@+id/iv_addsay_line"
+              android:layout_below="@+id/et_addsay_content"
+              android:layout_width="match_parent"
+              android:layout_height="10dp"
+              android:background="#efefef"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_addsay_imglist"
+                android:padding="10dp"
+                android:layout_below="@+id/iv_addsay_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+            <ImageView
+                android:id="@+id/iv_addsay_line2"
+                android:layout_below="@+id/rv_addsay_imglist"
+                android:layout_width="match_parent"
+                android:background="#efefef"
+                android:layout_height="10dp"/>
+            <TextView
+                android:autoLink="all"
+                android:padding="6dp"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/iv_addsay_line2"
+                android:layout_height="wrap_content"
+                android:text="@string/addsat_warn"/>
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

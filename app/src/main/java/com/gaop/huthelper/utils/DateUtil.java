@@ -1,7 +1,6 @@
 package com.gaop.huthelper.utils;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 
 import com.gaop.huthelper.CustomDate;
 
@@ -11,6 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
+ * 日期工具
  * Created by gaop1 on 2016/7/10.
  */
 public class DateUtil {
@@ -94,12 +94,10 @@ public class DateUtil {
         if (dayWeek == 1) {
             CustomDate date = new CustomDate(c.get(Calendar.YEAR),
                     c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH) - 7);
-            Log.e("daet", date.toString());
             return date;
         }
         CustomDate date = new CustomDate(c.get(Calendar.YEAR),
                 c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH));
-        Log.e("daet", date.toString());
         return date;
     }
 
@@ -111,12 +109,10 @@ public class DateUtil {
         if (dayWeek == 1) {
             CustomDate date = new CustomDate(c.get(Calendar.YEAR),
                     c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH) - 7);
-            Log.e("daet", date.toString());
             return date;
         }
         CustomDate date = new CustomDate(c.get(Calendar.YEAR),
                 c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH));
-        Log.e("daet", date.toString());
         return date;
     }
 

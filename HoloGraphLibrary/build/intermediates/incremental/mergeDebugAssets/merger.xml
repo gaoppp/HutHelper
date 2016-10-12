@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/home/gaop/Android/HutHelper/HoloGraphLibrary/assets"/><source path="/home/gaop/Android/HutHelper/HoloGraphLibrary/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/home/gaop/Android/HutHelper/HoloGraphLibrary/src/debug/assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/home/gaop/Android/HutHelper1/HoloGraphLibrary/assets"/><source path="/home/gaop/Android/HutHelper1/HoloGraphLibrary/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/home/gaop/Android/HutHelper1/HoloGraphLibrary/src/debug/assets"/></dataSet></merger>

@@ -6,18 +6,15 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.gaop.huthelper.Model.GoodsListItem;
 import com.gaop.huthelper.R;
 import com.gaop.huthelper.adapter.MarketRVAdapter;
-import com.gaop.huthelper.adapter.SayRVAdapter;
 import com.gaop.huthelper.jiekou.SubscriberOnNextListener;
 import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.net.ProgressSubscriber;
@@ -38,15 +35,15 @@ import butterknife.OnClick;
 
 public class MarketActivity extends BaseActivity {
 
-    @BindView(R.id.iv_market_mygoods)
-    ImageView ivMarketMygoods;
+    @BindView(R.id.tv_toolbar_title)
+    TextView tvToolbarTitle;
+    @BindView(R.id.toolbar)
+    RelativeLayout toolbar;
     private int COUNT = 0;
     private int CURPage = 0;
     private boolean isRefresh;
     List<GoodsListItem> Goodslist = new ArrayList<>();
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.rv_marketlist)
     LRecyclerView rvMarketlist;
     @BindView(R.id.fab)
@@ -66,22 +63,13 @@ public class MarketActivity extends BaseActivity {
 
 
     @Override
-    public void doBusiness(Context mContext) {
+    public void doBusiness(final Context mContext) {
         ButterKnife.bind(this);
-        toolbar.setTitle("二手市场");
-        setSupportActionBar(toolbar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        tvToolbarTitle.setText("二手市场");
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(AddGoodsActivity.class,311);
+                startActivityForResult(AddGoodsActivity.class, 311);
             }
         });
         getGoodsList(1);
@@ -112,8 +100,8 @@ public class MarketActivity extends BaseActivity {
                 if (CURPage + 1 <= COUNT) {
                     ++CURPage;
                     getGoodsList(CURPage);
-                }else
-                RecyclerViewStateUtils.setFooterViewState(rvMarketlist, LoadingFooter.State.TheEnd);
+                } else
+                    RecyclerViewStateUtils.setFooterViewState(rvMarketlist, LoadingFooter.State.TheEnd);
             }
 
             @Override
@@ -148,7 +136,7 @@ public class MarketActivity extends BaseActivity {
                     for (int i = 1; i < count; i++) {
                         Goodslist.add(jsonArray[i]);
                     }
-                    if(pagenum==1){
+                    if (pagenum == 1) {
                         mLRecyclerViewAdapter = new LRecyclerViewAdapter(MarketActivity.this, new MarketRVAdapter(MarketActivity.this, Goodslist));
                         rvMarketlist.setAdapter(mLRecyclerViewAdapter);
                         mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
@@ -190,11 +178,17 @@ public class MarketActivity extends BaseActivity {
     }
 
 
-
-    @OnClick(R.id.iv_market_mygoods)
-    public void onClick() {
-        if(fastClick())
-            startActivity(MyGoodsActivity.class);
+    @OnClick({R.id.imgbtn_toolbar_back, R.id.iv_explesson_update})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.imgbtn_toolbar_back:
+                finish();
+                break;
+            case R.id.iv_explesson_update:
+                if (fastClick())
+                    startActivity(MyGoodsActivity.class);
+                break;
+        }
     }
 
     public abstract class RecycleViewScroller extends RecyclerView.OnScrollListener implements LRecyclerView.LScrollListener {
@@ -267,7 +261,7 @@ public class MarketActivity extends BaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (resultCode){
+        switch (resultCode) {
             case 333:
                 CURPage = 0;
                 Goodslist = new ArrayList<>();

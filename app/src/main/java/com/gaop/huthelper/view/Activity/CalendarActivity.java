@@ -4,9 +4,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.gaop.huthelper.Model.HoliDay;
 import com.gaop.huthelper.R;
@@ -28,12 +29,15 @@ import uk.co.senab.photoview.PhotoViewAttacher;
  * Created by gaop1 on 2016/9/2.
  */
 public class CalendarActivity extends BaseActivity {
-    @BindView(R.id.toolba_calendar)
-    Toolbar toolbaCalendar;
+    ;
     @BindView(R.id.rv_calendar_date)
     RecyclerView rvCalendarDate;
     @BindView(R.id.iv_calendar)
     ImageView ivCalendar;
+    @BindView(R.id.imgbtn_toolbar_back)
+    ImageButton imgbtnToolbarBack;
+    @BindView(R.id.tv_toolbar_title)
+    TextView tvToolbarTitle;
 
     private List<HoliDay> holiDays;
 
@@ -51,15 +55,7 @@ public class CalendarActivity extends BaseActivity {
     @Override
     public void doBusiness(Context mContext) {
         ButterKnife.bind(this);
-        toolbaCalendar.setTitle("校历");
-        setSupportActionBar(toolbaCalendar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbaCalendar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        tvToolbarTitle.setText("校历");
         PhotoViewAttacher attacher = new PhotoViewAttacher(ivCalendar);
         attacher.update();
         holiDays = new ArrayList<>();
@@ -97,6 +93,12 @@ public class CalendarActivity extends BaseActivity {
             case R.id.iv_calendar:
                 break;
         }
+    }
+
+
+    @OnClick(R.id.imgbtn_toolbar_back)
+    public void onClick() {
+        finish();
     }
 
     class DateListAdapter extends AutoRVAdapter {

@@ -1,70 +1,50 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
- >
+    android:layout_height="match_parent"
+    android:background="@drawable/bcg_denglu"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolba_import"
-        android:layout_width="match_parent"
-        android:elevation="5dp"
-        android:layout_height="75dp"
-        android:fitsSystemWindows="true"
-        android:background="#63B8FF">
-    </android.support.v7.widget.Toolbar>
 
-    <android.support.design.widget.TextInputLayout
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:id="@+id/input_import_num"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolba_import"
-        android:layout_gravity="center">
+    <EditText
+        android:id="@+id/et_import_password"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignStart="@+id/btn_ok_import"
+        android:layout_below="@+id/et_import_num"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ed_importdata"
+        android:gravity="center"
+        android:hint="密码"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:maxLines="1"
+        android:password="true"
+        android:singleLine="true" />
 
-        <EditText
-            android:id="@+id/et_import_num"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="学号"
-            android:imeActionId="@+id/login"
-            android:imeOptions="actionUnspecified"
-            android:maxLines="1"
-            android:singleLine="true" />
-
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_below="@+id/input_import_num"
-        android:id="@+id/input_import_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:layout_gravity="center">
-
-        <EditText
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:id="@+id/et_import_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="密码(默认身份证后六位，同工大导航)"
-            android:password="true"
-            android:maxLines="1"
-            android:singleLine="true" />
-
-    </android.support.design.widget.TextInputLayout>
+    <EditText
+        android:textColorHint="@color/white"
+        android:id="@+id/et_import_num"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/ed_importdata"
+        android:gravity="center"
+        android:hint="学号"
+        android:textColor="@color/white"
+        android:maxLines="1"
+        android:singleLine="true" />
 
     <Button
+        android:alpha="0.5"
         android:id="@+id/btn_ok_import"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/input_import_password"
-        android:layout_margin="20dp"
-        android:background="@drawable/btn_import"
-        android:text="获取"
-        android:textColor="@drawable/login_nomrmal" />
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/et_import_password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_importdata"
+        android:text="登录"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

@@ -1,52 +1,41 @@
 package com.gaop.huthelper.view.Activity;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gaop.huthelper.DB.DBHelper;
-import com.gaop.huthelper.Model.Electric;
 import com.gaop.huthelper.Model.Goods;
 import com.gaop.huthelper.Model.HttpResult;
 import com.gaop.huthelper.R;
 import com.gaop.huthelper.adapter.AutoRVAdapter;
-import com.gaop.huthelper.adapter.DividerItemDecoration;
-import com.gaop.huthelper.adapter.FullyLinearLayoutManager;
 import com.gaop.huthelper.adapter.ViewHolder;
 import com.gaop.huthelper.jiekou.SubscriberOnNextListener;
 import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.net.ProgressSubscriber;
-import com.gaop.huthelper.utils.DateUtil;
-import com.gaop.huthelper.utils.DensityUtils;
-import com.gaop.huthelper.utils.PrefUtil;
-import com.gaop.huthelper.utils.ScreenUtils;
 import com.gaop.huthelper.utils.ToastUtil;
 import com.gaop.huthelperdao.User;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by gaop1 on 2016/9/2.
  */
 public class GoodsActivity extends BaseActivity {
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+
     @BindView(R.id.tv_name_goods)
     TextView tvNameGoods;
     @BindView(R.id.tv_createon_goods)
@@ -67,6 +56,18 @@ public class GoodsActivity extends BaseActivity {
     RecyclerView rvImglistGoods;
 
     String id;
+    @BindView(R.id.tv_toolbar_title)
+    TextView tvToolbarTitle;
+    @BindView(R.id.iv_line_goods1)
+    ImageView ivLineGoods1;
+    @BindView(R.id.quality)
+    TextView quality;
+    @BindView(R.id.connectway)
+    TextView connectway;
+    @BindView(R.id.iv_line_goods)
+    ImageView ivLineGoods;
+    @BindView(R.id.textView)
+    TextView textView;
 
     @Override
     public void initParms(Bundle parms) {
@@ -85,15 +86,7 @@ public class GoodsActivity extends BaseActivity {
     @Override
     public void doBusiness(Context mContext) {
         ButterKnife.bind(this);
-        toolbar.setTitle("详情");
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        tvToolbarTitle.setText("商品详情");
         getGoodsData();
     }
 
@@ -157,6 +150,11 @@ public class GoodsActivity extends BaseActivity {
         HttpMethods.getInstance().getGoodsContent(
                 new ProgressSubscriber<HttpResult<Goods>>(getData, GoodsActivity.this),
                 user.getStudentKH(), user.getRember_code(), id);
+    }
+
+    @OnClick(R.id.imgbtn_toolbar_back)
+    public void onClick() {
+        finish();
     }
 
     class Adapter extends AutoRVAdapter {

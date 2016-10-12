@@ -5,18 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gaop.huthelper.Model.GoodsListItem;
 import com.gaop.huthelper.Model.MyGoodsItem;
 import com.gaop.huthelper.R;
-import com.gaop.huthelper.net.HttpMethods;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 /**
+ * 用户商品数据适配器
  * Created by gaop1 on 2016/7/22.
  */
 public class MyGoodsAdapter extends RecyclerView.Adapter<MyGoodsAdapter.ViewHolder> {

@@ -7,30 +7,49 @@
     android:background="@color/gray1"
     tools:context="com.gaop.huthelper.view.Activity.MarketActivity">
 
-    <android.support.v7.widget.Toolbar
+
+    <RelativeLayout
+        android:elevation="5dp"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:background="#63B8FF"
-        android:fitsSystemWindows="true">
+        android:layout_height="64dp"
+        android:background="#1ddbcd">
 
-        <ImageView
-            android:id="@+id/iv_say_mysay"
+        <ImageButton
+            android:id="@+id/imgbtn_toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="31dp"
+            android:background="@mipmap/ic_back" />
+
+        <TextView
+            android:id="@+id/tv_toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginRight="-5dp"
-            android:alpha="0.55"
-            android:padding="13dp"
-            android:src="@drawable/person_selector" />
-    </android.support.v7.widget.Toolbar>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="31dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/iv_say_my"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="31dp"
+            android:src="@mipmap/ic_mylist" />
+    </RelativeLayout>
 
     <com.github.jdsjlzx.recyclerview.LRecyclerView
-
+        android:clipToPadding="false"
         android:id="@+id/rv_saylist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"></com.github.jdsjlzx.recyclerview.LRecyclerView>
+        android:paddingTop="64dp"></com.github.jdsjlzx.recyclerview.LRecyclerView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -42,7 +61,7 @@
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
         android:src="@mipmap/ic_add_white_48dp"
-        app:backgroundTint="@color/orange"
+        app:backgroundTint="@color/colorPrimary"
 
         app:elevation="6dp"
         app:pressedTranslationZ="12dp"

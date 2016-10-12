@@ -1,28 +1,22 @@
 package com.gaop.huthelper.view.Activity;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.gaop.huthelper.DB.DBHelper;
 import com.gaop.huthelper.Model.HttpResult;
@@ -34,9 +28,10 @@ import com.gaop.huthelper.utils.ToastUtil;
 import com.gaop.huthelperdao.User;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,29 +42,24 @@ import io.valuesfeng.picker.utils.PicturePickerUtils;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import rx.Observable;
 import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 /**
  * Created by gaop on 16-9-11.
  */
 public class AddSayActivity extends BaseActivity {
-    @BindView(R.id.iv_addsay_ok)
-    ImageView ivAddsayOk;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.et_addsay_content)
     EditText etAddsayContent;
     @BindView(R.id.rv_addsay_imglist)
     RecyclerView rvAddsayImglist;
+    @BindView(R.id.tv_toolbar_title)
+    TextView tvToolbarTitle;
     private Bitmap bmp;
     private List<Bitmap> imageItem;
     private ChoosePicAdapter adapter;
     private StringBuilder imageString = new StringBuilder();
-    private ArrayList<Integer> imageOption;
     /**
      * Dialog对话框提示用户删除操作
      * position为删除图片位置
@@ -77,6 +67,7 @@ public class AddSayActivity extends BaseActivity {
     ProgressDialog dialog;
 
     private final int REQUEST_CODE_CHOOSE = 111;
+    private AtomicInteger count;
 
 
     @Override
@@ -94,22 +85,11 @@ public class AddSayActivity extends BaseActivity {
         ButterKnife.bind(this);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.
                 SOFT_INPUT_ADJUST_PAN);
-        toolbar.setTitle("写说说");
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_add_black_48dp);
+        tvToolbarTitle.setText("发说说");
+        bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_addpic);
         imageItem = new ArrayList<Bitmap>();
-        imageOption = new ArrayList<>();
         imageItem.add(bmp);
-        imageOption.add(100);
-        rvAddsayImglist.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
+        rvAddsayImglist.setLayoutManager(new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL));
         adapter = new ChoosePicAdapter(this, imageItem);
         adapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -169,41 +149,38 @@ public class AddSayActivity extends BaseActivity {
             dialog.show();
             dialog.setMessage("正在处理图片");
             dialog.setCancelable(false);
-            Observable.from(mSelected).map(new Func1<Uri, Integer>() {
-                @Override
-                public Integer call(Uri filePath) { // 参数类型 String
+            count = new AtomicInteger(mSelected.size());
+            for (Uri u : mSelected) {
+                Luban.get(AddSayActivity.this)
+                        .load(CommUtil.uri2File(AddSayActivity.this, u))                     //传人要压缩的图片
+                        .putGear(Luban.THIRD_GEAR)      //设定压缩档次，默认三挡
+                        .setCompressListener(new OnCompressListener() { //设置回调
+                            @Override
+                            public void onStart() {
+                            }
 
-                    int option = 50;
-                    try {
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                        option = CommUtil.compressImage(bitmap);
-                        imageItem.add(bitmap);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    Log.e("fd",option+"");
-                    return option; // 返回类型 Bitmap
-                }
-            }).subscribeOn(Schedulers.io()) // 指定 subscribe() 发生在 IO 线程
-                    .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Integer>() {
-                @Override
-                public void onCompleted() {
-                    dialog.dismiss();
-                    adapter.notifyDataSetChanged();
-                }
+                            @Override
+                            public void onSuccess(File file) {
+                                Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
+                                imageItem.add(bitmap);
+                                count.decrementAndGet();
+                                if (count.get() == 0) {
+                                    dialog.dismiss();
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
 
-                @Override
-                public void onError(Throwable e) {
-                    dialog.dismiss();
-                    ToastUtil.showToastShort("导入图片出错");
-
-                }
-
-                @Override
-                public void onNext(Integer filePath) {
-                    imageOption.add(filePath);
-                }
-            });
+                            @Override
+                            public void onError(Throwable e) {
+                                Log.e("error", e.toString());
+                                count.decrementAndGet();
+                                if (count.get() == 0) {
+                                    dialog.dismiss();
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                        }).launch();    //启动压缩
+            }
         }
     }
 
@@ -216,7 +193,6 @@ public class AddSayActivity extends BaseActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 imageItem.remove(position);
-                imageOption.remove(position);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -229,18 +205,6 @@ public class AddSayActivity extends BaseActivity {
         builder.create().show();
     }
 
-    @OnClick(R.id.iv_addsay_ok)
-    public void onClick() {
-        if (fastClick()) {
-            if (etAddsayContent.getText().toString().equals("")) {
-                ToastUtil.showToastShort("请填写内容");
-            } else {
-                dialog = new ProgressDialog(AddSayActivity.this);
-                dialog.show();
-                uploadImg(1);
-            }
-        }
-    }
 
     private void uploadImg(final int i) {
         if (i + 1 > imageItem.size()) {
@@ -250,7 +214,7 @@ public class AddSayActivity extends BaseActivity {
         dialog.setCancelable(false);
         dialog.setMessage("正在上传第" + i + "张图片");
         ByteArrayOutputStream os = new ByteArrayOutputStream();
-        imageItem.get(i).compress(Bitmap.CompressFormat.PNG, imageOption.get(i), os);
+        imageItem.get(i).compress(Bitmap.CompressFormat.PNG, 100, os);
         byte[] bytes = os.toByteArray();
         final RequestBody requestFile = RequestBody.create(MediaType.parse("image/png"), bytes);
         final MultipartBody.Part photo = MultipartBody.Part.createFormData("file", "01.png", requestFile);
@@ -320,4 +284,23 @@ public class AddSayActivity extends BaseActivity {
     }
 
 
+    @OnClick({R.id.imgbtn_toolbar_back, R.id.iv_addsay_ok})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.imgbtn_toolbar_back:
+                finish();
+                break;
+            case R.id.iv_addsay_ok:
+                if (fastClick()) {
+                    if (etAddsayContent.getText().toString().equals("")) {
+                        ToastUtil.showToastShort("请填写内容");
+                    } else {
+                        dialog = new ProgressDialog(AddSayActivity.this);
+                        dialog.show();
+                        uploadImg(1);
+                    }
+                }
+                break;
+        }
+    }
 }

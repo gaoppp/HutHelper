@@ -4,29 +4,9 @@
     android:id="@+id/fraglayout_showImg"
     android:layout_height="match_parent"
     android:background="@color/black">
-   <android.support.v7.widget.Toolbar
-       android:layout_width="match_parent"
-       android:layout_height="75dp"
-       android:fitsSystemWindows="true"
-       android:elevation="5dp"
-       android:background="@color/black1"
-       android:id="@+id/toolar"
-       >
-
-       <TextView
-           android:text="sdfhdslkhf"
-           android:textSize="18sp"
-           android:textColor="@color/white"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:id="@+id/tv_imgviewnum"/>
-   </android.support.v7.widget.Toolbar>
-
-   <!-- <ImageView
-        android:layout_below="@+id/toolar"
-        android:id="@+id/iv_showImg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />-->
+    <include layout="@layout/customtoolbar"
+        android:id="@+id/toolar"
+        />
      <android.support.v4.view.ViewPager
         android:layout_below="@+id/toolar"
         android:id="@+id/viewPager"

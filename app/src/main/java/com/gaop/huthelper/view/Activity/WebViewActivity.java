@@ -2,7 +2,6 @@ package com.gaop.huthelper.view.Activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -11,6 +10,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.gaop.huthelper.DB.DBHelper;
 import com.gaop.huthelper.R;
@@ -20,17 +20,19 @@ import com.gaop.huthelperdao.User;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by gaop on 16-9-12.
  */
 public class WebViewActivity extends BaseActivity {
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+
     @BindView(R.id.wv_webview)
     WebView webview;
     @BindView(R.id.pb_webview)
     ProgressBar pbWebview;
+    @BindView(R.id.tv_toolbar_title)
+    TextView tvToolbarTitle;
 
 
     private String Url;
@@ -58,40 +60,21 @@ public class WebViewActivity extends BaseActivity {
     @Override
     public void doBusiness(Context mContext) {
         ButterKnife.bind(this);
-        //,"expired_time":+time
         if (type == TYPE_EXAM) {
             user = DBHelper.getUserDao().get(0);
             String num = user.getStudentKH();
             String rember = user.getRember_code();
-//            String sha1 = CommUtil.SHA1(num) + "Xp@d";
-//            //Long time = Long.parseLong(String.valueOf(System.currentTimeMillis()).toString().substring(0, 10)) + 24 * 3600;
-//            String url = "{\"jid\":\"" + sha1 + "\",\"device\":\"android x.x\",\"student_number\":\"" +
-//                    num + "\"}";
-
-            // Url = "http://218.75.197.121:8888/homework/?m=homework&client_token=" + URLDecoder.decode(url, "utf-8");
             Url = "http://218.75.197.121:8888/api/v1/get/myhomework/" + num + "/" + rember;
 
-            toolbar.setTitle("在线作业");
+           tvToolbarTitle.setText("在线作业");
         } else if (type == TYPE_LIB) {
-            toolbar.setTitle("图书馆");
+            tvToolbarTitle.setText("图书馆");
             Url = "http://172.16.64.7:8080/opac/index";
-//            toolbar.setTitle("考试查询");
-//            Url="http://172.16.10.210:81/exam";
-
         } else if (type == TYPE_CHANGE_PW) {
-            toolbar.setTitle("修改密码");
+            tvToolbarTitle.setText("修改密码");
             Url = "http://218.75.197.121:8888/auth/resetPass";
 
         }
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         pbWebview.setIndeterminate(false);
         pbWebview.setVisibility(View.VISIBLE);
 
@@ -129,7 +112,6 @@ public class WebViewActivity extends BaseActivity {
         webview.loadUrl(Url);
 
     }
-
 
 
     protected void hideErrorPage() {
@@ -199,4 +181,10 @@ public class WebViewActivity extends BaseActivity {
     }
 
 
+
+
+    @OnClick(R.id.imgbtn_toolbar_back)
+    public void onClick() {
+        finish();
+    }
 }

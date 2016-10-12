@@ -20,14 +20,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-
 import com.gaop.huthelper.DB.DBHelper;
 import com.gaop.huthelperdao.Lesson;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -39,6 +36,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 /**
+ * 公共工具
  * Created by gaop1 on 2016/7/15.
  */
 public class CommUtil {
@@ -222,29 +220,18 @@ public class CommUtil {
         }
     }
 
-    /**
-     * 压缩图片
-     *
-     * @param
-     * @return
-     */
-    public static String yasuo(Context mActivity, Uri uri,ContentResolver contentresolver) {
-        Log.e("d",uri.toString());
-        File file = new File(getFilePathFromContentUri(uri,contentresolver));
-        BitmapFactory.Options options = getBitmapOptions(file.getPath());
-        int screenMax = Math.max(ScreenUtils.getScreenWidth(mActivity),
-                ScreenUtils.getScreenHeight(mActivity));
-        int imgMax = Math.max(options.outWidth, options.outHeight);
-        int inSimpleSize = 1;
-        if (screenMax <= imgMax) {
-            inSimpleSize = Math.max(screenMax, imgMax) / Math.min(screenMax, imgMax);
-        }
-        return compressBitmap(mActivity,
-                file.getAbsolutePath(),
-                Bitmap.CompressFormat.JPEG,
-                options.outWidth / inSimpleSize,
-                options.outHeight / inSimpleSize,
-                false);
+    public static  File uri2File(Activity context,Uri uri) {
+        File file = null;
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor actualimagecursor = context.managedQuery(uri, proj, null,
+                null, null);
+        int actual_image_column_index = actualimagecursor
+                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        actualimagecursor.moveToFirst();
+        String img_path = actualimagecursor
+                .getString(actual_image_column_index);
+        file = new File(img_path);
+        return file;
     }
 
     public static String getFilePathFromContentUri(Uri selectedVideoUri,

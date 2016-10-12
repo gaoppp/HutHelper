@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.TypedValue;
 
 /**
+ * 尺寸转换工具
  * Created by gaop1 on 2016/7/10.
  */
 public class DensityUtils {

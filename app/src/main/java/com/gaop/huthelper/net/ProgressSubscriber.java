@@ -1,6 +1,7 @@
 package com.gaop.huthelper.net;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.gaop.huthelper.jiekou.SubscriberOnNextListener;
 import com.gaop.huthelper.utils.ToastUtil;
@@ -40,6 +41,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCanc
         } else if (e instanceof retrofit2.adapter.rxjava.HttpException) {
             ToastUtil.showToastShort("服务器错误");
         } else {
+            Log.e("e",e.toString());
             ToastUtil.showToastShort("数据解析错误");
         }
     }

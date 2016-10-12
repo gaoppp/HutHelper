@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
+ * 偏好设置工具
  * Created by gaop1 on 2016/8/30.
  */
 public class PrefUtil {

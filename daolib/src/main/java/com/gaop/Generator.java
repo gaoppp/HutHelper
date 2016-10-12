@@ -1,37 +1,48 @@
 package com.gaop;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import de.greenrobot.daogenerator.DaoGenerator;
 import de.greenrobot.daogenerator.Entity;
-import de.greenrobot.daogenerator.Property;
 import de.greenrobot.daogenerator.Schema;
-import de.greenrobot.daogenerator.ToMany;
-import sun.rmi.runtime.Log;
 
 public class Generator {
 
     public static void main(String[] args) throws Exception{
-        Schema schema=new Schema(3,"com.gaop.huthelperdao");
+        Schema schema=new Schema(5,"com.gaop.huthelperdao");
         addUser(schema);
         addLesson(schema);
         addGrade(schema);
         addNotice(schema);
-        new DaoGenerator().generateAll(schema, "/home/gaop/Android/HutHelper/app/src/main/java-gen");    }
+        addExpLesson(schema);
+        new DaoGenerator().generateAll(schema, "/home/gaop/Android/HutHelper1/app/src/main/java-gen");    }
 
 
     private static void addNotice(Schema schema){
 
         Entity notice= schema.addEntity("Notice");
+        notice.implementsSerializable();
         notice.addIdProperty();
         notice.addStringProperty("time");
         notice.addStringProperty("content");
         notice.addStringProperty("title");
     }
 
+    private static void addExpLesson(Schema schema){
+        Entity explesson=schema.addEntity("Explesson");
+        explesson.addIdProperty();
+        explesson.addStringProperty("teacher");
+        explesson.addStringProperty("lesson");
+        explesson.addStringProperty("obj");
+        explesson.addStringProperty("locate");
+        explesson.addStringProperty("weeks_no");
+        explesson.addStringProperty("week");
+        explesson.addStringProperty("lesson_no");
+        explesson.addStringProperty("period");
+        explesson.addStringProperty("real_time");
+    }
+
     private static void addUser(Schema schema){
         Entity user=schema.addEntity("User");
+        user.implementsSerializable();
         user.addIdProperty();
         user.addStringProperty("user_id");
         user.addStringProperty("rember_code");

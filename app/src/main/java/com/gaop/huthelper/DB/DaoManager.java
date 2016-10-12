@@ -1,14 +1,13 @@
 package com.gaop.huthelper.DB;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.gaop.huthelper.MApplication;
 import com.gaop.huthelperdao.CourseGrade;
 import com.gaop.huthelperdao.CourseGradeDao;
-import com.gaop.huthelperdao.DaoMaster;
 import com.gaop.huthelperdao.DaoSession;
+import com.gaop.huthelperdao.Explesson;
+import com.gaop.huthelperdao.ExplessonDao;
 import com.gaop.huthelperdao.Grade;
 import com.gaop.huthelperdao.GradeDao;
 import com.gaop.huthelperdao.Lesson;
@@ -34,6 +33,7 @@ public class DaoManager {
     private static Context appContext;
     private DaoSession mDaoSession;
     private UserDao userDao;
+    private ExplessonDao explessonDao;
     private TremDao tremDao;
     private CourseGradeDao courseGradeDao;
     private LessonDao lessonDao;
@@ -56,7 +56,8 @@ public class DaoManager {
             instance.gradeDao = instance.mDaoSession.getGradeDao();
             instance.courseGradeDao = instance.mDaoSession.getCourseGradeDao();
             instance.tremDao = instance.mDaoSession.getTremDao();
-            instance.noticeDao=instance.mDaoSession.getNoticeDao();
+            instance.noticeDao = instance.mDaoSession.getNoticeDao();
+            instance.explessonDao = instance.mDaoSession.getExplessonDao();
         }
         return instance;
     }
@@ -104,6 +105,7 @@ public class DaoManager {
 
         return personList;
     }
+
 
     /**
      * User删除所有功能
@@ -177,7 +179,6 @@ public class DaoManager {
         QueryBuilder<Lesson> qb = lessonDao.queryBuilder();
         qb.where(arg0, conditions);
         List<Lesson> personList = qb.list();
-
         return personList;
     }
 
@@ -411,20 +412,20 @@ public class DaoManager {
         gradeDao.delete(person);
     }
 
-    /****************************通知×××××××××××××××××××/
-     *
+    /****************************
+     * 通知×××××××××××××××××××/
      */
 
     public List<Notice> orderAscnotice() {
-        List<Notice> list= noticeDao.queryBuilder().orderAsc(NoticeDao.Properties.Id).list();
-        if(list==null||list.size()==0)
+        List<Notice> list = noticeDao.queryBuilder().orderAsc(NoticeDao.Properties.Id).list();
+        if (list == null || list.size() == 0)
             return new ArrayList<>();
         else
             return list;
     }
 
     /**
-     * Grade插入功能
+     * 插入功能
      *
      * @return
      * @param:album
@@ -436,4 +437,41 @@ public class DaoManager {
     public void deleteAllNotice() {
         noticeDao.deleteAll();
     }
+
+
+    /**************************
+     * ExpLesson×××××××××××××××××××/
+     */
+
+    public List<Explesson> orderAscExpLesson() {
+        List<Explesson> list = explessonDao.queryBuilder().orderAsc(ExplessonDao.Properties.Id).list();
+        if (list == null || list.size() == 0)
+            return new ArrayList<>();
+        else
+            return list;
+    }
+
+    /**
+     * 插入功能
+     *
+     * @return
+     * @param:album
+     */
+    public void insertExpLesson(Explesson person) {
+        explessonDao.insert(person);
+    }
+
+    public void insertListExpLesson(List<Explesson> list) {
+        if (null == list || list.isEmpty()) {
+            return;
+        }
+        for (Explesson object : list) {
+            explessonDao.insert(object);
+        }
+    }
+
+    public void deleteAllExpLesson() {
+        explessonDao.deleteAll();
+    }
 }
+

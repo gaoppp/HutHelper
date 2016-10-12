@@ -9,39 +9,31 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.ToggleButton;
+import android.widget.TextView;
 
 import com.gaop.huthelper.DB.DBHelper;
 import com.gaop.huthelper.Model.HttpResult;
 import com.gaop.huthelper.R;
-import com.gaop.huthelper.adapter.AutoRVAdapter;
 import com.gaop.huthelper.adapter.ChoosePicAdapter;
-import com.gaop.huthelper.adapter.ViewHolder;
 import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.utils.CommUtil;
-import com.gaop.huthelper.utils.DensityUtils;
-import com.gaop.huthelper.utils.ScreenUtils;
 import com.gaop.huthelper.utils.ToastUtil;
 import com.gaop.huthelperdao.User;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,21 +44,16 @@ import io.valuesfeng.picker.utils.PicturePickerUtils;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import rx.Observable;
 import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 /**
+ * 添加商品
  * Created by gaop1 on 2016/9/2.
  */
 public class AddGoodsActivity extends BaseActivity {
-    @BindView(R.id.iv_addgoods_ok)
-    ImageView ivAddgoodsOk;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+
     @BindView(R.id.spinner_fl)
     Spinner spinnerFl;
     @BindView(R.id.spinner_xj)
@@ -88,13 +75,16 @@ public class AddGoodsActivity extends BaseActivity {
     @BindView(R.id.et_addgoods_wechat)
     EditText etAddgoodsWechat;
 
+    private AtomicInteger count;
+
 
     private final int REQUEST_CODE_CHOOSE = 111;
+    @BindView(R.id.tv_toolbar_title)
+    TextView tvToolbarTitle;
 
     private Bitmap bmp;                      //导入临时图片
     private ArrayList<Bitmap> imageItem;
     private ChoosePicAdapter addGoodsAdapter;
-    private ArrayList<Integer> imageOption;
 
     @Override
     public void initParms(Bundle parms) {
@@ -111,22 +101,11 @@ public class AddGoodsActivity extends BaseActivity {
         ButterKnife.bind(this);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.
                 SOFT_INPUT_ADJUST_PAN);
-        toolbar.setTitle("添加商品");
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_add_black_48dp);
+        tvToolbarTitle.setText("添加商品");
+        bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_addpic);
         imageItem = new ArrayList<Bitmap>();
-        imageOption = new ArrayList<>();
         imageItem.add(bmp);
-        imageOption.add(100);
-        rvAddgoodsImglist.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
+        rvAddgoodsImglist.setLayoutManager(new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL));
         addGoodsAdapter = new ChoosePicAdapter(this, imageItem);
         addGoodsAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -159,46 +138,44 @@ public class AddGoodsActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
 
-            List<Uri> mSelected = PicturePickerUtils.obtainResult(data);
+            final List<Uri> mSelected = PicturePickerUtils.obtainResult(data);
             dialog = new ProgressDialog(AddGoodsActivity.this);
             dialog.show();
             dialog.setMessage("正在处理图片");
             dialog.setCancelable(false);
-            Observable.from(mSelected).map(new Func1<Uri, Integer>() {
-                @Override
-                public Integer call(Uri filePath) { // 参数类型 String
+            count = new AtomicInteger(mSelected.size());
+            for (Uri u : mSelected) {
+                Luban.get(AddGoodsActivity.this)
+                        .load(CommUtil.uri2File(AddGoodsActivity.this, u))                     //传人要压缩的图片
+                        .putGear(Luban.THIRD_GEAR)      //设定压缩档次，默认三挡
+                        .setCompressListener(new OnCompressListener() { //设置回调
+                            @Override
+                            public void onStart() {
+                            }
 
-                    int option = 50;
-                    try {
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                        option = CommUtil.compressImage(bitmap);
-                        imageItem.add(bitmap);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    Log.e("fd",option+"");
-                    return option; // 返回类型 Bitmap
-                }
-            }).subscribeOn(Schedulers.io()) // 指定 subscribe() 发生在 IO 线程
-                    .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Integer>() {
-                @Override
-                public void onCompleted() {
-                    dialog.dismiss();
-                    addGoodsAdapter.notifyDataSetChanged();
-                }
+                            @Override
+                            public void onSuccess(File file) {
+                                Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
+                                imageItem.add(bitmap);
+                                count.decrementAndGet();
+                                if (count.get() == 0) {
+                                    dialog.dismiss();
+                                    addGoodsAdapter.notifyDataSetChanged();
+                                }
+                            }
 
-                @Override
-                public void onError(Throwable e) {
-                    dialog.dismiss();
-                    ToastUtil.showToastShort("导入图片出错");
+                            @Override
+                            public void onError(Throwable e) {
+                                Log.e("error", e.toString());
+                                count.decrementAndGet();
+                                if (count.get() == 0) {
+                                    dialog.dismiss();
+                                    addGoodsAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }).launch();    //启动压缩
+            }
 
-                }
-
-                @Override
-                public void onNext(Integer filePath) {
-                    imageOption.add(filePath);
-                }
-            });
         }
     }
 
@@ -218,7 +195,6 @@ public class AddGoodsActivity extends BaseActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 imageItem.remove(position);
-                imageOption.remove(position);
                 addGoodsAdapter.notifyDataSetChanged();
             }
         });
@@ -231,25 +207,6 @@ public class AddGoodsActivity extends BaseActivity {
         builder.create().show();
     }
 
-    @OnClick(R.id.iv_addgoods_ok)
-    public void onClick() {
-        if (fastClick()) {
-            if (etAddgoodsPhone.getText().toString().equals("") && etAddgoodsQq.getText().toString().equals("")
-                    && etAddgoodsWechat.getText().toString().equals("")) {
-                ToastUtil.showToastShort("手机，QQ，微信必填一项");
-            } else if (TextUtils.isEmpty(spinnerFl.getSelectedItem().toString()) || TextUtils.isEmpty(spinnerXj.getSelectedItem().toString())) {
-                ToastUtil.showToastShort("请选择商品分类及成色");
-            } else if (imageItem.size() == 1) {
-                ToastUtil.showToastShort("至少上传一张图片");
-            } else {
-                dialog = new ProgressDialog(AddGoodsActivity.this);
-                dialog.show();
-                uploadImg(1);
-
-            }
-        }
-    }
-
 
     private void uploadImg(final int i) {
         if (i + 1 > imageItem.size()) {
@@ -259,13 +216,10 @@ public class AddGoodsActivity extends BaseActivity {
         dialog.setCancelable(false);
         dialog.setMessage("正在上传第" + i + "张图片");
         ByteArrayOutputStream os = new ByteArrayOutputStream();
-        imageItem.get(i).compress(Bitmap.CompressFormat.PNG, imageOption.get(i), os);
+        imageItem.get(i).compress(Bitmap.CompressFormat.PNG, 100, os);
         byte[] bytes = os.toByteArray();
-        Log.e(TAG, bytes.length+ "   " +imageOption.get(i));
         final RequestBody requestFile = RequestBody.create(MediaType.parse("image/png"), bytes);
         final MultipartBody.Part photo = MultipartBody.Part.createFormData("file", "01.png", requestFile);
-
-
         HttpMethods.getInstance().UploadFile(
                 new Subscriber<HttpResult<String>>() {
                     @Override
@@ -335,4 +289,29 @@ public class AddGoodsActivity extends BaseActivity {
     }
 
 
+    @OnClick({R.id.imgbtn_toolbar_back, R.id.iv_addgoods_ok})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.imgbtn_toolbar_back:
+                finish();
+                break;
+            case R.id.iv_addgoods_ok:
+                if (fastClick()) {
+                    if (etAddgoodsPhone.getText().toString().equals("") && etAddgoodsQq.getText().toString().equals("")
+                            && etAddgoodsWechat.getText().toString().equals("")) {
+                        ToastUtil.showToastShort("手机，QQ，微信必填一项");
+                    } else if (TextUtils.isEmpty(spinnerFl.getSelectedItem().toString()) || TextUtils.isEmpty(spinnerXj.getSelectedItem().toString())) {
+                        ToastUtil.showToastShort("请选择商品分类及成色");
+                    } else if (imageItem.size() == 1) {
+                        ToastUtil.showToastShort("至少上传一张图片");
+                    } else {
+                        dialog = new ProgressDialog(AddGoodsActivity.this);
+                        dialog.show();
+                        uploadImg(1);
+
+                    }
+                }
+                break;
+        }
+    }
 }

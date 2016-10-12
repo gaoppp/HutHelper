@@ -1,16 +1,15 @@
 package com.gaop.huthelper.view.Activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.View;
 
 import com.gaop.huthelper.utils.PrefUtil;
 
 /**
+ * 引导页Activity
  * Created by gaop1 on 2016/8/31.
  */
 public class SplashActivity extends Activity {

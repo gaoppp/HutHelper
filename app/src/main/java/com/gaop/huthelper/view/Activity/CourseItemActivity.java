@@ -4,10 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gaop.huthelper.DB.DBHelper;
@@ -26,8 +24,7 @@ import butterknife.OnClick;
  * Created by gaop1 on 2016/7/29.
  */
 public class CourseItemActivity extends BaseActivity {
-    @BindView(R.id.toolba_about)
-    Toolbar toolbaCourse;
+
     @BindView(R.id.tv_course_name)
     TextView tvCourseName;
     @BindView(R.id.tv_course_teacher)
@@ -40,8 +37,9 @@ public class CourseItemActivity extends BaseActivity {
     Lesson lesson;
     @BindView(R.id.tv_course_classroom)
     TextView tvCourseClassroom;
-    @BindView(R.id.iv_course_delete)
-    ImageView ivCourseDelete;
+    @BindView(R.id.tv_toolbar_title)
+    TextView tvToolbarTitle;
+
 
     private List<Long> IdList = new ArrayList<>();
 
@@ -60,15 +58,7 @@ public class CourseItemActivity extends BaseActivity {
     public void doBusiness(Context mContext) {
 
         ButterKnife.bind(this);
-        toolbaCourse.setTitle("课程详情");
-        setSupportActionBar(toolbaCourse);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbaCourse.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        tvToolbarTitle.setText("课程详情");
         tvCourseName.setText(lesson.getName());
         tvCourseTeacher.setText(lesson.getTeacher());
         tvCourseClassroom.setText(lesson.getRoom());
@@ -85,18 +75,11 @@ public class CourseItemActivity extends BaseActivity {
         if (!TextUtils.isEmpty(lesson.getDsz()))
             week.append("(").append(lesson.getDsz()).append(")");
         tvCourseWeek.setText(week);
-        if(TextUtils.isEmpty(week)){
+        if (TextUtils.isEmpty(week)) {
             tvCourseWeek.setText(lesson.getIndex());
         }
     }
 
-
-    @OnClick(R.id.iv_course_delete)
-    public void onClick() {
-        if (fastClick()) {
-            dialog();
-        }
-    }
 
     protected void dialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(CourseItemActivity.this);
@@ -121,4 +104,15 @@ public class CourseItemActivity extends BaseActivity {
     }
 
 
+    @OnClick({R.id.imgbtn_toolbar_back, R.id.iv_courseitem_delete})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.imgbtn_toolbar_back:
+                finish();
+                break;
+            case R.id.iv_courseitem_delete:
+                dialog();
+                break;
+        }
+    }
 }

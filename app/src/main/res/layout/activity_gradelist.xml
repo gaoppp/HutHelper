@@ -5,13 +5,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_gradelist"
+    <RelativeLayout
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:fitsSystemWindows="true"
-        android:layout_height="75dp"
-        android:background="#63B8FF">
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="64dp"
+        android:background="#1ddbcd">
+
+        <ImageButton
+            android:id="@+id/imgbtn_toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="31dp"
+            android:background="@mipmap/ic_back" />
+
+        <TextView
+            android:id="@+id/tv_choose_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="31dp"
+            android:drawablePadding="8dp"
+            android:drawableRight="@mipmap/ic_drop_down_32px"
+            android:gravity="center"
+            android:text="所有成绩"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_gradelist"

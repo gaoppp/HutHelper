@@ -1,58 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#efefef"
     android:layout_height="match_parent">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolba_feedback"
+    <include layout="@layout/customtoolbar"
+        android:id="@+id/rl_bg_maincontent"
+        />
+
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:elevation="5dp"
-        android:fitsSystemWindows="true"
-        android:background="#63B8FF">
-    </android.support.v7.widget.Toolbar>
-    <android.support.design.widget.TextInputLayout
+        android:layout_height="10dp"
+        />
+    <RelativeLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
-        android:padding="10dp"
         android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_feedback_msg"
+            android:textSize="16sp"
+            android:textColor="#404040"
+            android:paddingTop="40dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="你好，感谢使用工大助手，如遇紧急情况请加客服QQ123456"/>
 
         <EditText
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:padding="15dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/et_feeback"
+            android:layout_below="@+id/tv_feedback_msg"
             android:id="@+id/et_feedbk_tel"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:hint="联系方式"
-            android:imeActionId="@+id/login"
-            android:imeActionLabel="反馈"
-            android:imeOptions="actionSend"
             android:maxLines="1"
             android:singleLine="true" />
 
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:padding="10dp"
-        android:layout_height="wrap_content">
-
         <EditText
-            android:id="@+id/et_feedbk_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="140dp"
+            android:layout_below="@+id/et_feedbk_tel"
+            android:id="@+id/et_feedbk_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:padding="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/et_feeback"
             android:hint="反馈内容"
             android:imeActionId="@+id/login"
             android:minLines="5"
             />
 
-    </android.support.design.widget.TextInputLayout>
+        <Button
+            android:id="@+id/btn_feedbk_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="提交"
+            android:background="@drawable/ed_importdata"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/et_feedbk_content"
+            android:layout_alignEnd="@+id/et_feedbk_content"
+            android:layout_marginTop="27dp"
+            android:layout_marginBottom="40dp"/>
+
+    </RelativeLayout>
 
 
-    <Button
-        android:layout_margin="10dp"
-        android:id="@+id/btn_feedbk_ok"
-        style="?android:textAppearanceSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="反馈"
-        android:background="@drawable/btn_login"
-        android:textStyle="bold" />
+
 
 </LinearLayout>

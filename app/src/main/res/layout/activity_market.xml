@@ -1,52 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/gray1"
     tools:context="com.gaop.huthelper.view.Activity.MarketActivity">
 
-    <android.support.v7.widget.Toolbar
+    <RelativeLayout
         android:id="@+id/toolbar"
-        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:background="#63B8FF" >
-        <ImageView
-            android:id="@+id/iv_market_mygoods"
+        android:layout_height="64dp"
+        android:background="#1ddbcd">
+
+        <ImageButton
+            android:id="@+id/imgbtn_toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="31dp"
+            android:background="@mipmap/ic_back" />
+
+        <TextView
+            android:id="@+id/tv_toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/person_selector"
-           android:paddingRight="13dp"
-            android:layout_marginRight="-5dp"
-            android:alpha="0.55"
-            android:layout_gravity="right"
-            />
-    </android.support.v7.widget.Toolbar>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="31dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="20dp" />
 
+        <ImageView
+            android:id="@+id/iv_explesson_update"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="31dp"
+            android:src="@mipmap/ic_mylist" />
+    </RelativeLayout>
     <com.github.jdsjlzx.recyclerview.LRecyclerView
-        android:layout_below="@+id/toolbar"
         android:id="@+id/rv_marketlist"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </com.github.jdsjlzx.recyclerview.LRecyclerView>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"></com.github.jdsjlzx.recyclerview.LRecyclerView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:backgroundTint="@color/orange"
-        app:rippleColor="#33728dff"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp"
-        android:src="@mipmap/ic_add_white_48dp"
-
-        android:layout_marginRight="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin"
-
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/fab_margin" />
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+
+        android:src="@mipmap/ic_add_white_48dp"
+        app:backgroundTint="@color/colorPrimary"
+
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        app:rippleColor="#33728dff" />
 
 </RelativeLayout>

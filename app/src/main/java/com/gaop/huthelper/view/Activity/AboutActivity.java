@@ -1,16 +1,22 @@
 package com.gaop.huthelper.view.Activity;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.gaop.huthelper.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class AboutActivity extends BaseActivity {
+    @BindView(R.id.imgbtn_toolbar_back)
+    ImageButton imgbtnToolbarBack;
+    @BindView(R.id.tv_toolbar_title)
+    TextView tvToolbarTitle;
+
     @Override
     public void initParms(Bundle parms) {
 
@@ -22,32 +28,10 @@ public class AboutActivity extends BaseActivity {
     }
 
 
-
     @Override
     public void doBusiness(Context mContext) {
-        Toolbar mToolbar= (Toolbar) findViewById(R.id.toolba_about);
-        mToolbar.setTitle("关于我们");
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        TextView tv=(TextView)findViewById(R.id.tv_email);
-        tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uri = Uri.parse("mailto:gaopdev@gmail.com");
-                String[] email = {"gaopdev@gmail.com"};
-                Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
-                intent.putExtra(Intent.EXTRA_CC, email); // 抄送人
-                intent.putExtra(Intent.EXTRA_SUBJECT, "邮件主题"); // 主题
-                intent.putExtra(Intent.EXTRA_TEXT, "邮件正文"); // 正文
-                startActivity(Intent.createChooser(intent, "请选择邮件类应用"));
-            }
-        });
+        ButterKnife.bind(this);
+        tvToolbarTitle.setText("关于");
     }
 
 
@@ -55,5 +39,11 @@ public class AboutActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         System.gc();
+    }
+
+
+    @OnClick(R.id.imgbtn_toolbar_back)
+    public void onClick() {
+        finish();
     }
 }

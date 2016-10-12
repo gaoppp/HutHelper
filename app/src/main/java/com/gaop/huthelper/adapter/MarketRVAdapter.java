@@ -1,6 +1,5 @@
 package com.gaop.huthelper.adapter;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,16 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.gaop.huthelper.Model.GoodsListItem;
 import com.gaop.huthelper.R;
 import com.gaop.huthelper.net.HttpMethods;
 import com.squareup.picasso.Picasso;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
+ * 二手市场数据适配器
  * Created by gaop1 on 2016/7/22.
  */
 public class MarketRVAdapter extends RecyclerView.Adapter<MarketRVAdapter.ViewHolder> {

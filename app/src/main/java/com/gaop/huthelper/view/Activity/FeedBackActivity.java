@@ -2,11 +2,10 @@ package com.gaop.huthelper.view.Activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.gaop.huthelper.DB.DBHelper;
@@ -64,16 +63,16 @@ public class FeedBackActivity extends BaseActivity {
 
     @Override
     public void doBusiness(Context mContext) {
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolba_feedback);
-        mToolbar.setTitle("反馈意见");
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_toolbar_back);
+        TextView tv = (TextView) findViewById(R.id.tv_toolbar_title);
+        tv.setText("反馈");
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
         mTvContent = (TextView) findViewById(R.id.et_feedbk_content);
         mTvTel = (TextView) findViewById(R.id.et_feedbk_tel);
         mFeedBk = (Button) findViewById(R.id.btn_feedbk_ok);
@@ -86,7 +85,6 @@ public class FeedBackActivity extends BaseActivity {
                 }
             }
         });
-        Log.e("dd", "here");
     }
 
     protected boolean fastClick() {

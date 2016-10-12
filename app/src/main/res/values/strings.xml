@@ -6,5 +6,5 @@
     <string name="title_activity_market">MarketActivity</string>
     <string name="market_warn">信息为实名制发布，真实可靠。以下情况可能是诈骗行为：1.价格异常低； 2.要求先汇款； 3.非公共场合交易。</string>
 
-    <string name="addsat_warn">- 发布后，不会显示你的学号/姓名，但会显示昵称\n  *昵称可在工大导航http://www.hugongda.com:8888修改\n- 我们不会泄露你的隐私\n- 违规信息会被删除</string>
+    <string name="addsat_warn">- 图片最多四张\n- 发布后，不会显示你的学号/姓名，但会显示昵称\n  *昵称可在我的信息中修改\n- 我们不会泄露你的隐私\n- 违规信息会被删除</string>
 </resources>

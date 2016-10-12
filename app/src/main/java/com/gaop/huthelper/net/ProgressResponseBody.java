@@ -11,6 +11,7 @@ import okio.Okio;
 import okio.Source;
 
 /**
+ * 添加进度的responsebody
  * Created by gaop1 on 2016/9/1.
  */
 public class ProgressResponseBody extends ResponseBody {

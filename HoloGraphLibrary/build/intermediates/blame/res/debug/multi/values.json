@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/gaop/Android/HutHelper/HoloGraphLibrary/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+        "outputFile": "/home/gaop/Android/HutHelper1/HoloGraphLibrary/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 104
                 },
                 "from": {
-                    "file": "/home/gaop/Android/HutHelper/HoloGraphLibrary/res/values/strings.xml",
+                    "file": "/home/gaop/Android/HutHelper1/HoloGraphLibrary/res/values/strings.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -31,7 +31,7 @@
                     "endOffset": 395
                 },
                 "from": {
-                    "file": "/home/gaop/Android/HutHelper/HoloGraphLibrary/res/values/styles.xml",
+                    "file": "/home/gaop/Android/HutHelper1/HoloGraphLibrary/res/values/styles.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -52,7 +52,7 @@
                     "endOffset": 555
                 },
                 "from": {
-                    "file": "/home/gaop/Android/HutHelper/HoloGraphLibrary/res/values/styles.xml",
+                    "file": "/home/gaop/Android/HutHelper1/HoloGraphLibrary/res/values/styles.xml",
                     "position": {
                         "startLine": 15,
                         "startColumn": 4,

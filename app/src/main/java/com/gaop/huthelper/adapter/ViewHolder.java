@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 /**
+ * 通用viewHolder
  * Created by gaop1 on 2016/7/9.
  */
 public class ViewHolder {

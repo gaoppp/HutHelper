@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,9 +41,6 @@ import butterknife.OnClick;
  */
 public class CourseTableActivity extends BaseActivity {
 
-    @BindView(R.id.toolbar_coursetable)
-    Toolbar toolbarCoursetable;
-
 
     @BindView(R.id.fl_coursetable)
     FrameLayout flCoursetable;
@@ -57,7 +52,7 @@ public class CourseTableActivity extends BaseActivity {
     ImageView ivCoursetableUpdate;
 
     CourseTable table;
-    int CurrWeek;
+    int CurrWeek = 0;
 
     /**
      * 选择周数弹出窗口
@@ -89,16 +84,6 @@ public class CourseTableActivity extends BaseActivity {
     public void doBusiness(Context mContext) {
         ButterKnife.bind(this);
         CurrWeek = DateUtil.getNowWeek();
-        Log.e("dd",CurrWeek+"");
-        toolbarCoursetable.setTitle("");
-        setSupportActionBar(toolbarCoursetable);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbarCoursetable.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         if (!PrefUtil.getBoolean(CourseTableActivity.this, "isLoadCourseTable", false)) {
             getCourseTableData();
         } else {
@@ -135,7 +120,7 @@ public class CourseTableActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.tv_chooseweek_coursetable, R.id.iv_coursetable_update})
+    @OnClick({R.id.tv_chooseweek_coursetable, R.id.iv_coursetable_update, R.id.imgbtn_toolbar_back, R.id.iv_coursetable_explesson})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_chooseweek_coursetable:
@@ -144,6 +129,12 @@ public class CourseTableActivity extends BaseActivity {
                 break;
             case R.id.iv_coursetable_update:
                 getCourseTableData();
+                break;
+            case R.id.imgbtn_toolbar_back:
+                finish();
+                break;
+            case R.id.iv_coursetable_explesson:
+                startActivity(ExpLessonActivity.class);
                 break;
         }
 
@@ -179,7 +170,7 @@ public class CourseTableActivity extends BaseActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     weekListWindow.dismiss();
                     tvChoose.setText(weekList.get(position));
-                    table.changeWeek(position + 1,DateUtil.getNextSunday(DateUtil.addDate(new Date(), (position + 1 - CurrWeek) * 7)));
+                    table.changeWeek(position + 1, DateUtil.getNextSunday(DateUtil.addDate(new Date(), (position + 1 - CurrWeek) * 7)));
                 }
             });
             weekListWindow = new PopupWindow(popupWindowLayout, width, width + 100);
@@ -199,10 +190,10 @@ public class CourseTableActivity extends BaseActivity {
             public void onNext(String o) {
                 if ("ok".equals(o))
                     setView();
-                else if("令牌错误".equals(o)){
+                else if ("令牌错误".equals(o)) {
                     ToastUtil.showToastShort("账号异地登录，请重新登录");
                     startActivity(ImportActivity.class);
-                }else
+                } else
                     ToastUtil.showToastShort(o);
             }
         };
@@ -211,6 +202,7 @@ public class CourseTableActivity extends BaseActivity {
                 user.getRember_code()
         );
     }
+
 
     class WeekListAdapter extends BaseAdapter {
 

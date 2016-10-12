@@ -2,53 +2,180 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
 
     <RelativeLayout
         android:id="@+id/rl_bg_maincontent"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="7">
+        android:layout_height="64dp"
+        android:background="#1ddbcd">
 
-        <ImageView
-            android:id="@+id/iv_mainbg"
-            android:scaleType="centerCrop"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg3" />
-
-        <TextView
-            android:id="@+id/tv_course_maincontent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="15dp"
-            android:layout_marginRight="5dp"
-            android:text="123"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+        <ImageButton
+            android:id="@+id/imgbtn_menusetting"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="31dp"
+            android:background="@drawable/img_menu" />
 
         <TextView
             android:id="@+id/tv_date_maincontent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/tv_course_maincontent"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginBottom="3dp"
-            android:layout_marginRight="5dp"
-            android:text=" 123"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="24dp"
+            android:text="日期"
+            android:textColor="#ffffff"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/tv_course_maincontent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_date_maincontent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+            android:text="今天没课"
+            android:textColor="#ffffff"
+            android:textSize="14dp" />
+
 
     </RelativeLayout>
 
+    <ImageView
+        android:id="@+id/iv_mainbg"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/xiaomen2" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="9"
-        android:background="#ffffff"
+        android:layout_height="128dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="34dp">
+
+            <ImageView
+                android:layout_width="3dp"
+                android:layout_height="9dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/img_changtiao" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="通知"
+                android:textColor="#808080"
+                android:textSize="12dp" />
+
+            <ImageView
+                android:id="@+id/mu_right"
+                android:layout_width="11dp"
+                android:layout_height="11dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/img_right" />
+
+            <TextView
+                android:id="@+id/imgbtn_notice_maincontent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/mu_right"
+                android:text="查看全部通知"
+                android:textColor="#1ddbcd"
+                android:textSize="12dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <ImageView
+                android:id="@+id/mu_tongzhi"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/iv_tongzhi" />
+
+            <TextView
+                android:id="@+id/tv_tongzhi_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/mu_tongzhi"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/mu_tongzhi"
+                android:ellipsize="end"
+                android:maxWidth="160dp"
+                android:singleLine="true"
+                android:text="通知"
+                android:textColor="#404040"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/tv_tongzhi_contont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/mu_tongzhi"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/mu_tongzhi"
+                android:ellipsize="end"
+                android:maxWidth="200dp"
+                android:singleLine="true"
+                android:text="只是一句通知"
+                android:textColor="#808080"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/tv_tongzhi_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/mu_tongzhi"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="10dp"
+                android:text="10-10 18:17"
+                android:textColor="#808080"
+                android:textSize="9dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="34dp">
+
+            <ImageView
+                android:layout_width="3dp"
+                android:layout_height="9dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/img_changtiao" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="常用"
+                android:textColor="#808080"
+                android:textSize="12dp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -56,17 +183,13 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
+
             <ImageButton
-                android:id="@+id/imgbtn_notice_maincontent"
+                android:id="@+id/imgbtn_score_maincontent"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bt_notice" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/gray" />
+                android:background="@drawable/bt_score" />
 
             <ImageButton
                 android:id="@+id/imgbtn_course_maincontent"
@@ -74,11 +197,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/bt_course" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/gray" />
 
             <ImageButton
                 android:id="@+id/imgbtn_book_maincontent"
@@ -88,27 +206,17 @@
                 android:background="@drawable/bt_book" />
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
 
             <ImageButton
-                android:id="@+id/imgbtn_score_maincontent"
+                android:id="@+id/imgbtn_date_maincontent"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bt_score" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/gray" />
+                android:background="@drawable/bt_date" />
 
             <ImageButton
                 android:id="@+id/imgbtn_class_maincontent"
@@ -117,23 +225,14 @@
                 android:layout_weight="1"
                 android:background="@drawable/bt_say" />
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/gray" />
-
             <ImageButton
-                android:id="@+id/imgbtn_date_maincontent"
+                android:id="@+id/imgbtn_public_maincontent"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bt_date" />
-        </LinearLayout>
+                android:background="@drawable/bt_market" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -147,11 +246,6 @@
                 android:layout_weight="1"
                 android:background="@drawable/bt_homework" />
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/gray" />
-
             <ImageButton
                 android:id="@+id/imgbtn_electric_maincontent"
                 android:layout_width="0dp"
@@ -159,17 +253,13 @@
                 android:layout_weight="1"
                 android:background="@drawable/bt_electric" />
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/gray" />
-
             <ImageButton
-                android:id="@+id/imgbtn_public_maincontent"
+
+                android:id="@+id/imgbtn_ceshi_maincontent"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bt_market" />
+                android:background="@drawable/bt_more" />
         </LinearLayout>
     </LinearLayout>
 

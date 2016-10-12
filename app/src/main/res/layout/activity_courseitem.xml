@@ -4,32 +4,40 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolba_about"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:background="#63B8FF"
-        android:elevation="5dp"
-        android:fitsSystemWindows="true">
-        <!--<ImageView
+        android:layout_height="64dp"
+        android:background="#1ddbcd">
+
+        <ImageButton
+            android:id="@+id/imgbtn_toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="31dp"
+            android:background="@mipmap/ic_back" />
+
+        <TextView
+            android:id="@+id/tv_toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_edit"
-            android:padding="13dp"
-            android:layout_marginRight="0dp"
-            />-->
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="31dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
         <ImageView
-            android:id="@+id/iv_course_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_delete"
-            android:padding="13dp"
-            android:layout_marginRight="-5dp"
+            android:id="@+id/iv_courseitem_delete"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="31dp"
+            android:src="@android:drawable/ic_menu_delete" />
+    </RelativeLayout>
 
-            android:layout_gravity="right"
-            />
-
-    </android.support.v7.widget.Toolbar>
 
     <RelativeLayout
         android:id="@+id/rl_course_name"

@@ -4,15 +4,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -21,7 +15,6 @@ import android.widget.TextView;
 
 import com.gaop.huthelper.DB.DBHelper;
 import com.gaop.huthelper.Model.HttpResult;
-import com.gaop.huthelper.Model.Say;
 import com.gaop.huthelper.Model.UpdateMsg;
 import com.gaop.huthelper.R;
 import com.gaop.huthelper.jiekou.SubscriberOnNextListener;
@@ -29,20 +22,20 @@ import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.net.ProgressSubscriber;
 import com.gaop.huthelper.utils.CommUtil;
 import com.gaop.huthelper.utils.ToastUtil;
+import com.gaop.huthelper.view.lib.DragLayout;
+import com.gaop.huthelperdao.Notice;
 import com.gaop.huthelperdao.User;
 import com.umeng.common.inter.ITagManager;
-import com.umeng.message.ALIAS_TYPE;
 import com.umeng.message.PushAgent;
 import com.umeng.message.UTrack;
 import com.umeng.message.tag.TagManager;
 
-import java.util.Map;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Observable;
-import rx.Observer;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -59,10 +52,12 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.tv_date_maincontent)
     TextView tvDateMaincontent;
 
+    @BindView(R.id.imgbtn_menusetting)
+    ImageButton imgbtnMenusetting;
     @BindView(R.id.rl_bg_maincontent)
     RelativeLayout rlBgMaincontent;
     @BindView(R.id.imgbtn_notice_maincontent)
-    ImageButton imgbtnNoticeMaincontent;
+    TextView imgbtnNoticeMaincontent;
     @BindView(R.id.imgbtn_course_maincontent)
     ImageButton imgbtnCourseMaincontent;
     @BindView(R.id.imgbtn_book_maincontent)
@@ -79,28 +74,25 @@ public class MainActivity extends BaseActivity {
     ImageButton imgbtnElectricMaincontent;
     @BindView(R.id.imgbtn_public_maincontent)
     ImageButton imgbtnPublicMaincontent;
-    @BindView(R.id.toolbar_main)
-    Toolbar toolbar;
     @BindView(R.id.tv_nav_name)
     TextView tvNavName;
-    @BindView(R.id.tv_nav_update)
-    TextView tvNavUpdate;
-    @BindView(R.id.tv_nav_manage)
-    TextView tvNavManage;
-    @BindView(R.id.tv_nav_share)
-    TextView tvNavShare;
-    @BindView(R.id.tv_nav_fback)
-    TextView tvNavFback;
-    @BindView(R.id.tv_nav_logout)
-    TextView tvNavLogout;
+    @BindView(R.id.tv_tongzhi_contont)
+    TextView tvTZcontent;
+    @BindView(R.id.tv_tongzhi_title)
+    TextView tvTZtitle;
+
+    @BindView(R.id.tv_tongzhi_time)
+    TextView getTvTZtime;
+    @BindView(R.id.iv_nav_set)
+    ImageView ivNavSet;
     @BindView(R.id.drawer_layout)
-    DrawerLayout drawerLayout;
+    DragLayout mDragLayout;
+
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         User user = DBHelper.getUserDao().get(0);
-
         tvNavName.setText(user.getTrueName());
     }
 
@@ -113,17 +105,26 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
-
     @Override
     public void doBusiness(Context mContext) {
         ButterKnife.bind(this);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
-        toolbar.hideOverflowMenu();
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.setDrawerListener(toggle);
-        toggle.syncState();
+        mDragLayout = (DragLayout) findViewById(R.id.drawer_layout);
+        mDragLayout.setDragListener(new DragLayout.DragListener() {
+            @Override
+            public void onOpen() {
+
+            }
+
+            @Override
+            public void onClose() {
+
+            }
+
+            @Override
+            public void onDrag(float percent) {
+
+            }
+        });
 
 
         Observable.create(new Observable.OnSubscribe<String[]>() {
@@ -161,6 +162,23 @@ public class MainActivity extends BaseActivity {
                 .subscribe(new Action1<String[]>() {
                     @Override
                     public void call(String data[]) {
+                        List<Notice> notices = DBHelper.getNoticeDao();
+                        if (notices.size() != 0) {
+                            final Notice notice = notices.get(0);
+                            tvTZtitle.setText(notice.getTitle());
+                            getTvTZtime.setText(notice.getTime());
+                            tvTZcontent.setText(notice.getContent());
+                            tvTZcontent.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Bundle bundle = new Bundle();
+                                    bundle.putSerializable("notice", notice);
+                                    startActivity(NoticeItemActivity.class, bundle);
+                                }
+                            });
+                        } else {
+                            tvTZcontent.setText("暂时没有通知");
+                        }
                         tvCourseMaincontent.setText(data[0]);
                         tvDateMaincontent.setText(data[1]);
                         tvNavName.setText(data[2]);
@@ -170,20 +188,12 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-
-    @OnClick({R.id.tv_nav_name, R.id.tv_nav_update, R.id.tv_nav_manage, R.id.tv_nav_share, R.id.tv_nav_fback, R.id.tv_nav_logout, R.id.imgbtn_notice_maincontent, R.id.imgbtn_course_maincontent, R.id.imgbtn_book_maincontent, R.id.imgbtn_score_maincontent, R.id.imgbtn_class_maincontent, R.id.imgbtn_date_maincontent, R.id.imgbtn_time_maincontent, R.id.imgbtn_electric_maincontent, R.id.imgbtn_public_maincontent})
+    @OnClick({R.id.tv_nav_name, R.id.rl_nav_update, R.id.rl_nav_manage, R.id.rl_nav_share, R.id.rl_nav_fback, R.id.rl_nav_logout, R.id.imgbtn_notice_maincontent, R.id.imgbtn_course_maincontent, R.id.imgbtn_book_maincontent, R.id.imgbtn_score_maincontent, R.id.imgbtn_class_maincontent, R.id.imgbtn_date_maincontent, R.id.imgbtn_time_maincontent, R.id.imgbtn_electric_maincontent, R.id.imgbtn_public_maincontent, R.id.imgbtn_menusetting, R.id.iv_nav_set, R.id.imgbtn_ceshi_maincontent})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.imgbtn_menusetting:
+                mDragLayout.open();
+                break;
             case R.id.imgbtn_notice_maincontent:
                 startActivity(NoticeActivity.class);
                 break;
@@ -215,24 +225,28 @@ public class MainActivity extends BaseActivity {
             case R.id.imgbtn_public_maincontent:
                 startActivity(MarketActivity.class);
                 break;
-            case R.id.tv_nav_name:
+            case R.id.iv_nav_set:
                 startActivity(UserActivity.class);
                 break;
-            case R.id.tv_nav_update:
+            case R.id.rl_nav_update:
                 checkUpdate(true);
                 break;
-            case R.id.tv_nav_manage:
+            case R.id.rl_nav_manage:
                 startActivity(AboutActivity.class);
                 break;
-            case R.id.tv_nav_share:
+            case R.id.rl_nav_share:
                 share();
                 break;
-            case R.id.tv_nav_fback:
+            case R.id.rl_nav_fback:
                 startActivity(FeedBackActivity.class);
                 break;
-            case R.id.tv_nav_logout:
+            case R.id.rl_nav_logout:
                 startActivity(ImportActivity.class);
                 break;
+            case R.id.imgbtn_ceshi_maincontent:
+                ToastUtil.showToastShort("更多内容正在开发中");
+                break;
+
         }
     }
 
