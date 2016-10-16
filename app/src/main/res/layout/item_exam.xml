@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/tv_examitem_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="大学物理"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:paddingLeft="10dp"
+        android:paddingTop="3dp"
+        android:textColor="@color/black1"
+        android:textSize="14dp"
+        android:id="@+id/tv_examitem_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_examitem_name"
+        android:text="地点：" />
+
+    <TextView
+        android:paddingTop="3dp"
+        android:textColor="@color/black1"
+        android:textSize="14dp"
+        android:layout_toRightOf="@+id/tv_examitem_l"
+        android:id="@+id/tv_examitem_where"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_examitem_name"
+        android:text="公共楼22" />
+
+    <TextView
+        android:paddingTop="3dp"
+        android:textColor="@color/black1"
+        android:textSize="14dp"
+        android:paddingLeft="24dp"
+        android:layout_toRightOf="@+id/tv_examitem_where"
+        android:id="@+id/tv_examitem_h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_examitem_name"
+        android:text="状态：" />
+
+    <TextView
+        android:paddingRight="10dp"
+        android:paddingTop="3dp"
+        android:textColor="@color/black1"
+        android:textSize="14dp"
+        android:layout_toRightOf="@id/tv_examitem_h"
+        android:id="@+id/tv_examitem_how"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_examitem_name"
+        android:text="计划中" />
+
+    <TextView
+        android:paddingLeft="10dp"
+        android:paddingTop="3dp"
+        android:textColor="@color/black1"
+        android:textSize="14dp"
+        android:id="@+id/tv_examitem_w"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_examitem_how"
+        android:text="时间：" />
+
+    <TextView
+        android:paddingRight="10dp"
+        android:paddingTop="3dp"
+        android:textColor="@color/black1"
+        android:textSize="14dp"
+        android:layout_toRightOf="@+id/tv_examitem_w"
+        android:layout_below="@+id/tv_examitem_how"
+        android:id="@+id/tv_examitem_when"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="第17周的" />
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tv_examitem_when"
+        android:background="#EDEDED"/>
+</RelativeLayout>

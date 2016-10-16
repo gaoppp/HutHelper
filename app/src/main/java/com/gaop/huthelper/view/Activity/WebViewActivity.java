@@ -69,7 +69,7 @@ public class WebViewActivity extends BaseActivity {
            tvToolbarTitle.setText("在线作业");
         } else if (type == TYPE_LIB) {
             tvToolbarTitle.setText("图书馆");
-            Url = "http://172.16.64.7:8080/opac/index";
+            Url = "http://218.75.197.121:8889";
         } else if (type == TYPE_CHANGE_PW) {
             tvToolbarTitle.setText("修改密码");
             Url = "http://218.75.197.121:8888/auth/resetPass";

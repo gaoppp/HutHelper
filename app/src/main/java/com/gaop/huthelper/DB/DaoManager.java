@@ -6,6 +6,8 @@ import com.gaop.huthelper.MApplication;
 import com.gaop.huthelperdao.CourseGrade;
 import com.gaop.huthelperdao.CourseGradeDao;
 import com.gaop.huthelperdao.DaoSession;
+import com.gaop.huthelperdao.Exam;
+import com.gaop.huthelperdao.ExamDao;
 import com.gaop.huthelperdao.Explesson;
 import com.gaop.huthelperdao.ExplessonDao;
 import com.gaop.huthelperdao.Grade;
@@ -39,6 +41,7 @@ public class DaoManager {
     private LessonDao lessonDao;
     private GradeDao gradeDao;
     private NoticeDao noticeDao;
+    private ExamDao examDao;
 
     public DaoManager() {
 
@@ -58,6 +61,7 @@ public class DaoManager {
             instance.tremDao = instance.mDaoSession.getTremDao();
             instance.noticeDao = instance.mDaoSession.getNoticeDao();
             instance.explessonDao = instance.mDaoSession.getExplessonDao();
+            instance.examDao=instance.mDaoSession.getExamDao();
         }
         return instance;
     }
@@ -473,5 +477,31 @@ public class DaoManager {
     public void deleteAllExpLesson() {
         explessonDao.deleteAll();
     }
+    /*******************Exam************************/
+
+    public List<Exam> orderAscExam() {
+        List<Exam> list = examDao.queryBuilder().orderAsc(ExamDao.Properties.Id).list();
+        if (list == null || list.size() == 0)
+            return new ArrayList<>();
+        else
+            return list;
+    }
+    public void insertExam(Exam person) {
+        examDao.insert(person);
+    }
+
+    public void insertListExam(List<Exam> list) {
+        if (null == list || list.isEmpty()) {
+            return;
+        }
+        for (Exam object : list) {
+            examDao.insert(object);
+        }
+    }
+
+    public void deleteAllExam() {
+        examDao.deleteAll();
+    }
+
 }
 

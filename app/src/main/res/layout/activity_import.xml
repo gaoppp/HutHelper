@@ -46,5 +46,14 @@
         android:background="@drawable/btn_importdata"
         android:text="登录"
         android:textColor="@color/white" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="密码同工大导航，默认身份证后六位"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white"
+        android:padding="10dp"
+        android:textSize="10sp"/>
 
 </RelativeLayout>

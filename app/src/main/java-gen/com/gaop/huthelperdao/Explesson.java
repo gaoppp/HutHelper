@@ -120,16 +120,16 @@ public class Explesson implements Comparable<Explesson> {
 
     @Override
     public int compareTo(Explesson o) {
-        int weekdiff = Integer.valueOf(this.weeks_no) - Integer.valueOf(o.getWeeks_no());
-        if (weekdiff != 0)
-            return weekdiff;
-        int numdiff = Integer.valueOf(this.week) - Integer.valueOf(o.getWeek());
-        if (numdiff != 0)
-            return numdiff;
-        int lessondiff = Integer.valueOf(this.lesson_no) - Integer.valueOf(o.getLesson_no());
-        if (lessondiff != 0)
-            return lessondiff;
+        int wn = Integer.valueOf(this.weeks_no) - Integer.valueOf(o.getWeeks_no());
+        if (wn != 0)
+            return wn;
+        int w = Integer.valueOf(this.week) - Integer.valueOf(o.getWeek());
+        if (w != 0)
+            return w;
+        int l = Integer.valueOf(this.lesson_no) - Integer.valueOf(o.getLesson_no());
+        if (l != 0)
+            return wn;
+
         return 0;
     }
-
 }

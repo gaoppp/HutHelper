@@ -244,7 +244,8 @@ public class MainActivity extends BaseActivity {
                 startActivity(ImportActivity.class);
                 break;
             case R.id.imgbtn_ceshi_maincontent:
-                ToastUtil.showToastShort("更多内容正在开发中");
+                startActivity(ExamActivity.class);
+                //ToastUtil.showToastShort("更多内容正在开发中");
                 break;
 
         }

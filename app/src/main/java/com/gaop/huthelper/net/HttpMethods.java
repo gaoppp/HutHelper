@@ -6,6 +6,7 @@ import android.content.Context;
 import com.gaop.huthelper.DB.DBHelper;
 import com.gaop.huthelper.Model.DepInfo;
 import com.gaop.huthelper.Model.Electric;
+import com.gaop.huthelper.Model.ExamData;
 import com.gaop.huthelper.Model.Goods;
 import com.gaop.huthelper.Model.GoodsListItem;
 import com.gaop.huthelper.Model.HttpResult;
@@ -19,6 +20,7 @@ import com.gaop.huthelper.jiekou.ChangeUserNameAPI;
 import com.gaop.huthelper.jiekou.CourseTableAPI;
 import com.gaop.huthelper.jiekou.DeleteGoodAPI;
 import com.gaop.huthelper.jiekou.ElectricAPI;
+import com.gaop.huthelper.jiekou.ExamAPI;
 import com.gaop.huthelper.jiekou.FeedBackAPI;
 import com.gaop.huthelper.jiekou.FileUploadAPI;
 import com.gaop.huthelper.jiekou.GetExpLessonAPI;
@@ -499,6 +501,8 @@ public class HttpMethods {
                             PrefUtil.setBoolean(context, "isLoadUser", true);
                             PrefUtil.setBoolean(context, "isLoadCourseTable", false);
                             PrefUtil.setBoolean(context, "isLoadGrade", false);
+                            PrefUtil.setBoolean(context,"isLoadExam",false);
+                            PrefUtil.setBoolean(context,"isLoadExpLesson",false);
                         }
                         return userHttpResult.getMsg();
                     }
@@ -613,6 +617,26 @@ public class HttpMethods {
                 .subscribe(subscriber);
 
 
+    }
+
+    public void GetExamData(final Context context,Subscriber<ExamData> subscriber,String xh){
+       ExamAPI api = retrofit.create(ExamAPI.class);
+        api.getExamData(xh, CommUtil.getMD5(xh+"apiforapp!"))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .map(new Func1<ExamData, ExamData>() {
+                    @Override
+                    public ExamData call(ExamData listHttpResult) {
+                        if(listHttpResult.getCode()==100){
+                            DBHelper.deleteAllExam();
+                            DBHelper.insertListExam(listHttpResult.getRes().getExam());
+                            PrefUtil.setBoolean(context, "isLoadExam", true);
+                        }
+                        return listHttpResult;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
     }
 
 }

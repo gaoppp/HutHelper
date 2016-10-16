@@ -38,7 +38,7 @@
             android:layout_below="@+id/au_name"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="6dp"
-            android:text="V0.7.2"
+            android:text="V0.8"
             android:textColor="@color/black"
             android:textSize="14sp" />
     </RelativeLayout>

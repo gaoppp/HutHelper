@@ -2,6 +2,7 @@ package com.gaop.huthelper.DB;
 
 import com.gaop.huthelper.MApplication;
 import com.gaop.huthelperdao.CourseGrade;
+import com.gaop.huthelperdao.Exam;
 import com.gaop.huthelperdao.Explesson;
 import com.gaop.huthelperdao.Grade;
 import com.gaop.huthelperdao.Lesson;
@@ -149,6 +150,21 @@ public class DBHelper {
 
     public static void deleteAllExpLesson() {
         MApplication.daoManager.deleteAllExpLesson();
+    }
+
+    /***************
+     * Exam
+     */
+    public static List<Exam> getExam() {
+        return MApplication.daoManager.orderAscExam();
+    }
+
+    public static void insertListExam(List<Exam> list) {
+        MApplication.daoManager.insertListExam(list);
+    }
+
+    public static void deleteAllExam() {
+        MApplication.daoManager.deleteAllExam();
     }
 
 }

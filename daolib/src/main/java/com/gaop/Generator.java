@@ -7,15 +7,27 @@ import de.greenrobot.daogenerator.Schema;
 public class Generator {
 
     public static void main(String[] args) throws Exception{
-        Schema schema=new Schema(5,"com.gaop.huthelperdao");
+        Schema schema=new Schema(6,"com.gaop.huthelperdao");
         addUser(schema);
         addLesson(schema);
         addGrade(schema);
         addNotice(schema);
         addExpLesson(schema);
+        addExam(schema);
         new DaoGenerator().generateAll(schema, "/home/gaop/Android/HutHelper1/app/src/main/java-gen");    }
 
 
+
+    private static void addExam(Schema schema){
+        Entity exam=schema.addEntity("Exam");
+        exam.addIdProperty();
+        exam.addStringProperty("CourseName");
+        exam.addStringProperty("Starttime");
+        exam.addStringProperty("EndTime");
+        exam.addStringProperty("Week_Num");
+        exam.addStringProperty("isset");
+        exam.addStringProperty("RoomName");
+    }
     private static void addNotice(Schema schema){
 
         Entity notice= schema.addEntity("Notice");

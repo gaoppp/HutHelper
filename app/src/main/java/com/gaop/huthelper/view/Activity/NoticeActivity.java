@@ -69,10 +69,10 @@ public class NoticeActivity extends BaseActivity {
     private Notice addNotice() {
 
         Notice notice = new Notice();
-        notice.setTime("2016.9.15");
+        notice.setTime("2016.10.12");
         notice.setTitle("工大助手更新");
-        notice.setContent("工大助手更新了\n1.工大导航,工大助手统一认证\n2.新增在线作业功能\n3.电费查询优化\n4.校历优化\n5.课程表优化,支持自定义增删课程\n6.二手市场,说说同步工大导航\n7.图书馆接口整理中,目前仅内网可用\n" +
-                "\n祝使用愉快。\n工大助手团队");
+        notice.setContent("工大助手更新日志\n1.工大导航,工大助手统一认证\n2.新增在线作业功能\n3.电费查询优化\n4.校历优化\n5.课程表优化,支持自定义增删课程\n6.二手市场,说说同步工大导航\n7.图书馆接口整理中,目前仅内网可用\n" +
+                "\n8.增加实验课表,在课程表中查看"+"\n祝使用愉快。\n工大助手团队");
         return notice;
     }
 
