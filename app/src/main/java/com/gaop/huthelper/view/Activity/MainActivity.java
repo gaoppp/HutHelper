@@ -294,6 +294,7 @@ public class MainActivity extends BaseActivity {
             }
         };
         HttpMethods.getInstance().checkUpdate(
+
                 new ProgressSubscriber<HttpResult<UpdateMsg>>
                         (getUpdateData, MainActivity.this));
     }
