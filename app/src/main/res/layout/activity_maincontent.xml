@@ -212,11 +212,11 @@
             android:layout_weight="1">
 
             <ImageButton
-                android:id="@+id/imgbtn_date_maincontent"
+                android:id="@+id/imgbtn_shiyan_maincontent"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bt_date" />
+                android:background="@drawable/bt_shiyan" />
 
             <ImageButton
                 android:id="@+id/imgbtn_class_maincontent"
@@ -247,11 +247,11 @@
                 android:background="@drawable/bt_homework" />
 
             <ImageButton
-                android:id="@+id/imgbtn_electric_maincontent"
+                android:id="@+id/imgbtn_kaoshi_maincontent"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bt_electric" />
+                android:background="@drawable/bt_kaoshi" />
 
             <ImageButton
 

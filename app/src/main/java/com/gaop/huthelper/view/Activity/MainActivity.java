@@ -188,7 +188,9 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.tv_nav_name, R.id.rl_nav_update, R.id.rl_nav_manage, R.id.rl_nav_share, R.id.rl_nav_fback, R.id.rl_nav_logout, R.id.imgbtn_notice_maincontent, R.id.imgbtn_course_maincontent, R.id.imgbtn_book_maincontent, R.id.imgbtn_score_maincontent, R.id.imgbtn_class_maincontent, R.id.imgbtn_date_maincontent, R.id.imgbtn_time_maincontent, R.id.imgbtn_electric_maincontent, R.id.imgbtn_public_maincontent, R.id.imgbtn_menusetting, R.id.iv_nav_set, R.id.imgbtn_ceshi_maincontent})
+    @OnClick({R.id.tv_nav_name, R.id.rl_nav_update, R.id.rl_nav_manage, R.id.rl_nav_share, R.id.rl_nav_fback, R.id.rl_nav_logout,
+            R.id.imgbtn_notice_maincontent, R.id.imgbtn_course_maincontent, R.id.imgbtn_book_maincontent, R.id.imgbtn_score_maincontent,
+            R.id.imgbtn_class_maincontent, R.id.imgbtn_shiyan_maincontent, R.id.imgbtn_time_maincontent, R.id.imgbtn_kaoshi_maincontent, R.id.imgbtn_public_maincontent, R.id.imgbtn_menusetting, R.id.iv_nav_set, R.id.imgbtn_ceshi_maincontent})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imgbtn_menusetting:
@@ -211,16 +213,16 @@ public class MainActivity extends BaseActivity {
             case R.id.imgbtn_class_maincontent:
                 startActivity(SayActivity.class);
                 break;
-            case R.id.imgbtn_date_maincontent:
-                startActivity(CalendarActivity.class);
+            case R.id.imgbtn_shiyan_maincontent:
+                startActivity(ExpLessonActivity.class);
                 break;
             case R.id.imgbtn_time_maincontent:
                 Bundle bundle1 = new Bundle();
                 bundle1.putInt("type", WebViewActivity.TYPE_EXAM);
                 startActivity(WebViewActivity.class, bundle1);
                 break;
-            case R.id.imgbtn_electric_maincontent:
-                startActivity(ElecticActivity.class);
+            case R.id.imgbtn_kaoshi_maincontent:
+                startActivity(ExamActivity.class);
                 break;
             case R.id.imgbtn_public_maincontent:
                 startActivity(MarketActivity.class);
