@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/rl_bg_maincontent"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="70dp"
         android:background="#1ddbcd">
 
         <ImageButton
@@ -17,7 +17,7 @@
             android:layout_width="21dp"
             android:layout_height="21dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="31dp"
+            android:layout_marginTop="34dp"
             android:background="@drawable/img_menu" />
 
         <TextView
@@ -49,19 +49,19 @@
     <ImageView
         android:id="@+id/iv_mainbg"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="120dp"
         android:background="@drawable/xiaomen2" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="128dp"
+        android:layout_height="112dp"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="34dp">
+            android:layout_height="28dp">
 
             <ImageView
                 android:layout_width="3dp"
@@ -151,7 +151,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="34dp">
+            android:layout_height="24dp">
 
             <ImageView
                 android:layout_width="3dp"
@@ -173,7 +173,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="2dp"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:orientation="vertical">

@@ -40,6 +40,7 @@
             android:name=".view.Activity.ImportActivity"
             android:theme="@style/AppTheme.NoActionBar">
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
         </activity>
         <activity
             android:name=".view.Activity.MainActivity"
