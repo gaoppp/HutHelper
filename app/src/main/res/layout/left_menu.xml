@@ -15,11 +15,12 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_gravity="center_horizontal"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/ic_launcher2" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/rl_nav_name"
             android:layout_marginTop="17dp">
 
             <TextView

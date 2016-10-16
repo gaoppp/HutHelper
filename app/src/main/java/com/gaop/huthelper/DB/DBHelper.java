@@ -4,6 +4,7 @@ import com.gaop.huthelper.MApplication;
 import com.gaop.huthelperdao.CourseGrade;
 import com.gaop.huthelperdao.Exam;
 import com.gaop.huthelperdao.Explesson;
+import com.gaop.huthelperdao.ExplessonDao;
 import com.gaop.huthelperdao.Grade;
 import com.gaop.huthelperdao.Lesson;
 import com.gaop.huthelperdao.LessonDao;
@@ -155,6 +156,11 @@ public class DBHelper {
     /***************
      * Exam
      */
+
+    public static List<Explesson> getExpLessonByWeek(String week, String week_no) {
+        return MApplication.daoManager.queryExpLesson(ExplessonDao.Properties.Week.eq(week), ExplessonDao.Properties.Weeks_no.eq(week_no));
+    }
+
     public static List<Exam> getExam() {
         return MApplication.daoManager.orderAscExam();
     }

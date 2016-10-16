@@ -55,7 +55,7 @@ public class ExpLessonActivity extends BaseActivity {
     @Override
     public void doBusiness(Context mContext) {
         ButterKnife.bind(this);
-        tvToolbarTitle.setText("实验课程");
+        tvToolbarTitle.setText("实验课表");
         currweek = DateUtil.getNowWeek();
         if (!PrefUtil.getBoolean(ExpLessonActivity.this, "isLoadExpLesson", false)) {
             LoadExpLesson();
@@ -138,7 +138,7 @@ public class ExpLessonActivity extends BaseActivity {
             } else {
                 tvObj.setText(explesson.getObj());
             }
-            if (Integer.valueOf(explesson.getWeeks_no()) < currweek) {
+            if (Integer.valueOf(explesson.getWeeks_no()) < currweek || (Integer.valueOf(explesson.getWeeks_no())) == currweek && DateUtil.getWeekOfToday() > Integer.valueOf(explesson.getWeek())) {
                 tvFinish.setVisibility(View.VISIBLE);
             } else {
                 tvFinish.setVisibility(View.GONE);

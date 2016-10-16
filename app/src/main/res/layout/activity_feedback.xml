@@ -24,7 +24,7 @@
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="你好，感谢使用工大助手，如遇紧急情况请加客服QQ810216626"/>
+            android:text="你好，感谢使用工大助手，请在下方填写您的问题与意见。"/>
 
         <EditText
             android:layout_marginRight="10dp"

@@ -21,7 +21,7 @@ public class SplashActivity extends Activity {
             startActivity(new Intent(SplashActivity.this,ImportActivity.class));
             finish();
         }else{
-            mainhandler.sendEmptyMessageDelayed(0, 800);
+            mainhandler.sendEmptyMessageDelayed(0, 500);
         }
     }
 

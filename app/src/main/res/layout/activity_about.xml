@@ -7,259 +7,305 @@
 
     <include layout="@layout/customtoolbar" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/au_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:src="@mipmap/ic_launcher" />
-
-        <TextView
-            android:id="@+id/au_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/au_icon"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="1dp"
-            android:text="工大助手"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/au_name"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="6dp"
-            android:text="V0.8"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="#ffffff">
-
-        <TextView
-            android:id="@+id/au_introduce"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:text="介绍"
-            android:textColor="@color/black"
-            android:textSize="22sp" />
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="1dp"
-            android:layout_below="@+id/au_introduce"
-            android:layout_centerHorizontal="true"
-            android:background="@color/background_menu_divider" />
-
-        <TextView
-            android:id="@+id/au_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/au_introduce"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:text="这款应用是湖南工大计算机学院网络组与应用开发组，为工大学生开发的产品，志于帮助同学们更加便捷的体验校园生活。"
-            android:textColor="@color/black1"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/au_team"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/au_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:text="团队"
-            android:textColor="@color/black"
-            android:textSize="22sp" />
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="1dp"
-            android:layout_below="@+id/au_team"
-            android:layout_centerHorizontal="true"
-            android:background="@color/background_menu_divider" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/au_team"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <Button
-                    android:layout_width="60dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/ed_importdata"
-                    android:gravity="center"
-                    android:text="高沛"
-                    android:textColor="#121212"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
-                    android:text="app开发"
-                    android:textColor="#121212"
-                    android:textSize="11sp" />
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <Button
-                    android:layout_width="60dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/ed_importdata"
-                    android:gravity="center"
-                    android:text="曾恒"
-                    android:textColor="#121212"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
-                    android:text="产品策划"
-                    android:textColor="#121212"
-                    android:textSize="11sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <Button
-                    android:layout_width="60dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/ed_importdata"
-                    android:gravity="center"
-                    android:text="Tony"
-                    android:textColor="#121212"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
-                    android:text="后端开发"
-                    android:textColor="#121212"
-                    android:textSize="11sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <Button
-                    android:layout_width="60dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/ed_importdata"
-                    android:gravity="center"
-                    android:text="陈大山"
-                    android:textColor="#121212"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
-                    android:text="app开发"
-                    android:textColor="#121212"
-                    android:textSize="11sp" />
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp" />
-        </RelativeLayout>
-    </RelativeLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp">
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/au_hut" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="20dp"
-                android:src="@drawable/au_net" />
+                <ImageView
+                    android:id="@+id/au_icon"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@mipmap/ic_launcher2" />
+
+                <TextView
+                    android:id="@+id/au_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/au_icon"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="1dp"
+                    android:text="工大助手"
+                    android:textColor="#404040"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/au_name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="6dp"
+                    android:text="V0.8"
+                    android:textColor="#8e8e8e"
+                    android:textSize="14dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#ffffff">
+
+                <TextView
+                    android:id="@+id/au_introduce"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="介绍"
+                    android:textColor="#404040"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/au_introduce"
+                    android:layout_centerHorizontal="true"
+                    android:background="#8e8e8e" />
+
+                <TextView
+                    android:id="@+id/au_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/au_introduce"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="提供电费、成绩、实验课以及考试安排查询。简易首次登陆，摆脱重复验证。
+优化图文说说功能，即拍即传，畅所欲言，在交互中展现精彩自我。
+开放式工大二手市场，物资云集，实名发布，当面交易。
+简洁面板设计，每一次的指尖弹跳都在使生活变得更加简单。
+
+『工大助手，简单生活，精彩自我』"
+                    android:textColor="#404040"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/au_team"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/au_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="团队"
+                    android:textColor="#404040"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/au_team"
+                    android:layout_centerHorizontal="true"
+                    android:background="#8e8e8e" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/au_team"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="50dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/ed_importdata"
+                            android:gravity="center"
+                            android:text="高沛"
+                            android:textColor="#404040"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:text="app开发"
+                            android:textColor="#404040"
+                            android:textSize="11sp" />
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="50dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/ed_importdata"
+                            android:gravity="center"
+                            android:text="曾恒"
+                            android:textColor="#404040"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:text="产品策划"
+                            android:textColor="#404040"
+                            android:textSize="11sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="50dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/ed_importdata"
+                            android:gravity="center"
+                            android:text="Tony"
+                            android:textColor="#404040"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:text="后端开发"
+                            android:textColor="#404040"
+                            android:textSize="11sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="50dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/ed_importdata"
+                            android:gravity="center"
+                            android:text="陈大山"
+                            android:textColor="#404040"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:text="app开发"
+                            android:textColor="#404040"
+                            android:textSize="11sp" />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="50dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/ed_importdata"
+                            android:gravity="center"
+                            android:text="刘春杰"
+                            android:textColor="#404040"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:text="界面设计"
+                            android:textColor="#404040"
+                            android:textSize="11sp" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/au_hut" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:src="@drawable/au_net" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="© 2016  HUT net group"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="© 2016  HUT net group"
-            android:textSize="10sp" />
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

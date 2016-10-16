@@ -7,10 +7,9 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.view.KeyEvent;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gaop.huthelper.DB.DBHelper;
@@ -52,41 +51,17 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.tv_date_maincontent)
     TextView tvDateMaincontent;
 
-    @BindView(R.id.imgbtn_menusetting)
-    ImageButton imgbtnMenusetting;
-    @BindView(R.id.rl_bg_maincontent)
-    RelativeLayout rlBgMaincontent;
-    @BindView(R.id.imgbtn_notice_maincontent)
-    TextView imgbtnNoticeMaincontent;
-    @BindView(R.id.imgbtn_course_maincontent)
-    ImageButton imgbtnCourseMaincontent;
-    @BindView(R.id.imgbtn_book_maincontent)
-    ImageButton imgbtnBookMaincontent;
-    @BindView(R.id.imgbtn_score_maincontent)
-    ImageButton imgbtnScoreMaincontent;
-    @BindView(R.id.imgbtn_class_maincontent)
-    ImageButton imgbtnClassMaincontent;
-    @BindView(R.id.imgbtn_date_maincontent)
-    ImageButton imgbtnDateMaincontent;
-    @BindView(R.id.imgbtn_time_maincontent)
-    ImageButton imgbtnTimeMaincontent;
-    @BindView(R.id.imgbtn_electric_maincontent)
-    ImageButton imgbtnElectricMaincontent;
-    @BindView(R.id.imgbtn_public_maincontent)
-    ImageButton imgbtnPublicMaincontent;
     @BindView(R.id.tv_nav_name)
     TextView tvNavName;
     @BindView(R.id.tv_tongzhi_contont)
     TextView tvTZcontent;
     @BindView(R.id.tv_tongzhi_title)
     TextView tvTZtitle;
-
     @BindView(R.id.tv_tongzhi_time)
     TextView getTvTZtime;
-    @BindView(R.id.iv_nav_set)
-    ImageView ivNavSet;
     @BindView(R.id.drawer_layout)
     DragLayout mDragLayout;
+    private long exitTime=0;
 
 
     @Override
@@ -188,9 +163,10 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.tv_nav_name, R.id.rl_nav_update, R.id.rl_nav_manage, R.id.rl_nav_share, R.id.rl_nav_fback, R.id.rl_nav_logout,
+    @OnClick({R.id.rl_nav_name, R.id.rl_nav_update, R.id.rl_nav_manage, R.id.rl_nav_share, R.id.rl_nav_fback, R.id.rl_nav_logout,
             R.id.imgbtn_notice_maincontent, R.id.imgbtn_course_maincontent, R.id.imgbtn_book_maincontent, R.id.imgbtn_score_maincontent,
-            R.id.imgbtn_class_maincontent, R.id.imgbtn_shiyan_maincontent, R.id.imgbtn_time_maincontent, R.id.imgbtn_kaoshi_maincontent, R.id.imgbtn_public_maincontent, R.id.imgbtn_menusetting, R.id.iv_nav_set, R.id.imgbtn_ceshi_maincontent})
+            R.id.imgbtn_class_maincontent, R.id.imgbtn_shiyan_maincontent, R.id.imgbtn_time_maincontent, R.id.imgbtn_kaoshi_maincontent,
+            R.id.imgbtn_public_maincontent, R.id.imgbtn_menusetting, R.id.imgbtn_ceshi_maincontent})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imgbtn_menusetting:
@@ -227,7 +203,7 @@ public class MainActivity extends BaseActivity {
             case R.id.imgbtn_public_maincontent:
                 startActivity(MarketActivity.class);
                 break;
-            case R.id.iv_nav_set:
+            case R.id.rl_nav_name:
                 startActivity(UserActivity.class);
                 break;
             case R.id.rl_nav_update:
@@ -246,7 +222,7 @@ public class MainActivity extends BaseActivity {
                 startActivity(ImportActivity.class);
                 break;
             case R.id.imgbtn_ceshi_maincontent:
-                startActivity(ExamActivity.class);
+                startActivity(MoreActivity.class);
                 //ToastUtil.showToastShort("更多内容正在开发中");
                 break;
 
@@ -320,5 +296,27 @@ public class MainActivity extends BaseActivity {
         HttpMethods.getInstance().checkUpdate(
                 new ProgressSubscriber<HttpResult<UpdateMsg>>
                         (getUpdateData, MainActivity.this));
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            // 判断间隔时间 大于2秒就退出应用
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                // 应用名
+                String msg = "再按一次返回键退出";
+                //String msg1 = "再按一次返回键回到桌面";
+                ToastUtil.showToastShort(msg);
+                // 计算两次返回键按下的时间差
+                exitTime = System.currentTimeMillis();
+            } else {
+                // 关闭应用程序
+                finish();
+                // 返回桌面操作
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -14,9 +14,8 @@
 
         <ImageButton
             android:id="@+id/imgbtn_menusetting"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_marginLeft="12dp"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
             android:layout_marginTop="34dp"
             android:background="@drawable/img_menu" />
 

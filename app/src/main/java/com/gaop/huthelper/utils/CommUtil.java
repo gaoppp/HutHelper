@@ -75,7 +75,7 @@ public class CommUtil {
      */
     public static String getNextClass(Context context) {
         if (!PrefUtil.getBoolean(context, "isLoadCourseTable", false)) {
-            return "";
+            return "暂未导入课表";
         }
         final Calendar c = Calendar.getInstance();
         int mWeek = c.get(Calendar.DAY_OF_WEEK) - 1;
@@ -98,7 +98,8 @@ public class CommUtil {
             return "今天没课了";
 
         List<Lesson> courseList = DBHelper.getLessonByWeek(String.valueOf(mWeek));
-
+        if (courseList.size() == 0)
+            return "今天没课了";
         HashMap<Integer, Lesson> LessonMap = new HashMap<>();
         for (Lesson l : courseList) {
             if (CommUtil.ifHaveCourse(l, DateUtil.getNowWeek())) {
@@ -115,10 +116,38 @@ public class CommUtil {
             if (LessonMap.get(num) != null) {
                 return "第" + num + "," + (num + 1) + "节" + LessonMap.get(num).getName() + "　" + LessonMap.get(num).getRoom();
             }
-        } while (num < 9);
+        } while (num <= 9);
 
-        return "";
+
+
+
+
+        return "获取失败 点击重试";
     }
+//    private String getNextExpLesson(Context context,int num){
+//        num=(num + 1) / 2;
+//        if (!PrefUtil.getBoolean(context, "isLoadCourseTable", false)) {
+//            return "暂未导入实验课表";
+//        }
+//        List<Explesson> explessons = DBHelper.getExpLessonByWeek(String.valueOf(DateUtil.getNowWeek()), String.valueOf(num));
+//        if(explessons.size()==0)
+//            return "今天没课了";
+//        for (Explesson l : explessons) {
+//            if (l.getDjj().equals(num))
+//                    return "第" + num + "," + (num + 1) + "节" + l.getName() + " " + l.getRoom();
+//            else
+//                    LessonMap.put(l.getDjj(), l);
+//        }
+//        do{
+//            ++num;
+//            if(num>5)
+//                return "今天没课了";
+//            if()
+//        }
+//
+//
+//
+//    }
 
     /**
      * 判断网络
@@ -220,9 +249,9 @@ public class CommUtil {
         }
     }
 
-    public static  File uri2File(Activity context,Uri uri) {
+    public static File uri2File(Activity context, Uri uri) {
         File file = null;
-        String[] proj = { MediaStore.Images.Media.DATA };
+        String[] proj = {MediaStore.Images.Media.DATA};
         Cursor actualimagecursor = context.managedQuery(uri, proj, null,
                 null, null);
         int actual_image_column_index = actualimagecursor
@@ -248,7 +277,7 @@ public class CommUtil {
         int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
         filePath = cursor.getString(columnIndex);
         cursor.close();
-        Log.e("ea",filePath);
+        Log.e("ea", filePath);
         return filePath;
     }
 
@@ -283,7 +312,7 @@ public class CommUtil {
                                         Bitmap.CompressFormat format,
                                         int rqsW, int rqsH, boolean isDelSrc) {
         Bitmap bitmap = compressBitmap(srcPath, rqsW, rqsH);
-        int num=compressImage(bitmap);
+        int num = compressImage(bitmap);
         File srcFile = new File(srcPath);
         String desPath = getImageCacheDir(context) + srcFile.getName();
         clearCropFile(desPath);
@@ -351,7 +380,7 @@ public class CommUtil {
      * @return
      */
     private static String getImageCacheDir(Context context) {
-        String dir = context.getCacheDir()+ File.separator;
+        String dir = context.getCacheDir() + File.separator;
         File file = new File(dir);
         if (!file.exists()) file.mkdirs();
         return dir;

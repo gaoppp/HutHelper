@@ -2,6 +2,7 @@ package com.gaop.huthelper.view.Activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.gaop.huthelper.R;
@@ -35,8 +36,18 @@ public class MoreActivity extends BaseActivity {
     }
 
 
-    @OnClick(R.id.imgbtn_toolbar_back)
-    public void onClick() {
-        finish();
+    @OnClick({R.id.imgbtn_toolbar_back, R.id.imgbtn_time_maincontent, R.id.imgbtn_electric_maincontent})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.imgbtn_toolbar_back:
+                finish();
+                break;
+            case R.id.imgbtn_time_maincontent:
+                startActivity(CalendarActivity.class);
+                break;
+            case R.id.imgbtn_electric_maincontent:
+                startActivity(ElecticActivity.class);
+                break;
+        }
     }
 }

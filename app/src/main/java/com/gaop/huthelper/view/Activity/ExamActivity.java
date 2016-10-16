@@ -51,7 +51,7 @@ public class ExamActivity extends BaseActivity {
     @Override
     public void doBusiness(Context mContext) {
         ButterKnife.bind(this);
-        tvToolbarTitle.setText("考试时间");
+        tvToolbarTitle.setText("考试查询");
         if (!PrefUtil.getBoolean(ExamActivity.this, "isLoadExam", false)) {
             LoadExam();
         } else {

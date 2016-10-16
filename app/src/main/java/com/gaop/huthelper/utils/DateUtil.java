@@ -227,6 +227,17 @@ public class DateUtil {
         return weekName[w];
     }
 
+    public static int getWeekOfToday() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date(System.currentTimeMillis()));
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+        dayOfWeek--;
+        if (dayOfWeek == 0)
+            return 7;
+        else
+            return dayOfWeek;
+    }
+
 
     /**
      * 获取时间

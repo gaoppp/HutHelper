@@ -474,6 +474,14 @@ public class DaoManager {
         }
     }
 
+    public List<Explesson> queryExpLesson(WhereCondition arg0,
+                                    WhereCondition... conditions) {
+        QueryBuilder<Explesson> qb = explessonDao.queryBuilder();
+        qb.where(arg0, conditions);
+        List<Explesson> personList = qb.list();
+        return personList;
+    }
+
     public void deleteAllExpLesson() {
         explessonDao.deleteAll();
     }
