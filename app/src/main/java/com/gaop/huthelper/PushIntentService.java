@@ -3,11 +3,9 @@ package com.gaop.huthelper;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
-import com.gaop.huthelper.DB.DBHelper;
+import com.gaop.huthelper.db.DBHelper;
 import com.gaop.huthelperdao.Notice;
-import com.umeng.common.UmLog;
 import com.umeng.message.UTrack;
 import com.umeng.message.UmengMessageService;
 import com.umeng.message.entity.UMessage;
@@ -19,7 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by gaop on 16-9-14.
+ * Created by 高沛 on 16-9-14.
+ * 友盟推送Service
  */
 public class PushIntentService extends UmengMessageService {
 
@@ -73,7 +72,7 @@ public class PushIntentService extends UmengMessageService {
 //                context.stopService(intent1);
 //            }
         } catch (Exception e) {
-            UmLog.e(TAG, e.getMessage());
+           // UmLog.e(TAG, e.getMessage());
         }
     }
 }

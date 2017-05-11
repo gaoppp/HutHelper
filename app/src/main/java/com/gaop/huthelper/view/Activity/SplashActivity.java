@@ -1,4 +1,4 @@
-package com.gaop.huthelper.view.Activity;
+package com.gaop.huthelper.view.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import com.gaop.huthelper.utils.PrefUtil;
 
 /**
  * 引导页Activity
- * Created by gaop1 on 2016/8/31.
+ * Created by 高沛 on 2016/8/31.
  */
 public class SplashActivity extends Activity {
 

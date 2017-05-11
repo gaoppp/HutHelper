@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_add" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_marginBottom="@dimen/dp_10"
+            android:id="@+id/rl_addgood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/bg2_list_empty"
+            android:layout_alignParentTop="true"
+            >
+
+            <TextView
+                android:id="@+id/tv_mylose_label2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="13dp"
+                android:text="商品描述"
+                android:textColor="@color/dull_grey"
+                android:textSize="15sp" />
+
+            <EditText
+                android:background="@color/transparent"
+                android:id="@+id/et_addgoods_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_mylose_label2"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="10dp"
+                android:hint="请输入留言描述作补充说明"
+                android:textColor="@color/light_grey"
+                android:textColorHint="@color/light_grey"
+                android:textSize="13sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_addgoods_imglist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/et_addgoods_content"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="10dp"
+                android:horizontalSpacing="5dp"
+                android:numColumns="2"
+                android:verticalSpacing="5dp"></android.support.v7.widget.RecyclerView>
+
+
+            <TextView
+                android:id="@+id/tv_addgoods_addpic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rv_addgoods_imglist"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="10dp"
+                android:text="添加商品图片"
+                android:textColor="@color/light_grey"
+                android:textSize="12sp" />
+            <ImageView
+                android:id="@+id/iv_mylose_line5"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/tv_addgoods_addpic"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/line_grey" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/iv_mylose_line5"
+                android:text="标题"
+                android:textColor="@color/dull_grey"
+                android:textSize="15sp" />
+
+            <EditText
+                android:layout_below="@+id/iv_mylose_line5"
+                android:id="@+id/et_addgoods_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/transparent"
+                android:hint="标题将在首页显示"
+                android:textColor="@color/light_grey"
+                android:textColorHint="@color/light_grey"
+                android:gravity="right"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/iv_mylose_line1"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/et_addgoods_title"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/line_grey" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_mylose_line1"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="10dp"
+                android:text="原价"
+                android:textColor="@color/dull_grey"
+                android:textSize="15sp" />
+
+
+            <EditText
+                android:id="@+id/et_addgoods_oldprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/iv_mylose_line1"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="12dp"
+                android:hint="请输入原价"
+                android:textColor="@color/light_grey"
+                android:gravity="right"
+                android:textSize="13sp"
+                android:background="@color/transparent"
+                android:textColorHint="@color/light_grey"
+                />
+
+            <ImageView
+                android:id="@+id/iv_mylose_line2"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/et_addgoods_oldprice"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/line_grey" />
+
+            <TextView
+                android:text="现价"
+                android:layout_below="@+id/iv_mylose_line2"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="@color/dull_grey"
+                android:textSize="15sp" />
+
+            <EditText
+                android:gravity="right"
+                android:id="@+id/et_addgoods_nowprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_mylose_line2"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="12dp"
+                android:layout_alignParentRight="true"
+                android:background="@color/transparent"
+
+                android:textColor="@color/light_grey"
+                android:textColorHint="@color/light_grey"
+                android:textSize="13sp"
+                android:hint="请输入现价"/>
+
+            <ImageView
+                android:id="@+id/iv_addgood_line3"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/et_addgoods_nowprice"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/line_grey" />
+
+
+            <TextView
+                android:id="@+id/tv_addgoods_fl"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="@color/dull_grey"
+                android:textSize="15sp"
+                android:layout_below="@+id/iv_addgood_line3"
+                android:text="分类"
+                />
+            <Spinner
+                android:layout_marginTop="@dimen/dp_10"
+                android:id="@+id/spinner_fl"
+                android:layout_width="150dp"
+                android:layout_marginLeft="150dp"
+                android:entries="@array/goodsclass"
+                android:layout_height="wrap_content"
+                android:layout_marginRight ="-20dp"
+                android:textColor="@color/light_grey"
+                android:textSize="3sp"
+                android:layout_below="@+id/iv_addgood_line3"
+                android:layout_alignEnd="@+id/iv_addgood_line3" />
+
+            <ImageView
+                android:id="@+id/iv_mylose_line6"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/spinner_fl"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/line_grey" />
+
+            <TextView
+                android:id="@+id/tv_addgoods_xj"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="@color/dull_grey"
+                android:textSize="15sp"
+                android:layout_below="@+id/iv_mylose_line6"
+                android:gravity="center_vertical"
+                android:text="成色"
+              />
+
+            <Spinner
+                android:id="@+id/spinner_xj"
+                android:layout_width="150dp"
+                android:layout_marginLeft="150dp"
+                android:layout_below="@+id/iv_mylose_line6"
+                android:entries="@array/goodsqu"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="-20dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/light_grey"
+                android:textSize="13sp"
+                android:layout_alignEnd="@+id/iv_mylose_line6" />
+            <ImageView
+                android:id="@+id/iv_addgood_line7"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/spinner_xj"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/line_grey" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_addgood_line7"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="10dp"
+                android:text="您的电话"
+                android:textColor="@color/dull_grey"
+                android:textSize="15sp"
+                 />
+
+            <EditText
+                android:gravity="right"
+                android:id="@+id/et_addgoods_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="13dp"
+                android:background="@color/transparent"
+                android:hint="电话,QQ,微信请至少填写一个"
+                android:textColor="@color/light_grey"
+                android:textColorHint="@color/light_grey"
+                android:textSize="13sp"
+                android:layout_below="@+id/iv_addgood_line7"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="12dp"
+                />
+
+
+            <ImageView
+                android:id="@+id/iv_addgoods_line4"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/et_addgoods_phone"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/line_grey" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_addgoods_line4"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="10dp"
+                android:text="您的QQ"
+                android:textColor="@color/dull_grey"
+                android:textSize="15sp" />
+
+            <EditText
+                android:gravity="right"
+                android:id="@+id/et_addgoods_qq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/iv_addgoods_line4"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/transparent"
+                android:hint="电话,QQ,微信请至少填写一个"
+                android:textColor="@color/light_grey"
+                android:textColorHint="@color/light_grey"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/iv_addgoods_line5"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/et_addgoods_qq"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/line_grey" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_addgoods_line5"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="10dp"
+                android:text="您的微信"
+                android:textColor="@color/dull_grey"
+                android:textSize="15sp" />
+
+            <EditText
+                android:gravity="right"
+                android:id="@+id/et_addgoods_wechat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/iv_addgoods_line5"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/transparent"
+                android:hint="电话,QQ,微信请至少填写一个"
+                android:textColor="@color/light_grey"
+                android:textColorHint="@color/light_grey"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/iv_addgoods_line6"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/et_addgoods_wechat"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/line_grey" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>
+

@@ -1,24 +1,20 @@
-package com.gaop.huthelper.view.Activity;
+package com.gaop.huthelper.view.activity;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.echo.holographlibrary.Bar;
-import com.echo.holographlibrary.BarGraph;
-import com.echo.holographlibrary.PieGraph;
-import com.echo.holographlibrary.PieSlice;
-import com.gaop.huthelper.DB.DBHelper;
+import com.gaop.huthelper.db.DBHelper;
 import com.gaop.huthelper.R;
-import com.gaop.huthelper.jiekou.SubscriberOnNextListener;
+import com.gaop.huthelper.model.network.api.SubscriberOnNextListener;
 import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.net.ProgressSubscriber;
 import com.gaop.huthelper.utils.PrefUtil;
 import com.gaop.huthelper.utils.ToastUtil;
+import com.gaop.huthelper.view.BarListView;
+import com.gaop.huthelper.view.CirclePie;
 import com.gaop.huthelperdao.CourseGrade;
 import com.gaop.huthelperdao.Grade;
 import com.gaop.huthelperdao.Trem;
@@ -30,7 +26,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,23 +36,18 @@ import butterknife.OnClick;
  */
 public class GradeActivity extends BaseActivity {
 
-    @BindView(R.id.btn_grade_showall)
-    Button btnGradeShowall;
-    @BindView(R.id.tv_grade_jd)
-    TextView tvGradeJd;
-    @BindView(R.id.tv_grade_avgfs)
-    TextView tvGradeAvgfs;
+    @BindView(R.id.pie_grade_xf)
+    CirclePie pieGradeXf;
+    @BindView(R.id.bar_grade_jd)
+    BarListView barGradeJd;
     @BindView(R.id.tv_grade_nopassnum)
     TextView tvGradeNopassnum;
-    @BindView(R.id.tv_grade_pie)
-    TextView tvGradePie;
+    @BindView(R.id.tv_grade_avgjd)
+    TextView tvGradeAvgjd;
     @BindView(R.id.scroll_grade_body)
     ScrollView scrollGradeBody;
-    @BindView(R.id.tv_score_empty)
-    TextView tvScoreEmpty;
-    @BindView(R.id.tv_toolbar_title)
-    TextView tvToolbarTitle;
-
+    @BindView(R.id.tv_grade_empty)
+    TextView tvGradeEmpty;
 
     @Override
     public void initParms(Bundle parms) {
@@ -65,44 +55,33 @@ public class GradeActivity extends BaseActivity {
 
     @Override
     public int bindLayout() {
-        return R.layout.activity_grade;
+        return R.layout.activity_grade_new;
     }
-
 
     @Override
     public void doBusiness(Context mContext) {
-
         ButterKnife.bind(this);
-        tvToolbarTitle.setText("成绩");
         if (!PrefUtil.getBoolean(GradeActivity.this, "isLoadGrade", false)) {
-            LoadGrade();
-
+            loadGrade();
         } else {
-            InitData();
+            initData();
         }
     }
 
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-
-    private void InitData() {
+    private void initData() {
         //获取grade
         Grade grade = DBHelper.getGradeDao().get(0);
         if (grade.getAllNum() == null || grade.getAllNum() == 0) {
             scrollGradeBody.setVisibility(View.GONE);
-            tvScoreEmpty.setVisibility(View.VISIBLE);
+            tvGradeEmpty.setVisibility(View.VISIBLE);
         } else {
-            tvGradeAvgfs.setText("" + (float) (Math.round(grade.getAvgScore() * 100)) / 100);
-            tvGradeJd.setText("" + (float) (Math.round(grade.getAvgJd() * 100)) / 100);
-            tvGradeNopassnum.setText(grade.getNoPassNum() + "/" + grade.getAllNum());
+
+            tvGradeAvgjd.setText("综合绩点     " + (float) (Math.round(grade.getAvgJd() * 100)) / 100);
+            tvGradeNopassnum.setText("总挂科数     "+grade.getNoPassNum());
 
             List<CourseGrade> gradeList = DBHelper.getCourseGradeDao();
             List<Trem> tremList = DBHelper.getTremDao();
-            //Collections.sort(tremList, Collator.getInstance(java.util.Locale.CHINA));
+
             Collections.sort(tremList, new Comparator<Trem>() {
                 public int compare(Trem list1, Trem list2) {
                     if (list1.getXN().compareTo(list2.getXN()) > 0) {
@@ -119,21 +98,7 @@ public class GradeActivity extends BaseActivity {
                 }
             });
 
-
-            PieGraph pg = (PieGraph) findViewById(R.id.graph_grade_pie);
-
-            pg.removeSlices();
-            PieSlice slice = new PieSlice();
-            slice.setColor(Color.parseColor("#99CC00"));
-            slice.setValue(grade.getGetsf());
-            pg.addSlice(slice);
-            slice = new PieSlice();
-            slice.setColor(Color.parseColor("#FFBB33"));
-            slice.setValue(grade.getNopassxf());
-            pg.addSlice(slice);
-            tvGradePie.setText("未获得学分/总学分:" + grade.getNopassxf() + "/" + grade.getAllsf());
-
-
+            pieGradeXf.setCurrNum(grade.getAllsf(),grade.getAllsf()-grade.getNopassxf());
             Map<String, Float> xf = new HashMap<>();
             Map<String, Float> allJd = new HashMap<>();
             for (Trem t : tremList) {
@@ -150,32 +115,27 @@ public class GradeActivity extends BaseActivity {
                 }
             }
 
-            String[] colors = {"#99CC00", "#FFBB33", "#7cbd7b", "#777878", "#F24949", "#a15679", "#8DCE3F", "#b9a571"};
-            ArrayList<Bar> points = new ArrayList<Bar>();
+            ArrayList<BarListView.Bar> points = new ArrayList<BarListView.Bar>();
             for (Trem t : tremList) {
-                Bar d = new Bar();
-                Random random = new Random();
-                int i = Math.abs(random.nextInt()) % 8;
-                d.setColor(Color.parseColor(colors[i]));
-                d.setName(t.getXN() + "\n第" + t.getXQ() + "学期");
-                d.setValue((float) (Math.round(allJd.get(t.getContent()) / xf.get(t.getContent()) * 100)) / 100);
+                BarListView.Bar d = barGradeJd.new Bar();
+                d.setName(t.getXN() + "第" + t.getXQ() + "学期");
+                d.setNum((float)(Math.round(allJd.get(t.getContent()) / xf.get(t.getContent()) * 100)) / 100);
                 points.add(d);
             }
-            BarGraph g = (BarGraph) findViewById(R.id.graph_grade_bar);
-            g.setBars(points);
-            g.setUnit(" ");
+            barGradeJd.setMaxValue(5F);
+            barGradeJd.setBars(points);
         }
 
 
     }
 
-    private void LoadGrade() {
+    private void loadGrade() {
         User user = DBHelper.getUserDao().get(0);
         SubscriberOnNextListener getGradeData = new SubscriberOnNextListener<String>() {
             @Override
             public void onNext(String o) {
                 if ("ok".equals(o))
-                    InitData();
+                    initData();
                 else if ("令牌错误".equals(o)) {
                     ToastUtil.showToastShort("账号异地登录，请重新登录");
                     startActivity(ImportActivity.class);
@@ -188,19 +148,24 @@ public class GradeActivity extends BaseActivity {
         );
     }
 
-
-    @OnClick({R.id.imgbtn_toolbar_back, R.id.iv_coursetable_update, R.id.btn_grade_showall})
+    @OnClick({R.id.imgbtn_toolbar_back, R.id.btn_grade_showall,R.id.imgbtn_toolbar_refresh})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imgbtn_toolbar_back:
                 finish();
                 break;
-            case R.id.iv_coursetable_update:
-                LoadGrade();
-                break;
             case R.id.btn_grade_showall:
-                startActivity(GradeListActivity.class);
+                if (PrefUtil.getBoolean(GradeActivity.this, "isLoadGrade", false)) {
+                    startActivity(GradeListActivity.class);
+                } else {
+                    ToastUtil.showToastShort("暂未导入成绩");
+                }
                 break;
+            case R.id.imgbtn_toolbar_refresh:
+                loadGrade();
+                break;
+
         }
     }
+
 }

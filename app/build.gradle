@@ -1,9 +1,27 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
-android {
-    compileSdkVersion 24
-    buildToolsVersion '24.0.2'
 
+apply from: 'tinker-support.gradle'
+android {
+    signingConfigs {
+        config {
+            keyAlias 'huthelper'
+            keyPassword '13755181843'
+            storeFile file('F:/Linux/Android/key/appkey.jks')
+            storePassword '13755181843'
+        }
+        release {
+            keyAlias 'huthelper'
+            keyPassword '13755181843'
+            storeFile file('F:/Linux/Android/key/appkey.jks')
+            storePassword '13755181843'
+        }
+    }
+    dexOptions {
+        jumboMode true
+    }
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
     sourceSets {
         main {
             java.srcDirs = ['src/main/java', 'src/main/java-gen']
@@ -13,13 +31,32 @@ android {
     defaultConfig {
         applicationId "com.gaop.huthelper"
         minSdkVersion 17
-        targetSdkVersion 23
-        versionCode 7
-        versionName "0.8"
+        targetSdkVersion 22
+        versionCode 15
+        versionName "0.8.8"
+
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }
+
     }
+    //编译
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        mybuildType {
+            debuggable false
+            jniDebuggable false
+            signingConfig signingConfigs.config
+            renderscriptDebuggable false
+            minifyEnabled true
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -28,26 +65,56 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    apt 'com.jakewharton:butterknife-compiler:8.1.0'
+    //支持库
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:cardview-v7:26.0.0-alpha1'
+    compile 'com.google.android.gms:play-services-appindexing:9.4.0'
+    compile 'com.google.android.gms:play-services-gcm:9.4.0'
+    //rxjava && retrofit
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile project(':HoloGraphLibrary')
-    compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'io.reactivex:rxjava:1.1.6'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-    compile 'com.jakewharton:butterknife:8.1.0'
-    compile 'com.google.code.gson:gson:2.7'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'de.greenrobot:greendao:2.1.0'
+    //ButterKnife
+    apt 'com.jakewharton:butterknife-compiler:8.1.0'
+    compile 'com.jakewharton:butterknife:8.1.0'
+    //Picasso--图片加载
     compile 'com.squareup.picasso:picasso:2.5.2'
+    //Gson---json解析
+    compile 'com.google.code.gson:gson:2.7'
+    //GreenDao---数据库
+    compile 'de.greenrobot:greendao:2.1.0'
+    //LRecycleView---下拉刷新
     compile 'com.github.jdsjlzx:LRecyclerView:1.0.9'
+    //友盟数据统计
     compile 'com.umeng.analytics:analytics:latest.integration'
+    //图片选取
     compile 'com.github.valuesfeng:androidpicturepicker:1.0.0'
-    compile 'com.google.android.gms:play-services-gcm:9.4.0'
+    //PhotoView----图片放大缩小
     compile 'com.github.chrisbanes:PhotoView:1.3.0'
+    //推送包
     compile project(':PushSDK')
+    //动画低版本支持
     compile 'com.nineoldandroids:library:2.4.0+'
-    compile 'com.github.yuweiguocn:GreenDaoUpgradeHelper:v1.0.1'
+    //Luban---图片压缩
     compile 'top.zibin:Luban:1.0.8'
+    //LeakCanary----内存泄漏检测
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3'
+    //腾讯Q5浏览服务
+    compile files('libs/tbs_sdk_thirdapp_v2.5.0.1031_36880_sharewithdownload_obfs_20161107_154437.jar')
+    //权限管理
+    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.7.0@aar'
+    compile 'com.android.support:multidex:1.0.1'
+    //rxlifecycle--生命周期管理
+    compile 'com.trello:rxlifecycle:1.0'
+    compile 'com.trello:rxlifecycle-android:1.0'
+    compile 'com.trello:rxlifecycle-components:1.0'
+
+    // 多dex配置
+    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    //视频播放器
+    compile project(':vitamio')
 }

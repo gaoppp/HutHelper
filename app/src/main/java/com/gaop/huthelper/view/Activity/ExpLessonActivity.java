@@ -1,93 +1,137 @@
-package com.gaop.huthelper.view.Activity;
+package com.gaop.huthelper.view.activity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.gaop.huthelper.DB.DBHelper;
+import com.gaop.huthelper.db.DBHelper;
 import com.gaop.huthelper.R;
-import com.gaop.huthelper.adapter.AutoRVAdapter;
-import com.gaop.huthelper.adapter.ViewHolder;
-import com.gaop.huthelper.jiekou.SubscriberOnNextListener;
+import com.gaop.huthelper.model.network.api.SubscriberOnNextListener;
 import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.net.ProgressSubscriber;
-import com.gaop.huthelper.utils.DateUtil;
 import com.gaop.huthelper.utils.PrefUtil;
 import com.gaop.huthelper.utils.ToastUtil;
-import com.gaop.huthelperdao.Explesson;
 import com.gaop.huthelperdao.User;
+import com.umeng.analytics.MobclickAgent;
 
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
 /**
- * Created by gaop on 16-10-9.
+ * 实验课表
+ * Created by 高沛 on 16-10-9.
  */
 
-public class ExpLessonActivity extends BaseActivity {
+public class ExpLessonActivity extends FragmentActivity {
 
+    @BindView(R.id.vPager)
+    ViewPager viewPager;
+    @BindView(R.id.imgbtn_toolbar_back)
+    ImageButton imgbtnToolbarBack;
+    @BindView(R.id.radio_group_segmented_control)
+    RadioGroup radioGroupSegmentedControl;
+    @BindViews({R.id.radio_nofinish, R.id.radio_finish})
+    List<RadioButton> segmentedControls;
     @BindView(R.id.tv_toolbar_title)
     TextView tvToolbarTitle;
-    @BindView(R.id.rv_explesson)
-    RecyclerView rvExplesson;
-    @BindView(R.id.tv_explesson_empty)
-    TextView tvExplessonEmpty;
-    private int currweek = 0;
 
+    /**
+     * 未使用BaseActivity 需要处理状态栏/导航栏
+     * @param savedInstanceState
+     */
     @Override
-    public void initParms(Bundle parms) {
-
-    }
-
-    @Override
-    public int bindLayout() {
-        return R.layout.activity_explesson;
-    }
-
-    @Override
-    public void doBusiness(Context mContext) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            // 透明状态栏
+            getWindow().addFlags(
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            // 透明导航栏
+            getWindow().addFlags(
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
+        setContentView(R.layout.activity_explesson);
         ButterKnife.bind(this);
         tvToolbarTitle.setText("实验课表");
-        currweek = DateUtil.getNowWeek();
+        doBusiness(this);
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this); //统计页面，"MainScreen"为页面名称，可自定义
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
+    public void doBusiness(Context mContext) {
+
         if (!PrefUtil.getBoolean(ExpLessonActivity.this, "isLoadExpLesson", false)) {
-            LoadExpLesson();
+            viewPager.setVisibility(View.GONE);
+            loadExpLesson();
         } else {
-            InitData();
+            initData();
         }
     }
 
-    @OnClick({R.id.imgbtn_toolbar_back, R.id.iv_explesson_update})
+    @OnClick({R.id.imgbtn_toolbar_back, R.id.imgbtn_toolbar_refresh})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imgbtn_toolbar_back:
                 finish();
                 break;
-            case R.id.iv_explesson_update:
-                LoadExpLesson();
+            case R.id.imgbtn_toolbar_refresh:
+                loadExpLesson();
                 break;
+
         }
     }
 
-    private void LoadExpLesson() {
+    //radio监听
+    @OnCheckedChanged({R.id.radio_nofinish, R.id.radio_finish})
+    public void setRadioGroupSegmentedControl(RadioButton radioButton, boolean isch) {
+        if (isch) {
+            viewPager.setCurrentItem(segmentedControls.indexOf(radioButton));
+        }
+
+    }
+
+    //导入数据
+    private void loadExpLesson() {
         User user = DBHelper.getUserDao().get(0);
         SubscriberOnNextListener getGradeData = new SubscriberOnNextListener<String>() {
             @Override
             public void onNext(String o) {
-                if ("ok".equals(o))
-                    InitData();
-                else if ("令牌错误".equals(o)) {
+                if ("ok".equals(o)) {
+                    viewPager.setVisibility(View.VISIBLE);
+                    initData();
+                } else if ("令牌错误".equals(o)) {
                     ToastUtil.showToastShort("账号异地登录，请重新登录");
-                    startActivity(ImportActivity.class);
-                } else
+                    startActivity(new Intent(ExpLessonActivity.this, ImportActivity.class));
+                    finish();
+                } else {
                     ToastUtil.showToastShort(o);
+                    finish();
+                }
             }
         };
         HttpMethods.getInstance().GetExpLessons(ExpLessonActivity.this,
@@ -95,54 +139,40 @@ public class ExpLessonActivity extends BaseActivity {
                 user.getStudentKH(), user.getRember_code());
     }
 
-    private void InitData() {
-        List<Explesson> list = DBHelper.getExpLessons();
-        Collections.sort(list);
-        if (list.size() != 0) {
-            ExpLessonAdapter adapter = new ExpLessonAdapter(ExpLessonActivity.this, list, true);
-            rvExplesson.setLayoutManager(new LinearLayoutManager(ExpLessonActivity.this, LinearLayoutManager.VERTICAL, false));
-            rvExplesson.setAdapter(adapter);
-        } else {
-            tvExplessonEmpty.setVisibility(View.VISIBLE);
-            rvExplesson.setVisibility(View.GONE);
+    /**
+     * 初始化界面
+     */
+    private void initData() {
+        final Fragment[] fragemts = new Fragment[2];
+        fragemts[0] = ExpLessonFragment.newInstance(0);
+        fragemts[1] = ExpLessonFragment.newInstance(1);
 
-        }
-
-    }
-
-    class ExpLessonAdapter extends AutoRVAdapter {
-
-        public ExpLessonAdapter(Context context, List<Explesson> list, boolean isrecyable) {
-            super(context, list, isrecyable);
-        }
-
-        @Override
-        public int onCreateViewHolder(int viewType) {
-            return R.layout.item_explesson;
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            Explesson explesson = (Explesson) list.get(position);
-            TextView tvLesson = holder.getTextView(R.id.tv_expitem_lesson);
-            TextView tvFinish = holder.getTextView(R.id.tv_expitem_finish);
-            tvLesson.setText(explesson.getLesson());
-            TextView tvObj = holder.getTextView(R.id.tv_expitem_obj);
-            holder.getTextView(R.id.tv_expitem_realtime).setText(explesson.getWeeks_no() + "周 星期" + explesson.getWeek()
-                    + " " + explesson.getReal_time());
-            holder.getTextView(R.id.tv_expitem_place).setText(explesson.getLocate());
-            holder.getTextView(R.id.tv_expitem_timesum).setText(explesson.getPeriod() + "学时");
-            holder.getTextView(R.id.tv_expitem_teacher).setText(explesson.getTeacher());
-            if (TextUtils.isEmpty(explesson.getObj())) {
-                tvObj.setVisibility(View.GONE);
-            } else {
-                tvObj.setText(explesson.getObj());
+        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return fragemts[position];
             }
-            if (Integer.valueOf(explesson.getWeeks_no()) < currweek || (Integer.valueOf(explesson.getWeeks_no())) == currweek && DateUtil.getWeekOfToday() > Integer.valueOf(explesson.getWeek())) {
-                tvFinish.setVisibility(View.VISIBLE);
-            } else {
-                tvFinish.setVisibility(View.GONE);
+
+            @Override
+            public int getCount() {
+                return fragemts.length;
             }
-        }
+        });
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                segmentedControls.get(position).setChecked(true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+        viewPager.setCurrentItem(0);
+        segmentedControls.get(0).setChecked(true);
     }
 }

@@ -1,6 +1,6 @@
-package com.gaop.huthelper.DB;
+package com.gaop.huthelper.db;
 
-import com.gaop.huthelper.MApplication;
+import com.gaop.huthelper.app.MApplication;
 import com.gaop.huthelperdao.CourseGrade;
 import com.gaop.huthelperdao.Exam;
 import com.gaop.huthelperdao.Explesson;
@@ -8,7 +8,11 @@ import com.gaop.huthelperdao.ExplessonDao;
 import com.gaop.huthelperdao.Grade;
 import com.gaop.huthelperdao.Lesson;
 import com.gaop.huthelperdao.LessonDao;
+import com.gaop.huthelperdao.Menu;
+import com.gaop.huthelperdao.MenuDao;
 import com.gaop.huthelperdao.Notice;
+import com.gaop.huthelperdao.Ranking;
+import com.gaop.huthelperdao.RankingDao;
 import com.gaop.huthelperdao.Trem;
 import com.gaop.huthelperdao.User;
 
@@ -72,6 +76,10 @@ public class DBHelper {
 
     public static void deleteAllLesson() {
         MApplication.daoManager.deleteAllLesson();
+    }
+
+    public static void deleteLessonbyImport() {
+        MApplication.daoManager.deleteLessonbyImport(LessonDao.Properties.Addbyuser.eq(false));
     }
 
     /*********************
@@ -138,6 +146,10 @@ public class DBHelper {
         MApplication.daoManager.deleteAllNotice();
     }
 
+    public static void deleteNoticeByid(Long id) {
+        MApplication.daoManager.deleteNoteiceById(id);
+    }
+
     /***************
      * ExpLesson
      */
@@ -153,14 +165,14 @@ public class DBHelper {
         MApplication.daoManager.deleteAllExpLesson();
     }
 
-    /***************
-     * Exam
-     */
 
     public static List<Explesson> getExpLessonByWeek(String week, String week_no) {
         return MApplication.daoManager.queryExpLesson(ExplessonDao.Properties.Week.eq(week), ExplessonDao.Properties.Weeks_no.eq(week_no));
     }
 
+    /***************
+     * Exam
+     */
     public static List<Exam> getExam() {
         return MApplication.daoManager.orderAscExam();
     }
@@ -173,4 +185,72 @@ public class DBHelper {
         MApplication.daoManager.deleteAllExam();
     }
 
+    /***************
+     * Menu
+     */
+
+    public static List<Menu> getMenuInMain() {
+        return MApplication.daoManager.queryMenu((MenuDao.Properties.IsMain.eq(true)));
+    }
+
+    public static List<Menu> getMenuInMainSortByIndex() {
+        return MApplication.daoManager.queryMenuSortByIndex((MenuDao.Properties.IsMain.eq(true)));
+    }
+
+    public static List<Menu> getMenuNotInMain() {
+        return MApplication.daoManager.queryMenu((MenuDao.Properties.IsMain.eq(false)));
+    }
+
+    public static void insertMenu(Menu list) {
+        MApplication.daoManager.insertMenu(list);
+    }
+
+    public static List<Menu> getMenu() {
+        return MApplication.daoManager.orderAscMenu();
+    }
+
+    public static void insertListMenu(List<Menu> list) {
+        MApplication.daoManager.insertListMenu(list);
+    }
+
+    public static void deleteAllMenu() {
+        MApplication.daoManager.deleteAllMenu();
+    }
+
+    /***************
+     * RankingApiData
+     */
+
+
+    public static void insertRanking(Ranking list) {
+        MApplication.daoManager.insertRanking(list);
+    }
+
+    public static List<Ranking> getRanking() {
+        return MApplication.daoManager.orderAscRanking();
+    }
+
+    public static void insertListRanking(List<Ranking> list) {
+        MApplication.daoManager.insertListRanking(list);
+    }
+
+    public static void deleteAllRanking() {
+        MApplication.daoManager.deleteAllRanking();
+    }
+
+    public static List<Ranking> getNjAndXnRanking() {
+        return MApplication.daoManager.queryRanking((RankingDao.Properties.ISXN.eq(true)), RankingDao.Properties.ISBJ.eq(false));
+    }
+
+    public static List<Ranking> getNjAndXqRanking() {
+        return MApplication.daoManager.queryRanking((RankingDao.Properties.ISXN.eq(false)), RankingDao.Properties.ISBJ.eq(false));
+    }
+
+    public static List<Ranking> getBjAndXnRanking() {
+        return MApplication.daoManager.queryRanking((RankingDao.Properties.ISXN.eq(true)), RankingDao.Properties.ISBJ.eq(true));
+    }
+
+    public static List<Ranking> getBjAndXqRanking() {
+        return MApplication.daoManager.queryRanking((RankingDao.Properties.ISXN.eq(false)), RankingDao.Properties.ISBJ.eq(true));
+    }
 }

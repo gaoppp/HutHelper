@@ -1,74 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:background="#efefef"
-    android:layout_height="match_parent">
-    <include layout="@layout/customtoolbar"
-        android:id="@+id/rl_bg_maincontent"
-        />
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_grey"
+    android:orientation="vertical">
 
-    <ImageView
+    <include
+        android:id="@+id/rl_bg_maincontent"
+        layout="@layout/toolbar_nomenu" />
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        />
-    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp">
+
         <TextView
             android:id="@+id/tv_feedback_msg"
-            android:textSize="16sp"
-            android:textColor="#404040"
-            android:paddingTop="40dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="你好，感谢使用工大助手，请在下方填写您的问题与意见。"/>
+            android:text="留言"
+            android:textColor="#adadad"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="10dp"
+            android:background="#dbdbdb" />
 
         <EditText
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:padding="15dp"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/et_feeback"
-            android:layout_below="@+id/tv_feedback_msg"
+            android:gravity="left|top"
+            android:id="@+id/et_feedbk_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/transparent"
+            android:hint="请输入反馈意见..."
+            android:minLines="5"
+            android:textColor="#404040"
+            android:textColorHint="#404040"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="联系"
+            android:textColor="#adadad"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="10dp"
+            android:background="#dbdbdb" />
+
+        <EditText
+            android:gravity="left|top"
             android:id="@+id/et_feedbk_tel"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="联系方式"
-            android:maxLines="1"
-            android:singleLine="true" />
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/transparent"
+            android:hint="请输入联系方式以便与你取得联系..."
+            android:textColor="#404040"
+            android:textColorHint="#404040"
+            android:textSize="15dp" />
+    </LinearLayout>
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_below="@+id/et_feedbk_tel"
-            android:id="@+id/et_feedbk_content"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:padding="15dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/et_feeback"
-            android:hint="反馈内容"
-            android:imeActionId="@+id/login"
-            android:minLines="5"
-            />
 
-        <Button
-            android:id="@+id/btn_feedbk_ok"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="提交"
-            android:background="@drawable/ed_importdata"
-            android:layout_marginRight="10dp"
-            android:layout_below="@+id/et_feedbk_content"
-            android:layout_alignEnd="@+id/et_feedbk_content"
-            android:layout_marginTop="27dp"
-            android:layout_marginBottom="40dp"/>
-
-    </RelativeLayout>
-
+    <Button
+        android:id="@+id/btn_feedbk_ok"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_maincolor"
+        android:text="提交" />
 
 
 

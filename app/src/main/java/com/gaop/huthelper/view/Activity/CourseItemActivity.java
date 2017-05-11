@@ -1,4 +1,4 @@
-package com.gaop.huthelper.view.Activity;
+package com.gaop.huthelper.view.activity;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
-import com.gaop.huthelper.DB.DBHelper;
+import com.gaop.huthelper.db.DBHelper;
 import com.gaop.huthelper.R;
 import com.gaop.huthelper.utils.ToastUtil;
 import com.gaop.huthelperdao.Lesson;
@@ -21,7 +21,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by gaop1 on 2016/7/29.
+ * 课程详情
+ * Created by 高沛 on 2016/7/29.
  */
 public class CourseItemActivity extends BaseActivity {
 
@@ -33,13 +34,12 @@ public class CourseItemActivity extends BaseActivity {
     TextView tvCourseTime;
     @BindView(R.id.tv_course_week)
     TextView tvCourseWeek;
-
-    Lesson lesson;
     @BindView(R.id.tv_course_classroom)
     TextView tvCourseClassroom;
     @BindView(R.id.tv_toolbar_title)
     TextView tvToolbarTitle;
 
+    private Lesson lesson;
 
     private List<Long> IdList = new ArrayList<>();
 
@@ -104,11 +104,17 @@ public class CourseItemActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.imgbtn_toolbar_back, R.id.iv_courseitem_delete})
+    @OnClick({R.id.imgbtn_toolbar_back, R.id.iv_courseitem_edit, R.id.iv_courseitem_delete})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imgbtn_toolbar_back:
                 finish();
+                break;
+            case R.id.iv_courseitem_edit:
+                Bundle bundle = new Bundle();
+                bundle.putInt("type", 0);
+                bundle.putSerializable("lesson", lesson);
+                startActivity(AddCourseActivity.class, bundle);
                 break;
             case R.id.iv_courseitem_delete:
                 dialog();

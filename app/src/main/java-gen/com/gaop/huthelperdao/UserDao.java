@@ -36,6 +36,8 @@ public class UserDao extends AbstractDao<User, Long> {
         public final static Property Last_login = new Property(10, String.class, "last_login", false, "LAST_LOGIN");
         public final static Property Login_cnt = new Property(11, String.class, "login_cnt", false, "LOGIN_CNT");
         public final static Property Sex = new Property(12, String.class, "sex", false, "SEX");
+        public final static Property Head_pic = new Property(13, String.class, "head_pic", false, "HEAD_PIC");
+        public final static Property Head_pic_thumb = new Property(14, String.class, "head_pic_thumb", false, "HEAD_PIC_THUMB");
     };
 
 
@@ -63,7 +65,9 @@ public class UserDao extends AbstractDao<User, Long> {
                 "\"ACTIVE\" TEXT," + // 9: active
                 "\"LAST_LOGIN\" TEXT," + // 10: last_login
                 "\"LOGIN_CNT\" TEXT," + // 11: login_cnt
-                "\"SEX\" TEXT);"); // 12: sex
+                "\"SEX\" TEXT," + // 12: sex
+                "\"HEAD_PIC\" TEXT," + // 13: head_pic
+                "\"HEAD_PIC_THUMB\" TEXT);"); // 14: head_pic_thumb
     }
 
     /** Drops the underlying database table. */
@@ -141,6 +145,16 @@ public class UserDao extends AbstractDao<User, Long> {
         if (sex != null) {
             stmt.bindString(13, sex);
         }
+ 
+        String head_pic = entity.getHead_pic();
+        if (head_pic != null) {
+            stmt.bindString(14, head_pic);
+        }
+ 
+        String head_pic_thumb = entity.getHead_pic_thumb();
+        if (head_pic_thumb != null) {
+            stmt.bindString(15, head_pic_thumb);
+        }
     }
 
     /** @inheritdoc */
@@ -165,7 +179,9 @@ public class UserDao extends AbstractDao<User, Long> {
             cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // active
             cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // last_login
             cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // login_cnt
-            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12) // sex
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // sex
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // head_pic
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14) // head_pic_thumb
         );
         return entity;
     }
@@ -186,6 +202,8 @@ public class UserDao extends AbstractDao<User, Long> {
         entity.setLast_login(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
         entity.setLogin_cnt(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
         entity.setSex(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setHead_pic(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setHead_pic_thumb(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
      }
     
     /** @inheritdoc */

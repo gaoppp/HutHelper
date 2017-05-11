@@ -2,58 +2,65 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EDEDED"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
     android:orientation="vertical">
-
-    <RelativeLayout
+   <include layout="@layout/toolbar_refresh"/>
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="@color/bg_grey"/>
+    <LinearLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:background="#1ddbcd">
-
-        <ImageButton
-            android:id="@+id/imgbtn_toolbar_back"
-            android:layout_width="wrap_content"
-            android:layout_height="21dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="31dp"
-            android:background="@mipmap/ic_back" />
-
-        <TextView
-            android:id="@+id/tv_toolbar_title"
-            android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RadioGroup
+            android:id="@+id/radio_group_segmented_control"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="31dp"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:orientation="horizontal">
+            <RadioButton
+                android:drawableBottom="@drawable/bg_radiobutton"
+                android:drawablePadding="5dp"
+                android:gravity="center_horizontal|top"
+                android:checked="true"
+                android:layout_marginRight="40dp"
+                android:textSize="16dp"
+                android:textColor="@color/colorPrimary"
+                android:button="@null"
+                android:id="@+id/radio_nofinish"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:text="未完成"
+                tools:checked="true" />
+            <RadioButton
+                android:gravity="center_horizontal|top"
+                android:layout_marginLeft="40dp"
+                android:textSize="16dp"
+                android:textColor="@color/colorPrimary"
+                android:button="@null"
+                android:id="@+id/radio_finish"
+                android:drawableBottom="@drawable/bg_radiobutton"
+                android:drawablePadding="5dp"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:text="已完成" />
+        </RadioGroup>
+    </LinearLayout>
 
-        <ImageView
-            android:id="@+id/iv_explesson_update"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginTop="31dp"
-            android:src="@mipmap/ic_update" />
-    </RelativeLayout>
 
-
-    <android.support.v7.widget.RecyclerView
-        android:background="#efefef"
-        android:id="@+id/rv_explesson"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-
-    <TextView
-        android:id="@+id/tv_explesson_empty"
-        android:layout_width="match_parent"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vPager"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:gravity="center"
-        android:text="暂时还没有实验课数据"
-        android:textSize="20sp"
-        android:visibility="gone" />
+        android:layout_gravity="center"
+        android:background="#000000"
+        android:flipInterval="30"
+        android:persistentDrawingCache="animation"
+        />
 
 </LinearLayout>

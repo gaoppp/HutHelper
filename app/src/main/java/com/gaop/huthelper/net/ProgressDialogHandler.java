@@ -6,7 +6,7 @@ import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
 
-import com.gaop.huthelper.PinWheel.PinWheelDiolog;
+import com.gaop.huthelper.PinWheel.LoadingDiolog;
 
 /**
  * 处理网络访问Dialog Handler
@@ -14,9 +14,10 @@ import com.gaop.huthelper.PinWheel.PinWheelDiolog;
  */
 public class ProgressDialogHandler extends Handler {
 
+
     public static final int SHOW_PROGRESS_DIALOG = 1;
     public static final int DISMISS_PROGRESS_DIALOG = 2;
-    private PinWheelDiolog pd;
+    private LoadingDiolog pd;
 
     private Context context;
     private boolean cancelable;
@@ -28,13 +29,13 @@ public class ProgressDialogHandler extends Handler {
         this.context = context;
         this.progressCancelListener = progressCancelListener;
         this.cancelable = cancelable;
+
     }
 
     private void initProgressDialog() {
         if (pd == null) {
-            pd = new PinWheelDiolog(context);
+            pd = new LoadingDiolog(context);
             pd.setCancelable(cancelable);
-
             if (cancelable) {
                 pd.setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override

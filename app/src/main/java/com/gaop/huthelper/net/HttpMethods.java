@@ -3,41 +3,54 @@ package com.gaop.huthelper.net;
 
 import android.content.Context;
 
-import com.gaop.huthelper.DB.DBHelper;
-import com.gaop.huthelper.Model.DepInfo;
-import com.gaop.huthelper.Model.Electric;
-import com.gaop.huthelper.Model.ExamData;
-import com.gaop.huthelper.Model.Goods;
-import com.gaop.huthelper.Model.GoodsListItem;
-import com.gaop.huthelper.Model.HttpResult;
-import com.gaop.huthelper.Model.MyGoodsItem;
-import com.gaop.huthelper.Model.SayData;
-import com.gaop.huthelper.Model.UpdateMsg;
-import com.gaop.huthelper.jiekou.AddGoodsAPI;
-import com.gaop.huthelper.jiekou.AddSayLikeAPI;
-import com.gaop.huthelper.jiekou.AllClassAPI;
-import com.gaop.huthelper.jiekou.ChangeUserNameAPI;
-import com.gaop.huthelper.jiekou.CourseTableAPI;
-import com.gaop.huthelper.jiekou.DeleteGoodAPI;
-import com.gaop.huthelper.jiekou.ElectricAPI;
-import com.gaop.huthelper.jiekou.ExamAPI;
-import com.gaop.huthelper.jiekou.FeedBackAPI;
-import com.gaop.huthelper.jiekou.FileUploadAPI;
-import com.gaop.huthelper.jiekou.GetExpLessonAPI;
-import com.gaop.huthelper.jiekou.GoodListAPI;
-import com.gaop.huthelper.jiekou.GoodsAPI;
-import com.gaop.huthelper.jiekou.GradeAPI;
-import com.gaop.huthelper.jiekou.MyGoodListAPI;
-import com.gaop.huthelper.jiekou.SayAPI;
-import com.gaop.huthelper.jiekou.UpdateAPI;
-import com.gaop.huthelper.jiekou.UserDataAPI;
+import com.gaop.huthelper.db.DBHelper;
+import com.gaop.huthelper.model.entity.CareerTalkData;
+import com.gaop.huthelper.model.entity.CareerTalkItem;
+import com.gaop.huthelper.model.entity.Electric;
+import com.gaop.huthelper.model.entity.ExamData;
+import com.gaop.huthelper.model.entity.Goods;
+import com.gaop.huthelper.model.entity.GoodsListItem;
+import com.gaop.huthelper.model.entity.HttpResult;
+import com.gaop.huthelper.model.entity.Lose;
+import com.gaop.huthelper.model.entity.OfferData;
+import com.gaop.huthelper.model.entity.PageData;
+import com.gaop.huthelper.model.entity.RankingApiData;
+import com.gaop.huthelper.model.entity.Say;
+import com.gaop.huthelper.model.entity.UpdateMsg;
+import com.gaop.huthelper.model.entity.VideoData;
+import com.gaop.huthelper.model.entity.WeatherData;
+import com.gaop.huthelper.model.network.api.AddGoodsAPI;
+import com.gaop.huthelper.model.network.api.AddSayLikeAPI;
+import com.gaop.huthelper.model.network.api.CareerTalkAPI;
+import com.gaop.huthelper.model.network.api.ChangeUserNameAPI;
+import com.gaop.huthelper.model.network.api.CourseTableAPI;
+import com.gaop.huthelper.model.network.api.DeleteGoodAPI;
+import com.gaop.huthelper.model.network.api.ElectricAPI;
+import com.gaop.huthelper.model.network.api.ExamAPI;
+import com.gaop.huthelper.model.network.api.FeedBackAPI;
+import com.gaop.huthelper.model.network.api.FileUploadAPI;
+import com.gaop.huthelper.model.network.api.GetExpLessonAPI;
+import com.gaop.huthelper.model.network.api.GoodListAPI;
+import com.gaop.huthelper.model.network.api.GoodsAPI;
+import com.gaop.huthelper.model.network.api.GradeAPI;
+import com.gaop.huthelper.model.network.api.LoseAPI;
+import com.gaop.huthelper.model.network.api.MyGoodListAPI;
+import com.gaop.huthelper.model.network.api.OfferAPI;
+import com.gaop.huthelper.model.network.api.RankingDataAPI;
+import com.gaop.huthelper.model.network.api.SayAPI;
+import com.gaop.huthelper.model.network.api.UpdateAPI;
+import com.gaop.huthelper.model.network.api.UserDataAPI;
+import com.gaop.huthelper.model.network.api.VideoAPI;
+import com.gaop.huthelper.model.network.api.WeatherAPI;
 import com.gaop.huthelper.utils.CommUtil;
 import com.gaop.huthelper.utils.PrefUtil;
 import com.gaop.huthelper.utils.ToastUtil;
 import com.gaop.huthelperdao.CourseGrade;
+import com.gaop.huthelperdao.Exam;
 import com.gaop.huthelperdao.Explesson;
 import com.gaop.huthelperdao.Grade;
 import com.gaop.huthelperdao.Lesson;
+import com.gaop.huthelperdao.Ranking;
 import com.gaop.huthelperdao.Trem;
 import com.gaop.huthelperdao.User;
 
@@ -61,14 +74,15 @@ import rx.schedulers.Schedulers;
 
 /**
  * 网络封装
- * Created by 高沛 on 2016/7/24.
+ * Created by 高沛 on 2016/7/24
  */
 public class HttpMethods {
+
     public static final String BASE_URL = "http://218.75.197.121:8888/";
 
     private static final int DEFAULT_TIMEOUT = 5;
 
-    private Retrofit retrofit;
+    private static Retrofit retrofit;
 
     //构造方法私有
     private HttpMethods() {
@@ -93,6 +107,22 @@ public class HttpMethods {
         private static final HttpMethods INSTANCE = new HttpMethods();
     }
 
+    public static Retrofit getRetrofit() {
+        if (retrofit == null) {
+            OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
+            httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+
+            retrofit = new Retrofit.Builder()
+                    .client(httpClientBuilder.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .baseUrl(BASE_URL)
+                    .build();
+        }
+        retrofit.baseUrl();
+        return retrofit;
+    }
+
     /**
      * 获取单例
      */
@@ -110,7 +140,25 @@ public class HttpMethods {
     public void getElecticData(Subscriber<Electric> subscriber, String lou, String hao) {
         ElectricAPI electricAPI;
         electricAPI = retrofit.create(ElectricAPI.class);
+
         electricAPI.electricData(lou, hao)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+
+
+    }
+
+    /**
+     * 分页获取失物招领
+     *
+     * @param subscriber
+     * @param pagenum    页码 从1开始
+     */
+    public void getLose(Subscriber<HttpResult<PageData<Lose>>> subscriber, int pagenum) {
+        LoseAPI loseAPI = retrofit.create(LoseAPI.class);
+        loseAPI.getLosesList(pagenum)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -118,21 +166,73 @@ public class HttpMethods {
     }
 
     /**
-     * 分页获取商品列表
+     * 获取指定id的失物招领
      *
      * @param subscriber
-     * @param pagenum    页码
+     * @param user_id
      */
-    public void getGoodsList(Subscriber<GoodsListItem[]> subscriber, int pagenum) {
+    public void getLoseListById(Subscriber<HttpResult<PageData<Lose>>> subscriber, String user_id) {
 
-        GoodListAPI goodListAPI = retrofit.create(GoodListAPI.class);
-        goodListAPI.getGoodsList(pagenum)
+        LoseAPI ListAPI = retrofit.create(LoseAPI.class);
+        ListAPI.getLoseListById(user_id)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 删除失物招领`
+     *
+     * @param subscriber
+     * @param num
+     * @param code
+     * @param id
+     */
+    public void deleteLose(Subscriber<HttpResult> subscriber, String num, String code, String id) {
+        LoseAPI api = retrofit.create(LoseAPI.class);
+        api.deleteLose(num, code, id)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
 
     }
+
+    /**
+     * 发布失物招领
+     *
+     * @param subscriber
+     * @param user
+     * @param attr
+     */
+    public void addLose(Subscriber<HttpResult<String>> subscriber, User user, String title, String locate, String time,
+                        String content, String attr, String phone, String qq, String wechat) {
+        LoseAPI API = retrofit.create(LoseAPI.class);
+        API.addLose(user.getStudentKH(), user.getRember_code(), title, locate, time, content, attr, phone, qq, wechat)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 上传失物招领图片
+     *
+     * @param subscriber
+     * @param des
+     * @param bodyMap
+     */
+    public void UploadLoseImag(Subscriber<HttpResult<String>> subscriber, String des, MultipartBody.Part bodyMap) {
+        LoseAPI fileUploadService = retrofit.create(LoseAPI.class);
+        fileUploadService.uploadImage(bodyMap)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
 
     /**
      * 分页获取说说列表
@@ -140,7 +240,7 @@ public class HttpMethods {
      * @param subscriber
      * @param pagenum
      */
-    public void getSayList(Subscriber<HttpResult<SayData>> subscriber, int pagenum) {
+    public void getSayList(Subscriber<HttpResult<PageData<Say>>> subscriber, int pagenum) {
 
         SayAPI sayListAPI = retrofit.create(SayAPI.class);
         sayListAPI.getSayList(pagenum)
@@ -156,7 +256,7 @@ public class HttpMethods {
      * @param subscriber
      * @param user_id
      */
-    public void getMySayList(Subscriber<HttpResult<SayData>> subscriber, String user_id) {
+    public void getMySayList(Subscriber<HttpResult<PageData<Say>>> subscriber, String user_id) {
 
         SayAPI sayListAPI = retrofit.create(SayAPI.class);
         sayListAPI.getSayListById(user_id)
@@ -166,8 +266,9 @@ public class HttpMethods {
                 .subscribe(subscriber);
     }
 
+
     /**
-     * 点赞说说
+     * 点赞/取消说说
      *
      * @param subscriber
      * @param num
@@ -178,6 +279,15 @@ public class HttpMethods {
 
         AddSayLikeAPI sayListAPI = retrofit.create(AddSayLikeAPI.class);
         sayListAPI.likeSay(num, code, id)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void getLikedSays(Subscriber<HttpResult<List<String>>> subscriber, String num, String code) {
+        AddSayLikeAPI sayListAPI = retrofit.create(AddSayLikeAPI.class);
+        sayListAPI.getAllLikeSay(num, code)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -239,6 +349,24 @@ public class HttpMethods {
                 .subscribe(subscriber);
     }
 
+
+    /**
+     * 分页获取商品列表
+     *
+     * @param subscriber
+     * @param pagenum    页码
+     */
+    public void getGoodsList(Subscriber<GoodsListItem[]> subscriber, int pagenum) {
+
+        GoodListAPI goodListAPI = retrofit.create(GoodListAPI.class);
+        goodListAPI.getGoodsList(pagenum)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+
+    }
+
     /**
      * 获取我的商品
      *
@@ -246,7 +374,7 @@ public class HttpMethods {
      * @param num
      * @param rember_code
      */
-    public void getMyGoodsList(Subscriber<HttpResult<List<MyGoodsItem>>> subscriber, String num, String rember_code) {
+    public void getMyGoodsList(Subscriber<ResponseBody> subscriber, String num, final String rember_code) {
         MyGoodListAPI goodListAPI = retrofit.create(MyGoodListAPI.class);
         goodListAPI.getMyGoodsList(num, rember_code)
                 .subscribeOn(Schedulers.io())
@@ -278,11 +406,12 @@ public class HttpMethods {
      *
      * @param subscriber
      * @param num
-     * @param rember_code
-     * @param id
+     * @param rember_code 校验码
+     * @param id          商品id
      */
     public void getGoodsContent(Subscriber<HttpResult<Goods>> subscriber, String num, String rember_code, String id) {
 
+        // Observable d=Observable.from("")
         GoodsAPI goodsAPI = retrofit.create(GoodsAPI.class);
         goodsAPI.getGoodsContent(num, rember_code, id).
                 subscribeOn(Schedulers.io())
@@ -302,14 +431,13 @@ public class HttpMethods {
 
         String sha1 = CommUtil.SHA1(user.getStudentKH() + user.getRember_code() + "f$Z@%");
         gradeAPI.getGrade(user.getStudentKH(), user.getRember_code(), sha1)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .map(new Func1<HttpResult<List<CourseGrade>>, String>() {
                     @Override
                     public String call(HttpResult<List<CourseGrade>> studentGrade) {
-
                         if (studentGrade.getMsg().equals("ok")) {
+                            List<CourseGrade> firstTestList = new ArrayList<CourseGrade>();
+                            List<CourseGrade> cxTestList = new ArrayList<CourseGrade>();
+                            List<CourseGrade> firstnoPassList = new ArrayList<CourseGrade>();
 
                             Grade Allgrade = new Grade();
                             float allsf = 0;//所选学分
@@ -322,78 +450,182 @@ public class HttpMethods {
                             int allNum = 0;//总数目
                             Set<Trem> trim = new HashSet<Trem>();
                             if (studentGrade.getData() != null && studentGrade.getData().size() != 0) {
-
-                                //处理成绩数据并存入数据库
-                                for (CourseGrade grade : studentGrade.getData()) {
+                                for (CourseGrade cg : studentGrade.getData()) {
+                                    //获取学期
                                     Trem trem = new Trem();
-                                    trem.setContent(grade.getXN() + "学年第" + grade.getXQ() + "学期");
-                                    trem.setXN(grade.getXN());
-                                    trem.setXQ(grade.getXQ());
+                                    trem.setContent(cg.getXN() + "学年第" + cg.getXQ() + "学期");
+                                    trem.setXN(cg.getXN());
+                                    trem.setXQ(cg.getXQ());
                                     trim.add(trem);
-                                    if (grade.getCXBJ() == null)
-                                        grade.setCXBJ("0");
-                                    if ("0".equals(grade.getCXBJ())) {
-                                        allsf = allsf + Float.valueOf(grade.getXF());
-                                        allNum++;
+                                    //区分正考与重修科目
+                                    if (cg.getCXBJ() == null)
+                                        cg.setCXBJ("0");
+                                    //将重修与正考的分别存到不同的list
+                                    if (cg.getCXBJ().equals("0"))
+                                        firstTestList.add(cg);
+                                    else
+                                        cxTestList.add(cg);
+                                }
+                                //遍历正考list
+                                for (CourseGrade cg : firstTestList) {
+                                    //总科目与总学分累加
+                                    allNum++;
+                                    allsf += Float.valueOf(cg.getXF());
+                                    //获取最大成绩
+                                    Float g;
+                                    if (cg.getBKCJ() != null) {
+                                        g = Math.max(Float.valueOf(cg.getZSCJ()), Float.valueOf(cg.getBKCJ()));
+                                    } else {
+                                        g = Float.valueOf(cg.getZSCJ());
+                                    }
+                                    //考虑绩点为null 根据分数计算绩点
+                                    if (cg.getJD() == null || cg.getJD().equals("0")) {
+                                        if (g >= 60) {
+                                            cg.setJD((g - 50) / 10 + "");
+                                        } else {
+                                            cg.setJD("0");
+                                        }
+                                    }
+                                    //成绩与学分绩点累加
+                                    allScore += g;
+                                    allJd += Float.valueOf(cg.getXF()) * Float.valueOf(cg.getJD());
+                                    //通过科目累加获得学分，未通过科目累加未通过科目与未通过学分，并添加到正考未通过泪飙
+                                    if (g >= 60) {
+                                        getsf += Float.valueOf(cg.getXF());
+                                    } else {
+                                        noPassNum++;
+                                        firstnoPassList.add(cg);
+                                        nopassxf += Float.valueOf(cg.getXF());
+                                    }
+                                }
+                                //遍历重修列表
+                                for (CourseGrade cg : cxTestList) {
+                                    boolean isHave = false;
+                                    //判断是否在正考未通过列表（转专业学生的一些科目没有正考，只有重修）
+                                    for (CourseGrade g : firstnoPassList) {
+                                        if (g.getKCMC().equals(cg.getKCMC())) {
+                                            isHave = true;
+                                            break;
+                                        }
                                     }
                                     Float g;
-                                    if (grade.getBKCJ() != null) {
-                                        g = Math.max(Float.valueOf(grade.getZSCJ()), Float.valueOf(grade.getBKCJ()));
+                                    if (cg.getBKCJ() != null) {
+                                        g = Math.max(Float.valueOf(cg.getZSCJ()), Float.valueOf(cg.getBKCJ()));
                                     } else {
-                                        g = Float.valueOf(grade.getZSCJ());
+                                        g = Float.valueOf(cg.getZSCJ());
                                     }
 
-
-                                    if (grade.getJD() == null || grade.getJD().equals("0")) {
-
+                                    //考虑绩点为null 根据分数计算绩点
+                                    if (cg.getJD() == null || cg.getJD().equals("0")) {
                                         if (g >= 60) {
-                                            grade.setJD((g - 50) / 10 + "");
+                                            cg.setJD((g - 50) / 10 + "");
                                         } else {
-                                            grade.setJD("0");
+                                            cg.setJD("0");
                                         }
                                     }
+                                    //累加成绩与学分绩点
+                                    allScore += g;
+                                    allJd += Float.valueOf(cg.getXF()) * Float.valueOf(cg.getJD());
+                                    //有正考记录的，通过则将未通过科目减1，学分，重修学分减
+                                    if (isHave) {
+                                        if (g >= 60) {
+                                            noPassNum--;
+                                            nopassxf -= Float.valueOf(cg.getXF());
+                                            cxsf = cxsf + Float.valueOf(cg.getXF());
+                                        } else {
 
-                                    allJd += Float.valueOf(grade.getXF()) * Float.valueOf(grade.getJD());
-
-
-                                    if (g >= 60) {
-                                        getsf = getsf + Float.valueOf(grade.getXF());
-                                        allScore += g;
-                                        if ("1".equals(grade.getCXBJ())) {
-                                            cxsf = cxsf + Float.valueOf(grade.getXF());
-                                            nopassxf -= Float.valueOf(grade.getXF());
-                                            --noPassNum;
                                         }
                                     } else {
-                                        if ("0".equals(grade.getCXBJ())) {
-                                            ++noPassNum;
-                                            nopassxf += Float.valueOf(grade.getXF());
+                                        //没有正考记录（转专业的） 科目累加
+                                        allNum++;
+                                        allsf += Float.valueOf(cg.getXF());
+                                        //处理通过与未通过
+                                        if (g >= 60) {
+                                            cxsf = cxsf + Float.valueOf(cg.getXF());
+                                            getsf += Float.valueOf(cg.getXF());
+                                        } else {
+                                            noPassNum++;
+                                            nopassxf += Float.valueOf(cg.getXF());
                                         }
                                     }
                                 }
-
+                                //保存
                                 Allgrade.setAllsf(allsf);
                                 Allgrade.setNoPassNum(noPassNum);
                                 Allgrade.setGetsf(getsf);
                                 Allgrade.setCxsf(cxsf);
                                 Allgrade.setNopassxf(nopassxf);
                                 Allgrade.setAllNum(allNum);
-                                Allgrade.setAvgScore(allScore / (studentGrade.getData().size() - noPassNum));
+                                Allgrade.setAvgScore(allScore / (studentGrade.getData().size()));
                                 Allgrade.setAvgJd(allJd / allsf);
                             }
+                            //数据库保存
                             DBHelper.deleteAllCourseGrade();
                             DBHelper.deleteAllTrem();
                             DBHelper.deleteAllGrade();
                             DBHelper.insertGradeDao(Allgrade);
                             DBHelper.insertCourseGradeList(studentGrade.getData());
                             DBHelper.insertTremList(new ArrayList(trim));
-                            PrefUtil.setBoolean(context, "isLoadGrade", true);
-
+                            //设置导入标记
+                            //PrefUtil.setBoolean(context, "isLoadGrade", true);
                         }
                         return studentGrade.getMsg();
                     }
-                })
+                }).subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+
                 .subscribe(subscriber);
+    }
+
+    public void getRankingData(final Context context, Subscriber<String> subscriber, User user) {
+        RankingDataAPI api = retrofit.create(RankingDataAPI.class);
+        api.getRankingData(user.getStudentKH(), user.getRember_code())
+                .map(new Func1<RankingApiData, String>() {
+                    @Override
+                    public String call(RankingApiData rankingApiData) {
+                        if ("ok".equals(rankingApiData.getMsg())) {
+                            DBHelper.deleteAllRanking();
+                            // 班级学年
+                            List<Ranking> bjXn = rankingApiData.getData().get(1);
+                            for (Ranking r : bjXn) {
+                                r.setISBJ(true);
+                                r.setISXN(true);
+                            }
+                            DBHelper.insertListRanking(bjXn);
+                            //班级学期
+                            List<Ranking> bjXq = rankingApiData.getData().get(2);
+                            for (Ranking r : bjXq) {
+                                r.setISBJ(true);
+                                r.setISXN(false);
+                            }
+                            DBHelper.insertListRanking(bjXq);
+                            //年级学年
+                            List<Ranking> njXn = rankingApiData.getNdata().get(1);
+                            for (Ranking r : njXn) {
+                                r.setISXN(true);
+                                r.setISBJ(false);
+                            }
+                            DBHelper.insertListRanking(njXn);
+                            //年级学期
+                            List<Ranking> njXq = rankingApiData.getNdata().get(2);
+
+                            for (Ranking r : njXq) {
+                                r.setISXN(false);
+                                r.setISBJ(false);
+                            }
+                            DBHelper.insertListRanking(njXq);
+
+                            //设置导入标记
+                            PrefUtil.setBoolean(context, "isLoadGrade", true);
+                        }
+                        return rankingApiData.getMsg();
+                    }
+                }).subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+
     }
 
     /**
@@ -413,6 +645,7 @@ public class HttpMethods {
                             if (listHttpResult.getData() != null && listHttpResult.getData().size() != 0) {
                                 StringBuilder sb;
                                 for (Lesson l : listHttpResult.getData()) {
+                                    //建立索引 1-10（单）处理为 1 3 5 7 9
                                     sb = new StringBuilder();
                                     for (int i = l.getQsz(); i <= l.getJsz(); i++) {
                                         if ("单".equals(l.getDsz()) && i % 2 == 0) {
@@ -424,9 +657,11 @@ public class HttpMethods {
                                         }
                                     }
                                     l.setIndex(sb.toString());
+                                    l.setAddbyuser(false);
                                 }
+
                             }
-                            DBHelper.deleteAllLesson();
+                            DBHelper.deleteLessonbyImport();
                             DBHelper.insertListLessonDao(listHttpResult.getData());
                             PrefUtil.setBoolean(context, "isLoadCourseTable", true);
                         }
@@ -469,9 +704,9 @@ public class HttpMethods {
     /**
      * 检查更新
      */
-    public void checkUpdate(Subscriber<HttpResult<UpdateMsg>> subscriber) {
+    public void checkUpdate(Subscriber<HttpResult<UpdateMsg>> subscriber, String num, String vernum) {
         UpdateAPI updateAPI = retrofit.create(UpdateAPI.class);
-        updateAPI.getUpdateData()
+        updateAPI.getUpdateData(num, vernum)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -488,49 +723,55 @@ public class HttpMethods {
     public void getUserData(final Context context, Subscriber<String> subscriber, String num, String pass) {
         final UserDataAPI userDataAPI = retrofit.create(UserDataAPI.class);
         userDataAPI.getUserData(num, pass)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .map(new Func1<HttpResult<User>, String>() {
                     @Override
                     public String call(HttpResult<User> userHttpResult) {
+
                         if ("ok".equals(userHttpResult.getMsg())) {
+
                             userHttpResult.getData().setRember_code(userHttpResult.getRemember_code_app());
                             DBHelper.deleteAllUser();
                             DBHelper.insertUserDao(userHttpResult.getData());
+                            DBHelper.deleteAllNotice();
+                            //处理标记
                             PrefUtil.setBoolean(context, "isLoadUser", true);
                             PrefUtil.setBoolean(context, "isLoadCourseTable", false);
                             PrefUtil.setBoolean(context, "isLoadGrade", false);
-                            PrefUtil.setBoolean(context,"isLoadExam",false);
-                            PrefUtil.setBoolean(context,"isLoadExpLesson",false);
+                            PrefUtil.setBoolean(context, "isLoadExam", false);
+                            PrefUtil.setBoolean(context, "isLoadExpLesson", false);
                         }
                         return userHttpResult.getMsg();
                     }
                 })
-                .subscribe(subscriber);
-    }
-
-    /**
-     * 获取所有班级信息
-     *
-     * @param subscriber
-     */
-    public void getAllClass(Subscriber<List<DepInfo>> subscriber) {
-        AllClassAPI allClassAPI = retrofit.create(AllClassAPI.class);
-        allClassAPI.getAllClass()
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
 
+    /**
+     * 上传头像
+     *
+     * @param subscriber
+     * @param num        学号
+     * @param code       校验码
+     * @param bodyMap    图片
+     */
+    public void UploadAvator(Subscriber<HttpResult<String>> subscriber, String num, String code, MultipartBody.Part bodyMap) {
+        UserDataAPI fileUploadService = retrofit.create(UserDataAPI.class);
+        fileUploadService.uploadAvatar(num, code, bodyMap)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 
     /**
      * 上传商品图片
      *
      * @param subscriber
      * @param des
-     * @param bodyMap
+     * @param bodyMap    图片
      */
     public void UploadFile(Subscriber<HttpResult<String>> subscriber, String des, MultipartBody.Part bodyMap) {
         FileUploadAPI fileUploadService = retrofit.create(FileUploadAPI.class);
@@ -545,17 +786,17 @@ public class HttpMethods {
      * 发布商品
      *
      * @param subscriber
-     * @param user
-     * @param tit
-     * @param content
-     * @param price
-     * @param price_src
-     * @param Class
-     * @param attr
-     * @param hidden
-     * @param phone
-     * @param qq
-     * @param wechat
+     * @param user       发布用户
+     * @param tit        标题
+     * @param content    内容
+     * @param price      价格
+     * @param price_src  原价
+     * @param Class      分类
+     * @param attr       新旧
+     * @param hidden     图片
+     * @param phone      手机
+     * @param qq         QQ
+     * @param wechat     微信
      */
     public void AddGoods(Subscriber<HttpResult<String>> subscriber, User user, String tit, String content, String price, String price_src,
                          int Class, int attr, String hidden, String phone, String qq, String wechat) {
@@ -572,8 +813,8 @@ public class HttpMethods {
      * 修改昵称
      *
      * @param subscriber
-     * @param user
-     * @param username
+     * @param user       用户
+     * @param username   新昵称
      */
     public void ChangeUserName(Subscriber<HttpResult> subscriber, User user, final String username) {
         ChangeUserNameAPI api = retrofit.create(ChangeUserNameAPI.class);
@@ -581,7 +822,6 @@ public class HttpMethods {
                 .map(new Func1<HttpResult, HttpResult>() {
                     @Override
                     public HttpResult call(HttpResult httpResult) {
-
                         if (httpResult.getMsg().equals("ok")) {
                             User u = DBHelper.getUserDao().get(0);
                             u.setUsername(username);
@@ -597,15 +837,21 @@ public class HttpMethods {
 
     }
 
+    /**
+     * 实验课表
+     *
+     * @param context    上下文
+     * @param subscriber
+     * @param xh         学号
+     * @param code       校验码
+     */
     public void GetExpLessons(final Context context, Subscriber<String> subscriber, String xh, String code) {
         GetExpLessonAPI api = retrofit.create(GetExpLessonAPI.class);
         api.getExpLesson(xh, code)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
                 .map(new Func1<HttpResult<List<Explesson>>, String>() {
                     @Override
                     public String call(HttpResult<List<Explesson>> listHttpResult) {
-                        if(listHttpResult.getMsg().equals("ok")){
+                        if (listHttpResult.getMsg().equals("ok")) {
                             DBHelper.deleteAllExpLesson();
                             DBHelper.insertListExpLesson(listHttpResult.getData());
                             PrefUtil.setBoolean(context, "isLoadExpLesson", true);
@@ -613,28 +859,143 @@ public class HttpMethods {
                         return listHttpResult.getMsg();
                     }
                 })
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
 
 
     }
 
-    public void GetExamData(final Context context,Subscriber<ExamData> subscriber,String xh){
-       ExamAPI api = retrofit.create(ExamAPI.class);
-        api.getExamData(xh, CommUtil.getMD5(xh+"apiforapp!"))
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
+    /**
+     * 考试数据
+     *
+     * @param context
+     * @param subscriber
+     * @param xh         学号
+     */
+    public void GetExamData(final Context context, Subscriber<ExamData> subscriber, String xh) {
+        OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
+        httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(httpClientBuilder.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(PrefUtil.getString(context.getApplicationContext(), "test_plan", "http://218.75.197.122:84/") + "/")
+                .build();
+        ExamAPI api = retrofit.create(ExamAPI.class);
+        api.getExamData(xh, CommUtil.getMD5(xh + "apiforapp!"))
                 .map(new Func1<ExamData, ExamData>() {
                     @Override
                     public ExamData call(ExamData listHttpResult) {
-                        if(listHttpResult.getCode()==100){
+                        if (listHttpResult.getCode() == 100) {
                             DBHelper.deleteAllExam();
+                            for (Exam e : listHttpResult.getRes().getExam()) {
+                                e.setIsCx(false);
+                            }
                             DBHelper.insertListExam(listHttpResult.getRes().getExam());
+                            for (Exam e : listHttpResult.getRes().getCxexam()) {
+                                e.setIsCx(true);
+                            }
+                            DBHelper.insertListExam(listHttpResult.getRes().getCxexam());
                             PrefUtil.setBoolean(context, "isLoadExam", true);
                         }
                         return listHttpResult;
                     }
                 })
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取Offer的Token
+     *
+     * @param context
+     * @param subscriber
+     */
+    public void getOfferToken(final Context context, Subscriber<String> subscriber) {
+        final OfferAPI offerAPI = retrofit.create(OfferAPI.class);
+        offerAPI.getToken("A003", "04F96A77277FAAD8ABCEBDD6050CC92A")
+                .map(new Func1<OfferData, String>() {
+                    @Override
+                    public String call(OfferData offerData) {
+                        if (offerData.getR() == 1) {
+                            //保存token
+                            PrefUtil.setString(context, "OfferToken", offerData.getAccess_token());
+                            return "ok";
+                        }
+                        return offerData.getMsg();
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取校招薪水列表
+     *
+     * @param subscriber
+     * @param token
+     */
+    public void getOfferList(Subscriber<OfferData> subscriber, String token) {
+        OfferAPI offerAPI = retrofit.create(OfferAPI.class);
+        offerAPI.getOfferList(token)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 搜索Offer
+     *
+     * @param subscriber
+     * @param token
+     * @param content    关键词
+     */
+    public void searchOffer(Subscriber<OfferData> subscriber, String token, String content) {
+        OfferAPI offerAPI = retrofit.create(OfferAPI.class);
+        offerAPI.searchOffer(token, content)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取天气数据
+     *
+     * @param subscriber
+     */
+    public void getWeather(Subscriber<WeatherData> subscriber) {
+        WeatherAPI API = retrofit.create(WeatherAPI.class);
+        API.getWeather().subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取视频数据
+     *
+     * @param subscriber
+     */
+    public void getVideoData(Subscriber<VideoData> subscriber) {
+        VideoAPI api = retrofit.create(VideoAPI.class);
+        api.getVideoData().subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void getCareerTalkData(String id, Subscriber<CareerTalkData<CareerTalkItem>> subscriber) {
+        CareerTalkAPI api = retrofit.create(CareerTalkAPI.class);
+        api.getCareerTalk(id).subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }

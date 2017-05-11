@@ -1,26 +1,27 @@
-package com.gaop.huthelper.view.Activity;
+package com.gaop.huthelper.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.gaop.huthelper.MApplication;
+import com.gaop.huthelper.app.MApplication;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.PushAgent;
 
 /**
- * Created by gaop1 on 2016/7/23.
+ * 基类Activity
+ * Created by 高沛 on 2016/7/23.
  */
 
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends RxAppCompatActivity {
     /** 是否沉浸状态栏 **/
     private boolean isSetStatusBar = true;
     /** 是否允许全屏 **/

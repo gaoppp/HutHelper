@@ -1,4 +1,4 @@
-package com.gaop.huthelper.view.Activity;
+package com.gaop.huthelper.view.activity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,9 +12,14 @@ import android.widget.TextView;
 
 import com.gaop.huthelper.R;
 import com.gaop.huthelper.net.HttpMethods;
+import com.gaop.huthelper.utils.ButtonUtils;
+import com.gaop.huthelper.utils.CommUtil;
+import com.gaop.huthelper.utils.ToastUtil;
+import com.gaop.huthelper.view.ShowImageViewPager;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,7 +36,7 @@ public class ShowImgActivity extends BaseActivity {
     @BindView(R.id.fraglayout_showImg)
     RelativeLayout fraglayoutShowImg;
     @BindView(R.id.viewPager)
-    ViewPager viewPager;
+    ShowImageViewPager viewPager;
     @BindView(R.id.tv_toolbar_title)
     TextView tvToolbarTitle;
 
@@ -43,10 +48,19 @@ public class ShowImgActivity extends BaseActivity {
 
     @Override
     public void initParms(Bundle parms) {
-
-        urls = parms.getStringArrayList("urls");
-        curr = parms.getInt("curr");
-
+        if (parms.containsKey("urls")) {
+            urls = parms.getStringArrayList("urls");
+            curr = parms.getInt("curr");
+            return;
+        }
+        if (parms.containsKey("url")) {
+            urls = new ArrayList<>();
+            urls.add(parms.getString("url"));
+            curr = 0;
+            return;
+        }
+        ToastUtil.showToastShort("数据错误");
+        finish();
     }
 
     @Override
@@ -60,7 +74,6 @@ public class ShowImgActivity extends BaseActivity {
         tvToolbarTitle.setText((curr + 1) + "/" + urls.size());
         viewPager.setAdapter(pagerAdapter);
         viewPager.setCurrentItem(curr);
-
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -69,7 +82,7 @@ public class ShowImgActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int position) {
-               tvToolbarTitle.setText((position + 1) + "/" + urls.size());
+                tvToolbarTitle.setText((position + 1) + "/" + urls.size());
 
             }
 
@@ -78,7 +91,6 @@ public class ShowImgActivity extends BaseActivity {
 
             }
         });
-
     }
 
 
@@ -121,9 +133,19 @@ public class ShowImgActivity extends BaseActivity {
     };
 
 
-
-    @OnClick(R.id.imgbtn_toolbar_back)
-    public void onClick() {
-        finish();
+    @OnClick({R.id.imgbtn_toolbar_back, R.id.imgbtn_toolbar_download})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.imgbtn_toolbar_back:
+                finish();
+                break;
+            case R.id.imgbtn_toolbar_download:
+                //Log.e(TAG, "onClick: "+1 );
+                if (!ButtonUtils.isFastDoubleClick()) {
+                    //  Log.e(TAG, "onClick: 2" );
+                    CommUtil.downloadBitmap(ShowImgActivity.this, urls.get(curr));
+                }
+                break;
+        }
     }
 }

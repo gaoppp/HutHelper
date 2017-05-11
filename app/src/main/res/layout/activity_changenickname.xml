@@ -2,11 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/customtoolbar" />
+        layout="@layout/toolbar_nomenu" />
 
 
     <EditText
@@ -24,13 +25,13 @@
 
     <Button
         android:id="@+id/btn_chgnn_ok"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/et_chgnn_content"
         android:layout_margin="18dp"
-        android:background="@drawable/ed_importdata"
+        android:background="@drawable/btn_maincolor"
         android:text="确认"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 
 </RelativeLayout>

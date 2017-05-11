@@ -1,216 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
-    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFF"
+    android:background="@drawable/bg_grade"
     android:orientation="vertical">
 
-
     <RelativeLayout
-        android:id="@+id/toolba_scorer"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:background="#1ddbcd">
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/transparent">
 
         <ImageButton
             android:id="@+id/imgbtn_toolbar_back"
             android:layout_width="wrap_content"
-            android:layout_height="21dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="31dp"
-            android:background="@mipmap/ic_back" />
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:background="@color/transparent"
+            android:paddingBottom="@dimen/dp_10"
+            android:paddingLeft="12dp"
+            android:paddingRight="20dp"
+            android:paddingTop="@dimen/dp_10"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_back_small" />
 
         <TextView
             android:id="@+id/tv_toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="31dp"
-            android:text=""
+            android:layout_centerVertical="true"
+            android:text="成绩"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
-        <ImageView
-            android:id="@+id/iv_coursetable_update"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
+        <ImageButton
+            android:id="@+id/imgbtn_toolbar_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
             android:layout_alignParentRight="true"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginTop="31dp"
-            android:src="@mipmap/ic_update" />
+            android:layout_centerVertical="true"
+            android:background="@color/transparent"
+            android:paddingBottom="@dimen/dp_10"
+            android:paddingLeft="20dp"
+            android:paddingRight="12dp"
+            android:paddingTop="@dimen/dp_10"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_refresh_white" />
     </RelativeLayout>
-
 
     <ScrollView
         android:id="@+id/scroll_grade_body"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolba_scorer">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_grade_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="总览"
-                android:textSize="14dp" />
-
-            <ImageView
-                android:id="@+id/iv_grade_line"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/tv_grade_1"
-                android:background="@color/gray" />
-
-            <LinearLayout
-                android:id="@+id/ll_grade_title"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/iv_grade_line"
-                android:paddingTop="5dp"
-                android:weightSum="3">
+                android:orientation="vertical"
+                android:paddingTop="10dp">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="学分绩点"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="总览"
+                    android:textColor="@color/light_grey"
+                    android:textSize="14sp" />
+
+                <com.gaop.huthelper.view.CirclePie
+                    android:id="@+id/pie_grade_xf"
+                    android:layout_width="152dp"
+                    android:layout_height="152dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_10" />
+
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:id="@+id/tv_grade_avgjd"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="平均分数"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="挂科数/总数"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_grade_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ll_grade_title"
-                android:weightSum="3">
-
-                <TextView
-                    android:id="@+id/tv_grade_jd"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingTop="8dp"
-                    android:text="0.00"
-                    android:textColor="@color/titleTextColor"
-                    android:textSize="@dimen/dp_40" />
-
-                <TextView
-                    android:id="@+id/tv_grade_avgfs"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingTop="8dp"
-                    android:text="0"
-                    android:textColor="@color/titleTextColor"
-                    android:textSize="@dimen/dp_40" />
+                    android:layout_above="@+id/tv_grade_nopassnum"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="综合绩点"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dp_10" />
 
                 <TextView
                     android:id="@+id/tv_grade_nopassnum"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingTop="8dp"
-                    android:text="0"
-                    android:textColor="@color/titleTextColor"
-                    android:textSize="@dimen/dp_40" />
-            </LinearLayout>
+                    android:layout_above="@+id/iv_grade_line"
+                    android:layout_marginLeft="12dp"
+                    android:text="总挂科数"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dp_10" />
 
-            <TextView
-                android:id="@+id/tv_grade_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ll_grade_content"
-                android:paddingTop="6dp"
-                android:text="图表"
-                android:textSize="14dp" />
+                <ImageView
+                    android:id="@+id/iv_grade_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@+id/pie_grade_xf"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/light_grey" />
 
-            <ImageView
-                android:id="@+id/iv_grade_line2"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/iv_grade_line"
+                    android:background="@color/transparent">
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_segmented_control"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:paddingBottom="3dp"
+                            android:id="@+id/radio_grade_xq"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:button="@null"
+                            android:checked="true"
+                            android:drawableBottom="@drawable/bg_radiobutton_grade"
+                            android:drawablePadding="5dp"
+                            android:gravity="center_horizontal|top"
+                            android:text="学期"
+                            android:textColor="@drawable/tvbg_grade_radio"
+                            android:textSize="17dp"
+                            tools:checked="true" />
+
+                        <RadioButton
+                            android:id="@+id/radio_grade_xn"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:button="@null"
+                            android:drawableBottom="@drawable/bg_radiobutton_grade"
+                            android:drawablePadding="5dp"
+                            android:gravity="center_horizontal|top"
+                            android:text="学年"
+                            android:textColor="@drawable/tvbg_grade_radio"
+                            android:textSize="17dp" />
+                    </RadioGroup>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+            <com.gaop.huthelper.weiget.WrapContentHeightViewPager
+                android:id="@+id/viewpager_grade"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/tv_grade_2"
-                android:background="@color/gray" />
-
-            <com.echo.holographlibrary.BarGraph
-                android:id="@+id/graph_grade_bar"
-                android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:layout_below="@+id/iv_grade_line2"
-                android:paddingTop="6dp" />
-
-            <TextView
-                android:id="@+id/tv_grade_3"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/graph_grade_bar"
-                android:layout_centerHorizontal="true"
-                android:padding="4dp"
-                android:text="学分绩点柱形图" />
+                android:layout_gravity="center"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:flipInterval="30"
+                android:persistentDrawingCache="animation" />
+            <!--  <com.gaop.huthelper.view.ui.LineChartView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="12dp"
+                  android:layout_marginRight="12dp" />-->
 
-            <com.echo.holographlibrary.PieGraph
-                android:id="@+id/graph_grade_pie"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_below="@+id/tv_grade_3"
-                android:layout_marginTop="10dp" />
-
-            <TextView
-                android:id="@+id/tv_grade_pie"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/graph_grade_pie"
-                android:layout_centerHorizontal="true"
-                android:text="获得学分/总学分" />
 
             <Button
-                android:layout_marginBottom="10dp"
                 android:id="@+id/btn_grade_showall"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
-                android:layout_below="@+id/tv_grade_pie"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/btn_importdata"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/btn_maincolor"
                 android:text="查看所有成绩"
-                android:textColor="@color/white" />
-        </RelativeLayout>
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
+
     </ScrollView>
 
     <TextView
-        android:id="@+id/tv_score_empty"
-        android:layout_width="match_parent"
+        android:id="@+id/tv_grade_empty"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolba_scorer"
-        android:layout_margin="16dp"
-        android:gravity="center"
-        android:text="暂时还没有成绩数据"
-        android:textSize="20sp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="你还没有成绩数据"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_16"
         android:visibility="gone" />
 
-
-</RelativeLayout>
+</LinearLayout>

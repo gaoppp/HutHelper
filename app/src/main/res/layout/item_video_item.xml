@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="7.5dp"
+    android:layout_marginRight="7.5dp"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/bg2_list_empty"
+    android:orientation="vertical"
+    android:id="@+id/ll_videoitem_list"
+    >
+    <TextView
+        android:id="@+id/tv_videoitem_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="第一集"
+        android:textColor="#404040"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:gravity="left"
+        android:textSize="12sp"
+        />
+
+    <TextView
+        android:ellipsize="end"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:id="@+id/tv_videoitem_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="left"
+        android:textColor="#808080"
+        android:text="33天前"
+        android:lines="2"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:textSize="14sp"/>
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.gaop.huthelper.view.Activity;
+package com.gaop.huthelper.view.activity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,9 +6,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.gaop.huthelper.Model.HttpResult;
+import com.gaop.huthelper.model.entity.HttpResult;
 import com.gaop.huthelper.R;
-import com.gaop.huthelper.jiekou.SubscriberOnNextListener;
+import com.gaop.huthelper.model.network.api.SubscriberOnNextListener;
 import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.net.ProgressSubscriber;
 import com.gaop.huthelper.utils.ToastUtil;
@@ -19,7 +19,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by gaop on 16-10-6.
+ * 修改昵称
+ * Created by 高沛 on 16-10-6.
  */
 
 public class ChangeNickNameActivity extends BaseActivity {
@@ -52,12 +53,9 @@ public class ChangeNickNameActivity extends BaseActivity {
         ButterKnife.bind(this);
         tvToolbarTitle.setText(title);
         etChgnnContent.setText(user.getUsername());
-
     }
 
-
     private void changeNickName(String name) {
-
         SubscriberOnNextListener changnn = new SubscriberOnNextListener<HttpResult>() {
             @Override
             public void onNext(HttpResult o) {
@@ -76,8 +74,6 @@ public class ChangeNickNameActivity extends BaseActivity {
                 new ProgressSubscriber<HttpResult>(changnn, ChangeNickNameActivity.this),
                 user, name);
     }
-
-
 
     @OnClick({R.id.imgbtn_toolbar_back, R.id.btn_chgnn_ok})
     public void onClick(View view) {

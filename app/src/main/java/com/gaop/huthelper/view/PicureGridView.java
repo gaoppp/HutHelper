@@ -2,12 +2,11 @@ package com.gaop.huthelper.view;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.widget.GridView;
 
 /**
- * Created by gaop on 16-9-10.
+ * Created by 高沛 on 16-9-10.
  */
 public class PicureGridView extends GridView{
     public PicureGridView(Context context) {

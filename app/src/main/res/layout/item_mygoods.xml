@@ -2,55 +2,194 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="5dp"
-    android:layout_margin="10dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/bg2_list_empty"
+    android:id="@+id/rl_mygoods"
+    android:transitionName="goodstransition"
     android:orientation="vertical">
-
     <TextView
-        android:id="@+id/tv_mygoodsitem_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="标题sdfsdfqfdsfsd"
-        android:textColor="@color/black"
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/tv_mygoodsitem_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_mygoodsitem_title"
-        android:padding="5dp"
-        android:text="内容dfqe"
-        android:textColor="@color/black"
-        android:textSize="14sp" />
-
-    <TextView
-        android:paddingLeft="5dp"
-        android:id="@+id/tv_mygoodsitem_time"
+        android:id="@+id/tv_mygoods_label2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_mygoodsitem_content"
-        android:text="2016_09_04 19:12:40" />
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="13dp"
+        android:text="留言"
+        android:textColor="#adadad"
+        android:textSize="13sp" />
 
     <TextView
-
-        android:paddingBottom="5dp"
+        android:lineSpacingMultiplier="1.2"
+        android:id="@+id/tv_item_mygoods_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_mygoodsitem_content"
-        android:layout_toLeftOf="@+id/tv_mygoodsitem_1"
-        android:text="155"
-        android:id="@+id/tv_mygoodsitem_viewnum"/>
+        android:layout_below="@+id/tv_mygoods_label2"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:text="加载中"
+        android:textColor="#404040"
+        android:textSize="15sp" />
+
+    <com.gaop.huthelper.view.PicureGridView
+        android:layout_alignParentLeft="true"
+        android:id="@+id/gv_item_mygoods_image"
+        android:layout_width="205dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_item_mygoods_content"
+        android:layout_marginLeft="13dp"
+        android:numColumns="2"
+        android:horizontalSpacing="5dp"
+        android:verticalSpacing="5dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"></com.gaop.huthelper.view.PicureGridView>
+
+
+    <ImageView
+        android:id="@+id/iv_mygoods_line2"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/gv_item_mygoods_image"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:background="#dbdbdb" />
 
     <TextView
-        android:paddingBottom="5dp"
-        android:id="@+id/tv_mygoodsitem_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_mygoods_line2"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="12dp"
+        android:text="价格"
+        android:textColor="#adadad"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/tv_item_mygoods_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/tv_mygoodsitem_content"
-        android:paddingRight="5dp"
-        android:text="次浏览" />
+        android:layout_below="@+id/iv_mygoods_line2"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:text=""
+        android:textColor="#404040"
+        android:textSize="15sp" />
+    <ImageView
+        android:id="@+id/iv_mygoods_line3"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/tv_item_mygoods_price"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:background="#dbdbdb" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_mygoods_line3"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="12dp"
+        android:text="成色"
+        android:textColor="#adadad"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/tv_item_mygoods_quality"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/iv_mygoods_line3"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:text=""
+        android:textColor="#404040"
+        android:textSize="15sp" />
+
+
+
+    <ImageView
+        android:id="@+id/iv_mygoods_line4"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/tv_item_mygoods_quality"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:background="#dbdbdb" />
+
+    <TextView
+        android:id="@+id/tv_mygoods_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_mygoods_line4"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="12dp"
+        android:text="联系方式"
+        android:textColor="#adadad"
+        android:textSize="13sp" />
+
+    <TextView
+        android:autoLink="email|phone|web"
+        android:id="@+id/tv_item_mygoods_connect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_mygoods_label"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:text=""
+        android:textColor="#404040"
+        android:textSize="15sp" />
+
+
+    <ImageView
+        android:id="@+id/iv_mygoods_line5"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/tv_item_mygoods_connect"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:background="#dbdbdb" />
+
+    <TextView
+        android:id="@+id/tv_item_mygoods_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_mygoods_line5"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="5dp"
+        android:text=""
+        android:textColor="#404040"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/tv_item_mygoods_createtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/iv_mygoods_line5"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="5dp"
+        android:text=""
+        android:textColor="#404040"
+        android:textSize="11sp" />
+
+    <Button
+android:visibility="gone"
+        android:id="@+id/btn_item_mylose_delete"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tv_item_mygoods_createtime"
+        android:background="@drawable/btn_bottomradius"
+        android:text="删除"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 </RelativeLayout>

@@ -4,13 +4,20 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/customtoolbar" />
+        layout="@layout/toolbar_nomenu" />
 
-    <WebView
+    <ImageView
+        android:id="@+id/iv_webview_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/toolbar"
+        android:background="@color/bg_grey" />
+
+    <com.tencent.smtt.sdk.WebView
         android:id="@+id/wv_webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar" />
+        android:layout_below="@+id/iv_webview_line" />
 
     <ProgressBar
         android:id="@+id/pb_webview"

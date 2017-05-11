@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/banner">
+
+        <ImageButton
+            android:id="@+id/imgbtn_menusetting"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="31dp"
+            android:background="@mipmap/ic_menu_main" />
+
+        <TextView
+            android:id="@+id/tv_course_maincontent"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="135dp"
+            android:text="下节课：计算机网络 公共楼211"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/tv_date_maincontent"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_course_maincontent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="12周 星期1"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <com.gaop.huthelper.view.RichText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:drawablePadding="@dimen/dp_10"
+            android:gravity="center_vertical"
+            android:text="通知"
+            android:textColor="#adadad"
+            android:textSize="12dp"
+            view:drawable_height="9dp"
+            view:drawable_location="left"
+            view:drawable_src="@drawable/img_changtiao"
+            view:drawable_width="3dp" />
+
+        <com.gaop.huthelper.view.RichText
+            android:id="@+id/tv_notice_maincontent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:drawablePadding="@dimen/dp_10"
+            android:gravity="right|center_vertical"
+            android:text="查看全部通知"
+            android:textColor="#1ddbcd"
+            android:textSize="14dp"
+            view:drawable_height="9dp"
+            view:drawable_location="right"
+            view:drawable_src="@drawable/img_right"
+            view:drawable_width="5dp" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/line_grey" />
+
+    <RelativeLayout
+        android:id="@+id/rl_main_tongzhi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/mu_tongzhi"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_info" />
+
+        <TextView
+            android:id="@+id/tv_tongzhi_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/mu_tongzhi"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/mu_tongzhi"
+            android:ellipsize="end"
+            android:maxWidth="160dp"
+            android:singleLine="true"
+            android:text="通知"
+            android:textColor="#404040"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_marginTop="@dimen/dp_10"
+            android:id="@+id/tv_tongzhi_contont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/mu_tongzhi"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/mu_tongzhi"
+            android:ellipsize="end"
+            android:maxWidth="200dp"
+            android:singleLine="true"
+            android:text="只是一句通知"
+            android:textColor="#adadad"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/tv_tongzhi_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/mu_tongzhi"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="10dp"
+            android:text=""
+            android:textColor="#adadad"
+            android:textSize="10dp" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="7dp"
+        android:background="@color/bg_grey" />
+
+    <com.gaop.huthelper.view.RichText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:drawablePadding="@dimen/dp_10"
+        android:text="常用"
+        android:textColor="#adadad"
+        android:textSize="12dp"
+        view:drawable_height="9dp"
+        view:drawable_location="left"
+        view:drawable_src="@drawable/img_changtiao"
+        view:drawable_width="3dp" />
+
+   <!-- <LinearLayout
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:weightSum="3">-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:layout_marginTop="25dp"-->
+            <!--android:weightSum="4">-->
+
+            <!--<com.gaop.huthelper.view.RichText-->
+                <!--android:id="@+id/tv_book_main"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:drawablePadding="15dp"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="图书馆"-->
+                <!--android:textColor="#202020"-->
+                <!--android:textSize="14sp"-->
+                <!--view:drawable_height="35dp"-->
+                <!--view:drawable_width="48dp"-->
+                <!--view:drawable_location="top"-->
+                <!--view:drawable_src="@mipmap/ic_library" />-->
+
+            <!--<com.gaop.huthelper.view.RichText-->
+                <!--android:id="@+id/tv_course_main"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:drawablePadding="15dp"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="课程表"-->
+                <!--android:textColor="#202020"-->
+                <!--android:textSize="14sp"-->
+                <!--view:drawable_height="35dp"-->
+                <!--view:drawable_width="40dp"-->
+                <!--view:drawable_location="top"-->
+                <!--view:drawable_src="@mipmap/ic_curriculum" />-->
+
+            <!--<com.gaop.huthelper.view.RichText-->
+                <!--android:id="@+id/tv_exam_main"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:drawablePadding="15dp"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="考试查询"-->
+                <!--android:textColor="#202020"-->
+                <!--android:textSize="14sp"-->
+                <!--view:drawable_height="35dp"-->
+                <!--view:drawable_width="40dp"-->
+                <!--view:drawable_location="top"-->
+                <!--view:drawable_src="@mipmap/ic_exam" />-->
+
+            <!--<com.gaop.huthelper.view.RichText-->
+                <!--android:id="@+id/tv_score_main"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:drawablePadding="15dp"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="成绩查询"-->
+                <!--android:textColor="#202020"-->
+                <!--android:textSize="14sp"-->
+                <!--view:drawable_height="35dp"-->
+                <!--view:drawable_width="40dp"-->
+                <!--view:drawable_location="top"-->
+                <!--view:drawable_src="@mipmap/ic_score" />-->
+
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:layout_marginTop="25dp"-->
+            <!--android:weightSum="4">-->
+
+            <!--<com.gaop.huthelper.view.RichText-->
+                <!--android:id="@+id/tv_homework_main"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:drawablePadding="15dp"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="网上作业"-->
+                <!--android:textColor="#202020"-->
+                <!--android:textSize="14sp"-->
+                <!--view:drawable_height="35dp"-->
+                <!--view:drawable_width="48dp"-->
+                <!--view:drawable_location="top"-->
+                <!--view:drawable_src="@mipmap/ic_homework" />-->
+
+            <!--<com.gaop.huthelper.view.RichText-->
+                <!--android:id="@+id/tv_market_main"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:drawablePadding="15dp"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="二手市场"-->
+                <!--android:textColor="#202020"-->
+                <!--android:textSize="14sp"-->
+                <!--view:drawable_height="35dp"-->
+                <!--view:drawable_width="48dp"-->
+                <!--view:drawable_location="top"-->
+                <!--view:drawable_src="@mipmap/ic_secondhand" />-->
+
+            <!--<com.gaop.huthelper.view.RichText-->
+                <!--android:id="@+id/tv_say_main"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:drawablePadding="15dp"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="校园说说"-->
+                <!--android:textColor="#202020"-->
+                <!--android:textSize="14sp"-->
+                <!--view:drawable_height="35dp"-->
+                <!--view:drawable_width="48dp"-->
+                <!--view:drawable_location="top"-->
+                <!--view:drawable_src="@mipmap/ic_social" />-->
+
+            <!--<com.gaop.huthelper.view.RichText-->
+                <!--android:id="@+id/tv_ele_main"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:drawablePadding="15dp"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="电费查询"-->
+                <!--android:textColor="#202020"-->
+                <!--android:textSize="14sp"-->
+                <!--view:drawable_height="35dp"-->
+                <!--view:drawable_width="48dp"-->
+                <!--view:drawable_location="top"-->
+                <!--view:drawable_src="@mipmap/ic_elec" />-->
+
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:layout_marginTop="25dp"-->
+            <!--android:weightSum="4">-->
+
+            <!--<com.gaop.huthelper.view.RichText-->
+                <!--android:id="@+id/tv_offer_main"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:drawablePadding="15dp"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="校招薪水"-->
+                <!--android:textColor="#202020"-->
+                <!--android:textSize="14sp"-->
+                <!--view:drawable_height="35dp"-->
+                <!--view:drawable_width="52dp"-->
+                <!--view:drawable_location="top"-->
+                <!--view:drawable_src="@mipmap/ic_salary" />-->
+
+            <!--<com.gaop.huthelper.view.RichText-->
+                <!--android:id="@+id/tv_expcourse_main"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:drawablePadding="15dp"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="实验课表"-->
+                <!--android:textColor="#202020"-->
+                <!--android:textSize="14sp"-->
+                <!--view:drawable_height="35dp"-->
+                <!--view:drawable_width="48dp"-->
+                <!--view:drawable_location="top"-->
+                <!--view:drawable_src="@mipmap/ic_lab" />-->
+
+            <!--<com.gaop.huthelper.view.RichText-->
+                <!--android:id="@+id/tv_cal_main"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:drawablePadding="15dp"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="校历"-->
+                <!--android:textColor="#202020"-->
+                <!--android:textSize="14sp"-->
+                <!--view:drawable_height="35dp"-->
+                <!--view:drawable_width="48dp"-->
+                <!--view:drawable_location="top"-->
+                <!--view:drawable_src="@mipmap/ic_calendar" />-->
+
+            <!--<com.gaop.huthelper.view.RichText-->
+                <!--android:id="@+id/tv_lost_main"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:drawablePadding="15dp"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="失物招领"-->
+                <!--android:textColor="#202020"-->
+                <!--android:textSize="14sp"-->
+                <!--view:drawable_height="35dp"-->
+                <!--view:drawable_width="48dp"-->
+                <!--view:drawable_location="top"-->
+                <!--view:drawable_src="@mipmap/ic_lost" />-->
+
+        <!--</LinearLayout>-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_main_menu"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_grade"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/transparent">
+
+        <ImageButton
+            android:id="@+id/imgbtn_toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:background="@color/transparent"
+            android:paddingBottom="@dimen/dp_10"
+            android:paddingLeft="12dp"
+            android:paddingRight="20dp"
+            android:paddingTop="@dimen/dp_10"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_back_small" />
+
+        <TextView
+            android:id="@+id/tv_toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="成绩"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+          <ImageButton
+              android:paddingTop="@dimen/dp_10"
+              android:paddingBottom="@dimen/dp_10"
+              android:id="@+id/imgbtn_toolbar_refresh"
+              android:layout_width="wrap_content"
+              android:layout_height="40dp"
+              android:layout_alignParentRight="true"
+              android:layout_centerVertical="true"
+              android:background="@color/transparent"
+              android:paddingLeft="20dp"
+              android:paddingRight="12dp"
+              android:scaleType="fitCenter"
+              android:src="@mipmap/ic_refresh_white" />
+    </RelativeLayout>
+<ScrollView
+    android:id="@+id/scroll_grade_body"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="33dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="学分"
+            android:textColor="@color/light_grey"
+            android:textSize="14sp" />
+
+        <com.gaop.huthelper.view.CirclePie
+            android:id="@+id/pie_grade_xf"
+            android:layout_width="152dp"
+            android:layout_height="152dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_10"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="绩点"
+            android:textColor="@color/light_grey"
+            android:textSize="14sp" />
+
+        <com.gaop.huthelper.view.BarListView
+            android:id="@+id/bar_grade_jd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            />
+        <TextView
+
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="其他"
+            android:textColor="@color/light_grey"
+            android:textSize="14sp" />
+
+        <com.gaop.huthelper.view.BarListView
+            android:visibility="gone"
+            android:id="@+id/bar_grade_other"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10" />
+
+        <TextView
+            android:textSize="@dimen/dp_10"
+            android:textColor="@color/white"
+            android:id="@+id/tv_grade_nopassnum"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="@dimen/dp_10"
+            android:textColor="@color/white"
+            android:id="@+id/tv_grade_avgjd"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_grade_showall"
+            android:background="@drawable/btn_maincolor"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:text="查看所有成绩"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</ScrollView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:id="@+id/tv_grade_empty"
+        android:visibility="gone"
+        android:text="你还没有成绩数据"/>
+
+</LinearLayout>

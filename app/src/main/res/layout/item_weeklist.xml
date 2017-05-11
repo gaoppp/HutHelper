@@ -3,12 +3,13 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:layout_margin="6dp"
+       android:paddingTop="7.5dp"
+        android:paddingBottom="7.5dp"
         android:id="@+id/tv_weeklist_item"
-        android:textColor="@color/black"
-        android:background="@drawable/btn_weekitem"
+        android:textColor="@color/dull_grey"
+        android:background="@color/transparent"
         android:elevation="2dp"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

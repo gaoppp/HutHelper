@@ -102,4 +102,14 @@
     <drawable name="login_nomrmal">#63B8FF</drawable>
     <drawable name="scoreitem_normal">#F9F9F9</drawable>
 
+    <color name="themecolor_1">#acc4e1</color> <!-- 主题色 -->
+    <color name="themecolor_2">#8dcddf</color>
+    <color name="themecolor_3">#96c8ab</color>
+    <color name="themecolor_4">#bfbbe2</color>
+    
+    <color name="light_grey">#adadad</color> <!-- 浅灰 -->
+    <color name="medium_grey">#808080</color> <!-- 中灰 -->
+    <color name="dull_grey">#404040</color> <!-- 深灰-->
+    <color name="bg_grey">#efefef</color> <!-- 大灰底-->
+    <color name="line_grey">#dbdbdb</color> <!-- 分割线 -->
 </resources>

@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:background="@color/white"
     android:orientation="vertical"
-    android:elevation="5dp"
-    android:padding="18dp">
+    android:id="@+id/ll_exp_root"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_10"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:background="@color/white">
+    <TextView
+        android:textSize="13sp"
+        android:textColor="@color/light_grey"
+        android:id="@+id/tv_expitem_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="课程名称"/>
 
     <TextView
+        android:layout_marginTop="@dimen/dp_10"
         android:id="@+id/tv_expitem_lesson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="计算机网络"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
-    <TextView
+        android:text="课程名"
+        android:textColor="@color/dull_grey"
+        android:textSize="15sp" />
+<!--    <TextView
         android:visibility="gone"
         android:id="@+id/tv_expitem_finish"
         android:layout_width="wrap_content"
@@ -24,120 +35,107 @@
         android:padding="6dp"
         android:textSize="14sp"
         android:layout_alignParentRight="true"
-        android:background="@drawable/ed_importdata"/>
+        android:background="@drawable/ed_importdata"/>-->
 
     <TextView
         android:id="@+id/tv_expitem_obj"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_expitem_lesson"
-        android:paddingTop="5dp"
         android:text="实验内容"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp" />
+    <ImageView
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line_grey"/>
 
     <LinearLayout
+        android:layout_marginTop="@dimen/dp_10"
         android:id="@+id/ll_itemexp_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_expitem_obj"
-        android:orientation="horizontal"
-        android:paddingTop="5dp">
+        android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/iv_expitem_time"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@mipmap/ic_course_week" />
+      <TextView
+          android:textSize="13sp"
+          android:textColor="@color/light_grey"
+          android:gravity="center_vertical"
+          android:layout_gravity="center_vertical"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="课程时间"/>
 
         <TextView
-            android:paddingLeft="3dp"
-            android:layout_gravity="center_vertical"
-            android:textSize="14sp"
+            android:textColor="@color/dull_grey"
+            android:textSize="15sp"
+            android:gravity="right"
             android:id="@+id/tv_expitem_realtime"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="具体时间" />
 
     </LinearLayout>
-
-
+    <ImageView
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line_grey"/>
     <LinearLayout
-        android:id="@+id/ll_itemexp_place"
-        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_itemexp_teacher"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@mipmap/ic_courseloc" />
+        <TextView
+            android:textSize="13sp"
+            android:textColor="@color/light_grey"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="教师"/>
 
         <TextView
-            android:paddingLeft="3dp"
+            android:id="@+id/tv_expitem_teacher"
+            android:textColor="@color/dull_grey"
+            android:textSize="15sp"
+            android:gravity="right"
             android:layout_gravity="center_vertical"
-            android:textSize="14sp"
-            android:id="@+id/tv_expitem_place"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="教室" />
     </LinearLayout>
 
-    <LinearLayout
-        android:paddingTop="5dp"
-        android:weightSum="2"
-        android:id="@+id/ll_itemexp_teacher"
+    <ImageView
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/ll_itemexp_time"
-        android:layout_alignParentStart="true">
+        android:layout_height="0.5dp"
+        android:background="@color/line_grey"/>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@mipmap/ic_courseteacher" />
+            <TextView
+                android:textSize="13sp"
+                android:textColor="@color/light_grey"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="地点"/>
 
             <TextView
-                android:paddingLeft="3dp"
+                android:id="@+id/tv_expitem_place"
+                android:textColor="@color/dull_grey"
+                android:textSize="15sp"
+                android:gravity="right"
                 android:layout_gravity="center_vertical"
-                android:textSize="14sp"
-                android:id="@+id/tv_expitem_teacher"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="老师" />
-
         </LinearLayout>
-
-        <LinearLayout
-            android:paddingTop="5dp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@mipmap/ic_coursetime" />
-
-            <TextView
-                android:paddingLeft="3dp"
-                android:layout_gravity="center_vertical"
-                android:textSize="14sp"
-                android:id="@+id/tv_expitem_timesum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="课时量" />
-        </LinearLayout>
-
     </LinearLayout>
-
-
-</RelativeLayout>

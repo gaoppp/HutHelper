@@ -13,7 +13,7 @@ public class PrefUtil {
     public static boolean getBoolean(Context ctx, String key,
                                      boolean defaultValue) {
         SharedPreferences sp = ctx.getSharedPreferences(PREF_NAME,
-                Context.MODE_PRIVATE);
+                 Context.MODE_PRIVATE);
         return sp.getBoolean(key, defaultValue);
     }
     //设置缓存

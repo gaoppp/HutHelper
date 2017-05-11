@@ -1,4 +1,4 @@
-package com.gaop.huthelper.view.Activity;
+package com.gaop.huthelper.view.activity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -20,11 +20,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.gaop.huthelper.DB.DBHelper;
-import com.gaop.huthelper.Model.HttpResult;
+import com.gaop.huthelper.db.DBHelper;
+import com.gaop.huthelper.model.entity.HttpResult;
 import com.gaop.huthelper.R;
-import com.gaop.huthelper.adapter.ChoosePicAdapter;
+import com.gaop.huthelper.view.adapter.ChoosePicAdapter;
 import com.gaop.huthelper.net.HttpMethods;
+import com.gaop.huthelper.utils.ButtonUtils;
 import com.gaop.huthelper.utils.CommUtil;
 import com.gaop.huthelper.utils.ToastUtil;
 import com.gaop.huthelperdao.User;
@@ -50,7 +51,7 @@ import top.zibin.luban.OnCompressListener;
 
 /**
  * 添加商品
- * Created by gaop1 on 2016/9/2.
+ * Created by 高沛 on 2016/9/2.
  */
 public class AddGoodsActivity extends BaseActivity {
 
@@ -82,7 +83,7 @@ public class AddGoodsActivity extends BaseActivity {
     @BindView(R.id.tv_toolbar_title)
     TextView tvToolbarTitle;
 
-    private Bitmap bmp;                      //导入临时图片
+    //private Bitmap bmp;                      //导入临时图片
     private ArrayList<Bitmap> imageItem;
     private ChoosePicAdapter addGoodsAdapter;
 
@@ -93,7 +94,7 @@ public class AddGoodsActivity extends BaseActivity {
 
     @Override
     public int bindLayout() {
-        return R.layout.activity_addgoods;
+        return R.layout.activity_addgoods_new;
     }
 
     @Override
@@ -102,6 +103,7 @@ public class AddGoodsActivity extends BaseActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.
                 SOFT_INPUT_ADJUST_PAN);
         tvToolbarTitle.setText("添加商品");
+        Bitmap bmp;
         bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_addpic);
         imageItem = new ArrayList<Bitmap>();
         imageItem.add(bmp);
@@ -218,6 +220,7 @@ public class AddGoodsActivity extends BaseActivity {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         imageItem.get(i).compress(Bitmap.CompressFormat.PNG, 100, os);
         byte[] bytes = os.toByteArray();
+        Log.e("uploadImg: ",bytes.length+" " );
         final RequestBody requestFile = RequestBody.create(MediaType.parse("image/png"), bytes);
         final MultipartBody.Part photo = MultipartBody.Part.createFormData("file", "01.png", requestFile);
         HttpMethods.getInstance().UploadFile(
@@ -229,8 +232,9 @@ public class AddGoodsActivity extends BaseActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        ToastUtil.showToastShort(e.toString());
+
                         dialog.dismiss();
+                        ToastUtil.showToastShort("发送图片失败"+e.toString());
                     }
 
                     @Override
@@ -289,14 +293,14 @@ public class AddGoodsActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.imgbtn_toolbar_back, R.id.iv_addgoods_ok})
+    @OnClick({R.id.imgbtn_toolbar_back, R.id.imgbtn_toolbar_ok})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imgbtn_toolbar_back:
                 finish();
                 break;
-            case R.id.iv_addgoods_ok:
-                if (fastClick()) {
+            case R.id.imgbtn_toolbar_ok:
+                if(!ButtonUtils.isFastDoubleClick()){
                     if (etAddgoodsPhone.getText().toString().equals("") && etAddgoodsQq.getText().toString().equals("")
                             && etAddgoodsWechat.getText().toString().equals("")) {
                         ToastUtil.showToastShort("手机，QQ，微信必填一项");

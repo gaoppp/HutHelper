@@ -1,4 +1,4 @@
-package com.gaop.huthelper.view.Activity;
+package com.gaop.huthelper.view.activity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -18,11 +18,12 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.gaop.huthelper.DB.DBHelper;
-import com.gaop.huthelper.Model.HttpResult;
 import com.gaop.huthelper.R;
-import com.gaop.huthelper.adapter.ChoosePicAdapter;
+import com.gaop.huthelper.view.adapter.ChoosePicAdapter;
+import com.gaop.huthelper.db.DBHelper;
+import com.gaop.huthelper.model.entity.HttpResult;
 import com.gaop.huthelper.net.HttpMethods;
+import com.gaop.huthelper.utils.ButtonUtils;
 import com.gaop.huthelper.utils.CommUtil;
 import com.gaop.huthelper.utils.ToastUtil;
 import com.gaop.huthelperdao.User;
@@ -47,17 +48,22 @@ import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
 /**
- * Created by gaop on 16-9-11.
+ * 添加说说
+ * Created by 高沛 on 16-9-11.
  */
 public class AddSayActivity extends BaseActivity {
+
+
+
     @BindView(R.id.et_addsay_content)
     EditText etAddsayContent;
     @BindView(R.id.rv_addsay_imglist)
     RecyclerView rvAddsayImglist;
     @BindView(R.id.tv_toolbar_title)
     TextView tvToolbarTitle;
-    private Bitmap bmp;
+    // private Bitmap bmp;
     private List<Bitmap> imageItem;
+
     private ChoosePicAdapter adapter;
     private StringBuilder imageString = new StringBuilder();
     /**
@@ -86,6 +92,7 @@ public class AddSayActivity extends BaseActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.
                 SOFT_INPUT_ADJUST_PAN);
         tvToolbarTitle.setText("发说说");
+        Bitmap bmp;
         bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_addpic);
         imageItem = new ArrayList<Bitmap>();
         imageItem.add(bmp);
@@ -153,7 +160,7 @@ public class AddSayActivity extends BaseActivity {
             for (Uri u : mSelected) {
                 Luban.get(AddSayActivity.this)
                         .load(CommUtil.uri2File(AddSayActivity.this, u))                     //传人要压缩的图片
-                        .putGear(Luban.THIRD_GEAR)      //设定压缩档次，默认三挡
+                        .putGear(Luban.FIRST_GEAR)      //设定压缩档次，默认三挡
                         .setCompressListener(new OnCompressListener() { //设置回调
                             @Override
                             public void onStart() {
@@ -228,6 +235,7 @@ public class AddSayActivity extends BaseActivity {
                     @Override
                     public void onError(Throwable e) {
                         ToastUtil.showToastShort(e.toString());
+                        Log.e(TAG, "onError: " + e.toString());
                         dialog.dismiss();
                     }
 
@@ -284,14 +292,14 @@ public class AddSayActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.imgbtn_toolbar_back, R.id.iv_addsay_ok})
+    @OnClick({R.id.imgbtn_toolbar_back, R.id.imgbtn_toolbar_ok})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imgbtn_toolbar_back:
                 finish();
                 break;
-            case R.id.iv_addsay_ok:
-                if (fastClick()) {
+            case R.id.imgbtn_toolbar_ok:
+                if (!ButtonUtils.isFastDoubleClick()) {
                     if (etAddsayContent.getText().toString().equals("")) {
                         ToastUtil.showToastShort("请填写内容");
                     } else {

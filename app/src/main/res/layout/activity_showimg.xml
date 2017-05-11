@@ -4,14 +4,57 @@
     android:id="@+id/fraglayout_showImg"
     android:layout_height="match_parent"
     android:background="@color/black">
-    <include layout="@layout/customtoolbar"
-        android:id="@+id/toolar"
-        />
-     <android.support.v4.view.ViewPager
-        android:layout_below="@+id/toolar"
+    <RelativeLayout
+        android:elevation="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:paddingTop="20dp"
+        android:background="#3F000000">
+
+        <ImageButton
+            android:id="@+id/imgbtn_toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:background="@color/transparent"
+            android:paddingLeft="12dp"
+            android:paddingRight="20dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_back_small"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            />
+
+        <TextView
+            android:id="@+id/tv_toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+        <ImageButton
+            android:id="@+id/imgbtn_toolbar_download"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@color/transparent"
+            android:paddingLeft="20dp"
+            android:paddingRight="12dp"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_download"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
+            android:layout_alignParentBottom="true"
+          />
+    </RelativeLayout>
+
+     <com.gaop.huthelper.view.ShowImageViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-    </android.support.v4.view.ViewPager>
+    </com.gaop.huthelper.view.ShowImageViewPager>
 </RelativeLayout>

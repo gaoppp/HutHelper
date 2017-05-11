@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.gaop.huthelper.view.lib.DragLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cl_bg"
+    android:background="@drawable/bg_left_menu"
     android:clickable="true"
     android:orientation="vertical"
     >
@@ -16,10 +15,7 @@
         android:layout_height="match_parent"
         android:background="#eeeeee"
         android:orientation="vertical" >
-
-        <!-- headbanner -->
-
-        <include layout="@layout/activity_maincontent" />
+        <include layout="@layout/activity_main_content" />
     </com.gaop.huthelper.view.lib.MyRelativeLayout>
 
 

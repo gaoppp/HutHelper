@@ -1,36 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@color/bg_grey"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:background="#1ddbcd">
+        android:layout_height="60dp"
+        android:paddingTop="20dp"
+        android:background="@color/white">
 
         <ImageButton
             android:id="@+id/imgbtn_toolbar_back"
             android:layout_width="wrap_content"
-            android:layout_height="21dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="31dp"
-            android:background="@mipmap/ic_back" />
+            android:layout_height="40dp"
+            android:background="@color/transparent"
+            android:paddingLeft="12dp"
+            android:paddingRight="20dp"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_back_list"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"  />
 
         <TextView
-            android:id="@+id/tv_choose_grade"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="31dp"
-            android:drawablePadding="8dp"
-            android:drawableRight="@mipmap/ic_drop_down_32px"
-            android:gravity="center"
+            android:id="@+id/tv_choosexq_gradelist"
+            android:drawablePadding="10dp"
+            android:drawableRight="@mipmap/ic_dropdown"
             android:text="所有成绩"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textColor="@color/dull_grey"
+            android:textSize="20sp" />
+
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView

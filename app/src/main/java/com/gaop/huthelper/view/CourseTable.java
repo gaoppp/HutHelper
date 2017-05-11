@@ -22,15 +22,15 @@ import android.widget.TextView;
 
 import com.gaop.huthelper.CourseInfoGallery;
 import com.gaop.huthelper.CustomDate;
-import com.gaop.huthelper.DB.DBHelper;
+import com.gaop.huthelper.db.DBHelper;
 import com.gaop.huthelper.R;
-import com.gaop.huthelper.adapter.CourseInfoAdapter;
+import com.gaop.huthelper.view.adapter.CourseInfoAdapter;
 import com.gaop.huthelper.utils.CommUtil;
 import com.gaop.huthelper.utils.DateUtil;
 import com.gaop.huthelper.utils.DensityUtils;
 import com.gaop.huthelper.utils.ScreenUtils;
-import com.gaop.huthelper.view.Activity.AddCourseActivity;
-import com.gaop.huthelper.view.Activity.CourseItemActivity;
+import com.gaop.huthelper.view.activity.AddCourseActivity;
+import com.gaop.huthelper.view.activity.CourseItemActivity;
 import com.gaop.huthelperdao.Lesson;
 
 import java.lang.ref.WeakReference;
@@ -46,7 +46,8 @@ import butterknife.ButterKnife;
 
 
 /**
- * Created by gaop1 on 2016/7/10.
+ * Created by 高沛 on 2016/7/10.
+ * 课程表控件
  */
 public class CourseTable extends Fragment {
     protected static final String TAG = "CourseTable";
@@ -144,14 +145,14 @@ public class CourseTable extends Fragment {
     }
 
 
-    private View view;
+    //private View view;
 
     CourseInfoInitMessageHandler courseInfoInitMessageHandler = new CourseInfoInitMessageHandler(this);
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_course_table, container, false);
+        View view = inflater.inflate(R.layout.fragment_course_table, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -365,7 +366,7 @@ public class CourseTable extends Fragment {
             if (DateUtil.isToday(date)) {
                 mTextViews.get(i).setTextColor(mContext.getResources().getColor(R.color.white));
                 mTextViews.get(i).setText("" + day);
-                mLayouts.get(i).setBackgroundColor(mContext.getResources().getColor(R.color.week_view_date_highted));
+                mLayouts.get(i).setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary));
                 continue;
             }
             mTextViews.get(i).setText("" + day);
@@ -527,6 +528,7 @@ public class CourseTable extends Fragment {
 
 
     public void changeWeek(int week,CustomDate date) {
+
         textviewLessonMap = new HashMap<Integer, List<Lesson>>();
         courseTextViewList = new ArrayList<TextView>();
         CurrWeek=week;

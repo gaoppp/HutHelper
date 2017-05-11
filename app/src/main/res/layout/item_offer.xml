@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:background="@color/white"
+    android:elevation="2dp"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_offer_item_company"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="华为公司"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/tv_offer_item_score"
+        android:text="可信度："
+        android:textColor="@color/black1"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_offer_item_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="12"
+        android:textColor="@color/black1"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:id="@+id/ll_offer_item_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_offer_item_company"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_offer_item_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="180dp"
+            android:paddingTop="2dp"
+            android:text="深圳"
+            android:textColor="@color/black1"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_offer_item_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="2dp"
+            android:text="java开发"
+            android:textColor="@color/black1"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_offer_item_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_offer_item_content"
+        android:paddingTop="2dp"
+        android:text="浏览量：22"
+        android:textColor="@color/black2"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_offer_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+
+        android:layout_below="@+id/ll_offer_item_content"
+        android:paddingTop="2dp"
+        android:text="2016-18-18" />
+</RelativeLayout>

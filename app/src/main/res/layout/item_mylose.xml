@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/bg2_list"
+    android:id="@+id/rl_mylose"
+    android:transitionName="losetransition"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="15dp"
+        android:text="拾到物品"
+        android:textColor="#808080"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/tv_item_mylose_what"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="13dp"
+        android:text="校园卡"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/iv_mylose_line1"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/tv_item_mylose_what"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_mylose_line1"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="12dp"
+        android:text="拾到时间"
+        android:textColor="#808080"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/tv_item_mylose_when"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/iv_mylose_line1"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:text="2016-10-10"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/iv_mylose_line2"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/tv_item_mylose_when"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_mylose_line2"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="12dp"
+        android:text="拾到地点"
+        android:textColor="#808080"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/tv_item_mylose_where"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/iv_mylose_line2"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:text="公共楼111"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/iv_mylose_line3"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/tv_item_mylose_where"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_mylose_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_mylose_line3"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="12dp"
+        android:text="联系方式"
+        android:textColor="#808080"
+        android:textSize="13sp" />
+
+    <TextView
+        android:autoLink="email|phone|web"
+        android:id="@+id/tv_item_mylose_connect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_mylose_label"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:text="电话lkdsjf联系方式了看到将是否能看开利家电烦死了恐龙快打司法局可了健康"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/iv_mylose_line4"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/tv_item_mylose_connect"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_mylose_label2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_mylose_line4"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="12dp"
+        android:text="留言"
+        android:textColor="#808080"
+        android:textSize="13sp" />
+
+    <TextView
+        android:lineSpacingMultiplier="1.2"
+        android:id="@+id/tv_item_mylose_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_mylose_label2"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:text="电话lkdsjf联系方式了看到将是否能看开利家电烦死了恐龙快打司法局可了健康"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <com.gaop.huthelper.view.PicureGridView
+        android:layout_alignParentLeft="true"
+        android:id="@+id/gv_item_mylose_image"
+        android:layout_width="205dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_item_mylose_content"
+        android:layout_marginLeft="13dp"
+        android:numColumns="2"
+        android:horizontalSpacing="5dp"
+        android:verticalSpacing="5dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"></com.gaop.huthelper.view.PicureGridView>
+
+    <ImageView
+        android:id="@+id/iv_mylose_line5"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/gv_item_mylose_image"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_item_mylose_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_mylose_line5"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="5dp"
+        android:text="11111111111"
+        android:textColor="@color/white"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/tv_item_mylose_createtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/iv_mylose_line5"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="5dp"
+        android:text="11111"
+        android:textColor="@color/white"
+        android:textSize="11sp" />
+
+    <Button
+
+        android:id="@+id/btn_item_mylose_delete"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tv_item_mylose_createtime"
+        android:background="@drawable/btn_bottomradius"
+        android:text="删除"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+</RelativeLayout>

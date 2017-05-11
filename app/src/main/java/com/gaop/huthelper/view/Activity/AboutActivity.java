@@ -1,4 +1,4 @@
-package com.gaop.huthelper.view.Activity;
+package com.gaop.huthelper.view.activity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,7 +11,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 关于Activity
+ */
 public class AboutActivity extends BaseActivity {
+
     @BindView(R.id.imgbtn_toolbar_back)
     ImageButton imgbtnToolbarBack;
     @BindView(R.id.tv_toolbar_title)
@@ -19,7 +23,6 @@ public class AboutActivity extends BaseActivity {
 
     @Override
     public void initParms(Bundle parms) {
-
     }
 
     @Override
@@ -27,20 +30,11 @@ public class AboutActivity extends BaseActivity {
         return R.layout.activity_about;
     }
 
-
     @Override
     public void doBusiness(Context mContext) {
         ButterKnife.bind(this);
         tvToolbarTitle.setText("关于");
     }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        System.gc();
-    }
-
 
     @OnClick(R.id.imgbtn_toolbar_back)
     public void onClick() {

@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/home/gaop/Android/HutHelper1/PushSDK/assets"/><source path="/home/gaop/Android/HutHelper1/PushSDK/build/generated/assets/shaders/release"/></dataSet><dataSet config="release"><source path="/home/gaop/Android/HutHelper1/PushSDK/build-types/release/assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="C:\Users\gaop1\Android\HutHelper1\PushSDK\assets"/><source path="C:\Users\gaop1\Android\HutHelper1\PushSDK\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="C:\Users\gaop1\Android\HutHelper1\PushSDK\build-types\release\assets"/></dataSet></merger>

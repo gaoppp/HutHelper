@@ -2,74 +2,142 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="6dp"
-    android:background="@color/white"
-    android:elevation="5dp"
-    android:orientation="vertical">
-
+    xmlns:pic="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="10dp"
+    android:paddingRight="15dp"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_10"
+    android:paddingLeft="15dp"
+    android:background="@color/white">
+    <com.gaop.huthelper.view.CircleImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitCenter"
+        android:id="@+id/iv_item_say_avatar"
+        android:background="@color/transparent"/>
     <TextView
+        android:layout_marginTop="2dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_toRightOf="@+id/iv_item_say_avatar"
         android:id="@+id/tv_item_sayauthor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/tv_item_say_time"
-        android:padding="6dp"
-        android:text="gaodjfls"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/tv_item_say_istop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="用户名"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp" />
+
+   <!-- <TextView
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:id="@+id/tv_item_say_istop"
+        android:layout_width="wrap_content"
         android:layout_toLeftOf="@+id/tv_item_say_time"
         android:paddingTop="6dp"
         android:text="置顶  "
         android:textColor="@color/red"
         android:textSize="14sp"
-        android:visibility="gone" />
+        android:visibility="gone" />-->
 
     <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:id="@+id/tv_item_say_time"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:padding="6dp"
-        android:text="说说发布时间"
-        android:textColor="@color/black2"
-        android:textSize="14sp" />
-
-    <com.gaop.huthelper.view.PicureGridView
-        android:id="@+id/rv_item_sayimg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/iv_item_say_avatar"
         android:layout_below="@+id/tv_item_sayauthor"
-        android:horizontalSpacing="5dp"
-        android:padding="6dp"
-        android:verticalSpacing="5dp" />
-
+        android:text="说说发布时间"
+        android:textColor="@color/light_grey"
+        android:textSize="12sp" />
     <TextView
+        android:layout_below="@+id/iv_item_say_avatar"
         android:id="@+id/tv_item_saycontent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rv_item_sayimg"
-        android:padding="6dp"
+        android:layout_marginTop="@dimen/dp_10"
         android:text="说说内容"
-        android:textColor="@color/black1"
+        android:textColor="@color/dull_grey"
         android:textSize="16sp" />
-
+    <com.gaop.huthelper.ninepictureview.MyNinePictureLayout
+        android:id="@+id/rv_item_sayimg"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv_item_saycontent"
+        />
     <TextView
         android:id="@+id/tv_item_say_xy"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_item_saycontent"
-        android:padding="6dp"
-        android:paddingBottom="4dp"
-        android:paddingTop="6dp"
+        android:layout_toLeftOf="@+id/ll_sayitem"
+        android:layout_alignParentLeft="true"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
         android:text="说说作者学院"
-        android:textColor="@color/black2"
-        android:textSize="14sp" />
+        android:layout_below="@+id/rv_item_sayimg"
+        android:textColor="@color/light_grey"
+        android:textSize="12sp" />
+    <LinearLayout
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_alignParentRight="true"
+        android:id="@+id/ll_sayitem"
+        android:orientation="horizontal"
+        android:layout_below="@+id/rv_item_sayimg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <TextView
+        <ImageView
+            android:id="@+id/iv_say_item_addcommit"
+            android:layout_marginLeft="30dp"
+            android:layout_gravity="right"
+            android:src="@mipmap/ic_comment"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            />
+        <TextView
+            android:id="@+id/tv_say_item_commitnum"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sp_16"
+            />
+        <ImageView
+            android:id="@+id/iv_say_item_like"
+            android:layout_marginLeft="30dp"
+            android:layout_gravity="right"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/ic_unlike"/>
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/tv_say_item_likenum"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#fc6597"
+            android:textSize="@dimen/sp_16"
+            />
+        <ImageView
+            android:id="@+id/iv_item_deletesay"
+            android:visibility="gone"
+            android:layout_marginLeft="30dp"
+            android:layout_gravity="right"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/ic_delete_black"/>
+    </LinearLayout>
+    
+
+   <!-- <TextView
         android:id="@+id/tv_item_viewnum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,73 +149,21 @@
         android:paddingTop="6dp"
         android:text="浏览次数"
         android:textColor="@color/black2"
-        android:textSize="14sp" />
+        android:textSize="14sp" />-->
 
-
-    <TextView
-        android:id="@+id/tv_item_deletesay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_item_saycontent"
-        android:layout_toLeftOf="@+id/tv_item_viewnum"
-        android:padding="6dp"
-        android:text="删除"
-        android:textColor="@color/red"
-        android:textSize="14sp"
-        android:visibility="gone" />
-
+<ImageView
+    android:id="@+id/iv_item_say"
+    android:visibility="gone"
+    android:layout_marginTop="@dimen/dp_10"
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="@color/line_grey"
+    android:layout_below="@+id/ll_sayitem"
+    />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_say_comments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_item_viewnum"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:paddingLeft="6dp"
-        android:paddingRight="6dp"></android.support.v7.widget.RecyclerView>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/comment_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rv_say_comments"
-        android:orientation="horizontal"
-        android:paddingBottom="3dp"
-        android:background="@color/transparent"
-        android:paddingTop="3dp">
-
-        <EditText
-            android:id="@+id/et_addcomment_content"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginBottom="5dip"
-            android:layout_marginLeft="6dp"
-            android:layout_marginTop="3dip"
-            android:layout_weight="1"
-            android:background="@drawable/bg_input"
-            android:gravity="center_vertical"
-            android:hint="我也说一句"
-            android:maxLength="2000"
-            android:paddingLeft="3dp"
-            android:textSize="14sp"
-            android:windowSoftInputMode="adjustPan|stateVisible" />
-
-        <Button
-            android:id="@+id/btn_addcomment_submit"
-            android:layout_width="60dp"
-            android:layout_height="26dp"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="7dp"
-            android:layout_marginBottom="5dip"
-            android:layout_marginTop="3dip"
-            android:background="@color/transparent"
-            android:gravity="center_vertical"
-
-            android:text="发送"
-            android:textColor="@color/colorPrimary"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-
+        android:layout_below="@+id/iv_item_say"
+        ></android.support.v7.widget.RecyclerView>
 </RelativeLayout>

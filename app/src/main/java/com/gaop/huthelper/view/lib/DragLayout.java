@@ -3,6 +3,7 @@ package com.gaop.huthelper.view.lib;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
+import android.graphics.Rect;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
@@ -16,15 +17,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.gaop.huthelper.R;
+import com.gaop.huthelper.utils.DensityUtils;
 import com.nineoldandroids.view.ViewHelper;
-
 
 
 /**
  * 自定义侧面菜单布局
- * 
- * @author zihao
- * 
+ *
  */
 public class DragLayout extends FrameLayout {
 
@@ -33,7 +32,7 @@ public class DragLayout extends FrameLayout {
 	private GestureDetectorCompat gestureDetector;
 	private ViewDragHelper dragHelper;
 	private DragListener dragListener;
-	private int range;
+	private int range;//排除主页面的左侧页面宽度
 	private int width;
 	private int height;
 	private int mainLeft;
@@ -42,6 +41,8 @@ public class DragLayout extends FrameLayout {
 	private RelativeLayout vg_left;
 	private MyRelativeLayout vg_main;
 	private Status status = Status.Close;
+
+	private View view;
 
 	public DragLayout(Context context) {
 		this(context, null);
@@ -174,7 +175,10 @@ public class DragLayout extends FrameLayout {
 		super.onSizeChanged(w, h, oldw, oldh);
 		width = vg_left.getMeasuredWidth();
 		height = vg_left.getMeasuredHeight();
-		range = (int) (width * 0.6f);
+	    //range = (int) (width * 0.6f);
+		//改良贴近美工图  最大滑动范围为宽度减200 但是主页面会进行缩小0.7倍所以最终左侧显示大小为宽度-140（200*0.7） 在layout文件中右边距为140dp
+		int temp= DensityUtils.dp2px(context,200);
+		range=width-temp;
 	}
 
 	@Override
@@ -186,6 +190,9 @@ public class DragLayout extends FrameLayout {
 
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
+		 if(isInIgnoredView(ev,view)){
+			return false;
+		}
 		return dragHelper.shouldInterceptTouchEvent(ev)
 				&& gestureDetector.onTouchEvent(ev);
 	}
@@ -201,10 +208,11 @@ public class DragLayout extends FrameLayout {
 	}
 
 	private void dispatchDragEvent(int mainLeft) {
+        //mianleft 左侧手指拖动的宽度
 		if (dragListener == null) {
 			return;
 		}
-		float percent = mainLeft / (float) range;
+		float percent = mainLeft / (float) range;//已经滑动的范围占可滑动范围的百分比
 		animateView(percent);
 		dragListener.onDrag(percent);
 		Status lastStatus = status;
@@ -217,11 +225,11 @@ public class DragLayout extends FrameLayout {
 
 	private void animateView(float percent) {
 		float f1 = 1 - percent * 0.3f;
-		ViewHelper.setScaleX(vg_main, f1);
+		ViewHelper.setScaleX(vg_main, f1);   //主布局逐渐变大
 		ViewHelper.setScaleY(vg_main, f1);
 		ViewHelper.setTranslationX(vg_left, -vg_left.getWidth() / 2.3f
 				+ vg_left.getWidth() / 2.3f * percent);
-		ViewHelper.setScaleX(vg_left, 0.5f + 0.5f * percent);
+		ViewHelper.setScaleX(vg_left, 0.5f + 0.5f * percent);//左边的布局逐渐变小
 		ViewHelper.setScaleY(vg_left, 0.5f + 0.5f * percent);
 		ViewHelper.setAlpha(vg_left, percent);
 		if (isShowShadow) {
@@ -301,5 +309,19 @@ public class DragLayout extends FrameLayout {
 			dispatchDragEvent(0);
 		}
 	}
+	private boolean isInIgnoredView(MotionEvent ev, View v) {
+		if(v==null){
+			return false;
+		}
+		Rect rect = new Rect();
+		v.getHitRect(rect);
 
+		if (rect.contains((int) ev.getX(), (int) ev.getY()))
+			return true;
+
+		return false;
+	}
+	public void setIgnoreView(View view){
+		this.view=view;
+	}
 }

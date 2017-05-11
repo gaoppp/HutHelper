@@ -10,7 +10,7 @@ import android.view.animation.Transformation;
 import android.widget.Gallery;
 
 /**
- * Created by gaop1 on 2016/7/12.
+ * Created by 高沛 on 2016/7/12.
  */
 public class CourseInfoGallery extends Gallery {
     private Camera mCamera = new Camera();

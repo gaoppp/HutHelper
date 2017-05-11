@@ -19,6 +19,8 @@ public class User implements java.io.Serializable {
     private String last_login;
     private String login_cnt;
     private String sex;
+    private String head_pic;
+    private String head_pic_thumb;
 
     public User() {
     }
@@ -27,7 +29,7 @@ public class User implements java.io.Serializable {
         this.id = id;
     }
 
-    public User(Long id, String user_id, String rember_code, String studentKH, String TrueName, String username, String dep_name, String class_name, String address, String active, String last_login, String login_cnt, String sex) {
+    public User(Long id, String user_id, String rember_code, String studentKH, String TrueName, String username, String dep_name, String class_name, String address, String active, String last_login, String login_cnt, String sex, String head_pic, String head_pic_thumb) {
         this.id = id;
         this.user_id = user_id;
         this.rember_code = rember_code;
@@ -41,6 +43,8 @@ public class User implements java.io.Serializable {
         this.last_login = last_login;
         this.login_cnt = login_cnt;
         this.sex = sex;
+        this.head_pic = head_pic;
+        this.head_pic_thumb = head_pic_thumb;
     }
 
     public Long getId() {
@@ -145,6 +149,22 @@ public class User implements java.io.Serializable {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public String getHead_pic() {
+        return head_pic;
+    }
+
+    public void setHead_pic(String head_pic) {
+        this.head_pic = head_pic;
+    }
+
+    public String getHead_pic_thumb() {
+        return head_pic_thumb;
+    }
+
+    public void setHead_pic_thumb(String head_pic_thumb) {
+        this.head_pic_thumb = head_pic_thumb;
     }
 
 }

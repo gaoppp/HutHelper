@@ -2,24 +2,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
-    android:paddingRight="10dp"
-    android:paddingLeft="20dp">
+    android:paddingBottom="14dp"
+    android:paddingLeft="14dp"
+    android:paddingRight="14dp"
+    android:paddingTop="14dp">
 
     <TextView
         android:id="@+id/tv_noticeitem_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="flskjflkaaaaaaaaa"
-        android:textSize="18sp"
-        android:textColor="#000000"/>
+        android:textColor="#404040"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tv_noticeitem_time"
-        android:textColor="@color/black1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_below="@id/tv_noticeitem_title"
-        android:text="14.22"/>
+        android:paddingTop="14dp"
+        android:text="14.22"
+        android:textColor="#9a9a9a" />
 </RelativeLayout>

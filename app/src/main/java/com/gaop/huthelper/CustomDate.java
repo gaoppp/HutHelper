@@ -1,8 +1,5 @@
 package com.gaop.huthelper;
 
-import android.text.format.DateUtils;
-import android.util.Log;
-
 import com.gaop.huthelper.utils.DateUtil;
 
 import java.io.Serializable;
@@ -10,7 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by gaop1 on 2016/7/10.
+ * Created by 高沛 on 2016/7/10.
  */
 public class CustomDate implements Serializable {
     private static final long serialVersionUID = 1L;

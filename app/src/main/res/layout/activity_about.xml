@@ -2,12 +2,87 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EDEDED"
+    android:background="#efefef"
     android:orientation="vertical">
 
-    <include layout="@layout/customtoolbar" />
+    <include
+        android:id="@+id/rl_bg_maincontent"
+        layout="@layout/toolbar_nomenu" />
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@mipmap/ic_launcher2"
+        android:layout_gravity="center_horizontal"/>
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="工大助手"
+        android:textColor="#404040"
+        android:textSize="15sp"/>
+    <TextView
 
-    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="0.8.8"
+        android:textColor="#adadad"
+        android:textSize="13sp"/>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#adadad"
+            android:textSize="13sp"
+            android:text="介绍"/>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#404040"
+            android:textSize="15sp"
+            android:text="提供电费、成绩、实验课以及考试安排查询。简易首次登陆，摆脱重复验证。优化图文说说功能，即拍即传，畅所欲言，在交互中展现精彩自我。开放式工大二手市场，物资云集，实名发布，当面交易。简洁设计，每一次的指尖弹跳都在使生活变得更加简单。   『工大助手，简单生活，精彩自我』"/>
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_grey"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#adadad"
+            android:textSize="13sp"
+            android:text="团队"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#404040"
+            android:textSize="15sp"
+            android:layout_marginTop="10dp"
+            android:text="Android开发---高沛、陈大山\niOS开发---汪小祯\n产品策划---曾恒\n后台开发---Tony\nUI交互---刘春杰"/>
+
+    </LinearLayout>
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="8dp"-->
+<!--android:layout_gravity="center_horizontal"-->
+        <!--android:text="© 2016 网络与应用开发组"-->
+        <!--android:textSize="10sp" />-->
+   <!-- <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -47,7 +122,7 @@
                     android:layout_below="@+id/au_name"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="6dp"
-                    android:text="V0.8"
+                    android:text="V0.8.4"
                     android:textColor="#8e8e8e"
                     android:textSize="14dp" />
             </RelativeLayout>
@@ -91,7 +166,7 @@
 
 『工大助手，简单生活，精彩自我』"
                     android:textColor="#404040"
-                    android:textSize="13sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/au_team"
@@ -117,6 +192,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/au_team"
                     android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:layout_marginTop="20dp">
 
                     <LinearLayout
@@ -231,33 +308,7 @@
 
 
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
 
-                        <Button
-                            android:layout_width="50dp"
-                            android:layout_height="20dp"
-                            android:layout_gravity="center_horizontal"
-                            android:background="@drawable/ed_importdata"
-                            android:gravity="center"
-                            android:text="刘春杰"
-                            android:textColor="#404040"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="5dp"
-                            android:text="界面设计"
-                            android:textColor="#404040"
-                            android:textSize="11sp" />
-
-
-                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -299,13 +350,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="© 2016  HUT net group"
+                    android:text="© 2016 网络与应用开发组"
                     android:textSize="10sp" />
             </LinearLayout>
 
 
         </LinearLayout>
 
-    </ScrollView>
+    </ScrollView>-->
 
 </LinearLayout>

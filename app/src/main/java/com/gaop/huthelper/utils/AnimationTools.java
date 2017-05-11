@@ -11,7 +11,7 @@ import android.view.animation.ScaleAnimation;
 public class AnimationTools {
 
     public static void scale(View v) {
-        ScaleAnimation anim = new ScaleAnimation(1.0f, 1.5f, 1.0f, 1.5f,
+        ScaleAnimation anim = new ScaleAnimation(1.0f, 1.2f, 1.0f, 1.2f,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
                 0.5f);
         anim.setDuration(300);

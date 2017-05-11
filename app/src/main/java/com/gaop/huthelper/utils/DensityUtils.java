@@ -16,6 +16,8 @@ public class DensityUtils {
      */
     public static int dp2px(Context context, float dpVal)
     {
+
+        //TODO 此处居然爆context空指针错误
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 dpVal, context.getResources().getDisplayMetrics());
     }

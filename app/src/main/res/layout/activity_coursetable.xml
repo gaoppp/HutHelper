@@ -1,54 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:background="#1ddbcd">
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/transparent">
 
         <ImageButton
             android:id="@+id/imgbtn_toolbar_back"
             android:layout_width="wrap_content"
-            android:layout_height="21dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="31dp"
-            android:background="@mipmap/ic_back" />
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:background="@color/transparent"
+            android:paddingLeft="12dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_back_list" />
 
         <TextView
             android:id="@+id/tv_chooseweek_coursetable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="31dp"
-            android:drawablePadding="8dp"
-            android:drawableRight="@mipmap/ic_drop_down_32px"
+            android:drawablePadding="10dp"
+            android:drawableRight="@mipmap/ic_dropdown"
             android:gravity="center"
             android:text="第几周"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textColor="@color/dull_grey"
+            android:textSize="20sp" />
 
+
+        <ImageButton
+            android:id="@+id/iv_coursetable_update"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/transparent"
+            android:paddingLeft="20dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_refresh" />
+<!--
         <ImageView
            android:id="@+id/iv_coursetable_explesson"
             android:layout_width="21dp"
             android:layout_height="21dp"
-            android:layout_marginTop="31dp"
             android:layout_toLeftOf="@+id/iv_coursetable_update"
-            android:src="@mipmap/ic_explesson" />
+            android:src="@mipmap/ic_explesson" />-->
 
-        <ImageView
-            android:id="@+id/iv_coursetable_update"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginTop="31dp"
-            android:src="@mipmap/ic_update" />
     </RelativeLayout>
     <!--<android.support.v7.widget.Toolbar-->
     <!--android:id="@+id/toolbar_coursetable"-->
@@ -61,11 +73,14 @@
 
     <!---->
     <!--</android.support.v7.widget.Toolbar>-->
-
+<ImageView
+    android:layout_width="match_parent"
+    android:background="@color/line_grey"
+    android:layout_height="0.5dp" />
     <FrameLayout
         android:id="@+id/fl_coursetable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar" />
 
-</RelativeLayout>
+</LinearLayout>

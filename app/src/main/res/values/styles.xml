@@ -20,6 +20,7 @@
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">10sp</item>
     </style>
+
     <style name="weekViewNumText">
         <item name="android:textColor">@color/black2</item>
         <item name="android:textSize">10sp</item>
@@ -76,4 +77,13 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
+
+    <style name="Left">
+        <item name="android:background">@drawable/selector_segmented_left</item>
+    </style>
+
+    <style name="Right">
+        <item name="android:background">@drawable/selector_segmented_right</item>
+    </style>
+
 </resources>

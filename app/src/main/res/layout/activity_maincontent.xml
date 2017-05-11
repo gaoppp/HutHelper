@@ -45,11 +45,16 @@
 
     </RelativeLayout>
 
+    <!--<com.gaop.huthelper.view.AutoScrollViewPager-->
+        <!--android:id="@+id/viewPager_main"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="120dp"></com.gaop.huthelper.view.AutoScrollViewPager>-->
     <ImageView
         android:id="@+id/iv_mainbg"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:background="@drawable/xiaomen2" />
+        android:src="@drawable/bg3"
+        android:scaleType="centerCrop"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -98,6 +103,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_main_tongzhi"
             android:layout_width="match_parent"
             android:layout_height="60dp">
 

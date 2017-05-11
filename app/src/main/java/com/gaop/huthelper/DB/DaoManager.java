@@ -1,8 +1,8 @@
-package com.gaop.huthelper.DB;
+package com.gaop.huthelper.db;
 
 import android.content.Context;
 
-import com.gaop.huthelper.MApplication;
+import com.gaop.huthelper.app.MApplication;
 import com.gaop.huthelperdao.CourseGrade;
 import com.gaop.huthelperdao.CourseGradeDao;
 import com.gaop.huthelperdao.DaoSession;
@@ -14,8 +14,12 @@ import com.gaop.huthelperdao.Grade;
 import com.gaop.huthelperdao.GradeDao;
 import com.gaop.huthelperdao.Lesson;
 import com.gaop.huthelperdao.LessonDao;
+import com.gaop.huthelperdao.Menu;
+import com.gaop.huthelperdao.MenuDao;
 import com.gaop.huthelperdao.Notice;
 import com.gaop.huthelperdao.NoticeDao;
+import com.gaop.huthelperdao.Ranking;
+import com.gaop.huthelperdao.RankingDao;
 import com.gaop.huthelperdao.Trem;
 import com.gaop.huthelperdao.TremDao;
 import com.gaop.huthelperdao.User;
@@ -28,7 +32,7 @@ import de.greenrobot.dao.query.QueryBuilder;
 import de.greenrobot.dao.query.WhereCondition;
 
 /**
- * Created by gaop1 on 2016/8/30.
+ * Created by 高沛 on 2016/8/30.
  */
 public class DaoManager {
     private static DaoManager instance;
@@ -42,6 +46,9 @@ public class DaoManager {
     private GradeDao gradeDao;
     private NoticeDao noticeDao;
     private ExamDao examDao;
+    private MenuDao menuDao;
+
+    private RankingDao rankingDao;
 
     public DaoManager() {
 
@@ -61,7 +68,9 @@ public class DaoManager {
             instance.tremDao = instance.mDaoSession.getTremDao();
             instance.noticeDao = instance.mDaoSession.getNoticeDao();
             instance.explessonDao = instance.mDaoSession.getExplessonDao();
-            instance.examDao=instance.mDaoSession.getExamDao();
+            instance.examDao = instance.mDaoSession.getExamDao();
+            instance.menuDao = instance.mDaoSession.getMenuDao();
+            instance.rankingDao = instance.mDaoSession.getRankingDao();
         }
         return instance;
     }
@@ -160,7 +169,9 @@ public class DaoManager {
 
     public void deleteLessonByid(List<Long> d) {
         lessonDao.deleteByKeyInTx(d);
+
     }
+
 
     public void insertOrReplaceLesson(Lesson person) {
         lessonDao.insertOrReplaceInTx(person);
@@ -194,6 +205,14 @@ public class DaoManager {
      */
     public void deleteAllLesson() {
         lessonDao.deleteAll();
+    }
+
+    public void deleteLessonbyImport(WhereCondition arg0,
+                                     WhereCondition... conditions) {
+        //essonDao.Properties.Xqj.eq(num)
+        QueryBuilder<Lesson> qb = lessonDao.queryBuilder();
+        qb.where(arg0, conditions);
+        lessonDao.deleteInTx(qb.list());
     }
 
     /**
@@ -442,6 +461,10 @@ public class DaoManager {
         noticeDao.deleteAll();
     }
 
+    public void deleteNoteiceById(Long id) {
+        noticeDao.deleteByKey(id);
+    }
+
 
     /**************************
      * ExpLesson×××××××××××××××××××/
@@ -475,7 +498,7 @@ public class DaoManager {
     }
 
     public List<Explesson> queryExpLesson(WhereCondition arg0,
-                                    WhereCondition... conditions) {
+                                          WhereCondition... conditions) {
         QueryBuilder<Explesson> qb = explessonDao.queryBuilder();
         qb.where(arg0, conditions);
         List<Explesson> personList = qb.list();
@@ -485,6 +508,7 @@ public class DaoManager {
     public void deleteAllExpLesson() {
         explessonDao.deleteAll();
     }
+
     /*******************Exam************************/
 
     public List<Exam> orderAscExam() {
@@ -494,6 +518,7 @@ public class DaoManager {
         else
             return list;
     }
+
     public void insertExam(Exam person) {
         examDao.insert(person);
     }
@@ -511,5 +536,83 @@ public class DaoManager {
         examDao.deleteAll();
     }
 
+    /*******************Menu************************/
+
+    public List<Menu> orderAscMenu() {
+        List<Menu> list = menuDao.queryBuilder().orderAsc(MenuDao.Properties.Id).list();
+        if (list == null || list.size() == 0)
+            return new ArrayList<>();
+        else
+            return list;
+    }
+
+    public void insertMenu(Menu person) {
+        menuDao.insert(person);
+    }
+
+    public void insertListMenu(List<Menu> list) {
+        if (null == list || list.isEmpty()) {
+            return;
+        }
+        for (Menu object : list) {
+            menuDao.insert(object);
+        }
+    }
+
+    public List<Menu> queryMenu(WhereCondition arg0,
+                                WhereCondition... conditions) {
+        QueryBuilder<Menu> qb = menuDao.queryBuilder();
+        qb.where(arg0, conditions);
+        List<Menu> personList = qb.list();
+        return personList;
+    }
+
+    public List<Menu> queryMenuSortByIndex(WhereCondition arg0,
+                                           WhereCondition... conditions) {
+        QueryBuilder<Menu> qb = menuDao.queryBuilder();
+        qb.where(arg0, conditions).orderAsc(MenuDao.Properties.Index);
+        List<Menu> personList = qb.list();
+        return personList;
+    }
+
+    public void deleteAllMenu() {
+        menuDao.deleteAll();
+    }
+
+    /*******************RankingApiData************************/
+
+    public List<Ranking> orderAscRanking() {
+        List<Ranking> list = rankingDao.queryBuilder().orderAsc(RankingDao.Properties.Id).list();
+        if (list == null || list.size() == 0)
+            return new ArrayList<>();
+        else
+            return list;
+    }
+
+    public void insertRanking(Ranking person) {
+        rankingDao.insert(person);
+    }
+
+    public void insertListRanking(List<Ranking> list) {
+        if (null == list || list.isEmpty()) {
+            return;
+        }
+        for (Ranking object : list) {
+            rankingDao.insert(object);
+        }
+    }
+
+    public List<Ranking> queryRanking(WhereCondition arg0,
+                                      WhereCondition... conditions) {
+        QueryBuilder<Ranking> qb = rankingDao.queryBuilder();
+        qb.where(arg0, conditions);
+        List<Ranking> personList = qb.list();
+        return personList;
+    }
+
+
+    public void deleteAllRanking() {
+        rankingDao.deleteAll();
+    }
 }
 

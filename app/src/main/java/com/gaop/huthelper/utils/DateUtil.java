@@ -1,6 +1,7 @@
 package com.gaop.huthelper.utils;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
 import com.gaop.huthelper.CustomDate;
 
@@ -102,6 +103,7 @@ public class DateUtil {
     }
 
     public static CustomDate getNextSunday(Date d) {
+
         Calendar c = Calendar.getInstance();
         c.setTime(d);
         int dayWeek = c.get(Calendar.DAY_OF_WEEK);//获得当前日期是一个星期的第几天
@@ -109,10 +111,13 @@ public class DateUtil {
         if (dayWeek == 1) {
             CustomDate date = new CustomDate(c.get(Calendar.YEAR),
                     c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH) - 7);
+
+
             return date;
         }
         CustomDate date = new CustomDate(c.get(Calendar.YEAR),
                 c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH));
+
         return date;
     }
 
@@ -341,7 +346,7 @@ public class DateUtil {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         long be = 0;
         try {
-            Date begin = df.parse("2016-08-29");
+            Date begin = df.parse("2017-02-20");
             Date end = new Date();
             be = (end.getTime() - begin.getTime()) / (1000 * 60 * 60 * 24);
         } catch (ParseException e) {

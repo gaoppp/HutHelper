@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_marginTop="20dp"
+    android:background="@color/transparent">
+
+    <ImageButton
+        android:id="@+id/imgbtn_toolbar_back"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:background="@color/transparent"
+        android:paddingLeft="12dp"
+        android:paddingRight="20dp"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_back_list" />
+
+    <TextView
+        android:id="@+id/tv_toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="标题"
+        android:textColor="#404040"
+        android:textSize="20dp" />
+
+    <ImageButton
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
+        android:id="@+id/imgbtn_toolbar_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@color/transparent"
+        android:paddingLeft="20dp"
+        android:paddingRight="12dp"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_menu_list" />
+</RelativeLayout>

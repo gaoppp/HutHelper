@@ -24,9 +24,10 @@ public class NoticeDao extends AbstractDao<Notice, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Time = new Property(1, String.class, "time", false, "TIME");
-        public final static Property Content = new Property(2, String.class, "content", false, "CONTENT");
-        public final static Property Title = new Property(3, String.class, "title", false, "TITLE");
+        public final static Property Type = new Property(1, String.class, "type", false, "TYPE");
+        public final static Property Time = new Property(2, String.class, "time", false, "TIME");
+        public final static Property Content = new Property(3, String.class, "content", false, "CONTENT");
+        public final static Property Title = new Property(4, String.class, "title", false, "TITLE");
     };
 
 
@@ -43,9 +44,10 @@ public class NoticeDao extends AbstractDao<Notice, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"NOTICE\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"TIME\" TEXT," + // 1: time
-                "\"CONTENT\" TEXT," + // 2: content
-                "\"TITLE\" TEXT);"); // 3: title
+                "\"TYPE\" TEXT," + // 1: type
+                "\"TIME\" TEXT," + // 2: time
+                "\"CONTENT\" TEXT," + // 3: content
+                "\"TITLE\" TEXT);"); // 4: title
     }
 
     /** Drops the underlying database table. */
@@ -64,19 +66,24 @@ public class NoticeDao extends AbstractDao<Notice, Long> {
             stmt.bindLong(1, id);
         }
  
+        String type = entity.getType();
+        if (type != null) {
+            stmt.bindString(2, type);
+        }
+ 
         String time = entity.getTime();
         if (time != null) {
-            stmt.bindString(2, time);
+            stmt.bindString(3, time);
         }
  
         String content = entity.getContent();
         if (content != null) {
-            stmt.bindString(3, content);
+            stmt.bindString(4, content);
         }
  
         String title = entity.getTitle();
         if (title != null) {
-            stmt.bindString(4, title);
+            stmt.bindString(5, title);
         }
     }
 
@@ -91,9 +98,10 @@ public class NoticeDao extends AbstractDao<Notice, Long> {
     public Notice readEntity(Cursor cursor, int offset) {
         Notice entity = new Notice( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // time
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // content
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // title
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // type
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // time
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // content
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // title
         );
         return entity;
     }
@@ -102,9 +110,10 @@ public class NoticeDao extends AbstractDao<Notice, Long> {
     @Override
     public void readEntity(Cursor cursor, Notice entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setTime(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setContent(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setTitle(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setType(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setTime(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setContent(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setTitle(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
      }
     
     /** @inheritdoc */

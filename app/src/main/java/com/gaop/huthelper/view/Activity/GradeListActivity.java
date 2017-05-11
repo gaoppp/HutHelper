@@ -1,4 +1,4 @@
-package com.gaop.huthelper.view.Activity;
+package com.gaop.huthelper.view.activity;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
@@ -9,16 +9,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.gaop.huthelper.DB.DBHelper;
+import com.gaop.huthelper.db.DBHelper;
 import com.gaop.huthelper.R;
-import com.gaop.huthelper.adapter.AutoRVAdapter;
-import com.gaop.huthelper.adapter.ViewHolder;
+import com.gaop.huthelper.view.adapter.AutoRVAdapter;
+import com.gaop.huthelper.view.adapter.ViewHolder;
+import com.gaop.huthelper.utils.DensityUtils;
 import com.gaop.huthelper.utils.ScreenUtils;
 import com.gaop.huthelperdao.CourseGrade;
 import com.gaop.huthelperdao.Trem;
@@ -39,7 +42,7 @@ public class GradeListActivity extends BaseActivity {
 
     List<CourseGrade> lessonList;
     List<Trem> tremList;
-    @BindView(R.id.tv_choose_grade)
+    @BindView(R.id.tv_choosexq_gradelist)
     TextView tvChoose;
     @BindView(R.id.rv_gradelist)
     RecyclerView rvGradelist;
@@ -74,7 +77,7 @@ public class GradeListActivity extends BaseActivity {
     public void doBusiness(Context mContext) {
 
         ButterKnife.bind(this);
-        Log.e("d", "d22");
+
         lessonList = DBHelper.getCourseGradeDao();
         tremList = DBHelper.getTremDao();
 
@@ -131,11 +134,32 @@ public class GradeListActivity extends BaseActivity {
             });
             weekListWindow = new PopupWindow(popupWindowLayout, width, width + 100);
         }
+//        weekListView.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                weekListView.smoothScrollToPosition(chooseNum);
+//            }
+//        });
+        // 设置背景颜色变暗
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = 0.4f;
+        getWindow().setAttributes(lp);
+        weekListWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                lp.alpha = 1f;
+                getWindow().setAttributes(lp);
+            }
+        });
+
+
         weekListWindow.setFocusable(true);
         //设置点击外部可消失
         weekListWindow.setOutsideTouchable(true);
         weekListWindow.setBackgroundDrawable(new BitmapDrawable());
-        weekListWindow.showAsDropDown(parent, -(width - parent.getWidth()) / 2, 0);
+        weekListWindow.showAsDropDown(parent, -(width - parent.getWidth()) / 2, 20);
     }
 
     private void changeList(int trem) {
@@ -154,13 +178,13 @@ public class GradeListActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.imgbtn_toolbar_back, R.id.tv_choose_grade})
+    @OnClick({R.id.imgbtn_toolbar_back, R.id.tv_choosexq_gradelist})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imgbtn_toolbar_back:
                 finish();
                 break;
-            case R.id.tv_choose_grade:
+            case R.id.tv_choosexq_gradelist:
                 showChooseListWindows(tvChoose);
                 break;
         }
@@ -188,25 +212,27 @@ public class GradeListActivity extends BaseActivity {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             CourseGrade grade = ((CourseGrade) list.get(position));
+            LinearLayout.LayoutParams layoutParams =new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            int margin= DensityUtils.sp2px(context,10);
+            layoutParams.setMargins(0,margin,0,0);
+            holder.get(R.id.ll_gradelist_root).setLayoutParams(layoutParams);
             float cj;
             if (grade.getBKCJ() != null)
                 cj = Math.max(Float.valueOf(grade.getZSCJ()), Float.valueOf(grade.getBKCJ()));
             else
                 cj = Float.valueOf(grade.getZSCJ());
-            holder.setTextView(R.id.tv_lesson_name, grade.getKCMC());
-            holder.setTextView(R.id.tv_lesson_jd, ("绩点" + grade.getJD()));
-            holder.setTextView(R.id.tv_lesson_score, "" + cj);
-            holder.setTextView(R.id.tv_lesson_xf, "学分：" + grade.getXF());
-            holder.setTextView(R.id.tv_lesson_xq, "学期：" + grade.getXN() + "年第" + grade.getXQ() + "学期");
-
+            String name=grade.getKCMC()+"/"+cj;
+            String time=grade.getXN() + "年第" + grade.getXQ() + "学期";
+            String jd=grade.getXF()+"/"+grade.getJD();
             if (cj < 60) {
-                holder.getImageView(R.id.iv_lesson_ispass).setVisibility(View.VISIBLE);
-            } else
-                holder.getImageView(R.id.iv_lesson_ispass).setVisibility(View.GONE);
+                name+="(未通过)";
+            }
             if ("1".equals(grade.getCXBJ())) {
-                holder.getTextView(R.id.tv_lesson_iscx).setVisibility(View.VISIBLE);
-            } else
-                holder.getTextView(R.id.tv_lesson_iscx).setVisibility(View.GONE);
+               time+="(重修)";
+            }
+            holder.setTextView(R.id.tv_lesson_name, name);
+            holder.setTextView(R.id.tv_lesson_xf, jd);
+            holder.setTextView(R.id.tv_lesson_xq,time);
         }
     }
 
@@ -246,11 +272,11 @@ public class GradeListActivity extends BaseActivity {
             }
             TextView textView = (TextView) view.findViewById(R.id.tv_weeklist_item);
             if (position == currChoose) {
-                textView.setBackgroundResource(R.color.blue);
+                textView.setBackgroundResource(R.color.colorPrimary);
                 textView.setTextColor(getResources().getColor(R.color.white));
             } else {
-                textView.setBackgroundResource(R.drawable.btn_weekitem);
-                textView.setTextColor(getResources().getColor(R.color.black));
+                textView.setBackgroundResource(R.color.transparent);
+                textView.setTextColor(getResources().getColor(R.color.dull_grey));
             }
             textView.setText(data.get(position));
             return view;

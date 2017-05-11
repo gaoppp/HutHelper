@@ -1,7 +1,8 @@
 package com.gaop.huthelper.net;
 
 /**
- * Created by gaop1 on 2016/7/24.
+ * Created by 高沛 on 2016/7/24.
+ * 加载条取消监听接口
  */
 public interface ProgressCancelListener {
 

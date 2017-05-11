@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#1ddbcd">
+
+        <ImageButton
+            android:id="@+id/imgbtn_toolbar_back"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="31dp"
+            android:background="@drawable/left" />
+
+    <EditText
+        android:id="@+id/et_offerseacher_content"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textColorHint="@color/background_common"
+        android:padding="6dp"
+        android:hint="搜索岗位，地点或公司..."
+        android:background="@color/transparent"
+        android:singleLine="true"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imgbtn_toolbar_back"
+        android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+    <com.github.jdsjlzx.recyclerview.LRecyclerView
+        android:background="@color/background_common"
+        android:id="@+id/rl_offerseacher_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:padding="16dp"
+        android:id="@+id/tv_offersearch_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="没找到任何数据"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:textSize="16sp"/>
+
+</LinearLayout>

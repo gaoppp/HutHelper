@@ -1,4 +1,4 @@
-package com.gaop.huthelper.view.Activity;
+package com.gaop.huthelper.view.activity;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gaop.huthelper.R;
-import com.gaop.huthelper.jiekou.SubscriberOnNextListener;
+import com.gaop.huthelper.model.network.api.SubscriberOnNextListener;
 import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.net.ProgressSubscriber;
 import com.gaop.huthelper.utils.ToastUtil;
@@ -24,7 +24,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by gaop1 on 2016/5/15.
+ * 登录Activity
+ * Created by 高沛 on 2016/5/15.
  */
 public class ImportActivity extends BaseActivity {
 
@@ -41,10 +42,8 @@ public class ImportActivity extends BaseActivity {
     @BindView(R.id.iv_icon_import)
     ImageView ivIcon;
 
-
     @Override
     public void initParms(Bundle parms) {
-
     }
 
     @Override
@@ -52,19 +51,18 @@ public class ImportActivity extends BaseActivity {
         return R.layout.activity_import;
     }
 
-
     @Override
     public void doBusiness(Context mContext) {
         ButterKnife.bind(this);
+        //键盘控制
         controlKeyboardLayout(rlImport, tvFotgetpw);
     }
-
 
     private boolean isNumValid(String num) {
         return num.length() == 11;
     }
 
-    public void ImportData() {
+    public void importData() {
         SubscriberOnNextListener getUserData = new SubscriberOnNextListener<String>() {
             @Override
             public void onNext(String o) {
@@ -84,7 +82,11 @@ public class ImportActivity extends BaseActivity {
         finish();
     }
 
-
+    /**
+     * 根据键盘控制图标消失隐藏
+     * @param root
+     * @param scrollToView
+     */
     private void controlKeyboardLayout(final View root, final View scrollToView) {
         root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -95,7 +97,7 @@ public class ImportActivity extends BaseActivity {
                 //获取root在窗体的不可视区域高度(被其他View遮挡的区域高度)
                 int rootInvisibleHeight = root.getRootView().getHeight() - rect.bottom;
                 //若不可视区域高度大于100，则键盘显示
-                if (rootInvisibleHeight > 100) {
+                if (rootInvisibleHeight > 400) {
                     int[] location = new int[2];
                     //获取scrollToView在窗体的坐标
                     scrollToView.getLocationInWindow(location);
@@ -103,7 +105,7 @@ public class ImportActivity extends BaseActivity {
                     int srollHeight = (location[1] + scrollToView.getHeight()) - rect.bottom;
                     root.scrollTo(0, srollHeight);
                     ObjectAnimator animator = ObjectAnimator.ofFloat(ivIcon, "alpha", 1f, 0f);
-                    animator.setDuration(800);
+                    animator.setDuration(100);
                     animator.start();
 
                 } else {
@@ -117,17 +119,13 @@ public class ImportActivity extends BaseActivity {
         });
     }
 
-
-
-
-
     @OnClick({R.id.btn_ok_import, R.id.tv_fotgetpw})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_ok_import:
                 if (fastClick()) {
                     if (isNumValid(etImportNum.getText().toString())) {
-                        ImportData();
+                        importData();
                     } else
                         ToastUtil.showToastShort("学号有误");
                 }

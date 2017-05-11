@@ -1,29 +1,30 @@
-package com.gaop.huthelper.view.Activity;
+package com.gaop.huthelper.view.activity;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.gaop.huthelper.DB.DBHelper;
+import com.gaop.huthelper.db.DBHelper;
 import com.gaop.huthelper.R;
 import com.gaop.huthelper.utils.CommUtil;
+import com.gaop.huthelper.utils.PrefUtil;
 import com.gaop.huthelper.utils.ToastUtil;
 import com.gaop.huthelperdao.User;
+import com.tencent.smtt.sdk.WebChromeClient;
+import com.tencent.smtt.sdk.WebView;
+import com.tencent.smtt.sdk.WebViewClient;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by gaop on 16-9-12.
+ * Created by 高沛 on 16-9-12.
  */
 public class WebViewActivity extends BaseActivity {
 
@@ -43,12 +44,16 @@ public class WebViewActivity extends BaseActivity {
     static final int TYPE_LIB = 1;
     static final int TYPE_EXAM = 2;
     static final int TYPE_CHANGE_PW = 3;
+    static final int TYPE_NOTICE = 4;
     private int type;
-    private User user;
+    //private User user;
 
     @Override
     public void initParms(Bundle parms) {
         type = parms.getInt("type");
+        if (type == TYPE_NOTICE) {
+            Url = parms.getString("url");
+        }
 
     }
 
@@ -61,19 +66,21 @@ public class WebViewActivity extends BaseActivity {
     public void doBusiness(Context mContext) {
         ButterKnife.bind(this);
         if (type == TYPE_EXAM) {
-            user = DBHelper.getUserDao().get(0);
+            User user = DBHelper.getUserDao().get(0);
             String num = user.getStudentKH();
             String rember = user.getRember_code();
             Url = "http://218.75.197.121:8888/api/v1/get/myhomework/" + num + "/" + rember;
 
-           tvToolbarTitle.setText("网上作业");
+            tvToolbarTitle.setText("网上作业");
         } else if (type == TYPE_LIB) {
             tvToolbarTitle.setText("图书馆");
-            Url = "http://218.75.197.121:8889/opac/index";
+            Url = PrefUtil.getString(mContext, "library", "http://218.75.197.121:8889") + "/opac/m/index";
+            // http://218.75.197.121:8889/opac/m/reader/login?returnUrl=/reader/space-----我的图书馆
         } else if (type == TYPE_CHANGE_PW) {
             tvToolbarTitle.setText("修改密码");
             Url = "http://218.75.197.121:8888/auth/resetPass";
-
+        } else if (type == TYPE_NOTICE) {
+            tvToolbarTitle.setText("通知详情");
         }
         pbWebview.setIndeterminate(false);
         pbWebview.setVisibility(View.VISIBLE);
@@ -150,13 +157,16 @@ public class WebViewActivity extends BaseActivity {
      */
     protected void showErrorPage() {
         RelativeLayout webParentView = (RelativeLayout) webview.getParent();
-        initErrorPage();
-        while (webParentView.getChildCount() > 1) {
-            webParentView.removeViewAt(1);
+        if (webParentView != null) {
+            initErrorPage();
+            while (webParentView.getChildCount() > 1) {
+                webParentView.removeViewAt(1);
+            }
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT);
+            webParentView.addView(mErrorView, 1, lp);
+            mIsErrorPage = true;
         }
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT);
-        webParentView.addView(mErrorView, 1, lp);
-        mIsErrorPage = true;
+
     }
 
 
@@ -179,8 +189,6 @@ public class WebViewActivity extends BaseActivity {
         webview.removeAllViews();
         webview.destroy();
     }
-
-
 
 
     @OnClick(R.id.imgbtn_toolbar_back)

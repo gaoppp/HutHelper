@@ -1,9 +1,10 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <include layout="@layout/customtoolbar"
+    <include layout="@layout/toolbar_nomenu"
         android:id="@+id/toolbar"/>
 
     <com.github.jdsjlzx.recyclerview.LRecyclerView
@@ -12,14 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"></com.github.jdsjlzx.recyclerview.LRecyclerView>
 
-    <TextView
-        android:id="@+id/tv_goods_empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:layout_centerHorizontal="true"
-        android:padding="10dp"
-        android:text="你没有发布任何商品"
-        android:textSize="20sp"
-        android:visibility="gone" />
-</RelativeLayout>
+    <include layout="@layout/all_empty"
+        android:visibility="gone"/>
+</LinearLayout>

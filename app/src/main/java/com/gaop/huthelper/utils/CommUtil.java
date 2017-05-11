@@ -5,26 +5,38 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v8.renderscript.Allocation;
+import android.support.v8.renderscript.Element;
+import android.support.v8.renderscript.RenderScript;
+import android.support.v8.renderscript.ScriptIntrinsicBlur;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
-import com.gaop.huthelper.DB.DBHelper;
+import com.gaop.huthelper.db.DBHelper;
+import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelperdao.Lesson;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -34,6 +46,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
+
+import static android.R.attr.path;
 
 /**
  * 公共工具
@@ -149,6 +163,89 @@ public class CommUtil {
 //
 //    }
 
+    public static void saveImageToGallery(Context context, Bitmap bmp) {
+        // 保存图片
+        File appDir = new File(Environment.getExternalStorageDirectory(), "HutHelper");
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+        String fileName = System.currentTimeMillis() + ".jpg";
+        File file = new File(appDir, fileName);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 文件插入到系统图库
+        try {
+            MediaStore.Images.Media.insertImage(context.getContentResolver(),
+                    file.getAbsolutePath(), fileName, null);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // 通知图库更新
+        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path)));
+        ToastUtil.showToastShort("图片已成功保存至:"+appDir.toString()+"/"+fileName);
+    }
+
+    public static void downloadBitmap(final Context context, String url) {
+
+        //Target
+        Target target = new Target(){
+
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                saveImageToGallery(context,bitmap);
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+                     ToastUtil.showToastShort("保存失败");
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        };
+
+        //Picasso下载
+        Picasso.with(context).load(HttpMethods.BASE_URL+url).into(target);
+    }
+    /**
+     * 保存图片
+     * @param bm
+     * @param picName
+     */
+
+    public void saveBitmap(Bitmap bm,String picName) {
+       // Log.e(TAG, "保存图片");
+        File f = new File("/sdcard/namecard/", picName);
+        if (f.exists()) {
+            f.delete();
+        }
+        try {
+            FileOutputStream out = new FileOutputStream(f);
+            bm.compress(Bitmap.CompressFormat.PNG, 90, out);
+            out.flush();
+            out.close();
+            //Log.i(TAG, "已经保存");
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
+
     /**
      * 判断网络
      *
@@ -160,6 +257,22 @@ public class CommUtil {
                 .getSystemService(Activity.CONNECTIVITY_SERVICE);
         NetworkInfo info = manager.getActiveNetworkInfo();
         if (info != null && info.isConnected()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 是否wifi
+     * @param context
+     * @return
+     */
+    public static boolean isWifiConnected(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifiNetworkInfo = connectivityManager
+                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if (wifiNetworkInfo.isConnected()) {
             return true;
         }
         return false;
@@ -230,6 +343,26 @@ public class CommUtil {
         }
     }
 
+    /**
+     * 动态软键盘
+     * @param context
+     * @param edit
+     */
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
+    public static void toggleSoftInput(Context context, EditText edit) {
+        edit.setFocusable(true);
+        edit.setFocusableInTouchMode(true);
+        edit.requestFocus();
+        InputMethodManager inputManager = (InputMethodManager) context
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+    }
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
+    public static void showSoftInput(Context context, EditText edit) {
+//
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+    }
 
     public static int compressImage(Bitmap bitmap) {
         try {
@@ -323,10 +456,29 @@ public class CommUtil {
             fos.close();
             if (isDelSrc) srcFile.deleteOnExit();
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
         }
         return desPath;
+    }
+
+    public static Bitmap blurBitmap(Context context, Bitmap bitmap) {
+        //用需要创建高斯模糊bitmap创建一个空的bitmap
+        Bitmap outBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        // 初始化Renderscript，该类提供了RenderScript context，创建其他RS类之前必须先创建这个类，其控制RenderScript的初始化，资源管理及释放
+        RenderScript rs = RenderScript.create(context);
+        // 创建高斯模糊对象
+        ScriptIntrinsicBlur blurScript = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+        // 创建Allocations，此类是将数据传递给RenderScript内核的主要方 法，并制定一个后备类型存储给定类型
+        Allocation allIn = Allocation.createFromBitmap(rs, bitmap);
+        Allocation allOut = Allocation.createFromBitmap(rs, outBitmap);
+        //设定模糊度(注：Radius最大只能设置25.f)
+        blurScript.setRadius(15f);
+        // Perform the Renderscript
+        blurScript.setInput(allIn);
+        blurScript.forEach(allOut);
+        allOut.copyTo(outBitmap);
+        rs.destroy();
+        return outBitmap;
     }
 
     /**

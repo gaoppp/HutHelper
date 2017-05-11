@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#acc4e1"
+    android:id="@+id/bgcolor_lostsend">
+    <RelativeLayout
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+
+        <ImageView
+            android:id="@+id/iv_back_lostsend"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:src="@mipmap/ic_back_new"/>
+        <TextView
+            android:textSize="20dp"
+            android:textColor="#ffffff"
+            android:layout_centerInParent="true"
+            android:text="添加失物"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/iv_done_lostsend"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/ic_done"/>
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/imgandtext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                >
+
+                 <android.support.v7.widget.RecyclerView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                <EditText
+                    android:gravity="top|left"
+                    android:maxLength="50"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/et_text_lostsend"
+                    android:paddingTop="10dp"
+                    android:maxLines="4"
+                    android:minLines="4"
+                    android:lineSpacingExtra="3dp"
+                    android:hint="在添加点详情描述吧....."
+                    android:textSize="14dp"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+            <View
+                android:background="#efefef"
+                android:layout_marginTop="85dp"
+                android:layout_below="@id/imgandtext"
+                android:layout_width="match_parent"
+                android:layout_height="320dp"/>
+
+            <RelativeLayout
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@id/imgandtext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:background="#ffffff"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/context">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="35dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:layout_gravity="center"
+                                android:layout_width="20dp"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/icon_lostwhat"/>
+                            <LinearLayout
+                                android:layout_marginLeft="25dp"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:textSize="10dp"
+                                    android:textColor="#404040"
+                                    android:text="拾到物品"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <EditText
+                                    android:maxLength="20"
+                                    android:background="@null"
+                                    android:textColorHint="#cacaca"
+                                    android:id="@+id/ed_thing_lostsend"
+                                    android:paddingTop="5dp"
+                                    android:textSize="16dp"
+                                    android:hint="请输入拾到的物品名称"
+                                    android:textColor="#404040"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingTop="35dp">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@mipmap/icon_time" />
+
+                            <LinearLayout
+                                android:layout_marginLeft="25dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="拾到时间"
+                                    android:textColor="#404040"
+                                    android:textSize="10dp" />
+
+                                <EditText
+                                    android:id="@+id/ed_time_lostsend"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:hint="请输入拾到物品的大致时间"
+                                    android:lines="1"
+                                    android:maxLength="20"
+                                    android:paddingTop="5dp"
+                                    android:textColor="#404040"
+                                    android:textColorHint="#cacaca"
+                                    android:textSize="16dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:paddingTop="35dp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@mipmap/icon_locate"
+                                android:layout_width="20dp"
+                                android:layout_height="wrap_content" />
+                            <LinearLayout
+                                android:layout_marginLeft="25dp"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:textSize="10dp"
+                                    android:textColor="#404040"
+                                    android:text="拾到地点"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <EditText
+                                    android:maxLength="20"
+                                    android:background="@null"
+                                    android:id="@+id/ed_where_lostsend"
+                                    android:paddingTop="5dp"
+                                    android:textSize="16dp"
+                                    android:textColor="#404040"
+                                    android:textColorHint="#cacaca"
+                                    android:hint="请输入拾到物品的地点"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:paddingTop="35dp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@mipmap/icon_tel"
+                                android:layout_width="20dp"
+                                android:layout_height="wrap_content" />
+                            <LinearLayout
+                                android:layout_marginLeft="25dp"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:textSize="10dp"
+                                    android:textColor="#404040"
+                                    android:text="联系电话"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <EditText
+                                    android:maxLength="11"
+                                    android:inputType="phone|number"
+                                    android:background="@null"
+                                    android:hint="请输入拾取者的手机号码"
+                                    android:textColorHint="#cacaca"
+                                    android:id="@+id/ed_tel_lostsend"
+                                    android:paddingTop="5dp"
+                                    android:textSize="16dp"
+                                    android:textColor="#404040"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+</LinearLayout>

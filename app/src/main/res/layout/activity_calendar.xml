@@ -4,21 +4,21 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <include layout="@layout/customtoolbar"/>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <include layout="@layout/toolbar_nomenu"/>
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dp">
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingBottom="8dp">-->
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_calendar_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"></android.support.v7.widget.RecyclerView>
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/rv_calendar_date"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingBottom="10dp"></android.support.v7.widget.RecyclerView>-->
 
 
             <ImageView
@@ -26,12 +26,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rv_calendar_date"
+                android:layout_marginTop="@dimen/dp_10"
                 android:src="@drawable/calendar"
                 android:adjustViewBounds="true"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="4dp"
                 />
-        </RelativeLayout>
-    </ScrollView>
+        <!--</RelativeLayout>-->
+    <!--</ScrollView>-->
 </LinearLayout>

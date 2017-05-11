@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_add" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_marginBottom="@dimen/dp_10"
+                android:id="@+id/rl_addlose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/bg_list"
+                android:layout_alignParentTop="true"
+               >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="15dp"
+                    android:text="物品名称"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/et_addlose_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginTop="13dp"
+                    android:background="@color/transparent"
+                    android:hint="请输入拾到物品的名称，如钱包"
+                    android:textColor="#808080"
+                    android:textColorHint="#808080"
+                    android:gravity="right"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:id="@+id/iv_mylose_line1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@+id/et_addlose_title"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_mylose_line1"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="10dp"
+                    android:text="拾到时间"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_addlose_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/iv_mylose_line1"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginTop="12dp"
+                    android:text="请选择物品拾到的时间"
+                    android:textColor="#808080"
+                    android:gravity="right"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:id="@+id/iv_mylose_line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@+id/tv_addlose_time"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_mylose_line2"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="10dp"
+                    android:text="拾到地点"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:gravity="right"
+                    android:id="@+id/et_addlose_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/iv_mylose_line2"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/transparent"
+                    android:hint="请输入拾到物品的地点"
+                    android:textColor="#808080"
+                    android:textColorHint="#808080"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:id="@+id/iv_addlose_line3"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@+id/et_addlose_place"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_addlose_line3"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="10dp"
+                    android:text="您的电话"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:gravity="right"
+                    android:id="@+id/et_addlose_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/iv_addlose_line3"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/transparent"
+                    android:hint="电话,QQ,微信请至少填写一个"
+                    android:textColor="#808080"
+                    android:textColorHint="#808080"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:id="@+id/iv_addlose_line4"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@+id/et_addlose_phone"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_addlose_line4"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="10dp"
+                    android:text="您的QQ"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:gravity="right"
+                    android:id="@+id/et_addlose_qq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/iv_addlose_line4"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/transparent"
+                    android:hint="电话,QQ,微信请至少填写一个"
+                    android:textColor="#808080"
+                    android:textColorHint="#808080"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:id="@+id/iv_addlose_line5"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@+id/et_addlose_qq"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_addlose_line5"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="10dp"
+                    android:text="您的微信"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:gravity="right"
+                    android:id="@+id/et_addlose_wechat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/iv_addlose_line5"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/transparent"
+                    android:hint="电话,QQ,微信请至少填写一个"
+                    android:textColor="#808080"
+                    android:textColorHint="#808080"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:id="@+id/iv_addlose_line6"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@+id/et_addlose_wechat"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_mylose_label2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_addlose_line6"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="12dp"
+                    android:text="留言描述"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:background="@color/transparent"
+                    android:id="@+id/et_addlose_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_mylose_label2"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="请输入留言描述作补充说明"
+                    android:textColor="#808080"
+                    android:textColorHint="#808080"
+                    android:textSize="13sp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/gv_addlose_imglist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/et_addlose_content"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginTop="10dp"
+                    android:horizontalSpacing="5dp"
+                    android:numColumns="2"
+                    android:verticalSpacing="5dp"></android.support.v7.widget.RecyclerView>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/gv_addlose_imglist"
+                    android:layout_marginBottom="13dp"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="10dp"
+                    android:text="图片请适当马赛克"
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
+
+            </RelativeLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>
+

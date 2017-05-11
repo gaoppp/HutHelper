@@ -1,30 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray1">
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <TextView
-        android:visibility="gone"
-        android:id="@+id/tv_say_empty"
-        android:textSize="20sp"
-        android:layout_below="@+id/toolbar"
-        android:padding="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="你没有发布任何说说"/>
 
-    <include layout="@layout/customtoolbar"
-        android:id="@+id/toolbar"/>
+    <include layout="@layout/toolbar_nomenu" />
 
-    <com.github.jdsjlzx.recyclerview.LRecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_mysaylist"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/bg_grey"
         android:fastScrollEnabled="true"
         android:scrollbarStyle="insideInset"
-        android:transcriptMode="normal"
-        android:layout_below="@+id/toolbar"></com.github.jdsjlzx.recyclerview.LRecyclerView>
-</RelativeLayout>
+        android:transcriptMode="normal"></android.support.v7.widget.RecyclerView>
+
+    <include layout="@layout/all_empty" />
+</LinearLayout>

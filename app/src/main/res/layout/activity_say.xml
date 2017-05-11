@@ -1,72 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_say_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray1"
-    tools:context="com.gaop.huthelper.view.Activity.MarketActivity">
+    android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context="com.gaop.huthelper.view.activity.MarketActivity">
 
+    <include layout="@layout/toolbar_menu" />
 
-    <RelativeLayout
-        android:elevation="5dp"
-        android:id="@+id/toolbar"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/RefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:background="#1ddbcd">
+        android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/imgbtn_toolbar_back"
-            android:layout_width="wrap_content"
-            android:layout_height="21dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="31dp"
-            android:background="@mipmap/ic_back" />
-
-        <TextView
-            android:id="@+id/tv_toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="31dp"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="20dp" />
-
-        <ImageView
-            android:id="@+id/iv_say_my"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginTop="31dp"
-            android:src="@mipmap/ic_mylist" />
-    </RelativeLayout>
-
-    <com.github.jdsjlzx.recyclerview.LRecyclerView
-        android:clipToPadding="false"
-        android:id="@+id/rv_saylist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="64dp"></com.github.jdsjlzx.recyclerview.LRecyclerView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="@dimen/fab_margin"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginRight="@dimen/fab_margin"
-        android:src="@mipmap/ic_add_white_48dp"
-        app:backgroundTint="@color/colorPrimary"
-
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp"
-        app:rippleColor="#33728dff" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_saylist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_grey" />
 
 
+    </android.support.v4.widget.SwipeRefreshLayout>
 
-</RelativeLayout>
+    <include layout="@layout/all_empty" />
+
+</LinearLayout>

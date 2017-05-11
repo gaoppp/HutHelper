@@ -3,7 +3,7 @@ package com.gaop.huthelper.utils;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.gaop.huthelper.MApplication;
+import com.gaop.huthelper.app.MApplication;
 
 /**
  * 弹窗工具

@@ -7,6 +7,7 @@ package com.gaop.huthelperdao;
 public class Notice implements java.io.Serializable {
 
     private Long id;
+    private String type;
     private String time;
     private String content;
     private String title;
@@ -18,8 +19,9 @@ public class Notice implements java.io.Serializable {
         this.id = id;
     }
 
-    public Notice(Long id, String time, String content, String title) {
+    public Notice(Long id, String type, String time, String content, String title) {
         this.id = id;
+        this.type = type;
         this.time = time;
         this.content = content;
         this.title = title;
@@ -31,6 +33,14 @@ public class Notice implements java.io.Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getTime() {

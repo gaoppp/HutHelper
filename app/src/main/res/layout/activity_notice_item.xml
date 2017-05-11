@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#efefef">
 
     <include
         android:id="@+id/toolba_notice_item"
@@ -16,29 +16,49 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="vertical"
-            android:padding="15dp">
+           >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#efefef" />
 
             <TextView
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:id="@+id/tv_noticeitem_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="目前开通试用的范围"
-                android:textColor="#000000"
+                android:gravity="center_horizontal"
+                android:paddingTop="15dp"
+                android:textColor="#404040"
+                android:textIsSelectable="true"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/tv_noticeitem_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2016-12" />
-
-            <TextView
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:id="@+id/tv_noticeitem_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#000000"
+                android:paddingTop="15dp"
+                android:textColor="#808080"
+                android:textIsSelectable="true"
                 android:textSize="18sp" />
+
+            <TextView
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:id="@+id/tv_noticeitem_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:paddingTop="15dp"
+                android:textColor="#9a9a9a"
+                android:textSize="14sp"
+                android:paddingBottom="15dp"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

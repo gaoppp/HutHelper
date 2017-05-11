@@ -1,7 +1,8 @@
 package com.gaop.huthelper.net;
 
 /**
- * Created by gaop1 on 2016/9/1.
+ * Created by 高沛 on 2016/9/1.
+ *
  */
 public interface ProgressListener {
     /**

@@ -12,7 +12,7 @@ import com.gaop.huthelper.R;
 
 
 /**
- * Created by gaop1 on 2016/4/22.
+ * Created by 高沛 on 2016/4/22.
  */
 public class PinWheel extends View {
 

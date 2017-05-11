@@ -7,23 +7,22 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="70dp"
         android:background="#1ddbcd">
 
         <ImageButton
             android:id="@+id/imgbtn_toolbar_back"
-            android:layout_width="wrap_content"
-            android:layout_height="21dp"
-            android:layout_marginLeft="12dp"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
             android:layout_marginTop="31dp"
-            android:background="@mipmap/ic_back" />
+            android:background="@drawable/left" />
 
         <TextView
             android:id="@+id/tv_toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="31dp"
+            android:layout_marginTop="37dp"
             android:text=""
             android:textColor="@color/white"
             android:textSize="20dp" />
@@ -35,7 +34,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:layout_marginTop="31dp"
+            android:layout_marginTop="39dp"
             android:src="@mipmap/ic_ok" />
     </RelativeLayout>
 

@@ -1,76 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:padding="8dp"
-    android:elevation="4dp"
-    >
-
-    <TextView
-        android:id="@+id/tv_lesson_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="高等数学1"
-        android:textColor="#000000"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/tv_lesson_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tv_lesson_name"
-        android:text="85.0"
-        android:paddingLeft="10dp"
-        android:textColor="#000000"
-        android:textSize="18sp" />
-    <TextView
-        android:id="@+id/tv_lesson_iscx"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="  重修"
-        android:visibility="gone"
-        android:layout_toRightOf="@id/tv_lesson_score"
-        android:textColor="@android:color/holo_red_light"
-        android:textSize="16sp"/>
-
-    <TextView
-        android:id="@+id/tv_lesson_xq"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_lesson_name"
-        android:text="学期：2015-2016上"
-        android:textSize="16sp" />
+    android:layout_marginTop="10dp"
+    android:background="@color/white"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:id="@+id/ll_gradelist_root"
+    android:orientation="vertical"
+   >
 
     <LinearLayout
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_lesson_xq"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_lesson_xf"
+            android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="学分：5.0"
-            android:textSize="16sp" />
+            android:text="课程&amp;成绩"
+            android:textColor="@color/light_grey"
+            android:textSize="13dp"
+            android:id="@+id/textView2" />
 
         <TextView
-            android:id="@+id/tv_lesson_jd"
+            android:id="@+id/tv_lesson_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="70dp"
-            android:gravity="right"
-            android:text="绩点：4"
-            android:textSize="16sp" />
+            android:layout_marginLeft="@dimen/dp_10"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
     </LinearLayout>
 
     <ImageView
-        android:visibility="gone"
-        android:src="@drawable/wtg"
-        android:id="@+id/iv_lesson_ispass"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true" />
-</RelativeLayout>
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line_grey"/>
+    <LinearLayout
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="课程时间"
+            android:textSize="13dp"
+            android:textColor="@color/light_grey"/>
+        <TextView
+            android:id="@+id/tv_lesson_xq"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/dull_grey"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line_grey"/>
+
+    <LinearLayout
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="学分&amp;绩点"
+            android:textSize="13dp"
+            android:textColor="@color/light_grey"/>
+        <TextView
+            android:id="@+id/tv_lesson_xf"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/dull_grey"
+            android:textSize="15sp" />
+    </LinearLayout>
+</LinearLayout>

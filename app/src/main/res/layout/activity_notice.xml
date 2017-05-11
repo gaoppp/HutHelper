@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
    <include layout="@layout/customtoolbar"
-       android:id="@+id/toolba_notice"/>
+       android:id="@+id/toolba_notice"
+       />
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/lv_notice"
+        android:divider="#efefef"
+        android:dividerHeight="1dp"
         android:layout_below="@id/toolba_notice"></ListView>
     <TextView
         android:visibility="gone"
