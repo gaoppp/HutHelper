@@ -15,10 +15,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gaop.huthelper.R;
+import com.gaop.huthelper.app.MApplication;
 import com.gaop.huthelper.db.DBHelper;
+import com.gaop.huthelper.model.entity.HttpResult;
 import com.gaop.huthelper.model.entity.UpdateMsg;
 import com.gaop.huthelper.model.network.api.SubscriberOnNextListener;
-import com.gaop.huthelper.model.entity.HttpResult;
 import com.gaop.huthelper.model.rxbus.RxBus;
 import com.gaop.huthelper.model.rxbus.event.MainEvent;
 import com.gaop.huthelper.net.HttpMethods;
@@ -38,6 +39,8 @@ import com.gaop.huthelperdao.User;
 import com.squareup.picasso.Picasso;
 import com.umeng.message.PushAgent;
 import com.umeng.message.UTrack;
+import com.umeng.message.common.inter.ITagManager;
+import com.umeng.message.tag.TagManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +57,6 @@ import rx.schedulers.Schedulers;
 
 /**
  * Created by 高沛 on 2016/8/2.
- * this ischange
  */
 public class MainActivity extends BaseActivity {
 
@@ -87,16 +89,16 @@ public class MainActivity extends BaseActivity {
     private long exitTime = 0;
     private Subscription subscription;
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        User user = DBHelper.getUserDao().get(0);
-        int width = DensityUtils.dp2px(this, 75);
-        if(!TextUtils.isEmpty(user.getHead_pic_thumb())){
-            Picasso.with(this).load(HttpMethods.BASE_URL + user.getHead_pic_thumb()).resize(width, width).into(ivAvatar);
-        }
-        tvNavName.setText(user.getTrueName());
-    }
+//    @Override
+//    protected void onNewIntent(Intent intent) {
+//        super.onNewIntent(intent);
+//        User user = DBHelper.getUserDao().get(0);
+//        int width = DensityUtils.dp2px(this, 75);
+//        if(!TextUtils.isEmpty(user.getHead_pic_thumb())){
+//            Picasso.with(this).load(HttpMethods.BASE_URL + user.getHead_pic_thumb()).resize(width, width).into(ivAvatar);
+//        }
+//        tvNavName.setText(user.getTrueName());
+//    }
 
     @Override
     public void initParms(Bundle parms) {
@@ -109,9 +111,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void doBusiness(Context mContext) {
-
         ButterKnife.bind(this);
-
+        //初始化一些界面
         mDragLayout = (DragLayout) findViewById(R.id.drawer_layout);
         mDragLayout.setDragListener(new DragLayout.DragListener() {
             @Override
@@ -129,32 +130,24 @@ public class MainActivity extends BaseActivity {
 
             }
         });
-
-
-        Observable.create(new Observable.OnSubscribe<String[]>() {
+        initUserData();
+        tvCourseMaincontent.setText(CommUtil.getNextClass(this));
+        tvDateMaincontent.setText(CommUtil.getData());
+        //初始化友盟Tag以及通知
+        Observable.create(new Observable.OnSubscribe<List<Notice>>() {
             @Override
-            public void call(Subscriber<? super String[]> subscriber) {
-                String[] next = new String[4];
-                next[0] = CommUtil.getNextClass(MainActivity.this);
-                next[1] = CommUtil.getData();
-                User user = DBHelper.getUserDao().get(0);
-                if (user != null) {
-                    next[2] = user.getTrueName();
-                    next[3] = user.getHead_pic_thumb();
-                } else {
-                    next[2] = "助手";
-                    next[3] = "";
-                }
-                subscriber.onNext(next);
+            public void call(Subscriber<? super List<Notice>> subscriber) {
+                List<Notice> notices = DBHelper.getNoticeDao();
+                User user = MApplication.getUser();
+                subscriber.onNext(notices);
 
                 if (user != null) {
                     PushAgent mPushAgent = PushAgent.getInstance(MainActivity.this);
-//                    mPushAgent.getTagManager().add(new TagManager.TCallBack() {
-//                        @Override
-//                        public void onMessage(final boolean isSuccess, final ITagManager.Result result) {
-//
-//                        }
-//                    }, user.getDep_name(), user.getClass_name());
+                    mPushAgent.getTagManager().add(new TagManager.TCallBack() {
+                        @Override
+                        public void onMessage(final boolean isSuccess, final ITagManager.Result result) {
+                        }
+                    }, user.getDep_name(), user.getClass_name());
                     mPushAgent.addAlias(user.getStudentKH(), "学号", new UTrack.ICallBack() {
                         @Override
                         public void onMessage(boolean isSuccess, String message) {
@@ -162,11 +155,11 @@ public class MainActivity extends BaseActivity {
                     });
                 }
             }
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<String[]>() {
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<Notice>>() {
                     @Override
-                    public void call(String data[]) {
-                        List<Notice> notices = DBHelper.getNoticeDao();
+                    public void call(List<Notice> notices) {
                         if (notices.size() != 0) {
                             final Notice notice = notices.get((notices.size() - 1));
                             tvTZtitle.setText(notice.getTitle());
@@ -183,24 +176,24 @@ public class MainActivity extends BaseActivity {
                         } else {
                             tvTZcontent.setText("暂时没有通知");
                         }
-                        tvCourseMaincontent.setText(data[0]);
-                        tvDateMaincontent.setText(data[1]);
-                        tvNavName.setText(data[2]);
-                        if (!TextUtils.isEmpty(data[3])) {
-                            int width = DensityUtils.dp2px(MainActivity.this, 75);
-                            Picasso.with(MainActivity.this).load(HttpMethods.BASE_URL + data[3]).resize(width, width).into(ivAvatar);
-                        }
-
                     }
                 });
-
-
+        //事件监听
         subscription = RxBus.getInstance().toObservable(MainEvent.class)
                 .subscribe(new Action1<MainEvent>() {
                     @Override
                     public void call(MainEvent event) {
-                        if (event.getId() == 1) {
-                            initMenu();     //更新菜单
+                        switch (event.getId()) {
+                            case 1:
+                                initMenu();     //更新菜单
+                                break;
+                            case 2:
+                                //更新课表;
+                                break;
+                            case 3:
+                                //更新用户头像以及名称
+                                initUserData();
+                                break;
                         }
                     }
                 }, new Action1<Throwable>() {
@@ -211,6 +204,20 @@ public class MainActivity extends BaseActivity {
                 });
         initMenu();
         checkUpdate(false);
+    }
+
+    private void initUserData() {
+        int width = DensityUtils.dp2px(MainActivity.this, 75);
+        if (!TextUtils.isEmpty(MApplication.getUser().getHead_pic_thumb())) {
+            Picasso.with(MainActivity.this).load(HttpMethods.BASE_URL + MApplication.getUser().getHead_pic_thumb()).resize(width, width).into(ivAvatar);
+        } else {
+            if ("男".equals(MApplication.getUser().getSex())) {
+                Picasso.with(MainActivity.this).load(R.mipmap.head_boy).resize(width, width).into(ivAvatar);
+            } else {
+                Picasso.with(MainActivity.this).load(R.mipmap.head_girl).resize(width, width).into(ivAvatar);
+            }
+        }
+        tvNavName.setText(MApplication.getUser().getTrueName());
     }
 
     private void initMenu() {
@@ -286,7 +293,7 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.tv_nav_fback:
                 startActivity(FeedBackActivity.class);
-               // startActivity(NewGradeActivity.class);
+                // startActivity(NewGradeActivity.class);
                 break;
             case R.id.tv_nav_logout:
                 startActivity(ImportActivity.class);

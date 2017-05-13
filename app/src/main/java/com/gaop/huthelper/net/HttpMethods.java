@@ -3,6 +3,7 @@ package com.gaop.huthelper.net;
 
 import android.content.Context;
 
+import com.gaop.huthelper.app.MApplication;
 import com.gaop.huthelper.db.DBHelper;
 import com.gaop.huthelper.model.entity.CareerTalkData;
 import com.gaop.huthelper.model.entity.CareerTalkItem;
@@ -728,7 +729,6 @@ public class HttpMethods {
                     public String call(HttpResult<User> userHttpResult) {
 
                         if ("ok".equals(userHttpResult.getMsg())) {
-
                             userHttpResult.getData().setRember_code(userHttpResult.getRemember_code_app());
                             DBHelper.deleteAllUser();
                             DBHelper.insertUserDao(userHttpResult.getData());
@@ -739,6 +739,8 @@ public class HttpMethods {
                             PrefUtil.setBoolean(context, "isLoadGrade", false);
                             PrefUtil.setBoolean(context, "isLoadExam", false);
                             PrefUtil.setBoolean(context, "isLoadExpLesson", false);
+                            //初始化全局User
+                            MApplication.setUser(userHttpResult.getData());
                         }
                         return userHttpResult.getMsg();
                     }

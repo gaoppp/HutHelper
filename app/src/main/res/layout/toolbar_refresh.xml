@@ -40,5 +40,5 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         android:scaleType="fitCenter"
-        android:src="@mipmap/ic_refresh" />
+        android:src="@mipmap/common_refresh" />
 </RelativeLayout>

@@ -1,16 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_examitem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
-    android:id="@+id/rl_examitem"
-    >
+    android:background="@color/white">
+
+
+    <LinearLayout
+        android:id="@+id/ll_examitem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_examitem_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="日期"
+            android:textColor="@color/black"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/tv_examitem_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+    </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_examitem_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_examitem"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginTop="15dp"
+        android:text="考试科目"
+        android:textColor="#adadad"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/tv_examitem_where"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_examitem_name"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:text="考试地点"
+        android:textColor="#adadad"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/tv_examitem_countdown"
+        android:layout_width="66dp"
+        android:layout_height="22dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/tv_examitem_name"
+        android:layout_marginRight="15dp"
+        android:background="@mipmap/exam_time_bg"
+        android:gravity="center"
+        android:text="倒计时"
+        android:textColor="@color/white"
+        android:textSize="11sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/tv_examitem_where"
+        android:layout_marginTop="15dp"
+        android:background="#efefef"></View>
+
+
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -104,7 +173,7 @@
         android:text=""
         android:textColor="@color/dull_grey"
         android:paddingBottom="10dp"
-        android:textSize="15sp" />
+        android:textSize="15sp" />-->
 </RelativeLayout>
 
 

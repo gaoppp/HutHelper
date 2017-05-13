@@ -62,7 +62,7 @@
     </style>
 
     <style name="AppSplash" parent="AppTheme.NoActionBar">
-        <item name="android:windowBackground">@drawable/start</item>
+        <item name="android:windowDisablePreview">true</item>
         <item name="android:windowNoTitle">true</item>
     </style>
 

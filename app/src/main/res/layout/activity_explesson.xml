@@ -1,54 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:orientation="vertical">
-   <include layout="@layout/toolbar_refresh"/>
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="0.5dp"
-    android:background="@color/bg_grey"/>
+
+    <include layout="@layout/toolbar_refresh" />
+
     <LinearLayout
-        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="35dp"
+        android:background="#191dcbdb">
+
         <RadioGroup
             android:id="@+id/radio_group_segmented_control"
-            android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_horizontal"
             android:orientation="horizontal">
+
             <RadioButton
-                android:drawableBottom="@drawable/bg_radiobutton"
-                android:drawablePadding="5dp"
-                android:gravity="center_horizontal|top"
-                android:checked="true"
-                android:layout_marginRight="40dp"
-                android:textSize="16dp"
-                android:textColor="@color/colorPrimary"
-                android:button="@null"
                 android:id="@+id/radio_nofinish"
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
-                android:text="未完成"
-                tools:checked="true" />
-            <RadioButton
-                android:gravity="center_horizontal|top"
-                android:layout_marginLeft="40dp"
-                android:textSize="16dp"
-                android:textColor="@color/colorPrimary"
+                android:layout_marginRight="40dp"
                 android:button="@null"
+                android:checked="true"
+                android:gravity="center_horizontal|top"
+                android:text="未完成"
+                android:textColor="@drawable/explesson_radio_bg"
+                android:textSize="14dp"
+                tools:checked="true" />
+
+            <RadioButton
                 android:id="@+id/radio_finish"
-                android:drawableBottom="@drawable/bg_radiobutton"
-                android:drawablePadding="5dp"
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
-                android:text="已完成" />
+                android:layout_marginLeft="40dp"
+                android:button="@null"
+                android:gravity="center_horizontal|top"
+                android:text="已完成"
+                android:textColor="@drawable/explesson_radio_bg"
+                android:textSize="14dp" />
         </RadioGroup>
     </LinearLayout>
 
@@ -60,7 +56,6 @@
         android:layout_gravity="center"
         android:background="#000000"
         android:flipInterval="30"
-        android:persistentDrawingCache="animation"
-        />
+        android:persistentDrawingCache="animation" />
 
 </LinearLayout>

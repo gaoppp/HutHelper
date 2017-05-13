@@ -4,24 +4,23 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.gaop.huthelper.R;
 import com.gaop.huthelper.db.DBHelper;
 import com.gaop.huthelper.model.entity.ExamData;
-import com.gaop.huthelper.R;
-import com.gaop.huthelper.view.adapter.AutoRVAdapter;
-import com.gaop.huthelper.view.adapter.ViewHolder;
 import com.gaop.huthelper.model.network.api.SubscriberOnNextListener;
 import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.net.ProgressSubscriber;
 import com.gaop.huthelper.utils.DateUtil;
-import com.gaop.huthelper.utils.DensityUtils;
 import com.gaop.huthelper.utils.PrefUtil;
 import com.gaop.huthelper.utils.ToastUtil;
+import com.gaop.huthelper.view.adapter.AutoRVAdapter;
+import com.gaop.huthelper.view.adapter.ViewHolder;
 import com.gaop.huthelperdao.Exam;
 import com.gaop.huthelperdao.User;
 
@@ -132,18 +131,31 @@ public class ExamActivity extends BaseActivity {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             Exam exam = (Exam) list.get(position);
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            int margin = DensityUtils.sp2px(context, 10);
-            layoutParams.setMargins(0, margin, 0, 0);
-            holder.get(R.id.rl_examitem).setLayoutParams(layoutParams);
+//            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//            int margin = DensityUtils.sp2px(context, 10);
+//            layoutParams.setMargins(0, margin, 0, 0);
+//            holder.get(R.id.rl_examitem).setLayoutParams(layoutParams);
             holder.getTextView(R.id.tv_examitem_name).setText(exam.getCourseName());
-            if (exam.getIsset().equals("0"))
-                holder.getTextView(R.id.tv_examitem_how).setText("计划中");
-            else if (exam.getIsset().equals("1"))
-                holder.getTextView(R.id.tv_examitem_how).setText("执行中");
+            holder.getTextView(R.id.tv_examitem_where).setText(exam.getRoomName());
+//            if (exam.getIsset().equals("0"))
+//                holder.getTextView(R.id.tv_examitem_how).setText("计划中");
+//            else if (exam.getIsset().equals("1"))
+//                holder.getTextView(R.id.tv_examitem_how).setText("执行中");
 
             if (exam.getStarttime() == null && exam.getEndTime() == null) {
-                holder.getTextView(R.id.tv_examitem_when).setText(exam.getWeek_Num() + "周 ");
+                holder.getTextView(R.id.tv_examitem_day).setText(exam.getWeek_Num() + "周 ");
+                if(!TextUtils.isEmpty(exam.getWeek_Num())) {
+                    int weeknum = Integer.parseInt(exam.getWeek_Num());
+                    int currweek = DateUtil.getNowWeek();
+                    if (weeknum > currweek) {
+                        holder.getTextView(R.id.tv_examitem_countdown).setText("剩余"+(weeknum-currweek) + "周");
+                    } else if (weeknum == currweek) {
+                        holder.getTextView(R.id.tv_examitem_countdown).setText("本周");
+                    } else {
+                        holder.getTextView(R.id.tv_examitem_countdown).setText("已结束");
+                    }
+                    return;
+                }
                 holder.getTextView(R.id.tv_examitem_countdown).setText("无");
             } else {
                 Date begindate = null;
@@ -153,24 +165,26 @@ public class ExamActivity extends BaseActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                if (begindate != null) {
-                    int num = DateUtil.getIntervalDays(new Date(), begindate) + 1;
-                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
-                    if (num >= 1) {
-                        if (formatter.format(begindate).equals(formatter.format(new Date()))) {
-                            holder.getTextView(R.id.tv_examitem_countdown).setText("今天");
+                    if (begindate != null) {
+                        int num = DateUtil.getIntervalDays(new Date(), begindate) + 1;
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
+                        if (num >= 1) {
+                            if (formatter.format(begindate).equals(formatter.format(new Date()))) {
+                                holder.getTextView(R.id.tv_examitem_countdown).setText("今天");
+                            } else {
+                                holder.getTextView(R.id.tv_examitem_countdown).setText("剩余"+(num) + "天");
+                            }
                         } else {
-                            holder.getTextView(R.id.tv_examitem_countdown).setText((num) + "天");
+                            holder.getTextView(R.id.tv_examitem_countdown).setText("已结束");
                         }
-                    } else {
-                        holder.getTextView(R.id.tv_examitem_countdown).setText("已考");
-                    }
 
-                }
-                String date = exam.getStarttime().substring(0, 10);
-                String begin = exam.getStarttime().substring(11, 16);
-                String end = exam.getEndTime().substring(11, 16);
-                holder.getTextView(R.id.tv_examitem_when).setText(exam.getWeek_Num() + "周/" + date + "/" + begin + "-" + end);
+                    }
+                    String date = exam.getStarttime().substring(0, 10);
+                    String begin = exam.getStarttime().substring(11, 16);
+                    String end = exam.getEndTime().substring(11, 16);
+                    //holder.getTextView(R.id.tv_examitem_when).setText(exam.getWeek_Num() + "周/" + date + "/" + begin + "-" + end);
+                    holder.getTextView(R.id.tv_examitem_day).setText(date);
+                    holder.getTextView(R.id.tv_examitem_time).setText("("+exam.getWeek_Num()+"周 "+ begin + "-" + end+")");
 
             }
 //            if (exam.getIsset().equals("0"))
@@ -181,7 +195,7 @@ public class ExamActivity extends BaseActivity {
 //                holder.getTextView(R.id.tv_examitem_isCx).setVisibility(View.VISIBLE);
 //            else
 //                holder.getTextView(R.id.tv_examitem_isCx).setVisibility(View.GONE);
-            holder.getTextView(R.id.tv_examitem_where).setText(exam.getRoomName());
+
         }
     }
 }

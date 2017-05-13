@@ -1,41 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
     android:id="@+id/ll_exp_root"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/dp_10"
-    android:paddingTop="@dimen/dp_10"
-    android:paddingBottom="@dimen/dp_10"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingTop="15dp">
+
     <TextView
-        android:textSize="13sp"
-        android:textColor="@color/light_grey"
+        android:id="@+id/tv_expitem_realtime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="18周周一 9：00-19：00"
+        android:textColor="#000000"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tv_expitem_lesson"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:text="软件工程（（（（（（（））））"
+        android:textColor="#adadad"
+        android:textSize="11sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_expitem_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上课地点"
+            android:textColor="#adadad"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_expitem_teacher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="教师"
+            android:textColor="#1dcbdb"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="15dp"
+        android:background="#efefef" />
+
+    <!--<TextView
         android:id="@+id/tv_expitem_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="课程名称"/>
+        android:text="课程名称"
+        android:textColor="@color/light_grey"
+        android:textSize="13sp" />
 
     <TextView
-        android:layout_marginTop="@dimen/dp_10"
         android:id="@+id/tv_expitem_lesson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
         android:text="课程名"
         android:textColor="@color/dull_grey"
         android:textSize="15sp" />
-<!--    <TextView
-        android:visibility="gone"
-        android:id="@+id/tv_expitem_finish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="已完成"
-        android:padding="6dp"
-        android:textSize="14sp"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/ed_importdata"/>-->
+    &lt;!&ndash;    <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_expitem_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已完成"
+            android:padding="6dp"
+            android:textSize="14sp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ed_importdata"/>&ndash;&gt;
 
     <TextView
         android:id="@+id/tv_expitem_obj"
@@ -45,97 +96,100 @@
         android:text="实验内容"
         android:textColor="@color/colorPrimary"
         android:textSize="15sp" />
+
     <ImageView
-        android:layout_marginTop="@dimen/dp_10"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/line_grey"/>
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/line_grey" />
 
     <LinearLayout
-        android:layout_marginTop="@dimen/dp_10"
         android:id="@+id/ll_itemexp_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
         android:orientation="horizontal">
 
-      <TextView
-          android:textSize="13sp"
-          android:textColor="@color/light_grey"
-          android:gravity="center_vertical"
-          android:layout_gravity="center_vertical"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="课程时间"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text="课程时间"
+            android:textColor="@color/light_grey"
+            android:textSize="13sp" />
 
         <TextView
-            android:textColor="@color/dull_grey"
-            android:textSize="15sp"
-            android:gravity="right"
             android:id="@+id/tv_expitem_realtime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="具体时间" />
+            android:gravity="right"
+            android:text="具体时间"
+            android:textColor="@color/dull_grey"
+            android:textSize="15sp" />
 
     </LinearLayout>
+
     <ImageView
-        android:layout_marginTop="@dimen/dp_10"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/line_grey"/>
-    <LinearLayout
         android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/line_grey" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
         android:orientation="horizontal">
 
         <TextView
-            android:textSize="13sp"
-            android:textColor="@color/light_grey"
-            android:gravity="center_vertical"
-            android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="教师"/>
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text="教师"
+            android:textColor="@color/light_grey"
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/tv_expitem_teacher"
-            android:textColor="@color/dull_grey"
-            android:textSize="15sp"
-            android:gravity="right"
-            android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="教室" />
+            android:layout_gravity="center_vertical"
+            android:gravity="right"
+            android:text="教室"
+            android:textColor="@color/dull_grey"
+            android:textSize="15sp" />
     </LinearLayout>
 
     <ImageView
-        android:layout_marginTop="@dimen/dp_10"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/line_grey"/>
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/line_grey" />
 
-        <LinearLayout
-            android:layout_marginTop="@dimen/dp_10"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text="地点"
+            android:textColor="@color/light_grey"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tv_expitem_place"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:textSize="13sp"
-                android:textColor="@color/light_grey"
-                android:gravity="center_vertical"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="地点"/>
-
-            <TextView
-                android:id="@+id/tv_expitem_place"
-                android:textColor="@color/dull_grey"
-                android:textSize="15sp"
-                android:gravity="right"
-                android:layout_gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="老师" />
-        </LinearLayout>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="right"
+            android:text="老师"
+            android:textColor="@color/dull_grey"
+            android:textSize="15sp" />
+    </LinearLayout>-->
+</LinearLayout>

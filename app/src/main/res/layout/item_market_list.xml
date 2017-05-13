@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:background="@drawable/btn_topradius"
-            android:src="@drawable/bg2" />
+           />
 
         <TextView
             android:id="@+id/tv_price_marketitem"

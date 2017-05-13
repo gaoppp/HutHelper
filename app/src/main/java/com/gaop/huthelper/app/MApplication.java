@@ -8,6 +8,7 @@ import com.gaop.huthelper.db.DaoManager;
 import com.gaop.huthelperdao.DaoMaster;
 import com.gaop.huthelperdao.DaoSession;
 import com.gaop.huthelperdao.Notice;
+import com.gaop.huthelperdao.User;
 import com.tencent.smtt.sdk.QbSdk;
 import com.tencent.tinker.loader.app.TinkerApplication;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
@@ -31,6 +32,7 @@ public class MApplication extends TinkerApplication {
     public static DaoMaster daoMaster;
     public static DaoSession daoSession;
     public static DaoManager daoManager;
+    private static User user;
 
     public static final String TAG="Application";
 
@@ -125,5 +127,13 @@ public class MApplication extends TinkerApplication {
             daoSession = daoMaster.newSession();
         }
         return daoSession;
+    }
+
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        MApplication.user = user;
     }
 }

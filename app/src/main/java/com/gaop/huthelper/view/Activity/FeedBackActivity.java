@@ -1,6 +1,9 @@
 package com.gaop.huthelper.view.activity;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -8,8 +11,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.gaop.huthelper.db.DBHelper;
 import com.gaop.huthelper.R;
+import com.gaop.huthelper.db.DBHelper;
 import com.gaop.huthelper.model.network.api.SubscriberOnNextListener;
 import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.net.ProgressSubscriber;
@@ -73,8 +76,20 @@ public class FeedBackActivity extends BaseActivity {
             ToastUtil.showToastShort("反馈意见不能为空");
             return;
         } else {
+            String version = null,model=null;
+            try {
+                PackageManager pm=this.getPackageManager();
+                PackageInfo pi=pm.getPackageInfo(getPackageName(),PackageManager.GET_ACTIVITIES);
+                version="版本号 ："+pi.versionName+" ("+pi.versionCode+")";
+                model="机型："+Build.MANUFACTURER+ Build.MODEL+" (Android"+Build.VERSION.RELEASE+")";
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
             User user = DBHelper.getUserDao().get(0);
-            content = user.getStudentKH() + " " + "Android " + content;
+            content = "来源："+user.getStudentKH() + " Android \n内容：" + content;
+            if(!TextUtils.isEmpty(version)&&!TextUtils.isEmpty(model)){
+                content=content+"\n"+version+"\n"+model;
+            }
             SubscriberOnNextListener getData = new SubscriberOnNextListener<String>() {
                 @Override
                 public void onNext(String o) {

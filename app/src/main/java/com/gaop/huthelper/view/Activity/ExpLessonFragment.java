@@ -9,16 +9,14 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gaop.huthelper.R;
-import com.gaop.huthelper.view.adapter.AutoRVAdapter;
-import com.gaop.huthelper.view.adapter.ViewHolder;
 import com.gaop.huthelper.db.DBHelper;
 import com.gaop.huthelper.utils.DateUtil;
-import com.gaop.huthelper.utils.DensityUtils;
+import com.gaop.huthelper.view.adapter.AutoRVAdapter;
+import com.gaop.huthelper.view.adapter.ViewHolder;
 import com.gaop.huthelperdao.Explesson;
 
 import java.util.Collections;
@@ -126,28 +124,48 @@ public class ExpLessonFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             Explesson explesson = (Explesson) list.get(position);
-           LinearLayout.LayoutParams layoutParams =new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            int margin= DensityUtils.sp2px(context,10);
-            layoutParams.setMargins(0,margin,0,0);
-            holder.get(R.id.ll_exp_root).setLayoutParams(layoutParams);
+//            LinearLayout.LayoutParams layoutParams =new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//            int margin= DensityUtils.sp2px(context,10);
+//            layoutParams.setMargins(0,margin,0,0);
+//            holder.get(R.id.ll_exp_root).setLayoutParams(layoutParams);
+
             TextView tvLesson = holder.getTextView(R.id.tv_expitem_lesson);
-//            TextView tvFinish = holder.getTextView(R.id .tv_expitem_finish);
-            tvLesson.setText(explesson.getLesson());
-            TextView tvObj = holder.getTextView(R.id.tv_expitem_obj);
-            holder.getTextView(R.id.tv_expitem_realtime).setText(explesson.getWeeks_no() + "周-周" + explesson.getWeek()
-                    + "-" + explesson.getReal_time());
+            if (TextUtils.isEmpty(explesson.getObj())) {
+                tvLesson.setText(explesson.getLesson());
+            } else {
+                tvLesson.setText(explesson.getLesson()+"-"+explesson.getObj());
+            }
+
+            holder.getTextView(R.id.tv_expitem_realtime).setText(explesson.getWeeks_no() + "周周" + getWeekNum(explesson.getWeek())
+                    + " " + explesson.getReal_time());
             holder.getTextView(R.id.tv_expitem_place).setText(explesson.getLocate());
             holder.getTextView(R.id.tv_expitem_teacher).setText(explesson.getTeacher());
-            if (TextUtils.isEmpty(explesson.getObj())) {
-                tvObj.setVisibility(View.GONE);
-            } else {
-                tvObj.setText(explesson.getObj());
-            }
+
 //            if (Integer.valueOf(explesson.getWeeks_no()) < currweek || (Integer.valueOf(explesson.getWeeks_no())) == currweek && DateUtil.getWeekOfToday() > Integer.valueOf(explesson.getWeek())) {
 //                tvFinish.setVisibility(View.VISIBLE);
 //            } else {
 //                tvFinish.setVisibility(View.GONE);
 //            }
         }
+    }
+    private String getWeekNum(String num){
+        switch (num){
+            case "1":
+                return "一";
+            case "2":
+                return "二";
+            case "3":
+                return "三";
+            case "4":
+                return "四";
+            case "5":
+                return "五";
+            case "6":
+                return "六";
+            case "7":
+                return "日";
+
+        }
+        return num;
     }
 }

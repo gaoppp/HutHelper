@@ -11,10 +11,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gaop.huthelper.R;
+import com.gaop.huthelper.app.MApplication;
 import com.gaop.huthelper.db.DBHelper;
 import com.gaop.huthelper.model.entity.HttpResult;
-import com.gaop.huthelper.R;
 import com.gaop.huthelper.model.network.api.SubscriberOnNextListener;
+import com.gaop.huthelper.model.rxbus.RxBus;
+import com.gaop.huthelper.model.rxbus.event.MainEvent;
 import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.net.ProgressSubscriber;
 import com.gaop.huthelper.utils.DensityUtils;
@@ -82,7 +85,7 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initData() {
-        mUser = DBHelper.getUserDao().get(0);
+        mUser = MApplication.getUser();
         tvUserNickname.setText(mUser.getUsername());
         tvUserName.setText(mUser.getTrueName());
         tvUserSex.setText(mUser.getSex());
@@ -176,6 +179,7 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
                     ivUserAvatar.setImageBitmap(bitmap);
                     mUser.setHead_pic_thumb(o.getData());
                     mUser.setHead_pic("");
+                    RxBus.getInstance().send(new MainEvent(3));
                     DBHelper.UpdateUser(mUser);
                 } else if ("令牌错误".equals(o.getMsg())) {
                     ToastUtil.showToastShort("账号异地登录，请重新登录");
