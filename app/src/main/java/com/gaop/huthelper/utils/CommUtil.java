@@ -10,6 +10,9 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -461,6 +464,12 @@ public class CommUtil {
         return desPath;
     }
 
+    /**
+     * 图片高斯模糊
+     * @param context
+     * @param bitmap
+     * @return
+     */
     public static Bitmap blurBitmap(Context context, Bitmap bitmap) {
         //用需要创建高斯模糊bitmap创建一个空的bitmap
         Bitmap outBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
@@ -481,6 +490,21 @@ public class CommUtil {
         return outBitmap;
     }
 
+    /**
+     * 给图片蒙上阴影
+     * @param bitmap
+     * @param color
+     * @return
+     */
+    public static Bitmap coverColor(Bitmap bitmap, int color) {
+        Paint paint = new Paint();
+        paint.setColor(color);
+        RectF rect = new RectF(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        Canvas canvas = new Canvas(bitmap);
+        canvas.drawRoundRect(rect, 0, 0, paint);
+        return bitmap;
+
+    }
     /**
      * 删除文件
      *

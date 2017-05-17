@@ -7,8 +7,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gaop.huthelper.R;
@@ -21,6 +21,10 @@ import com.gaop.huthelper.utils.CommUtil;
 import com.gaop.huthelper.utils.ToastUtil;
 import com.gaop.huthelperdao.User;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 
 /**
  * 反馈Activity
@@ -28,8 +32,16 @@ import com.gaop.huthelperdao.User;
  */
 public class FeedBackActivity extends BaseActivity {
 
-    private TextView mTvTel, mTvContent;
-    private Button mFeedBk;
+    @BindView(R.id.tv_toolbar_title)
+    TextView tvToolbarTitle;
+    @BindView(R.id.et_feedbk_content)
+    EditText etFeedbkContent;
+    @BindView(R.id.et_feedbk_tel)
+    EditText etFeedbkTel;
+    @BindView(R.id.ll_feedbk)
+    LinearLayout llFeedbk;
+    @BindView(R.id.ll_feebk_success)
+    LinearLayout llFeebkSuccess;
 
     @Override
     public void initParms(Bundle parms) {
@@ -42,59 +54,40 @@ public class FeedBackActivity extends BaseActivity {
 
     @Override
     public void doBusiness(Context mContext) {
-        ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_toolbar_back);
-        TextView tv = (TextView) findViewById(R.id.tv_toolbar_title);
-        tv.setText("反馈");
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        ButterKnife.bind(this);
+        tvToolbarTitle.setText("反馈");
 
-        mTvContent = (TextView) findViewById(R.id.et_feedbk_content);
-        mTvTel = (TextView) findViewById(R.id.et_feedbk_tel);
-        mFeedBk = (Button) findViewById(R.id.btn_feedbk_ok);
-        mFeedBk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!ButtonUtils.isFastDoubleClick(-1, 2000)) {
-                    CommUtil.hideSoftInput(FeedBackActivity.this);
-                    feedBack();
-                }
-            }
-        });
     }
 
     /**
      * 反馈
      */
     private void feedBack() {
-        String content = mTvContent.getText().toString();
-        String tel = mTvTel.getText().toString();
+        String content = etFeedbkContent.getText().toString();
+        String tel = etFeedbkTel.getText().toString();
         if (TextUtils.isEmpty(content)) {
             ToastUtil.showToastShort("反馈意见不能为空");
             return;
         } else {
-            String version = null,model=null;
+            String version = null, model = null;
             try {
-                PackageManager pm=this.getPackageManager();
-                PackageInfo pi=pm.getPackageInfo(getPackageName(),PackageManager.GET_ACTIVITIES);
-                version="版本号 ："+pi.versionName+" ("+pi.versionCode+")";
-                model="机型："+Build.MANUFACTURER+ Build.MODEL+" (Android"+Build.VERSION.RELEASE+")";
+                PackageManager pm = this.getPackageManager();
+                PackageInfo pi = pm.getPackageInfo(getPackageName(), PackageManager.GET_ACTIVITIES);
+                version = "版本号 ：" + pi.versionName + " (" + pi.versionCode + ")";
+                model = "机型：" + Build.MANUFACTURER + Build.MODEL + " (Android" + Build.VERSION.RELEASE + ")";
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
             User user = DBHelper.getUserDao().get(0);
-            content = "来源："+user.getStudentKH() + " Android \n内容：" + content;
-            if(!TextUtils.isEmpty(version)&&!TextUtils.isEmpty(model)){
-                content=content+"\n"+version+"\n"+model;
+            content = "来源：" + user.getStudentKH() + " Android \n内容：" + content;
+            if (!TextUtils.isEmpty(version) && !TextUtils.isEmpty(model)) {
+                content = content + "\n" + version + "\n" + model;
             }
             SubscriberOnNextListener getData = new SubscriberOnNextListener<String>() {
                 @Override
                 public void onNext(String o) {
-                    FeedBackActivity.this.finish();
-                    ToastUtil.showToastShort("反馈成功！");
+                    llFeedbk.setVisibility(View.GONE);
+                    llFeebkSuccess.setVisibility(View.VISIBLE);
                 }
             };
             HttpMethods.getInstance().feedBack(
@@ -104,4 +97,26 @@ public class FeedBackActivity extends BaseActivity {
     }
 
 
+    @OnClick({R.id.imgbtn_toolbar_back, R.id.btn_feedbk_ok, R.id.btn_feedbk_finish, R.id.btn_feedbk_again})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.imgbtn_toolbar_back:
+                finish();
+                break;
+            case R.id.btn_feedbk_ok:
+                if (!ButtonUtils.isFastDoubleClick(-1, 2000)) {
+                    CommUtil.hideSoftInput(FeedBackActivity.this);
+                    feedBack();
+                }
+                break;
+            case R.id.btn_feedbk_finish:
+                finish();
+                break;
+            case R.id.btn_feedbk_again:
+                llFeebkSuccess.setVisibility(View.GONE);
+                llFeedbk.setVisibility(View.VISIBLE);
+                etFeedbkContent.setText("");
+                break;
+        }
+    }
 }

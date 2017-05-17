@@ -16,20 +16,20 @@
         <item>7成新及以下</item>
     </string-array>
     <string-array name="weeklist">
-        <item>星期一</item>
-        <item>星期二</item>
-        <item>星期三</item>
-        <item>星期四</item>
-        <item>星期五</item>
-        <item>星期六</item>
-        <item>星期日</item>
+        <item>周一</item>
+        <item>周二</item>
+        <item>周三</item>
+        <item>周四</item>
+        <item>周五</item>
+        <item>周六</item>
+        <item>周日</item>
     </string-array>
     <string-array name="coursenumlist">
-        <item>一,二节</item>
-        <item>三,四节</item>
-        <item>五,六节</item>
-        <item>七,八节</item>
-        <item>九,十节</item>
+        <item>1 2节</item>
+        <item>3 4节</item>
+        <item>5 6节</item>
+        <item>7 8节</item>
+        <item>9 10节</item>
     </string-array>
 
 </resources>

@@ -13,15 +13,17 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 
 import com.gaop.huthelper.R;
-import com.gaop.huthelper.view.adapter.VideoItemRVAdapter;
 import com.gaop.huthelper.model.entity.LinksBean;
 import com.gaop.huthelper.utils.CommUtil;
 import com.gaop.huthelper.utils.ToastUtil;
+import com.gaop.huthelper.view.adapter.VideoItemRVAdapter;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.gaop.huthelper.utils.CommUtil.coverColor;
 
 public class VideoItemActivity extends BaseActivity {
 
@@ -89,6 +91,7 @@ public class VideoItemActivity extends BaseActivity {
 //                Bitmap bitmap =BitmapFactory.de
 //                Bitmap bitmap = BitmapFactory.decodeResource(VideoItemActivity.this.getResources(), source, options);
                 Bitmap bitmap = (CommUtil.blurBitmap(VideoItemActivity.this, source));
+                bitmap = coverColor(bitmap, 0x21000000);
                 source.recycle();
                 return bitmap;
             }
@@ -100,6 +103,8 @@ public class VideoItemActivity extends BaseActivity {
         }).into(ivVideoitemBg);
 
     }
+
+
 
     private void startPlay(String url) {
         Bundle bundle = new Bundle();

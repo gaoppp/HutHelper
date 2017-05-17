@@ -3,24 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
-   <include layout="@layout/customtoolbar"
-       android:id="@+id/toolba_notice"
-       />
+
+    <include
+        android:id="@+id/toolba_notice"
+        layout="@layout/toolbar_nomenu" />
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line_grey"
+        android:layout_below="@+id/toolba_notice" />
+
     <ListView
+        android:id="@+id/lv_notice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/lv_notice"
+        android:layout_below="@id/view_line"
         android:divider="#efefef"
-        android:dividerHeight="1dp"
-        android:layout_below="@id/toolba_notice"></ListView>
+        android:dividerHeight="0dp"></ListView>
+
     <TextView
-        android:visibility="gone"
         android:id="@+id/tv_notice_empty"
-        android:textSize="20sp"
-        android:layout_below="@+id/toolba_notice"
-        android:padding="10dp"
-        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="暂无通知"/>
+        android:layout_below="@+id/toolba_notice"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:text="暂无通知"
+        android:textSize="20sp"
+        android:visibility="gone" />
 </RelativeLayout>

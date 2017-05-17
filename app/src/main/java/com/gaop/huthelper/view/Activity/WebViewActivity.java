@@ -44,7 +44,7 @@ public class WebViewActivity extends BaseActivity {
     static final int TYPE_LIB = 1;
     static final int TYPE_EXAM = 2;
     static final int TYPE_CHANGE_PW = 3;
-    static final int TYPE_NOTICE = 4;
+    public static final int TYPE_NOTICE = 4;
     private int type;
     //private User user;
 

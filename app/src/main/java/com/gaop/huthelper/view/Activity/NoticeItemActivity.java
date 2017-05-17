@@ -37,7 +37,7 @@ public class NoticeItemActivity extends BaseActivity {
 
     private void init() {
         ButterKnife.bind(this);
-        tvToolbarTitle.setText("通知内容");
+        tvToolbarTitle.setText("通知详情");
         mContent = (TextView) findViewById(R.id.tv_noticeitem_content);
         mTime = (TextView) findViewById(R.id.tv_noticeitem_time);
         mTitle = (TextView) findViewById(R.id.tv_noticeitem_title);

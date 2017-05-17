@@ -362,7 +362,7 @@ public class SayRVAdapter extends LoadMoreAdapter<Say> {
                 }
             }, 0, namelength + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-            spanString.setSpan(new ForegroundColorSpan(0xff1ddbcd), 0, namelength + 1,
+            spanString.setSpan(new ForegroundColorSpan(0xff1dcbdb), 0, namelength + 1,
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             holder.getTextView(R.id.tv_comment_content).setText(spanString);
             holder.getTextView(R.id.tv_comment_content).setMovementMethod(LinkMovementMethod.getInstance());

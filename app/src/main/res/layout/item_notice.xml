@@ -1,27 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="14dp"
-    android:paddingLeft="14dp"
-    android:paddingRight="14dp"
-    android:paddingTop="14dp">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_noticeitem_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="flskjflkaaaaaaaaa"
-        android:textColor="#404040"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorPrimary"
         android:textSize="18sp" />
 
-    <TextView
+    <com.gaop.huthelper.view.RichText
         android:id="@+id/tv_noticeitem_time"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/tv_noticeitem_title"
-        android:paddingTop="14dp"
-        android:text="14.22"
-        android:textColor="#9a9a9a" />
-</RelativeLayout>
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:drawablePadding="7.5dp"
+        android:gravity="center_vertical"
+        android:textColor="#adadad"
+        android:textSize="11sp"
+        view:drawable_height="14dp"
+        view:drawable_location="left"
+        view:drawable_src="@mipmap/notice_time"
+        view:drawable_width="14dp" />
+
+    <TextView
+        android:id="@+id/tv_noticeitem_content"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="通知内容预览"
+        android:textColor="#404040"
+        android:textSize="14sp" />
+
+    <Button
+        style="?android:attr/borderlessButtonStyle"
+        android:id="@+id/btn_noticeitem_show"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:background="#dff9fa"
+        android:text="查看详情"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/line_grey" />
+</LinearLayout>

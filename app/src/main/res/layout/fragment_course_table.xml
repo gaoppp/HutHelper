@@ -33,9 +33,9 @@
                     android:orientation="vertical"></LinearLayout>
 
                 <TextView
-                    android:layout_width="1.5dp"
+                    android:layout_width="0.5dp"
                     android:layout_height="match_parent"
-                    android:background="#d8d8d8" />
+                    android:background="@color/line_grey" />
 
                 <RelativeLayout
                     android:id="@+id/rl_courses"

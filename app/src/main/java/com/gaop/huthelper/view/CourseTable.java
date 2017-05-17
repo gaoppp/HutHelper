@@ -22,15 +22,14 @@ import android.widget.TextView;
 
 import com.gaop.huthelper.CourseInfoGallery;
 import com.gaop.huthelper.CustomDate;
-import com.gaop.huthelper.db.DBHelper;
 import com.gaop.huthelper.R;
-import com.gaop.huthelper.view.adapter.CourseInfoAdapter;
+import com.gaop.huthelper.db.DBHelper;
 import com.gaop.huthelper.utils.CommUtil;
 import com.gaop.huthelper.utils.DateUtil;
 import com.gaop.huthelper.utils.DensityUtils;
 import com.gaop.huthelper.utils.ScreenUtils;
-import com.gaop.huthelper.view.activity.AddCourseActivity;
 import com.gaop.huthelper.view.activity.CourseItemActivity;
+import com.gaop.huthelper.view.adapter.CourseInfoAdapter;
 import com.gaop.huthelperdao.Lesson;
 
 import java.lang.ref.WeakReference;
@@ -71,6 +70,9 @@ public class CourseTable extends Fragment {
 
     @BindViews({R.id.tv_day1, R.id.tv_day2, R.id.tv_day3, R.id.tv_day4, R.id.tv_day5, R.id.tv_day6, R.id.tv_day7})
     List<TextView> mTextViews;
+
+    @BindViews({R.id.tv_monday_course, R.id.tv_tuesday_course, R.id.tv_wednesday_course, R.id.tv_thursday_course, R.id.tv_friday_course, R.id.tv_saturday_course, R.id.tv_sunday_course})
+    List<TextView> mWeekNumViews;
 
     /**
      * 课程表
@@ -166,7 +168,7 @@ public class CourseTable extends Fragment {
             aveWidth = (ScreenUtils.getScreenWidth(mContext) - firstGridWidth) / 7;
             gridHeight = ScreenUtils.getScreenHeight(mContext) / 12;
         }
-        CurrWeek=DateUtil.getNowWeek();
+        CurrWeek = DateUtil.getNowWeek();
         //初始化24小时view
         initTwentyFourHourViews();
         //导入日期
@@ -234,7 +236,7 @@ public class CourseTable extends Fragment {
 
                                     //Toast.makeText(mContext, "节" + num + "xin" + weekofday, Toast.LENGTH_SHORT).show();
                                     //跳转到添加课程界面
-                                    startActivityForResult(new Intent(mContext, AddCourseActivity.class),101);
+                                    startActivityForResult(new Intent(mContext, CourseItemActivity.class), 101);
                                     return;
                                 }
                             }
@@ -262,16 +264,16 @@ public class CourseTable extends Fragment {
         textView.setTextAppearance(mContext, R.style.weekViewTimeText);
         textView.setText("" + hour);
         layout.addView(textView);
-        textView=new TextView(mContext);
+        textView = new TextView(mContext);
         textView.setLayoutParams(mNumTextParams);
-        textView.setTextAppearance(mContext,R.style.weekViewNumText);
-        textView.setText(HOURS[hour-1]);
+        textView.setTextAppearance(mContext, R.style.weekViewNumText);
+        textView.setText(HOURS[hour - 1]);
         layout.addView(textView);
         //第10节横线不显示
         if (hour != 10) {
             TextView lineView = new TextView(mContext);
             lineView.setLayoutParams(mHourLineParams);
-            lineView.setBackgroundColor(getResources().getColor(R.color.week_view_black));
+            lineView.setBackgroundColor(getResources().getColor(R.color.line_grey));
             layout.addView(lineView);
         }
         timeLayout.addView(layout);
@@ -310,15 +312,15 @@ public class CourseTable extends Fragment {
             mHourTextParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
             mHourTextParams.addRule(RelativeLayout.CENTER_IN_PARENT);
         }
-        if(mNumTextParams==null){
-            mNumTextParams=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+        if (mNumTextParams == null) {
+            mNumTextParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             mNumTextParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
             mNumTextParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-            mNumTextParams.topMargin=6;
+            mNumTextParams.topMargin = 6;
         }
 
         if (mHourLineParams == null) {
-            mHourLineParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, DensityUtils.dp2px(mContext, (float) 1.5));
+            mHourLineParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, DensityUtils.dp2px(mContext, (float) 0.5));
             mHourLineParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             mHourLineParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         }
@@ -365,12 +367,14 @@ public class CourseTable extends Fragment {
             //今天
             if (DateUtil.isToday(date)) {
                 mTextViews.get(i).setTextColor(mContext.getResources().getColor(R.color.white));
+                mWeekNumViews.get(i).setTextColor(mContext.getResources().getColor(R.color.white));
                 mTextViews.get(i).setText("" + day);
                 mLayouts.get(i).setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary));
                 continue;
             }
             mTextViews.get(i).setText("" + day);
             mTextViews.get(i).setTextColor(mContext.getResources().getColor(R.color.textColor_black));
+            mWeekNumViews.get(i).setTextColor(mContext.getResources().getColor(R.color.textColor_black));
             mLayouts.get(i).setBackgroundColor(mContext.getResources().getColor(R.color.transparent));
         }
     }
@@ -386,15 +390,16 @@ public class CourseTable extends Fragment {
         @Override
         public void handleMessage(Message msg) {
             //获取课程
-            List<Lesson> lessonList=new ArrayList<>();
-            if(DBHelper.getLessonDao()!=null) {
-                lessonList =  DBHelper.getLessonDao();
+            List<Lesson> lessonList = new ArrayList<>();
+            if (DBHelper.getLessonDao() != null) {
+                lessonList = DBHelper.getLessonDao();
             }
             Lesson upperCourse = null;
 
             int lastListSize;
             //七种颜色的背景
-            int[] background = {R.drawable.kb1, R.drawable.kb2, R.drawable.kb3, R.drawable.kb4, R.drawable.kb5, R.drawable.kb6, R.drawable.kb7};
+            // background = {R.drawable.kb1, R.drawable.kb2, R.drawable.kb3, R.drawable.kb4, R.drawable.kb5, R.drawable.kb6, R.drawable.kb7};
+            int[] background = {R.drawable.kb_item1, R.drawable.kb_item2, R.drawable.kb_item3, R.drawable.kb_item4};
 
             do {
                 lastListSize = lessonList.size();
@@ -414,7 +419,7 @@ public class CourseTable extends Fragment {
                     List<Lesson> lList = new ArrayList<>();
                     lList.add(upperCourse);
                     int index = -1;
-                    if (CommUtil.ifHaveCourse(upperCourse,  mTable.get().CurrWeek)) {
+                    if (CommUtil.ifHaveCourse(upperCourse, mTable.get().CurrWeek)) {
                         index = 0;
                     }
                     it = lessonList.iterator();
@@ -422,24 +427,24 @@ public class CourseTable extends Fragment {
                     while (it.hasNext()) {
                         Lesson lesson = it.next();
                         if (lesson.getDjj() == upperCourse.getDjj() && lesson.getXqj() == upperCourse.getXqj()) {
-                            boolean change=false;
-                            for (int i = 0; i <lList.size() ; i++) {
-                                 if(lList.get(i).getName().equals(lesson.getName())){
+                            boolean change = false;
+                            for (int i = 0; i < lList.size(); i++) {
+                                if (lList.get(i).getName().equals(lesson.getName())) {
                                     if (CommUtil.ifHaveCourse(lesson, mTable.get().CurrWeek)) {
                                         upperCourse = lesson;
-                                        index=i;
+                                        index = i;
                                     }
-                                    change=true;
-                                     it.remove();
+                                    change = true;
+                                    it.remove();
                                 }
                             }
-                            if(!change){
-                            lList.add(lesson);
-                            it.remove();
-                            if (CommUtil.ifHaveCourse(lesson,  mTable.get().CurrWeek)) {
-                                upperCourse = lesson;
-                                index++;
-                            }
+                            if (!change) {
+                                lList.add(lesson);
+                                it.remove();
+                                if (CommUtil.ifHaveCourse(lesson, mTable.get().CurrWeek)) {
+                                    upperCourse = lesson;
+                                    index++;
+                                }
                             }
                         }
                     }
@@ -449,17 +454,18 @@ public class CourseTable extends Fragment {
                     mTable.get().textviewLessonMap.put(lesson.getId(), lList);
                     lesson.setText(upperCourse.getName() + "@" + upperCourse.getRoom());
                     RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(mTable.get().aveWidth - 6, mTable.get().gridHeight * 2 - 10);
-                    rlp.topMargin = ((upperCourse.getDjj()+1)/2 - 1) * mTable.get().gridHeight * 2 + 3;
+                    rlp.topMargin = ((upperCourse.getDjj() + 1) / 2 - 1) * mTable.get().gridHeight * 2 + 3;
                     rlp.leftMargin = mTable.get().firstGridWidth + (upperCourse.getXqj() - 1) * mTable.get().aveWidth + 5;
                     lesson.setTextSize(12);
                     lesson.setPadding(10, 10, 10, 10);
                     if (index != -1) {
-                        int bgRes = background[(int) (Math.random() * (background.length - 1))];//随机获取背景色
+                        int bgRes = background[Math.abs(upperCourse.getName().hashCode()) % 4];
+                        // int bgRes = background[(int) (Math.random() * (background.length - 1))];//随机获取背景色
                         lesson.setBackgroundResource(bgRes);//设置背景
                         lesson.setTextColor(Color.WHITE);
                     } else {
                         lesson.setBackgroundResource(R.drawable.kbno);
-                        lesson.setTextColor(Color.GRAY);
+                        lesson.setTextColor(Color.parseColor("#cacaca"));
                     }
                     lesson.setLayoutParams(rlp);
                     //处理点击事件
@@ -495,10 +501,11 @@ public class CourseTable extends Fragment {
                                         Intent intent = new Intent();
                                         Bundle mBundle = new Bundle();
                                         mBundle.putSerializable("lesson", courseInfo);
+                                        mBundle.putInt("type",2);
                                         intent.putExtras(mBundle);
                                         intent.setClass(mTable.get().mContext, CourseItemActivity.class);
-                                        startActivityForResult(intent,102);
-                                      //  mTable.get().mContext.startActivityf(intent);
+                                        startActivityForResult(intent, 102);
+                                        //  mTable.get().mContext.startActivityf(intent);
                                         coursePopupDialog.dismiss();
                                     }
                                 });
@@ -508,9 +515,10 @@ public class CourseTable extends Fragment {
                                 Intent intent = new Intent();
                                 Bundle mBundle = new Bundle();
                                 mBundle.putSerializable("lesson", tempList.get(0));
+                                mBundle.putInt("type",2);
                                 intent.putExtras(mBundle);
                                 intent.setClass(mTable.get().mContext, CourseItemActivity.class);
-                                startActivityForResult(intent,102);
+                                startActivityForResult(intent, 102);
                             }
                         }
                     });
@@ -525,18 +533,17 @@ public class CourseTable extends Fragment {
     }
 
 
-
-
-    public void changeWeek(int week,CustomDate date) {
+    public void changeWeek(int week, CustomDate date) {
 
         textviewLessonMap = new HashMap<Integer, List<Lesson>>();
         courseTextViewList = new ArrayList<TextView>();
-        CurrWeek=week;
-        mShowDate=date;
+        CurrWeek = week;
+        mShowDate = date;
         fillDate();
         mMonth.setText(String.valueOf(mShowDate.getMonth()) + "月");
     }
-    public void removeAllViews(){
+
+    public void removeAllViews() {
         courseLayout.removeAllViews();
         mUserCourseLayout.removeAllViews();
         timeLayout.removeAllViews();

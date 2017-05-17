@@ -1,64 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="20dp"
     android:background="#efefef">
 
-    <include
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/notice_bg" />
+
+    <RelativeLayout
         android:id="@+id/toolba_notice_item"
-        layout="@layout/customtoolbar" />
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/transparent">
+
+        <TextView
+            android:id="@+id/tv_toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:text="标题"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <ImageButton
+            android:id="@+id/imgbtn_toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:background="@color/transparent"
+            android:paddingBottom="@dimen/dp_10"
+            android:paddingLeft="12dp"
+            android:paddingRight="20dp"
+            android:paddingTop="@dimen/dp_10"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_back_new" />
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_noticeitem_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolba_notice_item"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:paddingTop="15dp"
+        android:textColor="@color/white"
+        android:textIsSelectable="true"
+        android:textSize="27sp" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toolba_notice_item">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:background="@color/white"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="92dp"
+        android:layout_below="@+id/tv_noticeitem_title"
+        android:layout_centerHorizontal="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="15dp"
+
             android:orientation="vertical"
-           >
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="#efefef" />
-
-            <TextView
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:id="@+id/tv_noticeitem_title"
+            <com.gaop.huthelper.view.RichText
+                android:id="@+id/tv_noticeitem_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:paddingTop="15dp"
-                android:textColor="#404040"
-                android:textIsSelectable="true"
-                android:textSize="20sp" />
+                android:layout_marginTop="10dp"
+                android:drawablePadding="7.5dp"
+                android:textColor="#adadad"
+                android:textSize="11sp"
+                view:drawable_height="14dp"
+                view:drawable_location="left"
+                view:drawable_src="@mipmap/notice_time"
+                view:drawable_width="14dp" />
+
 
             <TextView
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
+                android:layout_marginTop="15dp"
                 android:id="@+id/tv_noticeitem_content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="15dp"
-                android:textColor="#808080"
+                android:layout_height="match_parent"
+                android:lineSpacingMultiplier="1.8"
+                android:textColor="#404040"
                 android:textIsSelectable="true"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
 
-            <TextView
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:id="@+id/tv_noticeitem_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:paddingTop="15dp"
-                android:textColor="#9a9a9a"
-                android:textSize="14sp"
-                android:paddingBottom="15dp"/>
+
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

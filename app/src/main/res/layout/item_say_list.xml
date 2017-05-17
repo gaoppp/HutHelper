@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:text="说说内容"
-        android:textColor="@color/dull_grey"
+        android:textColor="@color/black"
         android:textSize="16sp" />
     <com.gaop.huthelper.ninepictureview.MyNinePictureLayout
         android:id="@+id/rv_item_sayimg"
@@ -114,6 +114,8 @@
             android:layout_gravity="right"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
             android:src="@mipmap/ic_unlike"/>
 
         <TextView
