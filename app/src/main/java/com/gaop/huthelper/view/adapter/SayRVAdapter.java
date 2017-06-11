@@ -30,7 +30,7 @@ import com.gaop.huthelper.model.network.api.SubscriberOnNextListener;
 import com.gaop.huthelper.model.entity.HttpResult;
 import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.net.ProgressSubscriber;
-import com.gaop.huthelper.ninepictureview.MyNinePictureLayout;
+import com.gaop.huthelper.view.ninepictureview.MyNinePictureLayout;
 import com.gaop.huthelper.utils.AnimationTools;
 import com.gaop.huthelper.utils.DensityUtils;
 import com.gaop.huthelper.utils.ToastUtil;

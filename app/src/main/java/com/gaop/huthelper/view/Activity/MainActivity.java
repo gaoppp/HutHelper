@@ -1,11 +1,9 @@
 package com.gaop.huthelper.view.activity;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -26,13 +24,12 @@ import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.net.ProgressSubscriber;
 import com.gaop.huthelper.utils.CommUtil;
 import com.gaop.huthelper.utils.DensityUtils;
-import com.gaop.huthelper.utils.PrefUtil;
 import com.gaop.huthelper.utils.ToastUtil;
-import com.gaop.huthelper.view.CircleImageView;
+import com.gaop.huthelper.widget.CircleImageView;
 import com.gaop.huthelper.view.CustomGirdLayoutManager;
 import com.gaop.huthelper.view.DownloadService;
 import com.gaop.huthelper.view.adapter.MenuRVAdapter;
-import com.gaop.huthelper.view.lib.DragLayout;
+import com.gaop.huthelper.widget.lib.DragLayout;
 import com.gaop.huthelperdao.Menu;
 import com.gaop.huthelperdao.Notice;
 import com.gaop.huthelperdao.User;
@@ -239,8 +236,6 @@ public class MainActivity extends BaseActivity {
                 .subscribe(new Action1<List<Menu>>() {
                     @Override
                     public void call(final List<Menu> s) {
-//                        menuItems = s;
-//                        adapter.notifyDataSetChanged();
                         MenuRVAdapter adapter = new MenuRVAdapter(MainActivity.this, s);
                         adapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
@@ -293,7 +288,6 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.tv_nav_fback:
                 startActivity(FeedBackActivity.class);
-                // startActivity(NewGradeActivity.class);
                 break;
             case R.id.tv_nav_logout:
                 startActivity(ImportActivity.class);
@@ -301,60 +295,16 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void checkUpdate(final boolean showe) {
-        try {
-            User user = DBHelper.getUserDao().get(0);
-            final int versionCode = MainActivity.this.getPackageManager().getPackageInfo(MainActivity.this.getPackageName(), 0).versionCode;
-            SubscriberOnNextListener getUpdateData = new SubscriberOnNextListener<HttpResult<UpdateMsg>>() {
-                @Override
-                public void onNext(final HttpResult<UpdateMsg> o) {
-                    if (o.getMsg().equals("ok")) {
-                        PrefUtil.setString(getApplication(), "library", "http://" + o.getData().getApi_base_address().getLibrary());
-                        PrefUtil.setString(getApplication(), "test_plan", "http://" + o.getData().getApi_base_address().getTest_plan());
-                        if (o.getData().getVersionNum() > versionCode) {
-                            final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                            builder.setTitle("有新版本");
-                            builder.setMessage(o.getData().getData());
-                            builder.setPositiveButton("下载",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int whichButton) {
-                                            Intent dIntent = new Intent(MainActivity.this, DownloadService.class);
-                                            dIntent.putExtra("url", o.getData().getUrl());
-                                            startService(dIntent);
-                                        }
-                                    });
-                            builder.setNegativeButton("忽略",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int whichButton) {
-
-                                        }
-                                    });
-                            builder.show();
-                        } else {
-                            if (showe)
-                                ToastUtil.showToastShort("已经是最新版本了");
-                        }
-
-                    } else {
-                        if (showe)
-                            ToastUtil.showToastShort(o.getMsg());
-                    }
-                }
-            };
-            HttpMethods.getInstance().checkUpdate(
-                    new ProgressSubscriber<HttpResult<UpdateMsg>>
-                            (getUpdateData, MainActivity.this), user.getStudentKH(), versionCode + "");
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
+    private void checkUpdate(final boolean isUpdateByUser) {
+        Intent intent = new Intent(MainActivity.this, DownloadService.class);
+        intent.putExtra("type", isUpdateByUser ? DownloadService.TYPE_CHECK_UPDATE : DownloadService.TYPE_OPEN_UPDATE);
+        startService(intent);
     }
 
     private void share() {
         int versionCode = 0;
         try {
-            User user = DBHelper.getUserDao().get(0);
             versionCode = MainActivity.this.getPackageManager().getPackageInfo(MainActivity.this.getPackageName(), 0).versionCode;
-
             SubscriberOnNextListener getUpdateData = new SubscriberOnNextListener<HttpResult<UpdateMsg>>() {
                 @Override
                 public void onNext(HttpResult<UpdateMsg> o) {
@@ -372,7 +322,7 @@ public class MainActivity extends BaseActivity {
             };
             HttpMethods.getInstance().checkUpdate(
                     new ProgressSubscriber<HttpResult<UpdateMsg>>
-                            (getUpdateData, MainActivity.this), user.getStudentKH(), versionCode + "");
+                            (getUpdateData, MainActivity.this), versionCode + "");
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

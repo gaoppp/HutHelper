@@ -33,7 +33,7 @@
         android:textColor="#404040"
         android:textSize="15sp" />
 
-    <com.gaop.huthelper.view.PicureGridView
+    <com.gaop.huthelper.widget.PicureGridView
         android:layout_alignParentLeft="true"
         android:id="@+id/gv_item_mygoods_image"
         android:layout_width="205dp"
@@ -44,7 +44,7 @@
         android:horizontalSpacing="5dp"
         android:verticalSpacing="5dp"
         android:layout_marginRight="13dp"
-        android:layout_marginTop="10dp"></com.gaop.huthelper.view.PicureGridView>
+        android:layout_marginTop="10dp"></com.gaop.huthelper.widget.PicureGridView>
 
 
     <ImageView

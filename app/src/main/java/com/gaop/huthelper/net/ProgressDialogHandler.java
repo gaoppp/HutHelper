@@ -6,7 +6,7 @@ import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
 
-import com.gaop.huthelper.PinWheel.LoadingDiolog;
+import com.gaop.huthelper.widget.LoadingDiolog;
 
 /**
  * 处理网络访问Dialog Handler

@@ -13,7 +13,7 @@ import com.gaop.huthelper.net.ProgressSubscriber;
 import com.gaop.huthelper.utils.CommUtil;
 import com.gaop.huthelper.utils.PrefUtil;
 import com.gaop.huthelper.utils.ToastUtil;
-import com.gaop.huthelper.view.ElectricDialog;
+import com.gaop.huthelper.widget.ElectricDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +30,7 @@ public class ElecticActivity extends BaseActivity {
     @BindView(R.id.et_electric_hao)
     EditText etElectricHao;
 
+    //此处代码为空调使用统计界面View
 //    @BindView(R.id.radio_group_electric)
 //    RadioGroup radioGroupElectric;
 //    @BindView(R.id.rl_ele_choose)
@@ -47,17 +48,6 @@ public class ElecticActivity extends BaseActivity {
 //    @BindView(R.id.radio_electric_unopen)
 //    RadioButton radioElectricUnopen;
 
-//
-//    @BindView(R.id.num1)
-//    EditText num1;
-//    @BindView(R.id.num2)
-//    EditText num2;
-//    @BindView(R.id.btn_get)
-//    Button btnGet;
-//    @BindView(R.id.imgbtn_toolbar_back)
-//    ImageButton imgbtnToolbarBack;
-//    @BindView(R.id.tv_toolbar_title)
-//    TextView tvToolbarTitle;
 
     @Override
     public void initParms(Bundle parms) {

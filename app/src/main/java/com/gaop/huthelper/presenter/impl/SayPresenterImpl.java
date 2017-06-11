@@ -35,6 +35,8 @@ public class SayPresenterImpl implements SayPresenter {
         this.sayView = sayView;
     }
 
+
+
     /**
      * 请求说说数据
      *

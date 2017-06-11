@@ -12,14 +12,14 @@
         android:layout_marginRight="140dp"
         android:orientation="vertical">
 
-        <com.gaop.huthelper.view.CircleImageView
+        <com.gaop.huthelper.widget.CircleImageView
             android:id="@+id/iv_nav_avatar"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_gravity="center_horizontal"
             android:src="@mipmap/ic_launcher2" />
 
-        <com.gaop.huthelper.view.RichText
+        <com.gaop.huthelper.widget.RichText
             android:id="@+id/tv_nav_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             view:drawable_src="@mipmap/ic_pencil"
             view:drawable_width="16dp" />
 
-        <com.gaop.huthelper.view.RichText
+        <com.gaop.huthelper.widget.RichText
             android:id="@+id/tv_nav_update"
             android:layout_marginTop="54dp"
             android:gravity="center"
@@ -53,7 +53,7 @@
             android:textColor="@color/white"
             />
 
-        <com.gaop.huthelper.view.RichText
+        <com.gaop.huthelper.widget.RichText
             android:id="@+id/tv_nav_share"
             android:layout_marginTop="8dp"
             android:padding="6dp"
@@ -71,7 +71,7 @@
             android:textColor="@color/white"
             />
 
-        <com.gaop.huthelper.view.RichText
+        <com.gaop.huthelper.widget.RichText
             android:id="@+id/tv_nav_logout"
             android:layout_marginTop="8dp"
             android:padding="6dp"
@@ -89,7 +89,7 @@
             android:textColor="@color/white"
             />
 
-        <com.gaop.huthelper.view.RichText
+        <com.gaop.huthelper.widget.RichText
             android:id="@+id/tv_nav_manage"
             android:layout_marginTop="8dp"
             android:padding="6dp"
@@ -107,7 +107,7 @@
             android:textColor="@color/white"
             />
 
-        <com.gaop.huthelper.view.RichText
+        <com.gaop.huthelper.widget.RichText
             android:id="@+id/tv_nav_fback"
             android:layout_marginTop="8dp"
             android:padding="6dp"

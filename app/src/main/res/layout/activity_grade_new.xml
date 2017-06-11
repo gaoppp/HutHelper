@@ -68,7 +68,7 @@
             android:textColor="@color/light_grey"
             android:textSize="14sp" />
 
-        <com.gaop.huthelper.view.CirclePie
+        <com.gaop.huthelper.widget.CirclePie
             android:id="@+id/pie_grade_xf"
             android:layout_width="152dp"
             android:layout_height="152dp"
@@ -84,7 +84,7 @@
             android:textColor="@color/light_grey"
             android:textSize="14sp" />
 
-        <com.gaop.huthelper.view.BarListView
+        <com.gaop.huthelper.widget.BarListView
             android:id="@+id/bar_grade_jd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
             android:textColor="@color/light_grey"
             android:textSize="14sp" />
 
-        <com.gaop.huthelper.view.BarListView
+        <com.gaop.huthelper.widget.BarListView
             android:visibility="gone"
             android:id="@+id/bar_grade_other"
             android:layout_width="match_parent"

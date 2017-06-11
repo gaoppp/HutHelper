@@ -51,10 +51,10 @@
           />
     </RelativeLayout>
 
-     <com.gaop.huthelper.view.ShowImageViewPager
+     <com.gaop.huthelper.widget.ShowImageViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-    </com.gaop.huthelper.view.ShowImageViewPager>
+    </com.gaop.huthelper.widget.ShowImageViewPager>
 </RelativeLayout>

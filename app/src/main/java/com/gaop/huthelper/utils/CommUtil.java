@@ -135,36 +135,8 @@ public class CommUtil {
             }
         } while (num <= 9);
 
-
-
-
-
         return "获取失败 点击重试";
     }
-//    private String getNextExpLesson(Context context,int num){
-//        num=(num + 1) / 2;
-//        if (!PrefUtil.getBoolean(context, "isLoadCourseTable", false)) {
-//            return "暂未导入实验课表";
-//        }
-//        List<Explesson> explessons = DBHelper.getExpLessonByWeek(String.valueOf(DateUtil.getNowWeek()), String.valueOf(num));
-//        if(explessons.size()==0)
-//            return "今天没课了";
-//        for (Explesson l : explessons) {
-//            if (l.getDjj().equals(num))
-//                    return "第" + num + "," + (num + 1) + "节" + l.getName() + " " + l.getRoom();
-//            else
-//                    LessonMap.put(l.getDjj(), l);
-//        }
-//        do{
-//            ++num;
-//            if(num>5)
-//                return "今天没课了";
-//            if()
-//        }
-//
-//
-//
-//    }
 
     public static void saveImageToGallery(Context context, Bitmap bmp) {
         // 保存图片

@@ -9,7 +9,7 @@
     android:paddingBottom="20dp"
     android:paddingTop="24dp"
     android:background="@mipmap/bg_menulist">
-    <com.gaop.huthelper.view.RichText
+    <com.gaop.huthelper.widget.RichText
         android:id="@+id/tv_popmenu_add"
         android:layout_gravity="center_horizontal"
         android:textColor="#404040"
@@ -24,7 +24,7 @@
         view:drawable_width="25dp"
         />
 
-    <com.gaop.huthelper.view.RichText
+    <com.gaop.huthelper.widget.RichText
         android:layout_gravity="center_horizontal"
         android:id="@+id/tv_popmenu_mime"
         android:layout_marginTop="20dp"

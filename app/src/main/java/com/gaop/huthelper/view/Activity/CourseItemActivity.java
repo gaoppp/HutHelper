@@ -40,23 +40,6 @@ import butterknife.OnClick;
  */
 public class CourseItemActivity extends BaseActivity {
 
-
-//    @BindView(R.id.tv_course_name)
-//    EditText etCourseName;
-//    @BindView(R.id.tv_course_teacher)
-//    EditText etCourseTeacher;
-//    @BindView(R.id.tv_course_classroom)
-//    EditText etCourseClassroom;
-//    @BindView(R.id.rv_weekchoose)
-//    GridView rvWeekchoose;
-//    @BindView(R.id.spinner_addcourse_week)
-//    Spinner spinnerAddcourseWeek;
-//    @BindView(R.id.spinner_addcourse_num)
-//    Spinner spinnerAddcourseNum;
-//    @BindView(R.id.tv_toolbar_title)
-//    TextView tvToolbarTitle;
-
-
     @BindView(R.id.tv_toolbar_title)
     TextView tvToolbarTitle;
     @BindView(R.id.imgbtn_toolbar_edit)
@@ -102,7 +85,6 @@ public class CourseItemActivity extends BaseActivity {
 
     @Override
     public void initParms(Bundle parms) {
-
         if (parms != null) {
             type = parms.getInt("type");
             if (type == SHOW_COURSE) {
@@ -112,7 +94,6 @@ public class CourseItemActivity extends BaseActivity {
             type = ADD_COURSE;
         }
     }
-
 
     @Override
     public int bindLayout() {
@@ -201,7 +182,6 @@ public class CourseItemActivity extends BaseActivity {
         imgbtnToolbarDelete.setVisibility(View.GONE);
         imgbtnToolbarEdit.setVisibility(View.GONE);
     }
-
 
     @OnClick({R.id.imgbtn_toolbar_back, R.id.imgbtn_toolbar_edit, R.id.imgbtn_toolbar_delete, R.id.imgbtn_toolbar_ok})
     public void onViewClicked(View view) {

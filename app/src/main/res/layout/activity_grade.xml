@@ -76,7 +76,7 @@
                     android:textColor="@color/light_grey"
                     android:textSize="14sp" />
 
-                <com.gaop.huthelper.view.CirclePie
+                <com.gaop.huthelper.widget.CirclePie
                     android:id="@+id/pie_grade_xf"
                     android:layout_width="152dp"
                     android:layout_height="152dp"
@@ -164,7 +164,7 @@
             </RelativeLayout>
 
 
-            <com.gaop.huthelper.weiget.WrapContentHeightViewPager
+            <com.gaop.huthelper.widget.WrapContentHeightViewPager
                 android:id="@+id/viewpager_grade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
                 android:layout_marginRight="12dp"
                 android:flipInterval="30"
                 android:persistentDrawingCache="animation" />
-            <!--  <com.gaop.huthelper.view.ui.LineChartView
+            <!--  <com.gaop.huthelper.widget.LineChartView
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:layout_marginLeft="12dp"

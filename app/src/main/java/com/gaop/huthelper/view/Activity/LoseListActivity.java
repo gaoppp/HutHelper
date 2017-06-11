@@ -25,7 +25,7 @@ import com.gaop.huthelper.net.ProgressSubscriber;
 import com.gaop.huthelper.utils.DensityUtils;
 import com.gaop.huthelper.utils.ScreenUtils;
 import com.gaop.huthelper.utils.ToastUtil;
-import com.gaop.huthelper.view.RichText;
+import com.gaop.huthelper.widget.RichText;
 import com.gaop.huthelper.view.adapter.LoseListAdapter;
 import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;

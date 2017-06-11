@@ -15,7 +15,7 @@ import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.utils.ButtonUtils;
 import com.gaop.huthelper.utils.CommUtil;
 import com.gaop.huthelper.utils.ToastUtil;
-import com.gaop.huthelper.view.ShowImageViewPager;
+import com.gaop.huthelper.widget.ShowImageViewPager;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 

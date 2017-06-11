@@ -70,7 +70,6 @@ public class WebViewActivity extends BaseActivity {
             String num = user.getStudentKH();
             String rember = user.getRember_code();
             Url = "http://218.75.197.121:8888/api/v1/get/myhomework/" + num + "/" + rember;
-
             tvToolbarTitle.setText("网上作业");
         } else if (type == TYPE_LIB) {
             tvToolbarTitle.setText("图书馆");

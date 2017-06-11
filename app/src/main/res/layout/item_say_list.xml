@@ -9,7 +9,7 @@
     android:paddingBottom="@dimen/dp_10"
     android:paddingLeft="15dp"
     android:background="@color/white">
-    <com.gaop.huthelper.view.CircleImageView
+    <com.gaop.huthelper.widget.CircleImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="fitCenter"
@@ -62,7 +62,7 @@
         android:text="说说内容"
         android:textColor="@color/black"
         android:textSize="16sp" />
-    <com.gaop.huthelper.ninepictureview.MyNinePictureLayout
+    <com.gaop.huthelper.view.ninepictureview.MyNinePictureLayout
         android:id="@+id/rv_item_sayimg"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/dp_10"

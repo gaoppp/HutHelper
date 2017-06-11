@@ -7,7 +7,7 @@ import com.gaop.huthelperdao.User;
 import java.util.List;
 
 /**
- * Created by gaop1 on 2017/4/17.
+ * Created by 高沛 on 2017/4/17.
  */
 
 public interface MainView {
@@ -18,6 +18,8 @@ public interface MainView {
 
     void showNotice(Notice notice);
 
-    void showNextClassAndTime(String nextClass,String time);
+    void showNextClassAndTime(String nextClass, String time);
+
+    void showDateLine();
 
 }

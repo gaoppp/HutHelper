@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.gaop.huthelper.R;
-import com.gaop.huthelper.weiget.RecycleOnScrollListener;
+import com.gaop.huthelper.widget.RecycleOnScrollListener;
 import com.jakewharton.rxbinding.view.RxView;
 import com.trello.rxlifecycle.LifecycleTransformer;
 

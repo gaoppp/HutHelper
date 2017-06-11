@@ -3,6 +3,7 @@ package com.gaop.huthelper.net;
 
 import android.content.Context;
 
+import com.gaop.huthelper.R;
 import com.gaop.huthelper.app.MApplication;
 import com.gaop.huthelper.db.DBHelper;
 import com.gaop.huthelper.model.entity.CareerTalkData;
@@ -79,7 +80,7 @@ import rx.schedulers.Schedulers;
  */
 public class HttpMethods {
 
-    public static final String BASE_URL = "http://218.75.197.121:8888/";
+    public static final String BASE_URL = MApplication.AppContext.getString(R.string.base_url);
 
     private static final int DEFAULT_TIMEOUT = 5;
 
@@ -705,9 +706,9 @@ public class HttpMethods {
     /**
      * 检查更新
      */
-    public void checkUpdate(Subscriber<HttpResult<UpdateMsg>> subscriber, String num, String vernum) {
+    public void checkUpdate(Subscriber<HttpResult<UpdateMsg>> subscriber, String vernum) {
         UpdateAPI updateAPI = retrofit.create(UpdateAPI.class);
-        updateAPI.getUpdateData(num, vernum)
+        updateAPI.getUpdateData(MApplication.getUser().getStudentKH(), vernum)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -74,7 +74,6 @@ public class CourseTableActivity extends BaseActivity {
 
     @Override
     public void initParms(Bundle parms) {
-
     }
 
     @Override
@@ -96,7 +95,6 @@ public class CourseTableActivity extends BaseActivity {
     }
 
     private void setView() {
-
         table = new CourseTable();
         table.setmContext(this);
         tvChoose.setText("第" + CurrWeek + "周");
@@ -122,7 +120,6 @@ public class CourseTableActivity extends BaseActivity {
         this.getSupportFragmentManager().beginTransaction().replace(R.id.fl_coursetable, table).commit();
 
     }
-
 
     @OnClick({R.id.tv_chooseweek_coursetable, R.id.iv_coursetable_update, R.id.imgbtn_toolbar_back})
     public void onClick(View view) {
@@ -160,7 +157,6 @@ public class CourseTableActivity extends BaseActivity {
 
     /**
      * 设置周数列表PopupWindows
-     *
      * @param parent 相对位置View
      */
     private void showWeekListWindows(View parent) {
@@ -220,7 +216,6 @@ public class CourseTableActivity extends BaseActivity {
         weekListWindow.showAsDropDown(parent, -(width - parent.getWidth()) / 2, 20);
     }
 
-
     private void getCourseTableData() {
         User user = DBHelper.getUserDao().get(0);
         SubscriberOnNextListener getLessonData = new SubscriberOnNextListener<String>() {
@@ -241,9 +236,7 @@ public class CourseTableActivity extends BaseActivity {
         );
     }
 
-
     class WeekListAdapter extends BaseAdapter {
-
         Context context;
         List<String> data;
 

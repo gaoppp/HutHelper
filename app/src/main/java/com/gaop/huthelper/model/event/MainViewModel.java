@@ -1,14 +1,14 @@
 package com.gaop.huthelper.model.event;
 
 /**
- * Created by gaop1 on 2017/4/17.
+ * Created by 高沛 on 2017/4/17.
  */
 
 public interface MainViewModel {
 
-    void checkUpdate();
+    void loadAppUrl();
 
-    void loadData();
+    void loadCouseData();
 
-    void initMenu();
+    void loadMenu();
 }

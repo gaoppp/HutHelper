@@ -9,5 +9,13 @@ import com.gaop.huthelper.presenter.event.MainPresenter;
 public class MainPresenterImpl implements MainPresenter {
 
 
+    @Override
+    public void initView() {
 
+    }
+
+    @Override
+    public void initMemuView() {
+
+    }
 }

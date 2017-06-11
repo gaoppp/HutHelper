@@ -6,4 +6,8 @@ package com.gaop.huthelper.presenter.event;
 
 public interface MainPresenter {
 
+    void initView();
+    void initMemuView();
+
+
 }

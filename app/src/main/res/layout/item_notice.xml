@@ -15,7 +15,7 @@
         android:textColor="@color/colorPrimary"
         android:textSize="18sp" />
 
-    <com.gaop.huthelper.view.RichText
+    <com.gaop.huthelper.widget.RichText
         android:id="@+id/tv_noticeitem_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

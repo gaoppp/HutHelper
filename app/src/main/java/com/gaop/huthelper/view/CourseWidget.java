@@ -78,14 +78,6 @@ public class CourseWidget extends AppWidgetProvider {
                 week = whatToday(true, 1);
                 currNum = 0;
                 break;
-//            case START_COURSEACTIVITY_ACTION:
-//                Intent intent1=new Intent(context, CourseTableActivity.class);
-//                context.startActivity(intent);
-//                break;
-//            case START_MAINACTIVITY_ACTION:
-//                Intent intent2=new Intent(context,CourseTableActivity.class);
-//                context.startActivity(intent2);
-//                break;
         }
         RemoteViews remoteviews = new RemoteViews(context.getPackageName(), R.layout.course_widget);
         remoteviews.setTextViewText(R.id.tv_widget_week, week);
@@ -142,13 +134,6 @@ public class CourseWidget extends AppWidgetProvider {
     private void init(Context context, RemoteViews views) {
         views.setTextViewText(R.id.tv_widget_week, whatToday(false, 0));
         List<Lesson> todayLesson = new ArrayList<>();
-//        if(lessonList==null&&lessonList.size()==0){
-//            views.setViewVisibility(R.id.ll_widget_course1, 0);
-//            views.setViewVisibility(R.id.ll_widget_course2, 0);
-//            views.setViewVisibility(R.id.tv_widget_coure_empty, 1);
-//
-//            return;
-//        }
         Iterator it = lessonList.iterator();
         while (it.hasNext()) {
             Lesson l = (Lesson) it.next();

@@ -130,105 +130,11 @@ public class SayActivity extends BaseActivity implements SayRVAdapter.AddComment
             }
         });
         rvSaylist.setAdapter(adapter);
-//        mLRecyclerViewAdapter = new LRecyclerViewAdapter(this, adapter);
-//        ((SayRVAdapter) mLRecyclerViewAdapter.getInnerAdapter()).setAddComment(this);
-//        rvSaylist.setAdapter(mLRecyclerViewAdapter);
-//
-//        rvSaylist.setLScrollListener(new LRecyclerView.LScrollListener() {
-//            @Override
-//            public void onRefresh() {
-//                CURPage = 0;
-//                Saylist.clear();
-//                sayPresenter.request(1, bindUntilEvent(ActivityEvent.STOP));
-//            }
-//
-//            @Override
-//            public void onScrollUp() {
-//            }
-//
-//            @Override
-//            public void onScrollDown() {
-//            }
-//
-//            @Override
-//            public void onBottom() {
-//                if (!isRefresh) {
-//                    if (CURPage + 1 <= COUNT) {
-//                        sayPresenter.request(++CURPage, bindUntilEvent(ActivityEvent.STOP));
-//                    } else {
-//                        RecyclerViewStateUtils.setFooterViewState(rvSaylist, LoadingFooter.State.TheEnd);
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onScrolled(int distanceX, int distanceY) {
-//            }
-//        });
 
         user = DBHelper.getUserDao().get(0);
         sayPresenter.loadLikedSays(mContext, bindUntilEvent(ActivityEvent.STOP));
     }
 
-//    public void getSayList(final int pagenum) {
-//        isRefresh = true;
-//        SubscriberOnNextListener<HttpResult<PageData<Say>>> subscriberOnNextListener = new SubscriberOnNextListener<HttpResult<PageData<Say>>>() {
-//            @Override
-//            public void onNext(HttpResult<PageData<Say>> o) {
-//                if (o.getMsg().equals("ok")) {
-//                    COUNT = o.getData().getInfo().getPage_max();
-//                    CURPage = Integer.valueOf(o.getData().getInfo().getPage_cur());
-//                    Saylist.addAll(o.getData().getPosts());
-//                    mLRecyclerViewAdapter.notifyDataSetChanged();
-//                    //Log.e(TAG,"  listSize"+Saylist.size()+" "+mLRecyclerViewAdapter.getInnerAdapter().getItemCount());
-//                } else {
-//                    showToastShort("获取服务器数据为空");
-//                }
-//                isRefresh = false;
-//                rvSaylist.refreshComplete();
-//            }
-//
-////            @Override
-////            public void onError(Throwable e) {
-////
-////            }
-//
-//        };
-//        HttpMethods.getInstance().getSayList(
-//                new ProgressSubscriber<HttpResult<PageData<Say>>>(subscriberOnNextListener, SayActivity.this)
-//                , pagenum);
-//    }
-
-//    private void getLikeList() {
-//        SubscriberOnNextListener<HttpResult<List<String>>> subscriberOnNextListener = new SubscriberOnNextListener<HttpResult<List<String>>>() {
-//            @Override
-//            public void onNext(HttpResult<List<String>> data) {
-//                if ("成功获得点赞数据".equals(data.getMsg())) {
-//                    SayLikeCache.setLikeList(data.getData());
-//                    getSayList(1);
-//                } else if (data.getMsg().equals("令牌错误")) {
-//                    showToastShort("账号异地登录，请重新登录");
-//                    startActivity(new Intent(SayActivity.this, ImportActivity.class));
-//                } else {
-//                    showToastShort(data.getMsg());
-//                }
-//            }
-//        };
-//        User user = DBHelper.getUserDao().get(0);
-//        HttpMethods.getInstance().getLikedSays(new ProgressSubscriber<HttpResult<List<String>>>(subscriberOnNextListener, SayActivity.this), user.getStudentKH(), user.getRember_code());
-//    }
-//
-//    private void hideViews() {
-//        toolbar.animate().translationY(-toolbar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
-//        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) fab.getLayoutParams();
-//        int fabBottomMargin = lp.bottomMargin;
-//        fab.animate().translationY(fab.getHeight() + fabBottomMargin).setInterpolator(new AccelerateInterpolator(2)).start();
-//    }
-//
-//    private void showViews() {
-//        toolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
-//        fab.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
-//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -303,87 +209,9 @@ public class SayActivity extends BaseActivity implements SayRVAdapter.AddComment
         showCommentWindow(position, say.getId());
     }
 
-//    private void commitComment(final int position, String id, final String comment) {
-//
-//        HttpMethods.getInstance().addComment(new Subscriber<HttpResult>() {
-//            @Override
-//            public void onCompleted() {
-//
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                showToastShort("评论失败！请检查网络后重试！");
-//            }
-//
-//            @Override
-//            public void onNext(HttpResult o) {
-//                if (o.getMsg().equals("ok")) {
-//                    Saylist.get(position).getComments().add(new Say.CommentsBean(user.getUser_id(), user.getUsername(), comment));
-//                    if (editText != null)
-//                        editText.setText("");
-//                    mLRecyclerViewAdapter.notifyDataSetChanged();
-//                    showToastShort("评论成功");
-//                } else if (o.getMsg().equals("令牌错误")) {
-//                    showToastShort("账号异地登录，请重新登录");
-//                    startActivity(new Intent(SayActivity.this, ImportActivity.class));
-//                } else {
-//                    showToastShort(o.getMsg());
-//                }
-//            }
-//        }, user, id, comment);
-//    }
-
     protected PopupWindow menuListWindow;
     protected View popupWindowLayout;
 
-//    private void showMenuWindows(View parent) {
-//        if (menuListWindow == null) {
-//            LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            popupWindowLayout = layoutInflater.inflate(R.layout.popup_list_choose, null);
-//
-//            TextView tvMime = (TextView) popupWindowLayout.findViewById(R.id.tv_popmenu_mime);
-//            TextView tvAdd = (TextView) popupWindowLayout.findViewById(R.id.tv_popmenu_add);
-//            tvAdd.setText("发布说说");
-//            tvMime.setText("我的发布");
-//            tvAdd.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    startActivityForResult(AddSayActivity.class, 201);
-//                }
-//            });
-//            tvMime.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("user_id", "my");
-//                    startActivity(MySayListActivity.class, bundle);
-//
-//                }
-//            });
-//            menuListWindow = new PopupWindow(popupWindowLayout, DensityUtils.dp2px(SayActivity.this, 170),
-//                    DensityUtils.dp2px(SayActivity.this, 110));
-//        }
-//
-//        // 设置背景颜色变暗
-//        WindowManager.LayoutParams lp = getWindow().getAttributes();
-//        lp.alpha = 0.4f;
-//        getWindow().setAttributes(lp);
-//        menuListWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-//
-//            @Override
-//            public void onDismiss() {
-//                WindowManager.LayoutParams lp = getWindow().getAttributes();
-//                lp.alpha = 1f;
-//                getWindow().setAttributes(lp);
-//            }
-//        });
-//        menuListWindow.setFocusable(true);
-//        //设置点击外部可消失
-//        menuListWindow.setOutsideTouchable(true);
-//        menuListWindow.setBackgroundDrawable(new BitmapDrawable());
-//        menuListWindow.showAsDropDown(parent, -DensityUtils.dp2px(SayActivity.this, 115), 20);
-//    }
 
 
     @OnClick({R.id.imgbtn_toolbar_back, R.id.imgbtn_toolbar_menu})

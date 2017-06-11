@@ -26,7 +26,7 @@
         android:textColor="@color/white"
         android:textSize="14sp" />
 
-    <com.gaop.huthelper.view.PicureGridView
+    <com.gaop.huthelper.widget.PicureGridView
         android:id="@+id/gv_item_lose_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
