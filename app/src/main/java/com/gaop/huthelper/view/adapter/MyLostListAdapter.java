@@ -28,7 +28,7 @@ import java.util.List;
 import static com.gaop.huthelper.utils.ToastUtil.showToastShort;
 
 /**
- * Created by gaop on 16-11-10.
+ * Created by 高沛 on 16-11-10.
  */
 
 public class MyLostListAdapter extends RecyclerView.Adapter<MyLostListAdapter.ViewHolder> {

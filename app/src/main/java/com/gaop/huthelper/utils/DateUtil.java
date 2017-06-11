@@ -1,9 +1,6 @@
 package com.gaop.huthelper.utils;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
-
-import com.gaop.huthelper.CustomDate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

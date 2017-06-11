@@ -86,17 +86,6 @@ public class MainActivity extends BaseActivity {
     private long exitTime = 0;
     private Subscription subscription;
 
-//    @Override
-//    protected void onNewIntent(Intent intent) {
-//        super.onNewIntent(intent);
-//        User user = DBHelper.getUserDao().get(0);
-//        int width = DensityUtils.dp2px(this, 75);
-//        if(!TextUtils.isEmpty(user.getHead_pic_thumb())){
-//            Picasso.with(this).load(HttpMethods.BASE_URL + user.getHead_pic_thumb()).resize(width, width).into(ivAvatar);
-//        }
-//        tvNavName.setText(user.getTrueName());
-//    }
-
     @Override
     public void initParms(Bundle parms) {
     }

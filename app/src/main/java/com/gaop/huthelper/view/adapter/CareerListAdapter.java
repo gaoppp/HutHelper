@@ -68,9 +68,7 @@ public class CareerListAdapter extends LoadMoreAdapter<CareerTalk> {
             companyView = (TextView) itemView.findViewById(R.id.careertalk_company);
             addressView = (TextView) itemView.findViewById(R.id.careertalk_address);
             holdTimeView = (TextView) itemView.findViewById(R.id.careertalk_holdtime);
-//            isOfficialBtn = (TextView) itemView.findViewById(R.id.careertalk_is_official);
-//            weekView = (TextView) itemView.findViewById(R.id.careertalk_week);
-//            isSaveBtn=(ImageButton)itemView.findViewById(R.id.careertalk_is_save);
+
         }
     }
 }

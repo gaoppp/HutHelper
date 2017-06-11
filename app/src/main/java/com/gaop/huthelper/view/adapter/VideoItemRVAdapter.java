@@ -15,7 +15,7 @@ import com.gaop.huthelper.model.entity.LinksBean;
 import java.util.List;
 
 /**
- * Created by gaop1 on 2017/4/9.
+ * Created by 高沛 on 2017/4/9.
  */
 
 public class VideoItemRVAdapter extends RecyclerView.Adapter<VideoItemRVAdapter.ViewHolder> {

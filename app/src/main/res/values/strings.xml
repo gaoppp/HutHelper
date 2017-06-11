@@ -11,4 +11,8 @@
 
     <string name="action_settings">Settings</string>
     <string name="base_url">http://218.75.197.121:8888/</string>
+    <string name="updateNoticeContent">工大助手0.8.8更新日志 1.修复考试查询 2.添加宣讲会、视频专栏 3.新增成绩排名 4.主页应用可自定义 0.8.7更新日志 1.修复bug 2.说说点赞 0.8.6更新日志 1.全新界面 2.新增头像 之前版本 1.工大导航,工大助手统一认证 2.新增在线作业功能 3.电费查询优化 4.校历优化 5.课程表优化,支持自定义增删课程 6.二手市场,说说同步工大导航  7.增加实验课表,在课程表中 8.增加考试查询，请及时刷新数据 9.支持修改昵称和密码 10.新增校招薪资查询 11.新增失物招领 12.添加考试倒计时 13.优化WebView,降低Crash率  祝使用愉快。 工大助手团队</string>
+    <string name="updateNoticeTitle">工大助手更新</string>
+    <string name="updateNoticeTime">2017.4.30</string>
+    <string name="tokenOutTimeMsg">你的access_token不存在或是已经过期，此参数如若需要请与开发者联系</string>
 </resources>

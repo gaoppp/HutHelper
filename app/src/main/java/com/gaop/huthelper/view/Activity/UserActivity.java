@@ -103,13 +103,6 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
             List<Uri> mSelected = PicturePickerUtils.obtainResult(data);
             if (mSelected.size() != 0) {
-
-//                File file=new File(Environment.getExternalStorageDirectory(), "/temp/"+System.currentTimeMillis() + ".jpg");
-//                if (!file.getParentFile().exists())file.getParentFile().mkdirs();
-//
-//                Uri imageUri=FileProvider.getUriForFile(context, "com.jph.hutpe.fileprovider", new File("/storage/emulated/0/temp/1474960080319.jpg");//通过FileProvider创建一个content类型的Uri
-
-
                 Uri u = mSelected.get(0);
                 Intent intent = new Intent();
                 intent.setAction("com.android.camera.action.CROP");
@@ -123,40 +116,9 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
                 intent.putExtra("return-data", true);
                 startActivityForResult(intent, REQUEST_CODE_CUT);
             }
-//                final ProgressDialog dialog = new ProgressDialog(UserActivity.this);
-//                dialog.show();
-//                dialog.setMessage("正在处理图片...");
-//                dialog.setCancelable(false);
-//                Uri u=mSelected.get(0);
-//                    Luban.get(UserActivity.this)
-//                            .load(CommUtil.uri2File(UserActivity.this, u))                     //传人要压缩的图片
-//                            .putGear(Luban.FIRST_GEAR)      //设定压缩档次，默认三挡
-//                            .setCompressListener(new OnCompressListener() { //设置回调
-//                                @Override
-//                                public void onStart() {
-//                                }
-//
-//                                @Override
-//                                public void onSuccess(File file) {
-//                                    Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
-//                                    dialog.dismiss();
-//                                    uploadAvatar(bitmap);
-//                                }
-//
-//                                @Override
-//                                public void onError(Throwable e) {
-//                                    ToastUtil.showToastShort("处理图片出现问题，请重试");
-//                                    dialog.dismiss();
-//                                }
-//                            }).launch();    //启动压缩
 
         } else if (requestCode == REQUEST_CODE_CUT && resultCode == RESULT_OK) {
             Bitmap bmap = data.getParcelableExtra("data");
-//                ByteArrayOutputStream os = new ByteArrayOutputStream();
-//                bmap.compress(Bitmap.CompressFormat.PNG, 90, os);
-//                byte[] bytes = os.toByteArray();
-//                Log.e(TAG, "onActivityResult: "+bytes.length );
-//                ivUserAvatar.setImageBitmap(bmap);
             uploadAvatar(bmap);
 
         } else {

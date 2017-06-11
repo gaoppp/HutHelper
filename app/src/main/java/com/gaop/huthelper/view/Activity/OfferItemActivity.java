@@ -2,11 +2,10 @@ package com.gaop.huthelper.view.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
-import com.gaop.huthelper.model.entity.OfferInfo;
 import com.gaop.huthelper.R;
+import com.gaop.huthelper.model.entity.OfferInfo;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,9 +39,7 @@ public class OfferItemActivity extends BaseActivity {
 
     @Override
     public void initParms(Bundle parms) {
-        Log.e(TAG, "offdf");
         offerInfo = (OfferInfo) parms.getSerializable("offerinfo");
-        Log.e(TAG, offerInfo.getTime());
     }
 
     @Override

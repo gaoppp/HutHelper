@@ -20,8 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.gaop.huthelper.CourseInfoGallery;
-import com.gaop.huthelper.CustomDate;
+import com.gaop.huthelper.widget.CourseInfoGallery;
+import com.gaop.huthelper.utils.CustomDate;
 import com.gaop.huthelper.R;
 import com.gaop.huthelper.db.DBHelper;
 import com.gaop.huthelper.utils.CommUtil;

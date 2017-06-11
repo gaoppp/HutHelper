@@ -40,11 +40,8 @@ public class ShowImgActivity extends BaseActivity {
     @BindView(R.id.tv_toolbar_title)
     TextView tvToolbarTitle;
 
-
     private List<String> urls;
     private int curr;
-    private final static int VERTICALMINISTANCE = 200; //表示向左滑动的最小距离
-    private final static int MINVELOCITY = 10;  //表示向左滑动的最小的加速度
 
     @Override
     public void initParms(Bundle parms) {
@@ -140,9 +137,7 @@ public class ShowImgActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.imgbtn_toolbar_download:
-                //Log.e(TAG, "onClick: "+1 );
                 if (!ButtonUtils.isFastDoubleClick()) {
-                    //  Log.e(TAG, "onClick: 2" );
                     CommUtil.downloadBitmap(ShowImgActivity.this, urls.get(curr));
                 }
                 break;

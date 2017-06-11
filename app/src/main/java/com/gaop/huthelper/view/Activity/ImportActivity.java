@@ -37,18 +37,6 @@ public class ImportActivity extends BaseActivity {
     @BindView(R.id.tv_login_message)
     TextView tvLoginMessage;
 
-//    @BindView(R.id.et_import_num)
-//    EditText etImportNum;
-//    @BindView(R.id.et_import_password)
-//    EditText etImportPassword;
-//    @BindView(R.id.btn_ok_import)
-//    Button btnOkImport;
-//    @BindView(R.id.rl_import)
-//    RelativeLayout rlImport;
-//    @BindView(R.id.tv_fotgetpw)
-//    TextView tvFotgetpw;
-//    @BindView(R.id.iv_icon_import)
-//    ImageView ivIcon;
 
     @Override
     public void initParms(Bundle parms) {
@@ -157,22 +145,5 @@ public class ImportActivity extends BaseActivity {
 //        });
 //    }
 //
-//    @OnClick({R.id.btn_ok_import, R.id.tv_fotgetpw})
-//    public void onClick(View view) {
-//        switch (view.getId()) {
-//            case R.id.btn_ok_import:
-//                if (fastClick()) {
-//                    if (isNumValid(etImportNum.getText().toString())) {
-//                        importData();
-//                    } else
-//                        ToastUtil.showToastShort("学号有误");
-//                }
-//                break;
-//            case R.id.tv_fotgetpw:
-//                Bundle bundle = new Bundle();
-//                bundle.putInt("type", WebViewActivity.TYPE_CHANGE_PW);
-//                startActivity(WebViewActivity.class, bundle);
-//                break;
-//        }
-//    }
+
 }

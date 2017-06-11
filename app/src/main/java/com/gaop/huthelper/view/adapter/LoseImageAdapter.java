@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by gaop on 16-11-22.
+ * Created by 高沛 on 16-11-22.
  */
 
 public class LoseImageAdapter extends BaseAdapter {

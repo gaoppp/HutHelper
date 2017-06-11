@@ -131,16 +131,8 @@ public class ExamActivity extends BaseActivity {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             Exam exam = (Exam) list.get(position);
-//            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//            int margin = DensityUtils.sp2px(context, 10);
-//            layoutParams.setMargins(0, margin, 0, 0);
-//            holder.get(R.id.rl_examitem).setLayoutParams(layoutParams);
             holder.getTextView(R.id.tv_examitem_name).setText(exam.getCourseName());
             holder.getTextView(R.id.tv_examitem_where).setText(exam.getRoomName());
-//            if (exam.getIsset().equals("0"))
-//                holder.getTextView(R.id.tv_examitem_how).setText("计划中");
-//            else if (exam.getIsset().equals("1"))
-//                holder.getTextView(R.id.tv_examitem_how).setText("执行中");
 
             if (exam.getStarttime() == null && exam.getEndTime() == null) {
                 holder.getTextView(R.id.tv_examitem_day).setText(exam.getWeek_Num() + "周 ");
@@ -187,14 +179,7 @@ public class ExamActivity extends BaseActivity {
                     holder.getTextView(R.id.tv_examitem_time).setText("("+exam.getWeek_Num()+"周 "+ begin + "-" + end+")");
 
             }
-//            if (exam.getIsset().equals("0"))
-//                holder.getTextView(R.id.tv_examitem_how).setText("计划中");
-//            else if (exam.getIsset().equals("1"))
-//                holder.getTextView(R.id.tv_examitem_how).setText("执行中");
-//            if(exam.getIsCx())
-//                holder.getTextView(R.id.tv_examitem_isCx).setVisibility(View.VISIBLE);
-//            else
-//                holder.getTextView(R.id.tv_examitem_isCx).setVisibility(View.GONE);
+
 
         }
     }

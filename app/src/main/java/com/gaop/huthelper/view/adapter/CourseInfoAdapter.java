@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.gaop.huthelper.CourseInfoGallery;
+import com.gaop.huthelper.widget.CourseInfoGallery;
 
 import com.gaop.huthelper.R;
 import com.gaop.huthelper.utils.CommUtil;
@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * 课程信息适配器
- * Created by gaop1 on 2016/7/12.
+ * Created by 高沛 on 2016/7/12.
  */
 public class CourseInfoAdapter extends BaseAdapter{
     private Context context;

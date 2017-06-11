@@ -217,7 +217,6 @@ public class VideoViewActivity extends BaseActivity {
             }else{
                 videoView.seekTo(goalduration);
             }
-           /// T.showToastMsgShort(this, StringUtils.generateTime(goalduration));
         }
     }
 
@@ -234,7 +233,6 @@ public class VideoViewActivity extends BaseActivity {
             }else{
                 videoView.seekTo(goalduration);
             }
-            //T.showToastMsgShort(this, StringUtils.generateTime(goalduration));
         }
     }
     /**

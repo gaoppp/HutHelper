@@ -42,7 +42,6 @@ public class MySayListActivity extends BaseActivity {
     @BindView(R.id.tv_toolbar_title)
     TextView tvToolbarTitle;
 
-   // private LRecyclerViewAdapter mLRecyclerViewAdapter;
     private SayRVAdapter adapter;
 
     @Override
@@ -70,35 +69,7 @@ public class MySayListActivity extends BaseActivity {
 
         rvMysaylist.setLayoutManager(new LinearLayoutManager(MySayListActivity.this, LinearLayoutManager.VERTICAL, false));
         adapter=new SayRVAdapter(MySayListActivity.this, Saylist,bindUntilEvent(ActivityEvent.STOP));
-        //rvMysaylist.setAdapter(mLRecyclerViewAdapter);
         rvMysaylist.setAdapter(adapter);
-//        rvMysaylist.setLScrollListener(new LRecyclerView.LScrollListener() {
-//            @Override
-//            public void onRefresh() {
-//                Saylist = new ArrayList<>();
-//                getSayList();
-//            }
-//
-//            @Override
-//            public void onScrollUp() {
-//
-//            }
-//
-//            @Override
-//            public void onScrollDown() {
-//
-//            }
-//
-//            @Override
-//            public void onBottom() {
-//            }
-//
-//            @Override
-//            public void onScrolled(int distanceX, int distanceY) {
-//            }
-//
-//        });
-//        rvMysaylist.setEmptyView(rlEmpty);
     }
 
     public void getSayList() {
@@ -118,8 +89,6 @@ public class MySayListActivity extends BaseActivity {
                     ToastUtil.showToastShort(o.getMsg());
                     finish();
                 }
-//                rvMysaylist.refreshComplete();
-//                mLRecyclerViewAdapter.notifyDataSetChanged();
                 adapter.notifyDataSetChanged();
 
             }

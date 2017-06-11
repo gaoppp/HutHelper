@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 /**
  * 通用viewHolder
- * Created by gaop1 on 2016/7/9.
+ * Created by 高沛 on 2016/7/9.
  */
 public class ViewHolder {
     private SparseArray<View> viewHolder;

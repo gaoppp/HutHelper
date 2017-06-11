@@ -130,17 +130,6 @@
     public void *(android.webkit.webView, jav.lang.String);
 }
 
-#避免混淆泛型 如果混淆报错建议关掉
-#-keepattributes Signature
-
-#移除Log类打印各个等级日志的代码，打正式包的时候可以做为禁log使用，这里可以作为禁止log打印的功能使用，另外的一种实现方案是通过BuildConfig.DEBUG的变量来控制
-#-assumenosideeffects class android.util.Log {
-#    public static *** v(...);
-#    public static *** i(...);
-#    public static *** d(...);
-#    public static *** w(...);
-#    public static *** e(...);
-#}
 
 -keep class  com.gaop.huthelper.model.entity.** {*;}
 -keep class  com.gaop.huthelperdao.** {*;}

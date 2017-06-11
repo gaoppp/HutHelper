@@ -21,7 +21,7 @@ import com.gaop.huthelper.view.activity.VideoViewActivity;
 import io.vov.vitamio.widget.MediaController;
 
 /**
- * Created by gaop1 on 2017/4/8.
+ * Created by 高沛 on 2017/4/8.
  */
 
 public class CustomMediaController extends MediaController {

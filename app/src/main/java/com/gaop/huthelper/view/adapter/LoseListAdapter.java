@@ -22,7 +22,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 /**
- * Created by gaop on 16-11-22.
+ * Created by 高沛 on 16-11-22.
  */
 
 public class LoseListAdapter extends RecyclerView.Adapter<LoseListAdapter.ViewHolder> {
@@ -124,18 +124,6 @@ public class LoseListAdapter extends RecyclerView.Adapter<LoseListAdapter.ViewHo
             width = width / 4;// 对当前的列数进行设置imgView的宽度
             height = width;
             img.setLayoutParams(new AbsListView.LayoutParams(width, height));
-//            img.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Bundle mBundle = new Bundle();
-//                    mBundle.putStringArrayList("urls", (ArrayList<String>) list);
-//                    mBundle.putInt("curr", position);
-//                    Intent intent = new Intent();
-//                    intent.setClass(context, ShowImgActivity.class);
-//                    intent.putExtras(mBundle);
-//                    context.startActivity(intent);
-//                }
-//            });
             if (list.get(position).equals(img.getTag())) {
                 Picasso.with(context).load(HttpMethods.BASE_URL + list.get(position)).resize(width, width).centerCrop().placeholder(R.drawable.img_loading)
                         .error(R.drawable.img_error).into(img);

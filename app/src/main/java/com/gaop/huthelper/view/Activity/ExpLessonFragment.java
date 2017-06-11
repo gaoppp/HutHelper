@@ -124,10 +124,6 @@ public class ExpLessonFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             Explesson explesson = (Explesson) list.get(position);
-//            LinearLayout.LayoutParams layoutParams =new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//            int margin= DensityUtils.sp2px(context,10);
-//            layoutParams.setMargins(0,margin,0,0);
-//            holder.get(R.id.ll_exp_root).setLayoutParams(layoutParams);
 
             TextView tvLesson = holder.getTextView(R.id.tv_expitem_lesson);
             if (TextUtils.isEmpty(explesson.getObj())) {
@@ -141,11 +137,6 @@ public class ExpLessonFragment extends Fragment {
             holder.getTextView(R.id.tv_expitem_place).setText(explesson.getLocate());
             holder.getTextView(R.id.tv_expitem_teacher).setText(explesson.getTeacher());
 
-//            if (Integer.valueOf(explesson.getWeeks_no()) < currweek || (Integer.valueOf(explesson.getWeeks_no())) == currweek && DateUtil.getWeekOfToday() > Integer.valueOf(explesson.getWeek())) {
-//                tvFinish.setVisibility(View.VISIBLE);
-//            } else {
-//                tvFinish.setVisibility(View.GONE);
-//            }
         }
     }
     private String getWeekNum(String num){

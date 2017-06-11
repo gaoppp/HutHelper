@@ -121,10 +121,9 @@ public class NoticeActivity extends BaseActivity {
     private Notice addNotice() {
 
         Notice notice = new Notice();
-        notice.setTime("2017.4.30");
-        notice.setTitle("工大助手更新");
-        notice.setContent("工大助手0.8.8更新日志\n1.修复考试查询\n2.添加宣讲会、视频专栏\n3.新增成绩排名\n4.主页应用可自定义\n0.8.7更新日志\n1.修复bug\n2.说说点赞\n0.8.6更新日志\n1.全新界面\n2.新增头像\n之前版本\n1.工大导航,工大助手统一认证\n2.新增在线作业功能\n3.电费查询优化\n4.校历优化\n5.课程表优化,支持自定义增删课程\n6.二手市场,说说同步工大导航\n" +
-                "7.增加实验课表,在课程表中\n" + "8.增加考试查询，请及时刷新数据\n" + "9.支持修改昵称和密码\n" + "10.新增校招薪资查询\n11.新增失物招领\n12.添加考试倒计时\n13.优化WebView,降低Crash率 " + "\n祝使用愉快。\n工大助手团队");
+        notice.setTime(getString(R.string.updateNoticeTime));
+        notice.setTitle(getString(R.string.updateNoticeTitle));
+        notice.setContent(getString(R.string.updateNoticeContent));
         return notice;
     }
 

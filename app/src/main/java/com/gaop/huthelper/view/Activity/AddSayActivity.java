@@ -124,26 +124,6 @@ public class AddSayActivity extends BaseActivity {
 
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//
-//        if (requestCode == 1) {
-//            for (int i = 0; i < permissions.length; i++) {
-//                String permission = permissions[i];
-//                int grantResult = grantResults[i];
-//
-//                if (permission.equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-//                    if (grantResult == PackageManager.PERMISSION_GRANTED) {
-//                        //授权成功后的逻辑
-//                        ...
-//                    } else {
-//                        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSIONS_CODE);
-//                    }
-//                }
-//            }
-//        }
-//    }
 
     //获取图片路径 响应startActivityForResult
     @Override

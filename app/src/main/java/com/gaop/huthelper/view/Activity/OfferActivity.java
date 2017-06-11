@@ -192,7 +192,6 @@ public class OfferActivity extends BaseActivity {
                 dlg.dismiss();
             }
         });
-        //final AlertDialog dlg = builder.create();
         dlg.show();
     }
 

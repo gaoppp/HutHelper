@@ -157,15 +157,6 @@ public class MarketActivity extends BaseActivity {
                 , pagenum);
     }
 
-//    private void hideViews() {
-//        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) fab.getLayoutParams();
-//        int fabBottomMargin = lp.bottomMargin;
-//        fab.animate().translationY(fab.getHeight() + fabBottomMargin).setInterpolator(new AccelerateInterpolator(2)).start();
-//    }
-//
-//    private void showViews() {
-//        fab.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
-//    }
 
 
     @Override

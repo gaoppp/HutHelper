@@ -4,10 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.gaop.huthelper.CourseInfoGallery
+    <com.gaop.huthelper.widget.CourseInfoGallery
         android:id="@+id/lesson_gallery"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        ></com.gaop.huthelper.CourseInfoGallery>
+        ></com.gaop.huthelper.widget.CourseInfoGallery>
 </LinearLayout>

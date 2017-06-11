@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
 import com.gaop.huthelper.R;
@@ -19,11 +17,6 @@ import com.gaop.huthelper.db.DBHelper;
  */
 public class SplashActivity extends BaseActivity {
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//    }
 
     @Override
     public void initParms(Bundle parms) {
@@ -47,39 +40,8 @@ public class SplashActivity extends BaseActivity {
             finish();
         } else {
             MApplication.setUser(DBHelper.getUserDao().get(0));
-            ScaleAnimation animation = new ScaleAnimation(1f, 1.2f, 1f, 1.2f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-            animation.setDuration(2000);//设置动画持续时间
-            animation.setFillAfter(true);
-            animation.setFillBefore(false);
-            animation.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                    finish();
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
-            ivMain.startAnimation(animation);
-        }
-//        if (!PrefUtil.getBoolean(SplashActivity.this, "isLoadUser", false)) {
-////            if (Build.VERSION.SDK_INT > 20) {
-////                startActivity(new Intent(SplashActivity.this, ImportActivity.class), ActivityOptions.makeSceneTransitionAnimation(SplashActivity.this,ivMain, "splashtransition").toBundle());
-////            } else {
-//                 startActivity(new Intent(SplashActivity.this, ImportActivity.class));
-//          //  }
-//            finish();
-//        } else {
-//
-//            ScaleAnimation animation =new ScaleAnimation(1f, 1.2f,1f,1.2f, Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+            //动画效果启动
+//            ScaleAnimation animation = new ScaleAnimation(1f, 1.2f, 1f, 1.2f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 //            animation.setDuration(2000);//设置动画持续时间
 //            animation.setFillAfter(true);
 //            animation.setFillBefore(false);
@@ -101,8 +63,10 @@ public class SplashActivity extends BaseActivity {
 //                }
 //            });
 //            ivMain.startAnimation(animation);
-//       //    mainhandler.sendEmptyMessageDelayed(0, 1000);
-//        }
+
+            //普通启动
+             mainhandler.sendEmptyMessageDelayed(0, 1000);
+        }
     }
 
     private Handler mainhandler = new Handler() {

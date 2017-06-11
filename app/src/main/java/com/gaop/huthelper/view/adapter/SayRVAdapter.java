@@ -30,7 +30,7 @@ import com.gaop.huthelper.model.network.api.SubscriberOnNextListener;
 import com.gaop.huthelper.model.entity.HttpResult;
 import com.gaop.huthelper.net.HttpMethods;
 import com.gaop.huthelper.net.ProgressSubscriber;
-import com.gaop.huthelper.view.ninepictureview.MyNinePictureLayout;
+import com.gaop.huthelper.widget.ninepictureview.MyNinePictureLayout;
 import com.gaop.huthelper.utils.AnimationTools;
 import com.gaop.huthelper.utils.DensityUtils;
 import com.gaop.huthelper.utils.ToastUtil;
@@ -71,13 +71,6 @@ public class SayRVAdapter extends LoadMoreAdapter<Say> {
         return 0;
     }
 
-//    //创建新View，被LayoutManager所调用
-//    @Override
-//    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-//        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_say_list, viewGroup, false);
-//        ViewHolder vh = new ViewHolder(view);
-//        return vh;
-//    }
 
     @Override
     protected void bindHolder(RecyclerView.ViewHolder holder,final int position) {
@@ -197,12 +190,6 @@ public class SayRVAdapter extends LoadMoreAdapter<Say> {
         return vh;
     }
 
-//    //将数据与界面进行绑定的操作
-//    @Override
-//    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
-//
-//
-//    }
 
     private void likeSay(final ViewHolder holder, final Say say) {
         HttpMethods.getInstance().likeSay(new Subscriber<HttpResult>() {

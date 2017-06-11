@@ -13,7 +13,7 @@ import com.gaop.huthelper.R;
 import java.util.List;
 
 /**
- * Created by gaop on 16-11-14.
+ * Created by 高沛 on 16-11-14.
  */
 
 public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.ViewHolder> {

@@ -111,7 +111,7 @@ public class OfferSearchActivity extends BaseActivity {
                             offerList.addAll(data.getInfo());
                         }
                     } else {
-                        if ("你的access_token不存在或是已经过期，此参数如若需要请与开发者联系".equals(data.getMsg())) {
+                        if (getString(R.string.tokenOutTimeMsg).equals(data.getMsg())) {
                             getToken();
                         } else {
                             ToastUtil.showToastShort(data.getMsg());

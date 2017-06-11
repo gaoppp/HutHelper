@@ -16,7 +16,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.gaop.huthelper.CustomDate;
+import com.gaop.huthelper.utils.CustomDate;
 import com.gaop.huthelper.db.DBHelper;
 import com.gaop.huthelper.R;
 import com.gaop.huthelper.model.network.api.SubscriberOnNextListener;
@@ -132,13 +132,9 @@ public class CourseTableActivity extends BaseActivity {
                 getCourseTableData();
                 break;
             case R.id.imgbtn_toolbar_back:
-                //finish();
                 startActivity(MainActivity.class);
                 finish();
                 break;
-         /*   case R.id.iv_coursetable_explesson:
-                startActivity(ExpLessonActivity.class);
-                break;*/
         }
 
 

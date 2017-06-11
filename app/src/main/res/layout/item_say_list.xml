@@ -62,7 +62,7 @@
         android:text="说说内容"
         android:textColor="@color/black"
         android:textSize="16sp" />
-    <com.gaop.huthelper.view.ninepictureview.MyNinePictureLayout
+    <com.gaop.huthelper.widget.ninepictureview.MyNinePictureLayout
         android:id="@+id/rv_item_sayimg"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/dp_10"

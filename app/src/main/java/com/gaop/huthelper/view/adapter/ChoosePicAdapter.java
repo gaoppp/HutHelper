@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 图片选择适配器
- * Created by gaop on 16-9-11.
+ * Created by 高沛 on 16-9-11.
  */
 public class ChoosePicAdapter extends AutoRVAdapter {
 
